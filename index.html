@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nathan THIBAULT — Portfolio BTS SIO SLAM</title>
+    <meta name="description" content="Portfolio de Nathan THIBAULT, étudiant en 2e année de BTS SIO option SLAM : compétences, projets, parcours, expériences, certifications et veille technologique sur la réalité virtuelle et la réalité augmentée.">
+
+    <!-- Polices et icônes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Applique le thème enregistré avant l'affichage (évite le flash) -->
+    <script>
+        (function () {
+          try {
+            var theme = localStorage.getItem('theme');
+            if (!theme) theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+          } catch (e) { /* stockage indisponible : thème sombre par défaut */ }
+        })();
+    </script>
+</head>
+<body>
+
+<div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+<!-- ============ EN-TÊTE / NAVIGATION ============ -->
+<header class="header" id="header">
+    <nav class="nav container" aria-label="Navigation principale">
+        <a href="#accueil" class="logo" aria-label="Retour à l'accueil">NT<span>.</span></a>
+
+        <ul class="nav__menu" id="nav-menu">
+            <li><a href="#accueil" class="nav__link active">Accueil</a></li>
+            <li><a href="#apropos" class="nav__link">À propos</a></li>
+            <li><a href="#parcours" class="nav__link">Parcours</a></li>
+            <li><a href="#competences" class="nav__link">Compétences</a></li>
+            <li><a href="#projets" class="nav__link">Projets</a></li>
+            <li><a href="#experiences" class="nav__link">Expériences</a></li>
+            <li><a href="#certifications" class="nav__link">Certifications</a></li>
+            <li><a href="#veille" class="nav__link">Veille</a></li>
+            <li><a href="#contact" class="nav__link">Contact</a></li>
+        </ul>
+
+        <div class="nav__actions">
+            <button class="icon-btn" id="theme-toggle" type="button" aria-label="Changer de thème">
+                <i class="fa-solid fa-sun"></i>
+            </button>
+            <button class="icon-btn nav__burger" id="nav-burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+</header>
+
+<main>
+
+    <!-- ============ ACCUEIL ============ -->
+    <section class="hero" id="accueil">
+        <canvas id="stars" class="hero__canvas" aria-hidden="true"></canvas>
+        <div class="hero__glow hero__glow--1" aria-hidden="true"></div>
+        <div class="hero__glow hero__glow--2" aria-hidden="true"></div>
+
+        <div class="container hero__container">
+            <div class="hero__content">
+                <span class="badge"><span class="badge__dot"></span>BTS SIO · option SLAM · 2<sup>e</sup> année</span>
+                <p class="hero__hello">Bonjour, je suis</p>
+                <h1 class="hero__title">Nathan <span class="gradient-text">THIBAULT</span></h1>
+                <p class="hero__role" aria-live="polite"><span id="typed">Développeur web &amp; mobile</span><span class="cursor" aria-hidden="true">|</span></p>
+                <p class="hero__text">
+                    Étudiant en 2<sup>e</sup> année de BTS SIO, option <strong>SLAM</strong> (Solutions Logicielles et Applications Métiers).
+                    Je conçois des applications web, mobiles et desktop, de la base de données jusqu'à l'interface,
+                    et je suis de près l'évolution de la <strong>réalité virtuelle</strong> et de la <strong>réalité augmentée</strong>.
+                </p>
+                <div class="hero__buttons">
+                    <a href="#projets" class="btn btn--primary"><i class="fa-solid fa-code"></i> Voir mes projets</a>
+                    <!-- À MODIFIER : placez votre CV dans le dossier assets/ -->
+                    <a href="assets/CV_Nathan_THIBAULT.pdf" class="btn btn--ghost" download><i class="fa-solid fa-download"></i> Télécharger mon CV</a>
+                </div>
+                <!-- À MODIFIER : vos liens personnels -->
+                <ul class="socials">
+                    <li><a href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a></li>
+                    <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                    <li><a href="#contact" aria-label="Me contacter"><i class="fa-solid fa-envelope"></i></a></li>
+                </ul>
+            </div>
+
+            <div class="hero__visual">
+                <div class="avatar tilt">
+                    <div class="avatar__ring" aria-hidden="true"></div>
+                    <div class="avatar__inner">
+                        <!-- Pour mettre votre photo : remplacez le <span> par <img src="assets/photo.jpg" alt="Nathan THIBAULT"> -->
+                        <span>NT</span>
+                    </div>
+                </div>
+                <span class="float-icon float-icon--1" aria-hidden="true"><i class="devicon-angularjs-plain colored"></i></span>
+                <span class="float-icon float-icon--2" aria-hidden="true"><i class="devicon-flutter-plain colored"></i></span>
+                <span class="float-icon float-icon--3" aria-hidden="true"><i class="devicon-php-plain colored"></i></span>
+                <span class="float-icon float-icon--4" aria-hidden="true"><i class="devicon-java-plain colored"></i></span>
+                <a href="#veille" class="hero__card">
+                    <i class="fa-solid fa-vr-cardboard"></i>
+                    <span><strong>Veille technologique</strong><small>Réalité virtuelle &amp; augmentée</small></span>
+                </a>
+            </div>
+        </div>
+
+        <a href="#apropos" class="scroll-down" aria-label="Défiler vers la section À propos"><span></span></a>
+    </section>
+
+    <!-- ============ À PROPOS ============ -->
+    <section class="section" id="apropos">
+        <div class="container">
+            <header class="section__header reveal">
+                <span class="section__label">01 · À propos</span>
+                <h2 class="section__title">Qui <span class="gradient-text">suis-je ?</span></h2>
+            </header>
+
+            <div class="about">
+                <div class="about__text reveal">
+                    <p>
+                        Je m'appelle <strong>Nathan THIBAULT</strong> et je suis étudiant en <strong>2<sup>e</sup> année de BTS SIO</strong>
+                        (Services Informatiques aux Organisations), option <strong>SLAM</strong>. Cette formation m'apprend à concevoir,
+                        développer et maintenir des applications métiers : sites et applications web, logiciels desktop,
+                        applications mobiles et bases de données.
+                    </p>
+                    <p>
+                        Curieux et rigoureux, j'aime comprendre une application de bout en bout : de la modélisation des données
+                        jusqu'à l'expérience utilisateur. Je m'intéresse particulièrement aux technologies immersives,
+                        la <strong>réalité virtuelle</strong> et la <strong>réalité augmentée</strong>, qui sont le sujet de ma veille technologique.
+                    </p>
+                    <p>
+                        Après mon BTS, je souhaite poursuivre en <strong>Bachelor ou Licence en développement</strong>, idéalement en alternance.
+                    </p>
+
+                    <!-- À MODIFIER : vos informations -->
+                    <ul class="about__infos">
+                        <li><i class="fa-solid fa-location-dot"></i> [Ville], France</li>
+                        <li><i class="fa-solid fa-graduation-cap"></i> BTS SIO SLAM · promo 2027</li>
+                        <li><i class="fa-solid fa-language"></i> Français, Anglais</li>
+                        <li><i class="fa-solid fa-gamepad"></i> VR / AR, jeux vidéo, high-tech</li>
+                    </ul>
+                </div>
+
+                <div class="about__stats reveal">
+                    <div class="stat"><span class="stat__number" data-count>9</span><span class="stat__label">Technologies</span></div>
+                    <div class="stat"><span class="stat__number" data-count>6</span><span class="stat__label">Projets réalisés</span></div>
+                    <div class="stat"><span class="stat__number" data-count>2</span><span class="stat__label">Stages en entreprise</span></div>
+                    <div class="stat"><span class="stat__number" data-count>4</span><span class="stat__label">Certifications</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ PARCOURS SCOLAIRE ============ -->
+    <section class="section section--alt" id="parcours">
+        <div class="container">
+            <header class="section__header reveal">
+                <span class="section__label">02 · Parcours scolaire</span>
+                <h2 class="section__title">Mon <span class="gradient-text">parcours</span></h2>
+                <p class="section__subtitle">Les étapes de ma formation, du baccalauréat au BTS SIO.</p>
+            </header>
+
+            <div class="timeline">
+                <!-- Étape 1 -->
+                <article class="timeline__item reveal">
+                    <div class="timeline__dot"><i class="fa-solid fa-flag-checkered"></i></div>
+                    <div class="card timeline__card">
+                        <span class="timeline__date">2027 · Objectif</span>
+                        <h3>Poursuite d'études en développement</h3>
+                        <p class="timeline__place"><i class="fa-solid fa-route"></i> Bachelor / Licence professionnelle, en alternance</p>
+                        <p>Approfondir le développement full-stack et mobile, et me spécialiser vers les applications immersives (XR).</p>
+                    </div>
+                </article>
+
+                <!-- Étape 2 -->
+                <article class="timeline__item reveal">
+                    <div class="timeline__dot"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <div class="card timeline__card">
+                        <span class="timeline__date">2025 — 2027 · En cours</span>
+                        <h3>BTS SIO — option SLAM</h3>
+                        <p class="timeline__place"><i class="fa-solid fa-school"></i> [Nom du lycée / de l'école], [Ville]</p>
+                        <p>Brevet de Technicien Supérieur Services Informatiques aux Organisations, option Solutions Logicielles et Applications Métiers.</p>
+                        <ul class="timeline__list">
+                            <li><strong>Bloc 1</strong> — Support et mise à disposition de services informatiques</li>
+                            <li><strong>Bloc 2</strong> — Conception et développement d'applications (SLAM)</li>
+                            <li><strong>Bloc 3</strong> — Cybersécurité des services informatiques</li>
+                        </ul>
+                        <div class="tags">
+                            <span>Développement</span><span>Bases de données</span><span>POO</span><span>Cybersécurité</span><span>Gestion de projet</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Étape 3 -->
+                <article class="timeline__item reveal">
+                    <div class="timeline__dot"><i class="fa-solid fa-award"></i></div>
+                    <div class="card timeline__card">
+                        <span class="timeline__date">2025 · Obtenu</span>
+                        <h3>Baccalauréat [Général / Technologique / Professionnel]</h3>
+                        <p class="timeline__place"><i class="fa-solid fa-school"></i> [Nom du lycée], [Ville]</p>
+                        <p>[Spécialités ou série suivies] — Mention [à compléter].</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ COMPÉTENCES ============ -->
+    <section class="section" id="competences">
+        <div class="container">
+            <header class="section__header reveal">
+                <span class="section__label">03 · Compétences</span>
+                <h2 class="section__title">Mes <span class="gradient-text">compétences</span></h2>
+                <p class="section__subtitle">Les langages et technologies que j'utilise en cours, en stage et sur mes projets personnels.</p>
+            </header>
+
+            <div class="filters" id="skills-filters" role="group" aria-label="Filtrer les compétences">
+                <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">Toutes</button>
+                <button class="filter-btn" type="button" data-filter="front" aria-pressed="false">Front-end</button>
+                <button class="filter-btn" type="button" data-filter="back" aria-pressed="false">Back-end</button>
+                <button class="filter-btn" type="button" data-filter="mobile" aria-pressed="false">Mobile</button>
+                <button class="filter-btn" type="button" data-filter="bdd" aria-pressed="false">Bases de données</button>
+            </div>
+
+            <!-- À MODIFIER : ajustez les niveaux (data-level) selon votre ressenti -->
+            <div class="skills__grid">
+                <article class="card card--hover skill-card reveal" data-category="front">
+                    <div class="skill-card__head">
+                        <span class="skill-card__icon"><i class="devicon-html5-plain colored"></i></span>
+                        <div><h3>HTML5</h3><span class="skill-card__cat">Front-end</span></div>
+                        <span class="skill-card__percent">90%</span>
+                    </div>
+                    <div class="progress"><div class="progress__bar" data-level="90"></div></div>
+                    <p>Structure sémantique, formulaires, accessibilité et bonnes pratiques SEO.</p>
+                </article>
+
+                <article class="card card--hover skill-card reveal" data-category="front">
+                    <div class="skill-card__head">
+                        <span class="skill-card__icon"><i class="devicon-css3-plain colored"></i></span>
+                        <div><h3>CSS3</h3><span class="skill-card__cat">Front-end</span></div>
+                        <span class="skill-card__percent">85%</span>
+                    </div>
+                    <div class="progress"><div class="progress__bar" data-level="85"></div></div>
+                    <p>Flexbox, Grid, responsive design, variables CSS et animations.</p>
+                </article>
+
+                <article class="card card--hover skill-card reveal" data-category="front">
+                    <div class="skill-card__head">
+                        <span class="skill-card__icon"><i class="devicon-javascript-plain colored"></i></span>
+                        <div><h3>JavaScript</h3><span class="skill-card__cat">Front-end</span></div>
+                        <span class="skill-card__percent">75%</span>
+                    </div>
+                    <div class="progress"><div class="progress__bar" data-level="75"></div></div>
+                    <p>Manipulation du DOM, événements, ES6+, appels d'API REST avec fetch.</p>
+                </article>
+
+                <article class="card card--hover skill-card reveal" data-category="front">
+                    <div class="skill-card__head">
+                        <span class="skill-card__icon"><i class="devicon-angularjs-plain colored"></i></span>
+                        <div><h3>Angular</h3><span class="skill-card__cat">Front-end · TypeScript</span></div>
+                        <span class="skill-card__percent">60%</span>
+                    </div>
+                    <div class="progress"><div class="progress__bar" data-level="60"></div></div>
+                    <p>Composants, services, routing, formulaires réactifs et HttpClient.</p>
+                </article>
+
+                <article class="card card--hover skill-card reveal" data-category="back">
+                    <div class="skill-card__head">
+                        <span class="skill-card__icon"><i class="devicon-php-plain colored"></i></span>
+                        <div><h3>PHP</h3><span class="skill-card__cat">Back-end</span></div>
+                        <span class="skill-card__percent">80%</span>
+                    </div>
+                    <div class="progress"><div class="progress__bar" data-level="80"></div></div>
+                    <p>POO, architecture MVC, PDO et requêtes préparées, sessions, API REST.</p>
+                </article>
+
+                <article class="card card--hover skill-card reveal" data-category="back">
+                    <div class="skill-card__head">
+                        <span class="skill-card__icon"><i class="devicon-java-plain colored"></i></span>
+                        <div><h3>Java</h3><span class="skill-card__cat">Back-end · Desktop</span></div>
+                        <span class="skill-card__percent">70%</span>
+                    </div>
+                    <div class="progress"><div class="progress__bar" data-level="70"></div></div>
+                    <p>POO, collections, JavaFX, accès aux données avec JDBC, tests JUnit.</p>
+                </article>
+
+                <article class="card card--hover skill-card reveal" data-category="mobile">
+                    <div class="skill-card__head">
+                        <span class="skill-card__icon"><i class="devicon-flutter-plain colored"></i></span>
+                        <div><h3>Flutter</h3><span class="skill-card__cat">Mobile · Dart</span></div>
+                        <span class="skill-card__percent">60%</span>
+                    </div>
+                    <div class="progress"><div class="progress__bar" data-level="60"></div></div>
+                    <p>Widgets, navigation, gestion d'état et consommation d'API REST.</p>
+                </article>
+
+                <article class="card card--hover skill-card reveal" data-category="bdd">
+                    <div class="skill-card__head">
+                        <span class="skill-card__icon"><i class="devicon-mysql-plain colored"></i></span>
+                        <div><h3>MySQL</h3><span class="skill-card__cat">Base de données</span></div>
+                        <span class="skill-card__percent">80%</span>
+                    </div>
+                    <div class="progress"><div class="progress__bar" data-level="80"></div></div>
+                    <p>Modélisation Merise (MCD / MLD), requêtes SQL, jointures, procédures et triggers.</p>
+                </article>
+
+                <article class="card card--hover skill-card reveal" data-category="bdd">
+                    <div class="skill-card__head">
+                        <span class="skill-card__icon"><i class="devicon-postgresql-plain colored"></i></span>
+                        <div><h3>PostgreSQL</h3><span class="skill-card__cat">Base de données</span></div>
+                        <span class="skill-card__percent">65%</span>
+                    </div>
+                    <div class="progress"><div class="progress__bar" data-level="65"></div></div>
+                    <p>Contraintes d'intégrité, vues, fonctions, gestion des rôles et des droits.</p>
+                </article>
+            </div>
+
+            <div class="skills__extra">
+                <div class="card extra-card reveal">
+                    <h3><i class="fa-solid fa-screwdriver-wrench"></i> Outils</h3>
+                    <ul class="chips">
+                        <li><i class="devicon-git-plain colored"></i> Git</li>
+                        <li><i class="devicon-github-original"></i> GitHub</li>
+                        <li><i class="devicon-vscode-plain colored"></i> VS Code</li>
+                        <li><i class="devicon-intellij-plain colored"></i> IntelliJ IDEA</li>
+                        <li><i class="devicon-androidstudio-plain colored"></i> Android Studio</li>
+                        <li><i class="devicon-postman-plain colored"></i> Postman</li>
+                        <li><i class="devicon-figma-plain colored"></i> Figma</li>
+                    </ul>
+                </div>
+                <div class="card extra-card reveal">
+                    <h3><i class="fa-solid fa-diagram-project"></i> Méthodes</h3>
+                    <ul class="chips">
+                        <li>MVC</li><li>POO</li><li>UML</li><li>Merise</li><li>API REST</li><li>Agile / Scrum</li><li>Tests unitaires</li>
+                    </ul>
+                </div>
+                <div class="card extra-card reveal">
+                    <h3><i class="fa-solid fa-user-group"></i> Savoir-être</h3>
+                    <ul class="chips">
+                        <li>Travail en équipe</li><li>Autonomie</li><li>Rigueur</li><li>Curiosité</li><li>Communication</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ PROJETS ============ -->
+    <section class="section section--alt" id="projets">
+        <div class="container">
+            <header class="section__header reveal">
+                <span class="section__label">04 · Projets</span>
+                <h2 class="section__title">Mes <span class="gradient-text">projets</span></h2>
+                <p class="section__subtitle">Projets réalisés en formation, en stage et sur mon temps personnel. Cliquez sur « Détails » pour en savoir plus.</p>
+            </header>
+
+            <div class="filters" id="projects-filters" role="group" aria-label="Filtrer les projets">
+                <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">Tous</button>
+                <button class="filter-btn" type="button" data-filter="web" aria-pressed="false">Web</button>
+                <button class="filter-btn" type="button" data-filter="mobile" aria-pressed="false">Mobile</button>
+                <button class="filter-btn" type="button" data-filter="desktop" aria-pressed="false">Desktop</button>
+            </div>
+
+            <!-- À MODIFIER : remplacez ces projets par les vôtres et ajoutez vos liens GitHub -->
+            <div class="projects__grid">
+
+                <!-- Projet 1 -->
+                <article class="card card--hover project-card tilt reveal" data-category="web">
+                    <div class="project-card__media project-card__media--1">
+                        <i class="fa-solid fa-file-invoice-dollar" aria-hidden="true"></i>
+                        <span class="project-card__type">Projet scolaire</span>
+                    </div>
+                    <div class="project-card__body">
+                        <h3>GSB — Gestion des frais</h3>
+                        <p>Application web permettant aux visiteurs médicaux du laboratoire Galaxy Swiss Bourdin de saisir leurs frais, et aux comptables de les valider.</p>
+                        <ul class="tech-list"><li>PHP</li><li>MySQL</li><li>HTML / CSS</li><li>MVC</li></ul>
+                        <div class="project-card__actions">
+                            <button class="btn btn--small btn--primary" type="button" data-open-project>Détails</button>
+                            <a href="https://github.com/" class="btn btn--small btn--ghost" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                    <template>
+                        <span class="modal__tag">Projet scolaire · Web</span>
+                        <h3>GSB — Gestion des frais</h3>
+                        <p>Le laboratoire pharmaceutique fictif Galaxy Swiss Bourdin souhaite dématérialiser la gestion des frais de ses visiteurs médicaux.</p>
+                        <h4>Fonctionnalités</h4>
+                        <ul>
+                            <li>Authentification avec deux profils : visiteur et comptable</li>
+                            <li>Saisie des frais forfaitisés et hors forfait par mois</li>
+                            <li>Validation, refus et suivi du paiement des fiches par le comptable</li>
+                            <li>Génération d'un récapitulatif PDF</li>
+                        </ul>
+                        <h4>Compétences mobilisées</h4>
+                        <ul>
+                            <li>Architecture MVC en PHP et accès aux données avec PDO</li>
+                            <li>Modélisation et requêtes MySQL</li>
+                            <li>Sécurisation : requêtes préparées, hachage des mots de passe, contrôle des sessions</li>
+                        </ul>
+                        <div class="tags"><span>PHP</span><span>MySQL</span><span>HTML</span><span>CSS</span><span>Git</span></div>
+                    </template>
+                </article>
+
+                <!-- Projet 2 -->
+                <article class="card card--hover project-card tilt reveal" data-category="mobile">
+                    <div class="project-card__media project-card__media--2">
+                        <i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i>
+                        <span class="project-card__type">Projet scolaire</span>
+                    </div>
+                    <div class="project-card__body">
+                        <h3>GSB Mobile</h3>
+                        <p>Application mobile qui permet aux visiteurs médicaux de consulter et saisir leurs frais en déplacement, connectée à une API REST.</p>
+                        <ul class="tech-list"><li>Flutter</li><li>Dart</li><li>API REST PHP</li><li>MySQL</li></ul>
+                        <div class="project-card__actions">
+                            <button class="btn btn--small btn--primary" type="button" data-open-project>Détails</button>
+                            <a href="https://github.com/" class="btn btn--small btn--ghost" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                    <template>
+                        <span class="modal__tag">Projet scolaire · Mobile</span>
+                        <h3>GSB Mobile</h3>
+                        <p>Déclinaison mobile de l'application GSB pour les visiteurs médicaux qui travaillent sur le terrain.</p>
+                        <h4>Fonctionnalités</h4>
+                        <ul>
+                            <li>Connexion sécurisée par jeton auprès de l'API</li>
+                            <li>Consultation de l'historique des fiches de frais</li>
+                            <li>Ajout de frais avec photo du justificatif</li>
+                        </ul>
+                        <h4>Compétences mobilisées</h4>
+                        <ul>
+                            <li>Développement d'une interface mobile avec les widgets Flutter</li>
+                            <li>Création d'une API REST en PHP renvoyant du JSON</li>
+                            <li>Gestion des requêtes HTTP asynchrones en Dart</li>
+                        </ul>
+                        <div class="tags"><span>Flutter</span><span>Dart</span><span>PHP</span><span>JSON</span></div>
+                    </template>
+                </article>
+
+                <!-- Projet 3 -->
+                <article class="card card--hover project-card tilt reveal" data-category="web">
+                    <div class="project-card__media project-card__media--3">
+                        <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
+                        <span class="project-card__type">Projet scolaire</span>
+                    </div>
+                    <div class="project-card__body">
+                        <h3>M2L — Réservation de salles</h3>
+                        <p>Application web pour la Maison des Ligues de Lorraine : réservation de salles et de matériel par les ligues sportives.</p>
+                        <ul class="tech-list"><li>Angular</li><li>TypeScript</li><li>API PHP</li><li>PostgreSQL</li></ul>
+                        <div class="project-card__actions">
+                            <button class="btn btn--small btn--primary" type="button" data-open-project>Détails</button>
+                            <a href="https://github.com/" class="btn btn--small btn--ghost" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                    <template>
+                        <span class="modal__tag">Projet scolaire · Web</span>
+                        <h3>M2L — Réservation de salles</h3>
+                        <p>La Maison des Ligues de Lorraine met des salles et du matériel à disposition des ligues sportives. L'application remplace les réservations par téléphone.</p>
+                        <h4>Fonctionnalités</h4>
+                        <ul>
+                            <li>Planning des salles avec vue par semaine</li>
+                            <li>Réservation, modification et annulation de créneaux</li>
+                            <li>Espace administrateur pour gérer les salles et les ligues</li>
+                        </ul>
+                        <h4>Compétences mobilisées</h4>
+                        <ul>
+                            <li>Application Angular : composants, services, routing et guards</li>
+                            <li>API REST en PHP et base PostgreSQL</li>
+                            <li>Travail en équipe avec Git et un tableau Kanban</li>
+                        </ul>
+                        <div class="tags"><span>Angular</span><span>TypeScript</span><span>PHP</span><span>PostgreSQL</span></div>
+                    </template>
+                </article>
+
+                <!-- Projet 4 -->
+                <article class="card card--hover project-card tilt reveal" data-category="desktop">
+                    <div class="project-card__media project-card__media--4">
+                        <i class="fa-solid fa-boxes-stacked" aria-hidden="true"></i>
+                        <span class="project-card__type">Projet scolaire</span>
+                    </div>
+                    <div class="project-card__body">
+                        <h3>StockManager</h3>
+                        <p>Logiciel desktop de gestion de stock : suivi des produits, des entrées / sorties et alertes de réapprovisionnement.</p>
+                        <ul class="tech-list"><li>Java</li><li>JavaFX</li><li>JDBC</li><li>PostgreSQL</li></ul>
+                        <div class="project-card__actions">
+                            <button class="btn btn--small btn--primary" type="button" data-open-project>Détails</button>
+                            <a href="https://github.com/" class="btn btn--small btn--ghost" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                    <template>
+                        <span class="modal__tag">Projet scolaire · Desktop</span>
+                        <h3>StockManager</h3>
+                        <p>Application de bureau destinée à une petite entreprise pour suivre son stock en temps réel.</p>
+                        <h4>Fonctionnalités</h4>
+                        <ul>
+                            <li>CRUD complet sur les produits, catégories et fournisseurs</li>
+                            <li>Historique des mouvements de stock</li>
+                            <li>Alerte automatique quand un produit passe sous le seuil minimal</li>
+                            <li>Export des données au format CSV</li>
+                        </ul>
+                        <h4>Compétences mobilisées</h4>
+                        <ul>
+                            <li>Conception UML (cas d'utilisation, diagramme de classes)</li>
+                            <li>Programmation orientée objet en Java et pattern DAO</li>
+                            <li>Tests unitaires avec JUnit</li>
+                        </ul>
+                        <div class="tags"><span>Java</span><span>JavaFX</span><span>PostgreSQL</span><span>UML</span></div>
+                    </template>
+                </article>
+
+                <!-- Projet 5 -->
+                <article class="card card--hover project-card tilt reveal" data-category="web">
+                    <div class="project-card__media project-card__media--5">
+                        <i class="fa-solid fa-laptop-code" aria-hidden="true"></i>
+                        <span class="project-card__type">Projet personnel</span>
+                    </div>
+                    <div class="project-card__body">
+                        <h3>Portfolio</h3>
+                        <p>Le site que vous consultez : un portfolio responsive avec thème clair / sombre, animations et filtres, sans framework.</p>
+                        <ul class="tech-list"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+                        <div class="project-card__actions">
+                            <button class="btn btn--small btn--primary" type="button" data-open-project>Détails</button>
+                            <a href="https://github.com/" class="btn btn--small btn--ghost" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                    <template>
+                        <span class="modal__tag">Projet personnel · Web</span>
+                        <h3>Portfolio</h3>
+                        <p>Portfolio réalisé pour présenter mon parcours, mes projets et ma veille technologique dans le cadre du BTS SIO.</p>
+                        <h4>Fonctionnalités</h4>
+                        <ul>
+                            <li>Design responsive (mobile, tablette, ordinateur)</li>
+                            <li>Thème clair / sombre mémorisé dans le navigateur</li>
+                            <li>Filtres, fenêtres modales, onglets et animations au défilement</li>
+                            <li>Formulaire de contact avec validation côté client</li>
+                        </ul>
+                        <h4>Compétences mobilisées</h4>
+                        <ul>
+                            <li>HTML sémantique et accessibilité (ARIA, navigation au clavier)</li>
+                            <li>CSS moderne : Grid, Flexbox, variables, animations</li>
+                            <li>JavaScript : DOM, IntersectionObserver, Canvas</li>
+                        </ul>
+                        <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+                    </template>
+                </article>
+
+                <!-- Projet 6 -->
+                <article class="card card--hover project-card tilt reveal" data-category="web">
+                    <div class="project-card__media project-card__media--6">
+                        <i class="fa-solid fa-vr-cardboard" aria-hidden="true"></i>
+                        <span class="project-card__type">Projet personnel</span>
+                    </div>
+                    <div class="project-card__body">
+                        <h3>Galerie virtuelle WebXR</h3>
+                        <p>Galerie 3D visitable dans le navigateur et compatible casque VR, réalisée dans le prolongement de ma veille technologique.</p>
+                        <ul class="tech-list"><li>JavaScript</li><li>A-Frame</li><li>WebXR</li></ul>
+                        <div class="project-card__actions">
+                            <button class="btn btn--small btn--primary" type="button" data-open-project>Détails</button>
+                            <a href="https://github.com/" class="btn btn--small btn--ghost" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                    <template>
+                        <span class="modal__tag">Projet personnel · Web / VR</span>
+                        <h3>Galerie virtuelle WebXR</h3>
+                        <p>Expérimentation pour mettre en pratique ma veille : une galerie d'exposition en 3D, consultable sur ordinateur, sur smartphone et dans un casque VR, sans rien installer.</p>
+                        <h4>Fonctionnalités</h4>
+                        <ul>
+                            <li>Déplacement dans la galerie au clavier, à la souris ou par téléportation en VR</li>
+                            <li>Œuvres cliquables affichant une fiche descriptive</li>
+                            <li>Mode « Entrer en VR » grâce à l'API WebXR</li>
+                        </ul>
+                        <h4>Compétences mobilisées</h4>
+                        <ul>
+                            <li>Découverte de la 3D temps réel : scène, caméra, lumières, textures</li>
+                            <li>Utilisation du framework A-Frame (basé sur Three.js)</li>
+                            <li>Optimisation pour garder une fluidité suffisante en VR</li>
+                        </ul>
+                        <div class="tags"><span>JavaScript</span><span>A-Frame</span><span>Three.js</span><span>WebXR</span></div>
+                    </template>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ EXPÉRIENCES ============ -->
+    <section class="section" id="experiences">
+        <div class="container">
+            <header class="section__header reveal">
+                <span class="section__label">05 · Expériences</span>
+                <h2 class="section__title">Expériences <span class="gradient-text">en entreprise</span></h2>
+                <p class="section__subtitle">Mes stages réalisés dans le cadre du BTS SIO.</p>
+            </header>
+
+            <!-- À MODIFIER : entreprises, dates, missions -->
+            <div class="xp-list">
+                <article class="card xp-card reveal">
+                    <div class="xp-card__side">
+                        <div class="xp-card__logo"><i class="fa-solid fa-building"></i></div>
+                        <span class="xp-card__date">Mai — Juin 2026</span>
+                        <span class="xp-card__duration"><i class="fa-regular fa-clock"></i> 6 semaines</span>
+                        <span class="status status--done">Terminé</span>
+                    </div>
+                    <div class="xp-card__main">
+                        <h3>Développeur web — Stage de 1<sup>re</sup> année</h3>
+                        <p class="xp-card__company"><i class="fa-solid fa-location-dot"></i> [Nom de l'entreprise] · [Ville]</p>
+                        <p>[Présentation de l'entreprise : secteur d'activité, taille, service dans lequel vous avez été accueilli.]</p>
+                        <h4>Missions réalisées</h4>
+                        <ul class="check-list">
+                            <li>Développement d'une application web de gestion interne en PHP / MySQL</li>
+                            <li>Intégration d'interfaces responsives en HTML, CSS et JavaScript</li>
+                            <li>Correction de bugs et ajout de fonctionnalités sur l'existant</li>
+                            <li>Rédaction de la documentation technique et du guide utilisateur</li>
+                        </ul>
+                        <div class="tags"><span>PHP</span><span>MySQL</span><span>JavaScript</span><span>Git</span></div>
+                    </div>
+                </article>
+
+                <article class="card xp-card reveal">
+                    <div class="xp-card__side">
+                        <div class="xp-card__logo xp-card__logo--alt"><i class="fa-solid fa-briefcase"></i></div>
+                        <span class="xp-card__date">Janvier — Février 2027</span>
+                        <span class="xp-card__duration"><i class="fa-regular fa-clock"></i> 7 semaines</span>
+                        <span class="status status--soon">À venir</span>
+                    </div>
+                    <div class="xp-card__main">
+                        <h3>Développeur full-stack — Stage de 2<sup>e</sup> année</h3>
+                        <p class="xp-card__company"><i class="fa-solid fa-location-dot"></i> [Nom de l'entreprise] · [Ville]</p>
+                        <p>[Présentation de l'entreprise d'accueil et du contexte du stage.]</p>
+                        <h4>Missions prévues</h4>
+                        <ul class="check-list">
+                            <li>Développement de nouvelles fonctionnalités sur une application Angular</li>
+                            <li>Création et documentation d'endpoints d'API REST</li>
+                            <li>Mise en place de tests et participation aux cérémonies agiles</li>
+                        </ul>
+                        <div class="tags"><span>Angular</span><span>API REST</span><span>PostgreSQL</span><span>Scrum</span></div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ CERTIFICATIONS ============ -->
+    <section class="section section--alt" id="certifications">
+        <div class="container">
+            <header class="section__header reveal">
+                <span class="section__label">06 · Certifications</span>
+                <h2 class="section__title">Mes <span class="gradient-text">certifications</span></h2>
+                <p class="section__subtitle">Des certifications qui complètent ma formation, notamment en cybersécurité et protection des données.</p>
+            </header>
+
+            <!-- À MODIFIER : dates, scores et liens vers vos attestations -->
+            <div class="certif-grid">
+                <article class="card card--hover certif-card reveal">
+                    <div class="certif-card__top">
+                        <span class="certif-card__icon certif-card__icon--pix"><i class="fa-solid fa-medal"></i></span>
+                        <span class="status status--done">Obtenue</span>
+                    </div>
+                    <h3>Certification Pix</h3>
+                    <p class="certif-card__org">Pix — service public</p>
+                    <p>Certification des compétences numériques : information, communication, création de contenu, protection et sécurité, environnement numérique.</p>
+                    <div class="certif-card__footer">
+                        <span><i class="fa-regular fa-calendar"></i> 2026 · [score] pix</span>
+                        <a href="#" target="_blank" rel="noopener">Voir <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </article>
+
+                <article class="card card--hover certif-card reveal">
+                    <div class="certif-card__top">
+                        <span class="certif-card__icon certif-card__icon--anssi"><i class="fa-solid fa-shield-halved"></i></span>
+                        <span class="status status--done">Obtenue</span>
+                    </div>
+                    <h3>SecNumacadémie</h3>
+                    <p class="certif-card__org">ANSSI</p>
+                    <p>MOOC de sensibilisation à la sécurité du numérique : panorama de la SSI, authentification, sécurité sur Internet et du poste de travail.</p>
+                    <div class="certif-card__footer">
+                        <span><i class="fa-regular fa-calendar"></i> 2025</span>
+                        <a href="#" target="_blank" rel="noopener">Voir <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </article>
+
+                <article class="card card--hover certif-card reveal">
+                    <div class="certif-card__top">
+                        <span class="certif-card__icon certif-card__icon--cnil"><i class="fa-solid fa-scale-balanced"></i></span>
+                        <span class="status status--done">Obtenue</span>
+                    </div>
+                    <h3>Atelier RGPD</h3>
+                    <p class="certif-card__org">CNIL</p>
+                    <p>MOOC sur le Règlement Général sur la Protection des Données : principes, droits des personnes et obligations des organisations.</p>
+                    <div class="certif-card__footer">
+                        <span><i class="fa-regular fa-calendar"></i> 2025</span>
+                        <a href="#" target="_blank" rel="noopener">Voir <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </article>
+
+                <article class="card card--hover certif-card reveal">
+                    <div class="certif-card__top">
+                        <span class="certif-card__icon certif-card__icon--fcc"><i class="fa-solid fa-code"></i></span>
+                        <span class="status status--soon">En cours</span>
+                    </div>
+                    <h3>Responsive Web Design</h3>
+                    <p class="certif-card__org">freeCodeCamp</p>
+                    <p>Certification en ligne sur la conception de pages web adaptatives en HTML et CSS, validée par plusieurs projets pratiques.</p>
+                    <div class="certif-card__footer">
+                        <span><i class="fa-regular fa-calendar"></i> 2026</span>
+                        <a href="#" target="_blank" rel="noopener">Voir <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ VEILLE TECHNOLOGIQUE ============ -->
+    <section class="section" id="veille">
+        <div class="container">
+            <header class="section__header reveal">
+                <span class="section__label">07 · Veille technologique</span>
+                <h2 class="section__title">Réalité virtuelle <span class="gradient-text">&amp; réalité augmentée</span></h2>
+                <p class="section__subtitle">Où en sont les technologies immersives, qui sont les acteurs, et qu'est-ce que cela change pour un développeur ?</p>
+            </header>
+
+            <div class="veille__intro reveal">
+                <div class="problematique">
+                    <span class="problematique__label"><i class="fa-solid fa-magnifying-glass"></i> Problématique</span>
+                    <blockquote>
+                        En quoi la réalité virtuelle et la réalité augmentée transforment-elles nos usages,
+                        et quelles opportunités offrent-elles aux développeurs d'applications ?
+                    </blockquote>
+                    <p>
+                        Longtemps réservées au jeu vidéo et aux laboratoires, la VR et l'AR arrivent dans la santé, l'industrie,
+                        l'éducation ou le commerce. Les géants de la tech (Meta, Apple, Google, Samsung, Valve) y investissent massivement,
+                        entre casques immersifs et lunettes connectées dopées à l'intelligence artificielle.
+                    </p>
+                </div>
+                <ul class="veille__meta">
+                    <li><i class="fa-solid fa-vr-cardboard"></i><span><small>Sujet</small>VR, AR et réalité mixte (XR)</span></li>
+                    <li><i class="fa-solid fa-calendar-days"></i><span><small>Période suivie</small>Depuis septembre 2025</span></li>
+                    <li><i class="fa-solid fa-rotate"></i><span><small>Dernière mise à jour</small>Octobre 2026</span></li>
+                    <li><i class="fa-solid fa-rss"></i><span><small>Outils</small>Feedly, Google Alertes, YouTube</span></li>
+                </ul>
+            </div>
+
+            <!-- Onglets -->
+            <div class="tabs reveal" role="tablist" aria-label="Parties de la veille technologique">
+                <button class="tab-btn" type="button" role="tab" id="tab-btn-def" aria-controls="tab-def" aria-selected="true"><i class="fa-solid fa-book-open"></i> Définitions</button>
+                <button class="tab-btn" type="button" role="tab" id="tab-btn-acteurs" aria-controls="tab-acteurs" aria-selected="false" tabindex="-1"><i class="fa-solid fa-microchip"></i> Acteurs &amp; matériel</button>
+                <button class="tab-btn" type="button" role="tab" id="tab-btn-usages" aria-controls="tab-usages" aria-selected="false" tabindex="-1"><i class="fa-solid fa-lightbulb"></i> Usages</button>
+                <button class="tab-btn" type="button" role="tab" id="tab-btn-dev" aria-controls="tab-dev" aria-selected="false" tabindex="-1"><i class="fa-solid fa-code"></i> Développer en XR</button>
+                <button class="tab-btn" type="button" role="tab" id="tab-btn-enjeux" aria-controls="tab-enjeux" aria-selected="false" tabindex="-1"><i class="fa-solid fa-scale-balanced"></i> Enjeux &amp; limites</button>
+                <button class="tab-btn" type="button" role="tab" id="tab-btn-news" aria-controls="tab-news" aria-selected="false" tabindex="-1"><i class="fa-solid fa-newspaper"></i> Actualités</button>
+                <button class="tab-btn" type="button" role="tab" id="tab-btn-methode" aria-controls="tab-methode" aria-selected="false" tabindex="-1"><i class="fa-solid fa-filter"></i> Méthodologie</button>
+            </div>
+
+            <!-- Onglet : Définitions -->
+            <div class="tab-panel active" role="tabpanel" id="tab-def" aria-labelledby="tab-btn-def" tabindex="0">
+                <div class="grid-3">
+                    <article class="card def-card">
+                        <span class="def-card__icon def-card__icon--vr"><i class="fa-solid fa-vr-cardboard"></i></span>
+                        <span class="def-card__acronym">VR · Virtual Reality</span>
+                        <h3>Réalité virtuelle</h3>
+                        <p>L'utilisateur est plongé dans un environnement entièrement généré par ordinateur. Un casque masque le monde réel et des capteurs suivent les mouvements de la tête et des mains pour interagir avec cet univers.</p>
+                        <p class="def-card__ex"><strong>Exemples :</strong> Meta Quest 3, Steam Frame, PlayStation VR2</p>
+                    </article>
+                    <article class="card def-card">
+                        <span class="def-card__icon def-card__icon--ar"><i class="fa-solid fa-mobile-screen"></i></span>
+                        <span class="def-card__acronym">AR · Augmented Reality</span>
+                        <h3>Réalité augmentée</h3>
+                        <p>Des éléments virtuels (textes, objets 3D, indications) sont superposés au monde réel, en temps réel, à travers l'écran d'un smartphone ou des lunettes transparentes.</p>
+                        <p class="def-card__ex"><strong>Exemples :</strong> Pokémon GO, filtres Snapchat, IKEA Place, Meta Ray-Ban Display</p>
+                    </article>
+                    <article class="card def-card">
+                        <span class="def-card__icon def-card__icon--mr"><i class="fa-solid fa-cube"></i></span>
+                        <span class="def-card__acronym">MR · Mixed Reality</span>
+                        <h3>Réalité mixte</h3>
+                        <p>Objets virtuels et réels cohabitent et interagissent : un objet 3D peut être posé sur une vraie table ou caché derrière un vrai mur. On regroupe toutes ces technologies sous le terme <strong>XR</strong> (eXtended Reality).</p>
+                        <p class="def-card__ex"><strong>Exemples :</strong> Apple Vision Pro, Samsung Galaxy XR, Meta Quest 3</p>
+                    </article>
+                </div>
+
+                <div class="card continuum">
+                    <h3>Le continuum réalité – virtualité</h3>
+                    <p class="muted">Modèle proposé par Paul Milgram et Fumio Kishino (1994) : il n'y a pas de frontière nette entre réel et virtuel, mais un continuum.</p>
+                    <div class="continuum__bar" aria-hidden="true">
+                        <span class="continuum__mr">Réalité mixte</span>
+                        <span class="continuum__dot" style="left:12.5%"></span>
+                        <span class="continuum__dot" style="left:37.5%"></span>
+                        <span class="continuum__dot" style="left:62.5%"></span>
+                        <span class="continuum__dot" style="left:87.5%"></span>
+                    </div>
+                    <ol class="continuum__points">
+                        <li><strong>Environnement réel</strong><small>Le monde tel qu'on le voit</small></li>
+                        <li><strong>Réalité augmentée</strong><small>Le réel enrichi de virtuel</small></li>
+                        <li><strong>Virtualité augmentée</strong><small>Le virtuel enrichi de réel</small></li>
+                        <li><strong>Environnement virtuel</strong><small>Un monde 100 % numérique</small></li>
+                    </ol>
+                </div>
+
+                <h3 class="sub-title"><i class="fa-solid fa-table-columns"></i> VR ou AR : comparatif</h3>
+                <div class="table-wrap">
+                    <table class="compare">
+                        <thead>
+                        <tr><th scope="col">Critère</th><th scope="col">Réalité virtuelle</th><th scope="col">Réalité augmentée</th></tr>
+                        </thead>
+                        <tbody>
+                        <tr><td>Immersion</td><td>Totale</td><td>Partielle</td></tr>
+                        <tr><td>Rapport au réel</td><td>L'utilisateur est coupé du monde réel</td><td>Le monde réel reste visible et est enrichi</td></tr>
+                        <tr><td>Matériel</td><td>Casque autonome ou relié à un PC</td><td>Smartphone, tablette, lunettes connectées</td></tr>
+                        <tr><td>Interactions</td><td>Manettes, suivi des mains et du regard</td><td>Écran tactile, gestes, voix</td></tr>
+                        <tr><td>Usages types</td><td>Jeu, simulation, formation</td><td>Aide à la tâche, commerce, navigation</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="sub-title"><i class="fa-solid fa-clock-rotate-left"></i> Repères historiques</h3>
+                <ol class="history">
+                    <li><span class="history__year">1968</span>Ivan Sutherland crée « l'Épée de Damoclès », premier visiocasque.</li>
+                    <li><span class="history__year">1990</span>Tom Caudell, chercheur chez Boeing, invente le terme « réalité augmentée ».</li>
+                    <li><span class="history__year">2012</span>Le casque Oculus Rift est financé sur Kickstarter et relance la VR.</li>
+                    <li><span class="history__year">2016</span>Pokémon GO popularise l'AR, HTC Vive arrive chez le grand public.</li>
+                    <li><span class="history__year">2019</span>Oculus Quest : le premier casque VR autonome à grand succès.</li>
+                    <li><span class="history__year">2024</span>Apple Vision Pro : Apple entre sur le marché avec « l'informatique spatiale ».</li>
+                </ol>
+
+                <h3 class="sub-title"><i class="fa-solid fa-spell-check"></i> Glossaire</h3>
+                <dl class="glossary">
+                    <div class="card glossary__item"><dt>6DoF / 3DoF</dt><dd>Six degrés de liberté : le casque suit la rotation <em>et</em> le déplacement de la tête. En 3DoF, seule la rotation est détectée.</dd></div>
+                    <div class="card glossary__item"><dt>Passthrough</dt><dd>Les caméras du casque filment le monde réel et l'affichent à l'intérieur : c'est ce qui permet la réalité mixte.</dd></div>
+                    <div class="card glossary__item"><dt>FOV</dt><dd><em>Field of View</em> : le champ de vision, en degrés. Plus il est large, plus l'immersion est forte.</dd></div>
+                    <div class="card glossary__item"><dt>SLAM</dt><dd><em>Simultaneous Localization And Mapping</em> : l'appareil cartographie la pièce et s'y repère en même temps. Rien à voir avec mon option… quoique !</dd></div>
+                    <div class="card glossary__item"><dt>Eye tracking</dt><dd>Suivi du regard, utilisé pour interagir et pour le <em>rendu fovéal</em> : seule la zone regardée est affichée en pleine qualité.</dd></div>
+                    <div class="card glossary__item"><dt>Latence</dt><dd>Délai entre un mouvement et son affichage. Au-delà d'environ 20 ms, le risque de cybercinétose (nausée) augmente.</dd></div>
+                </dl>
+            </div>
+
+            <!-- Onglet : Acteurs & matériel -->
+            <div class="tab-panel" role="tabpanel" id="tab-acteurs" aria-labelledby="tab-btn-acteurs" tabindex="0">
+                <p class="panel-intro">Le marché se partage entre <strong>casques immersifs</strong> (jeu, travail, formation) et <strong>lunettes légères</strong> pensées pour un usage quotidien. Prix indiqués : prix de lancement aux États-Unis.</p>
+                <div class="grid-auto">
+                    <article class="card card--hover device-card">
+                        <div class="device-card__head">
+                            <span class="device-card__logo"><i class="fa-brands fa-meta"></i></span>
+                            <div><h3>Meta Quest 3 / 3S</h3><span>Meta · 2023 / 2024</span></div>
+                        </div>
+                        <span class="pill pill--vr">Casque autonome VR / MR</span>
+                        <p>La gamme la plus répandue du marché. Le passthrough couleur permet de mélanger réel et virtuel. Système : Horizon OS.</p>
+                        <div class="device-card__price"><i class="fa-solid fa-tag"></i> 499 $ / 299 $</div>
+                    </article>
+                    <article class="card card--hover device-card">
+                        <div class="device-card__head">
+                            <span class="device-card__logo"><i class="fa-brands fa-apple"></i></span>
+                            <div><h3>Apple Vision Pro</h3><span>Apple · 2024 (puce M5 en 2025)</span></div>
+                        </div>
+                        <span class="pill pill--mr">Ordinateur spatial MR</span>
+                        <p>Écrans micro-OLED très haute définition, contrôle par le regard et les gestes, système visionOS. Positionné haut de gamme : productivité et vidéo immersive.</p>
+                        <div class="device-card__price"><i class="fa-solid fa-tag"></i> 3 499 $</div>
+                    </article>
+                    <article class="card card--hover device-card">
+                        <div class="device-card__head">
+                            <span class="device-card__logo"><i class="fa-brands fa-android"></i></span>
+                            <div><h3>Samsung Galaxy XR</h3><span>Samsung × Google · octobre 2025</span></div>
+                        </div>
+                        <span class="pill pill--mr">Casque MR Android XR</span>
+                        <p>Premier casque sous Android XR, avec l'IA Gemini intégrée et le suivi des yeux et des mains. L'alternative Android au Vision Pro.</p>
+                        <div class="device-card__price"><i class="fa-solid fa-tag"></i> 1 799 $</div>
+                    </article>
+                    <article class="card card--hover device-card">
+                        <div class="device-card__head">
+                            <span class="device-card__logo"><i class="fa-brands fa-steam"></i></span>
+                            <div><h3>Valve Steam Frame</h3><span>Valve · 2026</span></div>
+                        </div>
+                        <span class="pill pill--vr">Casque autonome VR</span>
+                        <p>Pensé pour le jeu PC : il lance des jeux Steam en autonome ou les diffuse sans fil depuis un PC, avec un streaming optimisé grâce au suivi du regard.</p>
+                        <div class="device-card__price"><i class="fa-solid fa-tag"></i> à partir de 1 059 $</div>
+                    </article>
+                    <article class="card card--hover device-card">
+                        <div class="device-card__head">
+                            <span class="device-card__logo"><i class="fa-solid fa-glasses"></i></span>
+                            <div><h3>Meta Ray-Ban Display</h3><span>Meta × EssilorLuxottica · 2025</span></div>
+                        </div>
+                        <span class="pill pill--ar">Lunettes à écran</span>
+                        <p>Un petit écran intégré au verre affiche messages, itinéraires ou traductions. Elles se pilotent avec le Neural Band, un bracelet qui détecte les gestes de la main.</p>
+                        <div class="device-card__price"><i class="fa-solid fa-tag"></i> 799 $</div>
+                    </article>
+                    <article class="card card--hover device-card">
+                        <div class="device-card__head">
+                            <span class="device-card__logo"><i class="fa-solid fa-display"></i></span>
+                            <div><h3>Lunettes d'affichage</h3><span>XREAL, VITURE, RayNeo…</span></div>
+                        </div>
+                        <span class="pill pill--ar">Écran virtuel portable</span>
+                        <p>Branchées à un smartphone, un PC ou une console, elles affichent un écran géant devant les yeux. Au CES 2026, Asus et XREAL ont présenté des lunettes gaming à 240 Hz.</p>
+                        <div class="device-card__price"><i class="fa-solid fa-tag"></i> à partir d'environ 300 $</div>
+                    </article>
+                </div>
+
+                <h3 class="sub-title"><i class="fa-solid fa-layer-group"></i> Les plateformes logicielles</h3>
+                <ul class="chips chips--lg">
+                    <li><i class="fa-brands fa-meta"></i> Horizon OS — Meta</li>
+                    <li><i class="fa-brands fa-apple"></i> visionOS — Apple</li>
+                    <li><i class="fa-brands fa-google"></i> Android XR — Google</li>
+                    <li><i class="fa-brands fa-steam"></i> SteamOS / SteamVR — Valve</li>
+                    <li><i class="fa-solid fa-unlock"></i> OpenXR — standard ouvert</li>
+                </ul>
+            </div>
+
+            <!-- Onglet : Usages -->
+            <div class="tab-panel" role="tabpanel" id="tab-usages" aria-labelledby="tab-btn-usages" tabindex="0">
+                <p class="panel-intro">La VR et l'AR ne servent pas qu'à jouer : de nombreux secteurs les utilisent déjà pour former, vendre ou assister leurs équipes.</p>
+                <div class="grid-auto">
+                    <article class="card card--hover usage-card">
+                        <span class="usage-card__icon"><i class="fa-solid fa-heart-pulse"></i></span>
+                        <h3>Santé</h3>
+                        <p>Formation des chirurgiens en simulation, rééducation, thérapie des phobies par exposition progressive, visualisation 3D d'organes.</p>
+                    </article>
+                    <article class="card card--hover usage-card">
+                        <span class="usage-card__icon"><i class="fa-solid fa-industry"></i></span>
+                        <h3>Industrie</h3>
+                        <p>Maintenance assistée en AR (instructions affichées sur la machine), jumeaux numériques, formation aux gestes à risque sans danger.</p>
+                    </article>
+                    <article class="card card--hover usage-card">
+                        <span class="usage-card__icon"><i class="fa-solid fa-chalkboard-user"></i></span>
+                        <h3>Éducation</h3>
+                        <p>Visites virtuelles de musées ou de sites historiques, expériences scientifiques impossibles en classe, apprentissage par la pratique.</p>
+                    </article>
+                    <article class="card card--hover usage-card">
+                        <span class="usage-card__icon"><i class="fa-solid fa-cart-shopping"></i></span>
+                        <h3>Commerce</h3>
+                        <p>Essayage virtuel de lunettes, vêtements ou maquillage, visualisation de meubles chez soi (IKEA Place), showrooms virtuels.</p>
+                    </article>
+                    <article class="card card--hover usage-card">
+                        <span class="usage-card__icon"><i class="fa-solid fa-gamepad"></i></span>
+                        <h3>Jeu &amp; divertissement</h3>
+                        <p>Jeux comme Beat Saber ou Half-Life: Alyx, Pokémon GO en AR, concerts et matchs retransmis en immersion.</p>
+                    </article>
+                    <article class="card card--hover usage-card">
+                        <span class="usage-card__icon"><i class="fa-solid fa-house"></i></span>
+                        <h3>Architecture &amp; immobilier</h3>
+                        <p>Visites de biens à distance, revue de maquettes 3D à l'échelle 1 avant la construction, aménagement intérieur.</p>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Onglet : Développer en XR -->
+            <div class="tab-panel" role="tabpanel" id="tab-dev" aria-labelledby="tab-btn-dev" tabindex="0">
+                <p class="panel-intro">Ce qui m'intéresse en tant que futur développeur SLAM : la XR devient accessible avec des outils proches de ceux que j'utilise déjà, à commencer par <strong>JavaScript</strong>.</p>
+                <div class="grid-auto">
+                    <article class="card card--hover dev-card dev-card--highlight">
+                        <div class="dev-card__head"><i class="fa-solid fa-globe"></i><h3>WebXR</h3></div>
+                        <span class="pill pill--ar">JavaScript</span>
+                        <p>API du W3C pour créer des expériences VR / AR directement dans le navigateur, sans installation. Bibliothèques : Three.js, A-Frame, Babylon.js.</p>
+                        <p class="dev-card__link"><i class="fa-solid fa-link"></i> Lien direct avec mes compétences HTML / JS</p>
+                    </article>
+                    <article class="card card--hover dev-card">
+                        <div class="dev-card__head"><i class="fa-brands fa-unity"></i><h3>Unity</h3></div>
+                        <span class="pill pill--vr">C#</span>
+                        <p>Le moteur le plus utilisé pour les applications XR, avec le XR Interaction Toolkit. Il cible Quest, Android XR, visionOS et le PC.</p>
+                    </article>
+                    <article class="card card--hover dev-card">
+                        <div class="dev-card__head"><i class="fa-solid fa-mountain-sun"></i><h3>Unreal Engine</h3></div>
+                        <span class="pill pill--vr">C++ / Blueprints</span>
+                        <p>Rendu photoréaliste, utilisé pour la simulation, l'architecture et les jeux haut de gamme.</p>
+                    </article>
+                    <article class="card card--hover dev-card">
+                        <div class="dev-card__head"><i class="fa-solid fa-unlock"></i><h3>OpenXR</h3></div>
+                        <span class="pill pill--mr">Standard Khronos</span>
+                        <p>API ouverte et multiplateforme : on développe une fois pour plusieurs casques (Meta, Valve, Samsung, Pico…).</p>
+                    </article>
+                    <article class="card card--hover dev-card">
+                        <div class="dev-card__head"><i class="fa-solid fa-mobile-screen"></i><h3>ARCore &amp; ARKit</h3></div>
+                        <span class="pill pill--ar">Kotlin / Swift</span>
+                        <p>Kits de Google et d'Apple pour l'AR mobile : détection des surfaces, ancrage d'objets 3D, estimation de la lumière.</p>
+                    </article>
+                    <article class="card card--hover dev-card">
+                        <div class="dev-card__head"><i class="devicon-flutter-plain"></i><h3>Flutter</h3></div>
+                        <span class="pill pill--ar">Dart</span>
+                        <p>Des packages communautaires s'appuient sur ARCore / ARKit pour ajouter de l'AR à une application Flutter : une piste pour mes projets mobiles.</p>
+                    </article>
+                </div>
+
+                <div class="code">
+                    <div class="code__bar">
+                        <span class="code__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                        <span>scene-vr.html — une scène VR en 10 lignes avec A-Frame</span>
+                        <button class="code__copy" type="button" data-copy><i class="fa-regular fa-copy"></i> Copier</button>
+                    </div>
+                    <pre><code><span class="tok-com">&lt;!-- Une scène 3D visitable dans le navigateur et dans un casque VR --&gt;</span>
+<span class="tok-tag">&lt;script</span> <span class="tok-attr">src</span>=<span class="tok-val">"https://aframe.io/releases/1.6.0/aframe.min.js"</span><span class="tok-tag">&gt;&lt;/script&gt;</span>
+
+<span class="tok-tag">&lt;a-scene&gt;</span>
+  <span class="tok-tag">&lt;a-box</span> <span class="tok-attr">position</span>=<span class="tok-val">"-1 0.5 -3"</span> <span class="tok-attr">rotation</span>=<span class="tok-val">"0 45 0"</span> <span class="tok-attr">color</span>=<span class="tok-val">"#22d3ee"</span><span class="tok-tag">&gt;&lt;/a-box&gt;</span>
+  <span class="tok-tag">&lt;a-sphere</span> <span class="tok-attr">position</span>=<span class="tok-val">"0 1.25 -5"</span> <span class="tok-attr">radius</span>=<span class="tok-val">"1.25"</span> <span class="tok-attr">color</span>=<span class="tok-val">"#a855f7"</span><span class="tok-tag">&gt;&lt;/a-sphere&gt;</span>
+  <span class="tok-tag">&lt;a-plane</span> <span class="tok-attr">rotation</span>=<span class="tok-val">"-90 0 0"</span> <span class="tok-attr">width</span>=<span class="tok-val">"8"</span> <span class="tok-attr">height</span>=<span class="tok-val">"8"</span> <span class="tok-attr">color</span>=<span class="tok-val">"#1e1b4b"</span><span class="tok-tag">&gt;&lt;/a-plane&gt;</span>
+  <span class="tok-tag">&lt;a-sky</span> <span class="tok-attr">color</span>=<span class="tok-val">"#0b0d1a"</span><span class="tok-tag">&gt;&lt;/a-sky&gt;</span>
+<span class="tok-tag">&lt;/a-scene&gt;</span></code></pre>
+                </div>
+            </div>
+
+            <!-- Onglet : Enjeux & limites -->
+            <div class="tab-panel" role="tabpanel" id="tab-enjeux" aria-labelledby="tab-btn-enjeux" tabindex="0">
+                <div class="grid-2">
+                    <div class="card pros">
+                        <h3><i class="fa-solid fa-circle-check"></i> Opportunités</h3>
+                        <ul>
+                            <li><strong>Former sans risque :</strong> gestes techniques, chirurgie, sécurité incendie, répétables à volonté.</li>
+                            <li><strong>Visualiser en 3D :</strong> produits, bâtiments ou données, avant même qu'ils existent.</li>
+                            <li><strong>Collaborer à distance</strong> dans un espace virtuel partagé.</li>
+                            <li><strong>Rendre accessibles</strong> des lieux lointains ou fragiles (musées, sites historiques).</li>
+                            <li><strong>Nouveaux métiers :</strong> développeur XR, designer 3D, UX designer « spatial ».</li>
+                        </ul>
+                    </div>
+                    <div class="card cons">
+                        <h3><i class="fa-solid fa-triangle-exclamation"></i> Limites &amp; risques</h3>
+                        <ul>
+                            <li><strong>Cybercinétose :</strong> nausées et vertiges quand le mouvement vu ne correspond pas au mouvement ressenti.</li>
+                            <li><strong>Coût :</strong> les casques haut de gamme dépassent 1 000 $ et produire du contenu 3D coûte cher.</li>
+                            <li><strong>Confort :</strong> poids sur le visage, autonomie souvent limitée à 2 ou 3 heures, fatigue visuelle.</li>
+                            <li><strong>Vie privée :</strong> caméras en permanence, cartographie du domicile, données du regard très sensibles.</li>
+                            <li><strong>Santé et société :</strong> usage déconseillé aux jeunes enfants, risque d'isolement.</li>
+                            <li><strong>Fragmentation :</strong> plusieurs écosystèmes concurrents (Horizon OS, visionOS, Android XR…).</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card perspective">
+                    <h3><i class="fa-solid fa-rocket"></i> Perspectives</h3>
+                    <p>
+                        La tendance 2025-2026 est nette : les grands acteurs misent sur des <strong>lunettes légères associées à l'IA</strong>
+                        (assistant vocal, traduction, reconnaissance de ce que l'on regarde), tandis que les <strong>casques</strong> restent la référence
+                        pour l'immersion totale (jeu, formation, simulation). Les standards ouverts comme <strong>OpenXR</strong> et <strong>WebXR</strong>
+                        facilitent le développement multiplateforme et rendent ce domaine accessible aux développeurs web et mobile.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Onglet : Actualités -->
+            <div class="tab-panel" role="tabpanel" id="tab-news" aria-labelledby="tab-btn-news" tabindex="0">
+                <div class="filters filters--left" id="news-filters" role="group" aria-label="Filtrer les actualités">
+                    <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">Toutes</button>
+                    <button class="filter-btn" type="button" data-filter="vr" aria-pressed="false">VR</button>
+                    <button class="filter-btn" type="button" data-filter="ar" aria-pressed="false">AR</button>
+                    <button class="filter-btn" type="button" data-filter="mr" aria-pressed="false">Réalité mixte</button>
+                </div>
+
+                <!-- À COMPLÉTER : ajoutez vos nouvelles actualités en haut de la liste -->
+                <div class="news">
+                    <article class="card news-item reveal" data-category="vr">
+                        <div class="news-item__date">Sept. <small>2026</small></div>
+                        <div>
+                            <span class="pill pill--vr">VR</span>
+                            <h4>Valve ouvre les réservations du Steam Frame</h4>
+                            <p>Le casque VR autonome de Valve devient réservable via Steam, à partir de 1 059 $ pour la version 256 Go. L'alimentation est vendue séparément.</p>
+                            <p class="news-item__analysis"><strong>Mon analyse :</strong> un prix plus élevé que prévu, expliqué par la hausse du coût des composants. Valve vise les joueurs PC exigeants plutôt que le grand public.</p>
+                            <p class="news-item__source">Source : <a href="https://store.steampowered.com/" target="_blank" rel="noopener">Steam / Valve</a></p>
+                        </div>
+                    </article>
+
+                    <article class="card news-item reveal" data-category="ar">
+                        <div class="news-item__date">Janv. <small>2026</small></div>
+                        <div>
+                            <span class="pill pill--ar">AR</span>
+                            <h4>CES 2026 : Asus et XREAL dévoilent les ROG XREAL R1</h4>
+                            <p>Des lunettes d'affichage orientées jeu vidéo : écrans micro-OLED, 240 Hz, champ de vision de 57° pour 91 grammes.</p>
+                            <p class="news-item__analysis"><strong>Mon analyse :</strong> les lunettes « écran » deviennent un vrai accessoire de jeu, une alternative plus légère aux casques.</p>
+                            <p class="news-item__source">Source : <a href="https://kulturegeek.fr/" target="_blank" rel="noopener">KultureGeek</a></p>
+                        </div>
+                    </article>
+
+                    <article class="card news-item reveal" data-category="ar">
+                        <div class="news-item__date">Déc. <small>2025</small></div>
+                        <div>
+                            <span class="pill pill--ar">AR</span>
+                            <h4>Google détaille ses lunettes Android XR pour 2026</h4>
+                            <p>Deux familles de lunettes : des lunettes IA sans écran (audio, caméra) et des lunettes avec un affichage dans le verre, conçues avec Samsung et des marques de lunetterie comme Warby Parker et Gentle Monster.</p>
+                            <p class="news-item__analysis"><strong>Mon analyse :</strong> Google mise sur le design et l'IA Gemini pour rendre les lunettes connectées acceptables au quotidien.</p>
+                            <p class="news-item__source">Source : <a href="https://blog.google/" target="_blank" rel="noopener">Blog Google</a></p>
+                        </div>
+                    </article>
+
+                    <article class="card news-item reveal" data-category="vr">
+                        <div class="news-item__date">Nov. <small>2025</small></div>
+                        <div>
+                            <span class="pill pill--vr">VR</span>
+                            <h4>Valve annonce le Steam Frame</h4>
+                            <p>Un casque VR autonome sous SteamOS, capable de lancer des jeux Steam ou de les diffuser sans fil depuis un PC, avec un streaming optimisé par le suivi du regard.</p>
+                            <p class="news-item__analysis"><strong>Mon analyse :</strong> le retour de Valve relance la concurrence face à Meta sur le marché de la VR pour les joueurs.</p>
+                            <p class="news-item__source">Source : <a href="https://store.steampowered.com/" target="_blank" rel="noopener">Steam / Valve</a></p>
+                        </div>
+                    </article>
+
+                    <article class="card news-item reveal" data-category="mr">
+                        <div class="news-item__date">Oct. <small>2025</small></div>
+                        <div>
+                            <span class="pill pill--mr">MR</span>
+                            <h4>Samsung lance le Galaxy XR, premier casque Android XR</h4>
+                            <p>Vendu 1 799 $, il intègre l'IA Gemini, le suivi des yeux et des mains, et donne accès aux applications Android.</p>
+                            <p class="news-item__analysis"><strong>Mon analyse :</strong> l'arrivée de l'écosystème Android pourrait faire pour la XR ce qu'il a fait pour le smartphone : multiplier les appareils et les applications.</p>
+                            <p class="news-item__source">Source : <a href="https://news.samsung.com/fr/" target="_blank" rel="noopener">Samsung Newsroom</a></p>
+                        </div>
+                    </article>
+
+                    <article class="card news-item reveal" data-category="ar">
+                        <div class="news-item__date">Sept. <small>2025</small></div>
+                        <div>
+                            <span class="pill pill--ar">AR</span>
+                            <h4>Meta présente les Ray-Ban Display et le Neural Band</h4>
+                            <p>Des lunettes avec un écran intégré dans le verre droit, pilotées par un bracelet qui lit l'activité musculaire du poignet. Prix : 799 $.</p>
+                            <p class="news-item__analysis"><strong>Mon analyse :</strong> le bracelet résout un vrai problème (comment interagir avec des lunettes ?) et pourrait devenir un standard.</p>
+                            <p class="news-item__source">Source : <a href="https://about.fb.com/news/" target="_blank" rel="noopener">Meta Newsroom</a></p>
+                        </div>
+                    </article>
+
+                    <article class="card news-item reveal" data-category="ar">
+                        <div class="news-item__date">Juin <small>2025</small></div>
+                        <div>
+                            <span class="pill pill--ar">AR</span>
+                            <h4>Snap annonce ses lunettes AR grand public « Specs » pour 2026</h4>
+                            <p>Après plusieurs générations de Spectacles réservées aux développeurs, Snap prépare une version grand public de ses lunettes de réalité augmentée.</p>
+                            <p class="news-item__analysis"><strong>Mon analyse :</strong> la course aux vraies lunettes AR ne se limite pas aux géants comme Apple ou Meta.</p>
+                            <p class="news-item__source">Source : <a href="https://newsroom.snap.com/" target="_blank" rel="noopener">Snap Newsroom</a></p>
+                        </div>
+                    </article>
+
+                    <article class="card news-item reveal" data-category="mr">
+                        <div class="news-item__date">Déc. <small>2024</small></div>
+                        <div>
+                            <span class="pill pill--mr">MR</span>
+                            <h4>Google annonce Android XR</h4>
+                            <p>Un système d'exploitation pour casques et lunettes, développé avec Samsung et Qualcomm, compatible avec Unity, OpenXR et WebXR.</p>
+                            <p class="news-item__analysis"><strong>Mon analyse :</strong> le support de WebXR et d'OpenXR est une bonne nouvelle pour les développeurs : pas besoin d'apprendre une technologie propriétaire.</p>
+                            <p class="news-item__source">Source : <a href="https://blog.google/" target="_blank" rel="noopener">Blog Google</a></p>
+                        </div>
+                    </article>
+
+                    <article class="card news-item reveal" data-category="ar">
+                        <div class="news-item__date">Sept. <small>2024</small></div>
+                        <div>
+                            <span class="pill pill--ar">AR</span>
+                            <h4>Meta dévoile Orion, son prototype de lunettes AR</h4>
+                            <p>Des lunettes holographiques avec un champ de vision d'environ 70°, présentées comme un aperçu du futur des lunettes AR grand public.</p>
+                            <p class="news-item__analysis"><strong>Mon analyse :</strong> la technologie existe, mais son coût de fabrication la réserve encore aux prototypes.</p>
+                            <p class="news-item__source">Source : <a href="https://about.fb.com/news/" target="_blank" rel="noopener">Meta Newsroom</a></p>
+                        </div>
+                    </article>
+
+                    <article class="card news-item reveal" data-category="mr">
+                        <div class="news-item__date">Fév. <small>2024</small></div>
+                        <div>
+                            <span class="pill pill--mr">MR</span>
+                            <h4>Sortie de l'Apple Vision Pro aux États-Unis</h4>
+                            <p>Apple lance son premier casque à 3 499 $ et parle « d'informatique spatiale » plutôt que de VR ou d'AR.</p>
+                            <p class="news-item__analysis"><strong>Mon analyse :</strong> un prix trop élevé pour le grand public, mais Apple a imposé un nouveau niveau de qualité d'affichage et d'interaction (yeux + mains).</p>
+                            <p class="news-item__source">Source : <a href="https://www.apple.com/fr/newsroom/" target="_blank" rel="noopener">Apple Newsroom</a></p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Onglet : Méthodologie -->
+            <div class="tab-panel" role="tabpanel" id="tab-methode" aria-labelledby="tab-btn-methode" tabindex="0">
+                <h3 class="sub-title sub-title--first"><i class="fa-solid fa-arrows-spin"></i> Ma démarche de veille</h3>
+                <ol class="steps">
+                    <li class="card step"><span class="step__num">1</span><h4>Collecter</h4><p>Flux RSS et alertes sur des mots-clés : réalité virtuelle, réalité augmentée, WebXR, Android XR…</p></li>
+                    <li class="card step"><span class="step__num">2</span><h4>Trier</h4><p>Je garde les informations pertinentes, récentes et issues de sources fiables.</p></li>
+                    <li class="card step"><span class="step__num">3</span><h4>Vérifier</h4><p>Je recoupe chaque information avec au moins deux sources différentes.</p></li>
+                    <li class="card step"><span class="step__num">4</span><h4>Synthétiser</h4><p>Je résume l'information et j'ajoute mon analyse personnelle.</p></li>
+                    <li class="card step"><span class="step__num">5</span><h4>Partager</h4><p>Je publie ma synthèse sur ce portfolio et je la mets à jour régulièrement.</p></li>
+                </ol>
+
+                <div class="grid-2">
+                    <div class="card">
+                        <h3 class="card-title"><i class="fa-solid fa-toolbox"></i> Outils</h3>
+                        <ul class="tool-list">
+                            <li><i class="fa-solid fa-rss"></i><span><strong>Feedly</strong> — agrégateur de flux RSS</span></li>
+                            <li><i class="fa-solid fa-bell"></i><span><strong>Google Alertes</strong> — alertes e-mail par mot-clé</span></li>
+                            <li><i class="fa-brands fa-youtube"></i><span><strong>YouTube</strong> — tests et conférences (Meta Connect, WWDC, Google I/O)</span></li>
+                            <li><i class="fa-brands fa-reddit-alien"></i><span><strong>Reddit</strong> — r/virtualreality, r/augmentedreality</span></li>
+                            <li><i class="fa-brands fa-linkedin-in"></i><span><strong>LinkedIn</strong> — retours d'expérience d'entreprises</span></li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title"><i class="fa-solid fa-newspaper"></i> Sources</h3>
+                        <ul class="source-list">
+                            <li><a href="https://www.realite-virtuelle.com/" target="_blank" rel="noopener">Réalité-Virtuelle.com <span>FR</span></a></li>
+                            <li><a href="https://www.lesnumeriques.com/" target="_blank" rel="noopener">Les Numériques <span>FR</span></a></li>
+                            <li><a href="https://www.frandroid.com/" target="_blank" rel="noopener">Frandroid <span>FR</span></a></li>
+                            <li><a href="https://www.uploadvr.com/" target="_blank" rel="noopener">UploadVR <span>EN</span></a></li>
+                            <li><a href="https://www.roadtovr.com/" target="_blank" rel="noopener">Road to VR <span>EN</span></a></li>
+                            <li><a href="https://immersiveweb.dev/" target="_blank" rel="noopener">Immersive Web (WebXR) <span>EN</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Synthèse -->
+            <div class="synthese reveal">
+                <h3><i class="fa-solid fa-feather-pointed"></i> Ma synthèse</h3>
+                <p>
+                    La réalité virtuelle et la réalité augmentée ne relèvent plus de la science-fiction : elles sont déjà utilisées pour former,
+                    soigner, vendre ou divertir. Le marché se structure autour de deux familles d'appareils : des <strong>casques immersifs</strong>
+                    (Quest, Vision Pro, Galaxy XR, Steam Frame) et des <strong>lunettes légères</strong> associées à l'intelligence artificielle.
+                    Des freins demeurent (prix, confort, vie privée), mais l'arrivée de standards ouverts comme OpenXR et WebXR rend ce domaine
+                    accessible aux développeurs web et mobile. C'est une piste que je souhaite explorer dans la suite de mes études.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section section--alt" id="contact">
+        <div class="container">
+            <header class="section__header reveal">
+                <span class="section__label">08 · Contact</span>
+                <h2 class="section__title">Me <span class="gradient-text">contacter</span></h2>
+                <p class="section__subtitle">Une question, une proposition de stage ou d'alternance ? Écrivez-moi.</p>
+            </header>
+
+            <div class="contact">
+                <!-- À MODIFIER : vos coordonnées -->
+                <div class="contact__info reveal">
+                    <a class="card contact__item" href="mailto:nathan.thibault@exemple.fr">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span><small>E-mail</small><strong>nathan.thibault@exemple.fr</strong></span>
+                    </a>
+                    <a class="card contact__item" href="https://www.linkedin.com/" target="_blank" rel="noopener">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                        <span><small>LinkedIn</small><strong>linkedin.com/in/nathan-thibault</strong></span>
+                    </a>
+                    <a class="card contact__item" href="https://github.com/" target="_blank" rel="noopener">
+                        <i class="fa-brands fa-github"></i>
+                        <span><small>GitHub</small><strong>github.com/nathan-thibault</strong></span>
+                    </a>
+                    <div class="card contact__item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span><small>Localisation</small><strong>[Ville], France</strong></span>
+                    </div>
+                </div>
+
+                <!-- Le formulaire ouvre la messagerie du visiteur (pas de serveur nécessaire) -->
+                <form class="card contact__form reveal" id="contact-form" data-to="nathan.thibault@exemple.fr" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Nom</label>
+                            <input type="text" id="name" name="name" autocomplete="name" placeholder="Votre nom" required>
+                            <small class="error" id="name-error"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" name="email" autocomplete="email" placeholder="vous@exemple.fr" required>
+                            <small class="error" id="email-error"></small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Objet</label>
+                        <input type="text" id="subject" name="subject" placeholder="Proposition de stage, question…" required>
+                        <small class="error" id="subject-error"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Votre message…" required></textarea>
+                        <small class="error" id="message-error"></small>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full"><i class="fa-solid fa-paper-plane"></i> Envoyer le message</button>
+                    <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- ============ PIED DE PAGE ============ -->
+<footer class="footer">
+    <div class="container footer__inner">
+        <a href="#accueil" class="logo">NT<span>.</span></a>
+        <p>© <span id="year">2026</span> Nathan THIBAULT · BTS SIO option SLAM · Réalisé en HTML, CSS et JavaScript</p>
+        <ul class="socials socials--small">
+            <li><a href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a></li>
+            <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a></li>
+            <li><a href="#contact" aria-label="Me contacter"><i class="fa-solid fa-envelope"></i></a></li>
+        </ul>
+    </div>
+</footer>
+
+<button class="back-to-top" id="back-to-top" type="button" aria-label="Retour en haut de la page"><i class="fa-solid fa-arrow-up"></i></button>
+
+<!-- Fenêtre modale des projets -->
+<div class="modal" id="project-modal" role="dialog" aria-modal="true" aria-label="Détails du projet" aria-hidden="true">
+    <div class="modal__box">
+        <button class="icon-btn modal__close" type="button" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal__content" id="modal-content"></div>
+    </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
