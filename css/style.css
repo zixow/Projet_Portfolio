@@ -4,16 +4,17 @@
    ========================================================= */
 
 /* ---------- 1. Variables & thèmes ---------- */
+/* Thème sombre : le désert la nuit (sable violet, ciel étoilé) */
 :root {
-  --bg: #070812;
-  --bg-alt: #0b0d1c;
-  --surface: #11142a;
-  --surface-2: #181c38;
-  --border: rgba(148, 163, 255, 0.12);
-  --text: #e9ebf8;
-  --text-muted: #9ca3c9;
+  --bg: #241730;
+  --bg-alt: #2d1d3b;
+  --surface: #352347;
+  --surface-2: #3f2b53;
+  --border: rgba(244, 200, 255, 0.13);
+  --text: #f6eefc;
+  --text-muted: #c3b0d6;
   --primary: #22d3ee;
-  --secondary: #a855f7;
+  --secondary: #c084fc;
   --accent: #f472b6;
   --success: #34d399;
   --warning: #fbbf24;
@@ -21,7 +22,13 @@
   --gradient: linear-gradient(135deg, #22d3ee, #a855f7 55%, #f472b6);
   --shadow: 0 20px 45px -20px rgba(0, 0, 0, 0.6);
   --glow: 0 0 0 1px rgba(34, 211, 238, 0.3), 0 20px 45px -18px rgba(168, 85, 247, 0.55);
-  --header-bg: rgba(7, 8, 18, 0.78);
+  --header-bg: rgba(36, 23, 48, 0.82);
+  /* Grain de sable + ondulations laissées par le vent */
+  --grain:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 0.88 0 0 0 0 0.96 0 0 0 0.45 -0.16'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(172deg, transparent 0 22px, rgba(255, 220, 255, 0.035) 22px 24px);
+  /* Forme d'une dune, utilisée entre les sections */
+  --dune: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 48' preserveAspectRatio='none'%3E%3Cpath d='M0 48 C 180 20 360 6 600 22 S 1020 46 1240 18 S 1400 10 1440 16 V48 Z'/%3E%3C/svg%3E");
   --radius: 18px;
   --radius-sm: 12px;
   --font-title: "Space Grotesk", system-ui, sans-serif;
@@ -31,23 +38,27 @@
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Thème « désert » (clair, par défaut) : sable doré, terracotta, turquoise et coucher de soleil */
 [data-theme="light"] {
-  --bg: #f5f7fc;
-  --bg-alt: #eceffa;
-  --surface: #ffffff;
-  --surface-2: #f1f3fb;
-  --border: rgba(30, 41, 99, 0.12);
-  --text: #121530;
-  --text-muted: #555c82;
-  --primary: #0891b2;
-  --secondary: #7c3aed;
+  --bg: #f3d7a7;
+  --bg-alt: #ebc890;
+  --surface: #fff6e6;
+  --surface-2: #fbecd2;
+  --border: rgba(120, 72, 30, 0.18);
+  --text: #3a2216;
+  --text-muted: #6b4633;
+  --primary: #9a3412;
+  --secondary: #0f6b63;
   --accent: #db2777;
-  --success: #059669;
-  --warning: #c2410c;
-  --gradient: linear-gradient(135deg, #0891b2, #7c3aed 55%, #db2777);
-  --shadow: 0 20px 45px -25px rgba(30, 41, 99, 0.35);
-  --glow: 0 0 0 1px rgba(8, 145, 178, 0.25), 0 20px 45px -22px rgba(124, 58, 237, 0.45);
-  --header-bg: rgba(245, 247, 252, 0.85);
+  --success: #15803d;
+  --warning: #b45309;
+  --gradient: linear-gradient(135deg, #ea580c, #e11d48 55%, #be185d);
+  --shadow: 0 20px 45px -25px rgba(124, 45, 18, 0.45);
+  --glow: 0 0 0 1px rgba(234, 88, 12, 0.35), 0 20px 45px -22px rgba(225, 29, 72, 0.45);
+  --header-bg: rgba(250, 228, 190, 0.88);
+  --grain:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.28 0 0 0 0 0.12 0 0 0 0.6 -0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(172deg, transparent 0 22px, rgba(150, 95, 40, 0.06) 22px 24px);
 }
 
 /* ---------- 2. Base ---------- */
@@ -66,7 +77,7 @@ html {
 
 body {
   font-family: var(--font-body);
-  background: var(--bg);
+  background: var(--grain), var(--bg);
   color: var(--text);
   line-height: 1.65;
   overflow-x: hidden;
@@ -168,11 +179,11 @@ sup { font-size: 0.72em; line-height: 0; }
 .btn--primary {
   background: var(--gradient);
   color: #fff;
-  box-shadow: 0 10px 30px -12px rgba(168, 85, 247, 0.75);
+  box-shadow: 0 10px 30px -12px color-mix(in srgb, var(--accent) 75%, transparent);
 }
 .btn--primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 16px 36px -12px rgba(168, 85, 247, 0.9);
+  box-shadow: 0 16px 36px -12px color-mix(in srgb, var(--accent) 90%, transparent);
 }
 .btn--ghost {
   background: var(--surface);
@@ -387,9 +398,20 @@ sup { font-size: 0.72em; line-height: 0; }
   min-height: 100svh;
   display: flex;
   align-items: center;
-  padding: calc(var(--header-h) + 2rem) 0 5rem;
+  padding: calc(var(--header-h) + 2rem) 0 7.5rem;
   overflow: hidden;
   isolation: isolate;
+}
+
+/* Grain de sable par-dessus le sol dessiné dans le canvas */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 72px;
+  z-index: -1;
+  background: var(--grain);
+  pointer-events: none;
 }
 
 .hero__canvas {
@@ -509,7 +531,7 @@ sup { font-size: 0.72em; line-height: 0; }
   position: absolute;
   inset: -5px;
   border-radius: 50%;
-  background: conic-gradient(from 0deg, #22d3ee, #a855f7, #f472b6, #22d3ee);
+  background: conic-gradient(from 0deg, var(--primary), var(--accent), var(--secondary), var(--primary));
   animation: spin 9s linear infinite;
 }
 .avatar__ring::after {
@@ -591,6 +613,28 @@ sup { font-size: 0.72em; line-height: 0; }
 .hero__card strong { display: block; font-size: 0.92rem; }
 .hero__card small { color: var(--text-muted); font-size: 0.8rem; }
 
+/* Bouton pause / lecture de l'animation des dinosaures */
+.dino-toggle {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--header-bg);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: var(--text);
+  font-size: 0.78rem;
+  font-weight: 600;
+  transition: border-color 0.3s var(--ease);
+}
+.dino-toggle:hover { border-color: var(--primary); }
+.dino-toggle i { color: var(--primary); }
+
 .scroll-down {
   position: absolute;
   bottom: 1.6rem;
@@ -615,7 +659,23 @@ sup { font-size: 0.72em; line-height: 0; }
 
 /* ---------- 7. Sections ---------- */
 .section { position: relative; padding: 6.5rem 0; }
-.section--alt { background: var(--bg-alt); }
+.section--alt { background: var(--grain), var(--bg-alt); }
+
+/* Dunes en haut et en bas des sections alternées */
+.section--alt::before,
+.section--alt::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: var(--grain), var(--bg-alt);
+  -webkit-mask: var(--dune) center / 100% 100% no-repeat;
+  mask: var(--dune) center / 100% 100% no-repeat;
+  pointer-events: none;
+}
+.section--alt::before { bottom: calc(100% - 1px); }
+.section--alt::after { top: calc(100% - 1px); transform: scaleY(-1); }
 
 .section__header {
   max-width: 700px;
@@ -1628,7 +1688,7 @@ a.contact__item:hover { border-color: var(--primary); transform: translateX(6px)
 .form-status { min-height: 1.2em; font-size: 0.9rem; color: var(--success); text-align: center; }
 
 /* ---------- 16. Pied de page & retour en haut ---------- */
-.footer { padding: 2.5rem 0; border-top: 1px solid var(--border); }
+.footer { padding: 4.5rem 0 2.5rem; }
 .footer__inner {
   display: flex;
   flex-wrap: wrap;
@@ -1651,7 +1711,7 @@ a.contact__item:hover { border-color: var(--primary); transform: translateX(6px)
   border-radius: 14px;
   background: var(--gradient);
   color: #fff;
-  box-shadow: 0 12px 30px -10px rgba(168, 85, 247, 0.7);
+  box-shadow: 0 12px 30px -10px color-mix(in srgb, var(--accent) 70%, transparent);
   opacity: 0;
   visibility: hidden;
   translate: 0 20px;

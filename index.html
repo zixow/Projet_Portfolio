@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="dark">
+<html lang="fr" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,9 +20,8 @@
         (function () {
           try {
             var theme = localStorage.getItem('theme');
-            if (!theme) theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', theme);
-          } catch (e) { /* stockage indisponible : thème sombre par défaut */ }
+            if (theme) document.documentElement.setAttribute('data-theme', theme);
+          } catch (e) { /* stockage indisponible : thème « désert » (clair) par défaut */ }
         })();
     </script>
 </head>
@@ -63,8 +62,6 @@
     <!-- ============ ACCUEIL ============ -->
     <section class="hero" id="accueil">
         <canvas id="dinos" class="hero__canvas" aria-hidden="true"></canvas>
-        <div class="hero__glow hero__glow--1" aria-hidden="true"></div>
-        <div class="hero__glow hero__glow--2" aria-hidden="true"></div>
 
         <div class="container hero__container">
             <div class="hero__content">
@@ -110,6 +107,7 @@
         </div>
 
         <a href="#apropos" class="scroll-down" aria-label="Défiler vers la section À propos"><span></span></a>
+        <button class="dino-toggle" id="dino-toggle" type="button"><i class="fa-solid fa-pause"></i> <span>Pause</span></button>
     </section>
 
     <!-- ============ À PROPOS ============ -->
@@ -140,7 +138,7 @@
                     <!-- À MODIFIER : vos informations -->
                     <ul class="about__infos">
                         <li><i class="fa-solid fa-location-dot"></i> Nouméa, Nouvelle-Calédonie</li>
-                        <li><i class="fa-solid fa-graduation-cap"></i> BTS SIO SLAM · promo 2027</li>
+                        <li><i class="fa-solid fa-graduation-cap"></i> BTS SIO SLAM · promo 2026</li>
                         <li><i class="fa-solid fa-language"></i> Français, Anglais</li>
                         <li><i class="fa-solid fa-gamepad"></i> VR / AR, jeux vidéo, high-tech</li>
                     </ul>
@@ -181,7 +179,7 @@
                 <article class="timeline__item reveal">
                     <div class="timeline__dot"><i class="fa-solid fa-graduation-cap"></i></div>
                     <div class="card timeline__card">
-                        <span class="timeline__date">2025 — 2027 · En cours</span>
+                        <span class="timeline__date">2025 — 2026 · En cours</span>
                         <h3>BTS SIO — option SLAM</h3>
                         <p class="timeline__place"><i class="fa-solid fa-school"></i> Lycée Dick Ukeiwé, Nouméa (Yahoué)</p>
                         <p>Brevet de Technicien Supérieur Services Informatiques aux Organisations, option Solutions Logicielles et Applications Métiers.</p>
@@ -200,10 +198,10 @@
                 <article class="timeline__item reveal">
                     <div class="timeline__dot"><i class="fa-solid fa-award"></i></div>
                     <div class="card timeline__card">
-                        <span class="timeline__date">2025 · Obtenu</span>
-                        <h3>Baccalauréat [Général / Technologique / Professionnel]</h3>
+                        <span class="timeline__date">2024 · Obtenu</span>
+                        <h3>Baccalauréat professionnel</h3>
                         <p class="timeline__place"><i class="fa-solid fa-school"></i> [Nom du lycée], [Ville]</p>
-                        <p>[Spécialités ou série suivies] — Mention [à compléter].</p>
+                        <p>Bac pro [spécialité] — Mention [à compléter].</p>
                     </div>
                 </article>
             </div>
@@ -593,48 +591,49 @@
                 <p class="section__subtitle">Mes stages réalisés dans le cadre du BTS SIO.</p>
             </header>
 
-            <!-- À MODIFIER : entreprises, dates, missions -->
+            <!-- À MODIFIER : nom de l'entreprise du 1er stage, durées, missions et technologies exactes -->
             <div class="xp-list">
                 <article class="card xp-card reveal">
                     <div class="xp-card__side">
-                        <div class="xp-card__logo"><i class="fa-solid fa-building"></i></div>
-                        <span class="xp-card__date">Mai — Juin 2026</span>
-                        <span class="xp-card__duration"><i class="fa-regular fa-clock"></i> 6 semaines</span>
+                        <div class="xp-card__logo xp-card__logo--alt"><i class="fa-solid fa-headset"></i></div>
+                        <span class="xp-card__date">2026</span>
+                        <span class="xp-card__duration"><i class="fa-regular fa-clock"></i> 2<sup>e</sup> année de BTS</span>
                         <span class="status status--done">Terminé</span>
                     </div>
                     <div class="xp-card__main">
-                        <h3>Développeur web — Stage de 1<sup>re</sup> année</h3>
-                        <p class="xp-card__company"><i class="fa-solid fa-location-dot"></i> [Nom de l'entreprise] · [Ville]</p>
-                        <p>[Présentation de l'entreprise : secteur d'activité, taille, service dans lequel vous avez été accueilli.]</p>
+                        <h3>Technicien hotline — Stage de 2<sup>e</sup> année</h3>
+                        <p class="xp-card__company"><i class="fa-solid fa-building"></i> SF2I</p>
+                        <p>Stage au sein du service d'assistance (hotline) : accompagnement des clients et résolution de leurs problèmes informatiques.</p>
                         <h4>Missions réalisées</h4>
                         <ul class="check-list">
-                            <li>Développement d'une application web de gestion interne en PHP / MySQL</li>
-                            <li>Intégration d'interfaces responsives en HTML, CSS et JavaScript</li>
-                            <li>Correction de bugs et ajout de fonctionnalités sur l'existant</li>
-                            <li>Rédaction de la documentation technique et du guide utilisateur</li>
+                            <li>Prise en charge des appels et des demandes des clients</li>
+                            <li>Diagnostic et résolution des incidents à distance</li>
+                            <li>Suivi des demandes dans l'outil de tickets</li>
+                            <li>Transmission des problèmes complexes aux techniciens confirmés</li>
                         </ul>
-                        <div class="tags"><span>PHP</span><span>MySQL</span><span>JavaScript</span><span>Git</span></div>
+                        <div class="tags"><span>Hotline</span><span>Support utilisateurs</span><span>Tickets</span><span>Relation client</span></div>
                     </div>
                 </article>
 
                 <article class="card xp-card reveal">
                     <div class="xp-card__side">
-                        <div class="xp-card__logo xp-card__logo--alt"><i class="fa-solid fa-briefcase"></i></div>
-                        <span class="xp-card__date">Janvier — Février 2027</span>
-                        <span class="xp-card__duration"><i class="fa-regular fa-clock"></i> 7 semaines</span>
-                        <span class="status status--soon">À venir</span>
+                        <div class="xp-card__logo"><i class="fa-solid fa-laptop-code"></i></div>
+                        <span class="xp-card__date">2025</span>
+                        <span class="xp-card__duration"><i class="fa-regular fa-clock"></i> 1<sup>re</sup> année de BTS</span>
+                        <span class="status status--done">Terminé</span>
                     </div>
                     <div class="xp-card__main">
-                        <h3>Développeur full-stack — Stage de 2<sup>e</sup> année</h3>
-                        <p class="xp-card__company"><i class="fa-solid fa-location-dot"></i> [Nom de l'entreprise] · [Ville]</p>
-                        <p>[Présentation de l'entreprise d'accueil et du contexte du stage.]</p>
-                        <h4>Missions prévues</h4>
+                        <h3>Développeur web — Stage de 1<sup>re</sup> année</h3>
+                        <p class="xp-card__company"><i class="fa-solid fa-building"></i> [Nom de l'entreprise] · Entreprise individuelle</p>
+                        <p>Stage dans une entreprise d'une seule personne : j'ai réalisé son site web, en étant l'unique développeur du projet.</p>
+                        <h4>Missions réalisées</h4>
                         <ul class="check-list">
-                            <li>Développement de nouvelles fonctionnalités sur une application Angular</li>
-                            <li>Création et documentation d'endpoints d'API REST</li>
-                            <li>Mise en place de tests et participation aux cérémonies agiles</li>
+                            <li>Recueil des besoins auprès du gérant</li>
+                            <li>Conception de la maquette et de l'arborescence du site</li>
+                            <li>Développement d'un site web responsive</li>
+                            <li>Mise en ligne et présentation du site au gérant</li>
                         </ul>
-                        <div class="tags"><span>Angular</span><span>API REST</span><span>PostgreSQL</span><span>Scrum</span></div>
+                        <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Autonomie</span></div>
                     </div>
                 </article>
             </div>
