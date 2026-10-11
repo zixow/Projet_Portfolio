@@ -355,88 +355,304 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ---------- Fond étoilé animé (accueil) ---------- */
-  const canvas = $('#stars');
-  if (canvas && !reducedMotion) {
+  /* ---------- Fond animé de l'accueil : dinosaures en pixel art ---------- */
+  const canvas = $('#dinos');
+  if (canvas) {
     const ctx = canvas.getContext('2d');
     const hero = $('#accueil');
+    const rand = (min, max) => min + Math.random() * (max - min);
+
+    // Chaque « X » d'un sprite est un pixel dessiné
+    const sprite = (rows) => ({
+      w: Math.max(...rows.map((r) => r.length)),
+      h: rows.length,
+      pixels: rows.flatMap((row, y) => [...row].flatMap((c, x) => (c === 'X' ? [[x, y]] : []))),
+    });
+
+    const REX_BODY = [
+      '          XXXXXXXX',
+      '         XX XXXXXXX',
+      '         XXXXXXXXXX',
+      '         XXXXXXXXXX',
+      '         XXXXX',
+      '         XXXXXXXX',
+      'X       XXXXX',
+      'X      XXXXXX',
+      'XX    XXXXXXXXXX',
+      'XXX  XXXXXXXX  X',
+      'XXXXXXXXXXXX',
+      'XXXXXXXXXXXX',
+      ' XXXXXXXXXXX',
+      '  XXXXXXXXX',
+      '   XXXXXXXX',
+      '    XXXXXXX',
+    ];
+    const REX = [
+      sprite([...REX_BODY, '    XXX  XXX', '    XX    XX', '    X', '    XX']),
+      sprite([...REX_BODY, '    XXX  XXX', '     XX   X', '          X', '          XX']),
+      sprite([...REX_BODY, '    XXX  XXX', '    XX    X', '    X     X', '    XX    XX']), // en saut
+    ];
+    const PTERO = [
+      sprite(['      X', '      XX', '      XXX', '   X  XXXX', '  XX  XXXXX', ' XXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXX', '      XXXXXXXXXX', '        XXXXX']),
+      sprite(['', '', '', '   X', '  XX', ' XXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXX', '      XXXXXXXXXX', '      XXXXX', '      XXXX', '      XXX', '      XX']),
+    ];
+    const CACTUS = sprite(['   XX', '   XX', 'X  XX', 'X  XX X', 'X  XX X', 'XXXXX X', '   XXXX', '   XX', '   XX', '   XX', '   XX']);
+    const BRONTO_BODY = [
+      ' XXX',
+      'XXXXX',
+      '   XXX',
+      '    XXX',
+      '     XXX',
+      '      XXX',
+      '       XXX',
+      '        XXXXXXXXXXX',
+      '        XXXXXXXXXXXXXX',
+      '        XXXXXXXXXXXXXXXXX',
+      '        XXXXXXXXXXXXXXXXXXXXX',
+      '         XXXXXXXXXXXXXX    XXXXX',
+    ];
+    const BRONTO = [
+      sprite([...BRONTO_BODY, '          XX  XX   XX  XX', '          XX  XX   XX  XX', '          XX  XX   XX  XX']),
+      sprite([...BRONTO_BODY, '          XX  XX   XX  XX', '         XX    XX XX    XX', '         XX    XX XX    XX']),
+    ];
+
+    // Couleurs reprises du thème (mises à jour quand on change de thème)
+    let colors = {};
+    const readColors = () => {
+      const styles = getComputedStyle(root);
+      const v = (name) => styles.getPropertyValue(name).trim();
+      colors = {
+        rex: v('--primary'),
+        ptero: v('--secondary'),
+        cactus: v('--success'),
+        bronto: v('--secondary'),
+        ground: v('--text-muted'),
+        meteor: v('--accent'),
+        star: root.getAttribute('data-theme') === 'light' ? '#6366f1' : '#ffffff',
+      };
+    };
+    readColors();
+
+    let W = 0;
+    let H = 0;
+    let ground = 0;
+    let scale = 3;
+    let speed = 260;
+    let gravity = 2400;
+    let jumpSpeed = 760;
+    let distance = 0;
+    let time = 0;
     let stars = [];
-    let width = 0;
-    let height = 0;
-    let frame = null;
-    const mouse = { x: 0, y: 0 };
+    let cacti = [];
+    let pteros = [];
+    let brontos = [];
+    let meteor = null;
+    let nextMeteor = 4;
+    const rex = { x: 0, y: 0, vy: 0, jumping: false };
+
+    const jump = () => {
+      if (rex.jumping) return;
+      rex.jumping = true;
+      rex.vy = -jumpSpeed;
+    };
+
+    const addCactus = (x) => {
+      const s = scale + (Math.random() < 0.35 ? 1 : 0);
+      cacti.push({ x, s, w: CACTUS.w * s });
+    };
 
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      width = canvas.offsetWidth;
-      height = canvas.offsetHeight;
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
+      W = canvas.offsetWidth;
+      H = canvas.offsetHeight;
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const count = Math.min(Math.floor((width * height) / 9000), 150);
-      stars = Array.from({ length: count }, () => ({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        z: Math.random() * 0.8 + 0.2, // profondeur : effet de parallaxe
-        r: Math.random() * 1.3 + 0.3,
+
+      const small = W < 600;
+      scale = small ? 2 : 3;
+      ground = H - (small ? 30 : 42);
+      speed = small ? 190 : 260;
+      gravity = 800 * scale;
+      jumpSpeed = 253 * scale;
+      rex.x = Math.max(16, W * 0.05);
+
+      stars = Array.from({ length: Math.min(Math.floor((W * H) / 14000), 90) }, () => ({
+        x: rand(0, W), y: rand(0, ground * 0.8), r: rand(0.3, 1.4), phase: rand(0, Math.PI * 2),
       }));
+      cacti = [];
+      addCactus(W * 0.6);
+      pteros = Array.from({ length: small ? 1 : 3 }, () => ({ x: rand(0, W), y: rand(H * 0.1, ground - 200), v: rand(40, 90) }));
+      brontos = [{ x: W * 0.45 }, { x: W * 1.3 }];
     };
 
-    const draw = () => {
-      const rgb = root.getAttribute('data-theme') === 'light' ? '99, 102, 241' : '255, 255, 255';
-      ctx.clearRect(0, 0, width, height);
+    const update = (dt) => {
+      time += dt;
+      distance += speed * dt;
 
-      const points = stars.map((s) => {
-        s.y -= s.z * 0.15;
-        if (s.y < 0) { s.y = height; s.x = Math.random() * width; }
-        return { x: s.x + mouse.x * 25 * s.z, y: s.y + mouse.y * 25 * s.z, s };
-      });
-
-      // Liaisons entre étoiles proches (effet « constellation »)
-      for (let i = 0; i < points.length; i++) {
-        for (let j = i + 1; j < points.length; j++) {
-          const dx = points[i].x - points[j].x;
-          const dy = points[i].y - points[j].y;
-          const dist = dx * dx + dy * dy;
-          if (dist < 10000) {
-            ctx.strokeStyle = `rgba(${rgb}, ${0.12 * (1 - dist / 10000)})`;
-            ctx.lineWidth = 0.6;
-            ctx.beginPath();
-            ctx.moveTo(points[i].x, points[i].y);
-            ctx.lineTo(points[j].x, points[j].y);
-            ctx.stroke();
-          }
+      // T-Rex : saute tout seul juste avant chaque cactus
+      const rexW = REX[0].w * scale;
+      if (rex.jumping) {
+        rex.vy += gravity * dt;
+        rex.y += rex.vy * dt;
+        if (rex.y >= 0) { rex.y = 0; rex.vy = 0; rex.jumping = false; }
+      } else {
+        const next = cacti.find((c) => c.x + c.w > rex.x);
+        if (next) {
+          const airTime = (2 * jumpSpeed) / gravity;
+          const lead = speed * (airTime / 2 - (rexW + next.w) / speed / 2);
+          if (next.x - (rex.x + rexW) <= lead) jump();
         }
       }
 
-      points.forEach(({ x, y, s }) => {
-        ctx.fillStyle = `rgba(${rgb}, ${0.35 + s.z * 0.55})`;
-        ctx.beginPath();
-        ctx.arc(x, y, s.r, 0, Math.PI * 2);
-        ctx.fill();
+      // Cactus
+      cacti.forEach((c) => { c.x -= speed * dt; });
+      cacti = cacti.filter((c) => c.x + c.w > -20);
+      const minGap = speed * ((2 * jumpSpeed) / gravity) + 140;
+      while (!cacti.length || cacti[cacti.length - 1].x < W + 100) {
+        const last = cacti.length ? cacti[cacti.length - 1].x : W;
+        addCactus(last + rand(minGap, minGap + 450));
+      }
+
+      // Ptérodactyles
+      pteros.forEach((p) => {
+        p.x -= (speed * 0.45 + p.v) * dt;
+        if (p.x < -80) { p.x = W + rand(40, 400); p.y = rand(H * 0.1, ground - 200); p.v = rand(40, 90); }
       });
 
-      frame = requestAnimationFrame(draw);
+      // Brontosaures au loin (défilent plus lentement : parallaxe)
+      brontos.forEach((b) => {
+        b.x -= speed * 0.3 * dt;
+        if (b.x < -BRONTO[0].w * (scale + 1)) b.x = W + rand(100, W);
+      });
+
+      // Météorite de temps en temps (clin d'œil à l'extinction des dinosaures)
+      nextMeteor -= dt;
+      if (!meteor && nextMeteor <= 0) {
+        meteor = { x: rand(W * 0.4, W * 1.1), y: -30, life: 0 };
+        nextMeteor = rand(7, 13);
+      }
+      if (meteor) {
+        meteor.life += dt;
+        meteor.x -= 520 * dt;
+        meteor.y += 300 * dt;
+        if (meteor.life > 1.8) meteor = null;
+      }
     };
 
-    window.addEventListener('mousemove', (e) => {
-      mouse.x = e.clientX / window.innerWidth - 0.5;
-      mouse.y = e.clientY / window.innerHeight - 0.5;
-    }, { passive: true });
+    const drawSprite = (sp, x, y, s, color, alpha) => {
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      sp.pixels.forEach(([px, py]) => ctx.rect(Math.round(x + px * s), Math.round(y + py * s), s, s));
+      ctx.fill();
+    };
+
+    const draw = () => {
+      ctx.clearRect(0, 0, W, H);
+
+      // Étoiles qui scintillent
+      ctx.fillStyle = colors.star;
+      stars.forEach((s) => {
+        ctx.globalAlpha = 0.15 + 0.45 * Math.abs(Math.sin(time * 1.5 + s.phase));
+        ctx.fillRect(s.x, s.y, s.r * 1.6, s.r * 1.6);
+      });
+
+      // Météorite
+      if (meteor) {
+        const tail = ctx.createLinearGradient(meteor.x, meteor.y, meteor.x + 130, meteor.y - 75);
+        tail.addColorStop(0, colors.meteor);
+        tail.addColorStop(1, 'transparent');
+        ctx.globalAlpha = Math.max(0, 0.8 - meteor.life * 0.4);
+        ctx.strokeStyle = tail;
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(meteor.x, meteor.y);
+        ctx.lineTo(meteor.x + 130, meteor.y - 75);
+        ctx.stroke();
+        ctx.fillStyle = colors.meteor;
+        ctx.fillRect(meteor.x - 3, meteor.y - 3, 6, 6);
+      }
+
+      // Brontosaures au loin
+      const bs = scale + 1;
+      brontos.forEach((b) => {
+        const frame = BRONTO[Math.floor(time / 0.35) % 2];
+        drawSprite(frame, b.x, ground - frame.h * bs, bs, colors.bronto, 0.12);
+      });
+
+      // Ptérodactyles
+      pteros.forEach((p, i) => {
+        drawSprite(PTERO[Math.floor(time / 0.2 + i) % 2], p.x, p.y, scale, colors.ptero, 0.4);
+      });
+
+      // Sol qui défile + petits cailloux
+      ctx.globalAlpha = 0.3;
+      ctx.fillStyle = colors.ground;
+      ctx.fillRect(0, ground, W, Math.max(1, scale - 1));
+      const step = 34;
+      const offset = distance % step;
+      const first = Math.floor(distance / step);
+      for (let i = 0; i <= W / step + 1; i++) {
+        const n = first + i;
+        ctx.fillRect(i * step - offset + (n * 7) % 13, ground + 5 + (n % 3) * 4, scale - 1 || 1, scale - 1 || 1);
+      }
+
+      // Cactus
+      cacti.forEach((c) => drawSprite(CACTUS, c.x, ground - CACTUS.h * c.s, c.s, colors.cactus, 0.45));
+
+      // T-Rex
+      const rexFrame = rex.jumping ? REX[2] : REX[Math.floor(time / 0.1) % 2];
+      drawSprite(rexFrame, rex.x, ground - rexFrame.h * scale + rex.y + scale, scale, colors.rex, 0.6);
+
+      ctx.globalAlpha = 1;
+    };
+
+    let frameId = null;
+    let last = 0;
+    const loop = (now) => {
+      const dt = Math.min(Math.max((now - last) / 1000, 0), 0.05);
+      last = now;
+      update(dt);
+      draw();
+      frameId = requestAnimationFrame(loop);
+    };
+
+    const start = () => {
+      if (reducedMotion || frameId) return;
+      last = performance.now();
+      frameId = requestAnimationFrame(loop);
+    };
+    const stop = () => {
+      if (frameId) cancelAnimationFrame(frameId);
+      frameId = null;
+    };
 
     let resizeTimer;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(resize, 150);
+      resizeTimer = setTimeout(() => { resize(); if (reducedMotion) draw(); }, 150);
+    });
+
+    // Un clic sur l'accueil fait sauter le T-Rex
+    hero.addEventListener('click', (e) => {
+      if (!e.target.closest('a, button')) jump();
     });
 
     // L'animation tourne seulement quand l'accueil est visible
     new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !frame) frame = requestAnimationFrame(draw);
-      if (!entry.isIntersecting && frame) { cancelAnimationFrame(frame); frame = null; }
+      if (entry.isIntersecting) start();
+      else stop();
     }).observe(hero);
 
+    // Changement de thème : nouvelles couleurs
+    new MutationObserver(() => {
+      readColors();
+      if (!frameId) draw();
+    }).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+
     resize();
+    draw(); // image fixe si les animations sont désactivées
   }
 
   /* ---------- Année du pied de page ---------- */
