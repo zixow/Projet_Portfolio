@@ -146,7 +146,7 @@
 
                 <div class="about__stats reveal">
                     <div class="stat"><span class="stat__number" data-count>9</span><span class="stat__label">Technologies</span></div>
-                    <div class="stat"><span class="stat__number" data-count>6</span><span class="stat__label">Projets réalisés</span></div>
+                    <div class="stat"><span class="stat__number" data-count>7</span><span class="stat__label">Projets réalisés</span></div>
                     <div class="stat"><span class="stat__number" data-count>2</span><span class="stat__label">Stages en entreprise</span></div>
                     <div class="stat"><span class="stat__number" data-count>4</span><span class="stat__label">Certifications</span></div>
                 </div>
@@ -366,6 +366,110 @@
             <!-- À MODIFIER : remplacez ces projets par les vôtres et ajoutez vos liens GitHub -->
             <div class="projects__grid">
 
+                <!-- Vapeur (projet réel) -->
+                <article class="card card--hover project-card tilt reveal" data-category="web">
+                    <div class="project-card__media project-card__media--photo">
+                        <img src="assets/projets/vapeur-magasin.jpg" alt="" loading="lazy">
+                        <span class="project-card__type">Projet BTS · PHP / MySQL</span>
+                    </div>
+                    <div class="project-card__body">
+                        <h3>Vapeur — boutique de jeux</h3>
+                        <p>Application web inspirée de Steam : catalogue de jeux, comptes joueurs, achats avec portefeuille, bibliothèque, évaluations et espace administrateur.</p>
+                        <ul class="tech-list"><li>PHP</li><li>MySQL</li><li>PDO</li><li>JavaScript</li></ul>
+                        <div class="project-card__actions">
+                            <button class="btn btn--small btn--primary" type="button" data-open-project>Détails</button>
+                        </div>
+                    </div>
+                    <template>
+                        <span class="modal__tag">Projet BTS · Web · PHP / MySQL</span>
+                        <h3>Vapeur — boutique de jeux inspirée de Steam</h3>
+                        <p>Application web de vente de jeux vidéo : les joueurs créent un compte, achètent des jeux avec leur portefeuille (argent fictif), les retrouvent dans leur bibliothèque et les évaluent. Un administrateur gère le catalogue.</p>
+                        <div class="modal__gallery">
+                            <figure>
+                                <a href="assets/projets/vapeur-magasin.jpg" target="_blank" rel="noopener"><img src="assets/projets/vapeur-magasin.jpg" alt="Page du magasin de Vapeur" loading="lazy"></a>
+                                <figcaption>Le magasin</figcaption>
+                            </figure>
+                            <figure>
+                                <a href="assets/projets/vapeur-fiche-jeu.jpg" target="_blank" rel="noopener"><img src="assets/projets/vapeur-fiche-jeu.jpg" alt="Fiche d'un jeu avec ses évaluations" loading="lazy"></a>
+                                <figcaption>Fiche d'un jeu et évaluations</figcaption>
+                            </figure>
+                        </div>
+                        <h4>Fonctionnalités</h4>
+                        <ul>
+                            <li>Catalogue avec recherche, filtre par genre et tri (prix, date, évaluations)</li>
+                            <li>Inscription et connexion par pseudo ou e-mail</li>
+                            <li>Achat d'un jeu débité du portefeuille, puis ajout à la bibliothèque</li>
+                            <li>Évaluations « recommandé / non recommandé » comme sur Steam</li>
+                            <li>Espace administrateur : statistiques des ventes et gestion des jeux (ajout, modification, suppression)</li>
+                        </ul>
+                        <h4>Base de données</h4>
+                        <ul>
+                            <li>5 tables : utilisateur, genre, jeu, bibliothèque et avis</li>
+                            <li>Clés étrangères, clé primaire composée, contraintes UNIQUE et CHECK</li>
+                            <li>Achat réalisé dans une transaction SQL : débit et ajout réussissent ensemble ou pas du tout</li>
+                        </ul>
+                        <h4>Sécurité</h4>
+                        <ul>
+                            <li>Requêtes préparées PDO contre les injections SQL</li>
+                            <li>Mots de passe hachés avec password_hash (bcrypt)</li>
+                            <li>Protection contre les failles XSS et CSRF, contrôle des rôles</li>
+                        </ul>
+                        <div class="tags"><span>PHP</span><span>MySQL</span><span>PDO</span><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Git</span></div>
+                    </template>
+                </article>
+
+                <!-- Caillou Tour (projet réel) -->
+                <article class="card card--hover project-card tilt reveal" data-category="mobile">
+                    <div class="project-card__media project-card__media--2">
+                        <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>
+                        <span class="project-card__type">Projet en binôme · En cours</span>
+                    </div>
+                    <div class="project-card__body">
+                        <h3>Caillou Tour</h3>
+                        <p>Application mobile de découverte touristique de la Nouvelle-Calédonie : lieux, activités, événements, restaurants et hébergements.</p>
+                        <ul class="tech-list"><li>Flutter</li><li>Dart</li><li>Material 3</li><li>UML</li></ul>
+                        <div class="project-card__actions">
+                            <button class="btn btn--small btn--primary" type="button" data-open-project>Détails</button>
+                            <a href="https://github.com/zixow/POO_nathan_weinim" class="btn btn--small btn--ghost" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                    <template>
+                        <span class="modal__tag">Projet scolaire en binôme · Mobile · En cours</span>
+                        <h3>Caillou Tour</h3>
+                        <p>Application mobile pour un office du tourisme : elle aide les visiteurs à découvrir la Nouvelle-Calédonie (lieux touristiques, activités, événements, restaurants et hébergements).</p>
+                        <h4>Conception (UML)</h4>
+                        <ul>
+                            <li>Diagramme de cas d'utilisation avec trois acteurs : visiteur, membre et administrateur</li>
+                            <li>Diagramme de classes : utilisateurs, lieux, catégories, activités, événements, restaurants, hébergements et favoris</li>
+                        </ul>
+                        <div class="modal__gallery">
+                            <figure>
+                                <a href="assets/projets/caillou-tour-cas-utilisation.jpg" target="_blank" rel="noopener"><img src="assets/projets/caillou-tour-cas-utilisation.jpg" alt="Diagramme de cas d'utilisation de Caillou Tour" loading="lazy"></a>
+                                <figcaption>Cas d'utilisation</figcaption>
+                            </figure>
+                            <figure>
+                                <a href="assets/projets/caillou-tour-classes.jpg" target="_blank" rel="noopener"><img src="assets/projets/caillou-tour-classes.jpg" alt="Diagramme de classes de Caillou Tour" loading="lazy"></a>
+                                <figcaption>Diagramme de classes</figcaption>
+                            </figure>
+                        </div>
+                        <h4>Fonctionnalités réalisées</h4>
+                        <ul>
+                            <li>Navigation par onglets (Accueil, Hôtels, Commentaires) avec la barre de navigation Material 3</li>
+                            <li>Page d'accueil avec barre de recherche</li>
+                            <li>Écran de connexion avec validation des champs</li>
+                            <li>Création de compte : pseudo, e-mail vérifié par expression régulière, mot de passe et confirmation</li>
+                        </ul>
+                        <h4>Prochaines étapes</h4>
+                        <ul>
+                            <li>Fiches des lieux, activités et événements</li>
+                            <li>Favoris et affichage sur une carte</li>
+                            <li>Comptes enregistrés dans une base de données via une API</li>
+                            <li>Espace administrateur pour gérer le contenu</li>
+                        </ul>
+                        <div class="tags"><span>Flutter</span><span>Dart</span><span>Material 3</span><span>UML</span><span>Git</span></div>
+                    </template>
+                </article>
+
                 <!-- Projet 1 -->
                 <article class="card card--hover project-card tilt reveal" data-category="web">
                     <div class="project-card__media project-card__media--1">
@@ -399,41 +503,6 @@
                             <li>Sécurisation : requêtes préparées, hachage des mots de passe, contrôle des sessions</li>
                         </ul>
                         <div class="tags"><span>PHP</span><span>MySQL</span><span>HTML</span><span>CSS</span><span>Git</span></div>
-                    </template>
-                </article>
-
-                <!-- Projet 2 -->
-                <article class="card card--hover project-card tilt reveal" data-category="mobile">
-                    <div class="project-card__media project-card__media--2">
-                        <i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i>
-                        <span class="project-card__type">Projet scolaire</span>
-                    </div>
-                    <div class="project-card__body">
-                        <h3>GSB Mobile</h3>
-                        <p>Application mobile qui permet aux visiteurs médicaux de consulter et saisir leurs frais en déplacement, connectée à une API REST.</p>
-                        <ul class="tech-list"><li>Flutter</li><li>Dart</li><li>API REST PHP</li><li>MySQL</li></ul>
-                        <div class="project-card__actions">
-                            <button class="btn btn--small btn--primary" type="button" data-open-project>Détails</button>
-                            <a href="https://github.com/" class="btn btn--small btn--ghost" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
-                        </div>
-                    </div>
-                    <template>
-                        <span class="modal__tag">Projet scolaire · Mobile</span>
-                        <h3>GSB Mobile</h3>
-                        <p>Déclinaison mobile de l'application GSB pour les visiteurs médicaux qui travaillent sur le terrain.</p>
-                        <h4>Fonctionnalités</h4>
-                        <ul>
-                            <li>Connexion sécurisée par jeton auprès de l'API</li>
-                            <li>Consultation de l'historique des fiches de frais</li>
-                            <li>Ajout de frais avec photo du justificatif</li>
-                        </ul>
-                        <h4>Compétences mobilisées</h4>
-                        <ul>
-                            <li>Développement d'une interface mobile avec les widgets Flutter</li>
-                            <li>Création d'une API REST en PHP renvoyant du JSON</li>
-                            <li>Gestion des requêtes HTTP asynchrones en Dart</li>
-                        </ul>
-                        <div class="tags"><span>Flutter</span><span>Dart</span><span>PHP</span><span>JSON</span></div>
                     </template>
                 </article>
 

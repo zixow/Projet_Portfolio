@@ -925,6 +925,19 @@ sup { font-size: 0.72em; line-height: 0; }
 .project-card__media--4 { background: linear-gradient(135deg, #f59e0b, #ef4444); }
 .project-card__media--5 { background: linear-gradient(135deg, #6366f1, #ec4899); }
 .project-card__media--6 { background: linear-gradient(135deg, #22d3ee, #a855f7 60%, #f472b6); }
+/* Carte avec une vraie capture d'écran du projet */
+.project-card__media--photo { background: #1b2838; }
+.project-card__media--photo::before { display: none; }
+.project-card__media--photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.5s var(--ease);
+}
+.project-card:hover .project-card__media--photo img { transform: scale(1.05); }
 .project-card__type {
   position: absolute;
   top: 1rem;
@@ -1004,6 +1017,35 @@ sup { font-size: 0.72em; line-height: 0; }
   background: var(--gradient);
 }
 .modal__content .tags { margin-top: 1.5rem; }
+
+/* Images (diagrammes, captures) dans le détail d'un projet */
+.modal__gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+.modal__gallery figure { margin: 0; }
+.modal__gallery img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+  transition: transform 0.3s var(--ease);
+}
+.modal__gallery a:hover img { transform: scale(1.02); }
+.modal__gallery figcaption {
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+@media (max-width: 520px) {
+  .modal__gallery { grid-template-columns: 1fr; }
+}
 
 /* ---------- 12. Expériences ---------- */
 .xp-list {
