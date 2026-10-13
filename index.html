@@ -146,7 +146,7 @@
 
                 <div class="about__stats reveal">
                     <div class="stat"><span class="stat__number" data-count>9</span><span class="stat__label">Technologies</span></div>
-                    <div class="stat"><span class="stat__number" data-count>7</span><span class="stat__label">Projets réalisés</span></div>
+                    <div class="stat"><span class="stat__number" data-count>2</span><span class="stat__label">Projets réalisés</span></div>
                     <div class="stat"><span class="stat__number" data-count>2</span><span class="stat__label">Stages en entreprise</span></div>
                     <div class="stat"><span class="stat__number" data-count>4</span><span class="stat__label">Certifications</span></div>
                 </div>
@@ -360,61 +360,55 @@
                 <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">Tous</button>
                 <button class="filter-btn" type="button" data-filter="web" aria-pressed="false">Web</button>
                 <button class="filter-btn" type="button" data-filter="mobile" aria-pressed="false">Mobile</button>
-                <button class="filter-btn" type="button" data-filter="desktop" aria-pressed="false">Desktop</button>
             </div>
 
-            <!-- À MODIFIER : remplacez ces projets par les vôtres et ajoutez vos liens GitHub -->
+            <!-- Mes projets : ajoutez ici vos prochains projets -->
             <div class="projects__grid">
 
-                <!-- Vapeur (projet réel) -->
+                <!-- PixelStar (projet web) -->
                 <article class="card card--hover project-card tilt reveal" data-category="web">
                     <div class="project-card__media project-card__media--photo">
-                        <img src="assets/projets/vapeur-magasin.jpg" alt="" loading="lazy">
-                        <span class="project-card__type">Projet BTS · PHP / MySQL</span>
+                        <img src="assets/projets/pixelstar-accueil.jpg" alt="" loading="lazy">
+                        <span class="project-card__type">Projet BTS · En cours</span>
                     </div>
                     <div class="project-card__body">
-                        <h3>Vapeur — boutique de jeux</h3>
-                        <p>Application web inspirée de Steam : catalogue de jeux, comptes joueurs, achats avec portefeuille, bibliothèque, évaluations et espace administrateur.</p>
-                        <ul class="tech-list"><li>PHP</li><li>MySQL</li><li>PDO</li><li>JavaScript</li></ul>
+                        <h3>PixelStar</h3>
+                        <p>Site web dynamique de vente de jeux vidéo (PC, PS5, Xbox, Switch) : catalogue lu dans une base MySQL, filtre par genre, notes des joueurs et page de contact.</p>
+                        <ul class="tech-list"><li>PHP</li><li>PDO</li><li>MySQL</li><li>HTML / CSS</li></ul>
                         <div class="project-card__actions">
                             <button class="btn btn--small btn--primary" type="button" data-open-project>Détails</button>
                         </div>
                     </div>
                     <template>
-                        <span class="modal__tag">Projet BTS · Web · PHP / MySQL</span>
-                        <h3>Vapeur — boutique de jeux inspirée de Steam</h3>
-                        <p>Application web de vente de jeux vidéo : les joueurs créent un compte, achètent des jeux avec leur portefeuille (argent fictif), les retrouvent dans leur bibliothèque et les évaluent. Un administrateur gère le catalogue.</p>
-                        <div class="modal__gallery">
+                        <span class="modal__tag">Projet BTS · Web · En cours</span>
+                        <h3>PixelStar — boutique de jeux vidéo</h3>
+                        <p>Site web dynamique en PHP pour une boutique de jeux vidéo multiplateforme. Les jeux, les genres et les avis sont enregistrés dans une base de données MySQL.</p>
+                        <div class="modal__gallery modal__gallery--single">
                             <figure>
-                                <a href="assets/projets/vapeur-magasin.jpg" target="_blank" rel="noopener"><img src="assets/projets/vapeur-magasin.jpg" alt="Page du magasin de Vapeur" loading="lazy"></a>
-                                <figcaption>Le magasin</figcaption>
-                            </figure>
-                            <figure>
-                                <a href="assets/projets/vapeur-fiche-jeu.jpg" target="_blank" rel="noopener"><img src="assets/projets/vapeur-fiche-jeu.jpg" alt="Fiche d'un jeu avec ses évaluations" loading="lazy"></a>
-                                <figcaption>Fiche d'un jeu et évaluations</figcaption>
+                                <a href="assets/projets/pixelstar-accueil.jpg" target="_blank" rel="noopener"><img src="assets/projets/pixelstar-accueil.jpg" alt="Page d'accueil de PixelStar" loading="lazy"></a>
+                                <figcaption>Page d'accueil</figcaption>
                             </figure>
                         </div>
-                        <h4>Fonctionnalités</h4>
+                        <h4>Fonctionnalités réalisées</h4>
                         <ul>
-                            <li>Catalogue avec recherche, filtre par genre et tri (prix, date, évaluations)</li>
-                            <li>Inscription et connexion par pseudo ou e-mail</li>
-                            <li>Achat d'un jeu débité du portefeuille, puis ajout à la bibliothèque</li>
-                            <li>Évaluations « recommandé / non recommandé » comme sur Steam</li>
-                            <li>Espace administrateur : statistiques des ventes et gestion des jeux (ajout, modification, suppression)</li>
+                            <li>Navigation entre les pages (Accueil, À propos, Contact) avec un routeur PHP et une page 404</li>
+                            <li>En-tête et pied de page réutilisables</li>
+                            <li>Catalogue des jeux mis en avant, filtre par genre, note moyenne et nombre d'avis</li>
+                            <li>Statistiques : nombre de jeux, note moyenne, clients</li>
+                            <li>Formulaire de contact avec vérification des champs et de l'adresse e-mail</li>
                         </ul>
                         <h4>Base de données</h4>
                         <ul>
-                            <li>5 tables : utilisateur, genre, jeu, bibliothèque et avis</li>
-                            <li>Clés étrangères, clé primaire composée, contraintes UNIQUE et CHECK</li>
-                            <li>Achat réalisé dans une transaction SQL : débit et ajout réussissent ensemble ou pas du tout</li>
+                            <li>Tables jeux, genres, utilisateurs, avis, commandes et panier</li>
+                            <li>Relation plusieurs-à-plusieurs entre jeux et genres (table game_genres)</li>
+                            <li>Requêtes avec jointures et calculs (AVG, COUNT) et vues SQL</li>
                         </ul>
-                        <h4>Sécurité</h4>
+                        <h4>Prochaines étapes</h4>
                         <ul>
-                            <li>Requêtes préparées PDO contre les injections SQL</li>
-                            <li>Mots de passe hachés avec password_hash (bcrypt)</li>
-                            <li>Protection contre les failles XSS et CSRF, contrôle des rôles</li>
+                            <li>Inscription et connexion des utilisateurs</li>
+                            <li>Panier et passage de commande</li>
                         </ul>
-                        <div class="tags"><span>PHP</span><span>MySQL</span><span>PDO</span><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Git</span></div>
+                        <div class="tags"><span>PHP</span><span>PDO</span><span>MySQL</span><span>HTML</span><span>CSS</span><span>Git</span></div>
                     </template>
                 </article>
 
@@ -467,184 +461,6 @@
                             <li>Espace administrateur pour gérer le contenu</li>
                         </ul>
                         <div class="tags"><span>Flutter</span><span>Dart</span><span>Material 3</span><span>UML</span><span>Git</span></div>
-                    </template>
-                </article>
-
-                <!-- Projet 1 -->
-                <article class="card card--hover project-card tilt reveal" data-category="web">
-                    <div class="project-card__media project-card__media--1">
-                        <i class="fa-solid fa-file-invoice-dollar" aria-hidden="true"></i>
-                        <span class="project-card__type">Projet scolaire</span>
-                    </div>
-                    <div class="project-card__body">
-                        <h3>GSB — Gestion des frais</h3>
-                        <p>Application web permettant aux visiteurs médicaux du laboratoire Galaxy Swiss Bourdin de saisir leurs frais, et aux comptables de les valider.</p>
-                        <ul class="tech-list"><li>PHP</li><li>MySQL</li><li>HTML / CSS</li><li>MVC</li></ul>
-                        <div class="project-card__actions">
-                            <button class="btn btn--small btn--primary" type="button" data-open-project>Détails</button>
-                            <a href="https://github.com/" class="btn btn--small btn--ghost" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
-                        </div>
-                    </div>
-                    <template>
-                        <span class="modal__tag">Projet scolaire · Web</span>
-                        <h3>GSB — Gestion des frais</h3>
-                        <p>Le laboratoire pharmaceutique fictif Galaxy Swiss Bourdin souhaite dématérialiser la gestion des frais de ses visiteurs médicaux.</p>
-                        <h4>Fonctionnalités</h4>
-                        <ul>
-                            <li>Authentification avec deux profils : visiteur et comptable</li>
-                            <li>Saisie des frais forfaitisés et hors forfait par mois</li>
-                            <li>Validation, refus et suivi du paiement des fiches par le comptable</li>
-                            <li>Génération d'un récapitulatif PDF</li>
-                        </ul>
-                        <h4>Compétences mobilisées</h4>
-                        <ul>
-                            <li>Architecture MVC en PHP et accès aux données avec PDO</li>
-                            <li>Modélisation et requêtes MySQL</li>
-                            <li>Sécurisation : requêtes préparées, hachage des mots de passe, contrôle des sessions</li>
-                        </ul>
-                        <div class="tags"><span>PHP</span><span>MySQL</span><span>HTML</span><span>CSS</span><span>Git</span></div>
-                    </template>
-                </article>
-
-                <!-- Projet 3 -->
-                <article class="card card--hover project-card tilt reveal" data-category="web">
-                    <div class="project-card__media project-card__media--3">
-                        <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
-                        <span class="project-card__type">Projet scolaire</span>
-                    </div>
-                    <div class="project-card__body">
-                        <h3>M2L — Réservation de salles</h3>
-                        <p>Application web pour la Maison des Ligues de Lorraine : réservation de salles et de matériel par les ligues sportives.</p>
-                        <ul class="tech-list"><li>Angular</li><li>TypeScript</li><li>API PHP</li><li>PostgreSQL</li></ul>
-                        <div class="project-card__actions">
-                            <button class="btn btn--small btn--primary" type="button" data-open-project>Détails</button>
-                            <a href="https://github.com/" class="btn btn--small btn--ghost" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
-                        </div>
-                    </div>
-                    <template>
-                        <span class="modal__tag">Projet scolaire · Web</span>
-                        <h3>M2L — Réservation de salles</h3>
-                        <p>La Maison des Ligues de Lorraine met des salles et du matériel à disposition des ligues sportives. L'application remplace les réservations par téléphone.</p>
-                        <h4>Fonctionnalités</h4>
-                        <ul>
-                            <li>Planning des salles avec vue par semaine</li>
-                            <li>Réservation, modification et annulation de créneaux</li>
-                            <li>Espace administrateur pour gérer les salles et les ligues</li>
-                        </ul>
-                        <h4>Compétences mobilisées</h4>
-                        <ul>
-                            <li>Application Angular : composants, services, routing et guards</li>
-                            <li>API REST en PHP et base PostgreSQL</li>
-                            <li>Travail en équipe avec Git et un tableau Kanban</li>
-                        </ul>
-                        <div class="tags"><span>Angular</span><span>TypeScript</span><span>PHP</span><span>PostgreSQL</span></div>
-                    </template>
-                </article>
-
-                <!-- Projet 4 -->
-                <article class="card card--hover project-card tilt reveal" data-category="desktop">
-                    <div class="project-card__media project-card__media--4">
-                        <i class="fa-solid fa-boxes-stacked" aria-hidden="true"></i>
-                        <span class="project-card__type">Projet scolaire</span>
-                    </div>
-                    <div class="project-card__body">
-                        <h3>StockManager</h3>
-                        <p>Logiciel desktop de gestion de stock : suivi des produits, des entrées / sorties et alertes de réapprovisionnement.</p>
-                        <ul class="tech-list"><li>Java</li><li>JavaFX</li><li>JDBC</li><li>PostgreSQL</li></ul>
-                        <div class="project-card__actions">
-                            <button class="btn btn--small btn--primary" type="button" data-open-project>Détails</button>
-                            <a href="https://github.com/" class="btn btn--small btn--ghost" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
-                        </div>
-                    </div>
-                    <template>
-                        <span class="modal__tag">Projet scolaire · Desktop</span>
-                        <h3>StockManager</h3>
-                        <p>Application de bureau destinée à une petite entreprise pour suivre son stock en temps réel.</p>
-                        <h4>Fonctionnalités</h4>
-                        <ul>
-                            <li>CRUD complet sur les produits, catégories et fournisseurs</li>
-                            <li>Historique des mouvements de stock</li>
-                            <li>Alerte automatique quand un produit passe sous le seuil minimal</li>
-                            <li>Export des données au format CSV</li>
-                        </ul>
-                        <h4>Compétences mobilisées</h4>
-                        <ul>
-                            <li>Conception UML (cas d'utilisation, diagramme de classes)</li>
-                            <li>Programmation orientée objet en Java et pattern DAO</li>
-                            <li>Tests unitaires avec JUnit</li>
-                        </ul>
-                        <div class="tags"><span>Java</span><span>JavaFX</span><span>PostgreSQL</span><span>UML</span></div>
-                    </template>
-                </article>
-
-                <!-- Projet 5 -->
-                <article class="card card--hover project-card tilt reveal" data-category="web">
-                    <div class="project-card__media project-card__media--5">
-                        <i class="fa-solid fa-laptop-code" aria-hidden="true"></i>
-                        <span class="project-card__type">Projet personnel</span>
-                    </div>
-                    <div class="project-card__body">
-                        <h3>Portfolio</h3>
-                        <p>Le site que vous consultez : un portfolio responsive avec thème clair / sombre, animations et filtres, sans framework.</p>
-                        <ul class="tech-list"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
-                        <div class="project-card__actions">
-                            <button class="btn btn--small btn--primary" type="button" data-open-project>Détails</button>
-                            <a href="https://github.com/zixow/Projet_Portfolio" class="btn btn--small btn--ghost" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
-                        </div>
-                    </div>
-                    <template>
-                        <span class="modal__tag">Projet personnel · Web</span>
-                        <h3>Portfolio</h3>
-                        <p>Portfolio réalisé pour présenter mon parcours, mes projets et ma veille technologique dans le cadre du BTS SIO.</p>
-                        <h4>Fonctionnalités</h4>
-                        <ul>
-                            <li>Design responsive (mobile, tablette, ordinateur)</li>
-                            <li>Thème clair / sombre mémorisé dans le navigateur</li>
-                            <li>Filtres, fenêtres modales, onglets et animations au défilement</li>
-                            <li>Formulaire de contact avec validation côté client</li>
-                        </ul>
-                        <h4>Compétences mobilisées</h4>
-                        <ul>
-                            <li>HTML sémantique et accessibilité (ARIA, navigation au clavier)</li>
-                            <li>CSS moderne : Grid, Flexbox, variables, animations</li>
-                            <li>JavaScript : DOM, IntersectionObserver, Canvas</li>
-                        </ul>
-                        <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
-                    </template>
-                </article>
-
-                <!-- Projet 6 -->
-                <article class="card card--hover project-card tilt reveal" data-category="web">
-                    <div class="project-card__media project-card__media--6">
-                        <i class="fa-solid fa-vr-cardboard" aria-hidden="true"></i>
-                        <span class="project-card__type">Projet personnel</span>
-                    </div>
-                    <div class="project-card__body">
-                        <h3>Galerie virtuelle WebXR</h3>
-                        <p>Galerie 3D visitable dans le navigateur et compatible casque VR, réalisée dans le prolongement de ma veille technologique.</p>
-                        <ul class="tech-list"><li>JavaScript</li><li>A-Frame</li><li>WebXR</li></ul>
-                        <div class="project-card__actions">
-                            <button class="btn btn--small btn--primary" type="button" data-open-project>Détails</button>
-                            <a href="https://github.com/" class="btn btn--small btn--ghost" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
-                        </div>
-                    </div>
-                    <template>
-                        <span class="modal__tag">Projet personnel · Web / VR</span>
-                        <h3>Galerie virtuelle WebXR</h3>
-                        <p>Expérimentation pour mettre en pratique ma veille : une galerie d'exposition en 3D, consultable sur ordinateur, sur smartphone et dans un casque VR, sans rien installer.</p>
-                        <h4>Fonctionnalités</h4>
-                        <ul>
-                            <li>Déplacement dans la galerie au clavier, à la souris ou par téléportation en VR</li>
-                            <li>Œuvres cliquables affichant une fiche descriptive</li>
-                            <li>Mode « Entrer en VR » grâce à l'API WebXR</li>
-                        </ul>
-                        <h4>Compétences mobilisées</h4>
-                        <ul>
-                            <li>Découverte de la 3D temps réel : scène, caméra, lumières, textures</li>
-                            <li>Utilisation du framework A-Frame (basé sur Three.js)</li>
-                            <li>Optimisation pour garder une fluidité suffisante en VR</li>
-                        </ul>
-                        <div class="tags"><span>JavaScript</span><span>A-Frame</span><span>Three.js</span><span>WebXR</span></div>
                     </template>
                 </article>
             </div>

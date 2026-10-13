@@ -502,6 +502,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Dessine le décor fixe (ciel, soleil ou lune, plateaux rocheux, dunes, sable, cactus)
     const paintBackground = () => {
+      if (!W || !H) return; // accueil pas encore affiché (onglet en arrière-plan…)
       background.width = W * dpr;
       background.height = H * dpr;
       bg.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -617,6 +618,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const draw = () => {
+      if (!W || !H) return;
       ctx.clearRect(0, 0, W, H);
       ctx.drawImage(background, 0, 0, W, H);
 
@@ -655,6 +657,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     const start = () => {
       if (paused || !heroVisible || frameId) return;
+      if (!W || !H) resize(); // la taille n'était pas connue au chargement
       last = performance.now();
       frameId = requestAnimationFrame(loop);
     };
@@ -693,6 +696,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // L'animation tourne seulement quand l'accueil est visible
     new IntersectionObserver(([entry]) => {
       heroVisible = entry.isIntersecting;
+      if (heroVisible && (!W || !H)) { resize(); draw(); } // l'accueil vient d'apparaître
       if (heroVisible) start(); else stop();
     }).observe(hero);
 

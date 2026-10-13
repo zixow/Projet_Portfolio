@@ -1025,6 +1025,7 @@ sup { font-size: 0.72em; line-height: 0; }
   gap: 0.8rem;
   margin-top: 1rem;
 }
+.modal__gallery--single { grid-template-columns: 1fr; }
 .modal__gallery figure { margin: 0; }
 .modal__gallery img {
   width: 100%;
@@ -1036,6 +1037,7 @@ sup { font-size: 0.72em; line-height: 0; }
   background: #fff;
   transition: transform 0.3s var(--ease);
 }
+.modal__gallery--single img { aspect-ratio: auto; }
 .modal__gallery a:hover img { transform: scale(1.02); }
 .modal__gallery figcaption {
   margin-top: 0.35rem;
