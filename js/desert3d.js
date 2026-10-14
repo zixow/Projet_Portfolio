@@ -114,7 +114,11 @@ window.demarrerDesert3D = function ({ canvas, hero, toggle, root, reducedMotion 
     const g = 0.88 + bruitFin(u, v) * 0.12 + bruitMoyen(u, v) * 0.05;
     return [255 * g, 255 * g, 255 * g];
   });
-  const sableRelief = creerRelief(256, (u, v) => Math.sin(Math.PI * 2 * (u * 9 + bruitLarge(u, v) * 0.8 + v * 0.5)) * 0.6 + bruitFin(u, v) * 0.5, 3);
+  // Rides du sable : ondulations tordues par le vent, plus ou moins marquées selon l'endroit (moins répétitif)
+  const sableRelief = creerRelief(512, (u, v) => {
+    const ride = Math.sin(Math.PI * 2 * (u * 18 + bruitLarge(u, v) * 1.6 + bruitMoyen(u, v) * 0.3 + v));
+    return ride * (0.3 + 0.7 * bruitLarge(v, u)) * 0.6 + bruitFin(u, v) * 0.5;
+  }, 3);
 
   // Peau : petites écailles irrégulières
   const peauRelief = creerRelief(256, (u, v) => {
@@ -133,7 +137,7 @@ window.demarrerDesert3D = function ({ canvas, hero, toggle, root, reducedMotion 
 
   /* ---------- Scène, caméra, lumières ---------- */
   const scene = new T.Scene();
-  const CAMERA_HAUTEUR = 2.2;
+  const CAMERA_HAUTEUR = 4.2; // caméra un peu en hauteur : on voit mieux le sable et les traces de pas
   const CAMERA_Z = 24;
   const camera = new T.PerspectiveCamera(50, 1, 0.5, 2000);
   camera.position.set(0, CAMERA_HAUTEUR, CAMERA_Z); // la caméra regarde droit devant (vers -z)
@@ -163,7 +167,7 @@ window.demarrerDesert3D = function ({ canvas, hero, toggle, root, reducedMotion 
     });
   };
 
-  scene.fog = new T.Fog(couleur(amb.brouillard), 90, 520); // le lointain se fond dans la brume
+  scene.fog = new T.Fog(couleur(amb.brouillard), 120, 720); // le lointain se fond dans la brume
 
   const lumiereCiel = new T.HemisphereLight(couleur(amb.cielLumiere), couleur(amb.solLumiere), amb.forceCiel);
   scene.add(lumiereCiel);
@@ -191,15 +195,15 @@ window.demarrerDesert3D = function ({ canvas, hero, toggle, root, reducedMotion 
   nuitTexture.encoding = T.sRGBEncoding;
 
   /* ---------- Sol : dunes à crêtes au loin, sable plat près des dinosaures ---------- */
-  const solGeo = new T.PlaneGeometry(700, 380, 220, 120);
+  const solGeo = new T.PlaneGeometry(1000, 700, 260, 170);
   solGeo.rotateX(-Math.PI / 2);
-  solGeo.translate(0, 0, -160);
+  solGeo.translate(0, 0, -300);
   /** Hauteur du sol en (x, z) : sert au terrain et pour poser cailloux et buissons. */
   const hauteurSol = (x, z) => {
     const loin = lisse(-z, 14, 55);
     const vague = Math.sin(x * 0.035 + z * 0.012 + Math.sin(z * 0.02) * 1.5);
-    const dunes = Math.pow(1 - Math.abs(vague), 2.2) * 9 + Math.sin(x * 0.011 - z * 0.017) * 3; // crêtes nettes
-    return loin * dunes + (1 - loin) * Math.sin(x * 0.3 + z * 0.5) * 0.05;
+    const dunes = Math.pow(1 - Math.abs(vague), 2.2) * 6.5 + Math.sin(x * 0.011 - z * 0.017) * 2.2; // crêtes nettes
+    return loin * dunes; // près des dinosaures : sol plat (les rides viennent de la texture)
   };
   const pos = solGeo.attributes.position;
   const nuancesSable = creerBruit(8);
@@ -209,15 +213,15 @@ window.demarrerDesert3D = function ({ canvas, hero, toggle, root, reducedMotion 
     const z = pos.getZ(i);
     pos.setY(i, hauteurSol(x, z));
     // Nuances du sable : zones plus claires ou plus foncées et traînées laissées par le vent
-    const n = nuancesSable(((x / 700) % 1 + 1) % 1, ((z / 380) % 1 + 1) % 1);
+    const n = nuancesSable(((x / 1000) % 1 + 1) % 1, ((z / 700) % 1 + 1) % 1);
     const trainee = 0.5 + 0.5 * Math.sin(x * 0.05 + z * 0.15 + n * 4);
     const f = 0.86 + n * 0.16 + trainee * 0.05;
     couleursSol.set([f, f * 0.985, f * 0.96], i * 3);
   }
   solGeo.setAttribute('color', new T.BufferAttribute(couleursSol, 3));
   solGeo.computeVertexNormals();
-  sableCouleur.repeat.set(140, 76);
-  sableRelief.repeat.set(140, 76);
+  sableCouleur.repeat.set(200, 140);
+  sableRelief.repeat.set(100, 70);
   const materiauSable = new T.MeshStandardMaterial({
     color: couleur(amb.sable), map: sableCouleur, normalMap: sableRelief, vertexColors: true,
     normalScale: new T.Vector2(0.7, 0.7), roughness: 0.95, metalness: 0,
@@ -235,8 +239,8 @@ window.demarrerDesert3D = function ({ canvas, hero, toggle, root, reducedMotion 
   const materiauTalus = materiauRoche.clone(); // éboulis au pied des falaises : même roche, plus sableuse
   materiauTalus.color = couleur(amb.talus);
   for (let i = 0; i < 8; i++) {
-    const rayon = rand(16, 32);
-    const hauteur = rand(20, 44);
+    const rayon = rand(24, 42);
+    const hauteur = rand(14, 26);
     const geo = new T.CylinderGeometry(rayon * 0.8, rayon * 1.05, hauteur, 32, 12);
     const p = geo.attributes.position;
     const irregularite = creerBruit(8);
@@ -249,7 +253,7 @@ window.demarrerDesert3D = function ({ canvas, hero, toggle, root, reducedMotion 
     }
     geo.computeVertexNormals();
     const mesa = new T.Mesh(geo, materiauRoche);
-    mesa.position.set(-300 + i * 85 + rand(-20, 20), hauteur / 2 - 5, rand(-310, -210));
+    mesa.position.set(-440 + i * 120 + rand(-25, 25), hauteur / 2 - 5, rand(-440, -340));
     mesa.rotation.y = rand(0, Math.PI);
     mesa.receiveShadow = true;
     const talus = new T.Mesh(new T.CylinderGeometry(rayon * 1.0, rayon * 1.75, hauteur * 0.3, 32, 2), materiauTalus);
@@ -441,9 +445,9 @@ window.demarrerDesert3D = function ({ canvas, hero, toggle, root, reducedMotion 
   /* ---------- Dinosaures « organiques » ---------- */
 
   // Texture de peau partagée : relief d'écailles ; la couleur vient de chaque sommet (dos foncé, ventre clair)
-  peauRelief.repeat.set(6, 2);
+  peauRelief.repeat.set(10, 3);
   const materiauPeau = new T.MeshStandardMaterial({
-    vertexColors: true, roughness: 0.72, metalness: 0, normalMap: peauRelief, normalScale: new T.Vector2(0.55, 0.55),
+    vertexColors: true, roughness: 0.72, metalness: 0, normalMap: peauRelief, normalScale: new T.Vector2(0.85, 0.85),
   });
 
   /** Interpolation douce entre des valeurs clés [[t, a, b], ...] (t de 0 à 1). */
@@ -460,9 +464,10 @@ window.demarrerDesert3D = function ({ canvas, hero, toggle, root, reducedMotion 
   /**
    * Corps organique : un tube qui suit une « colonne vertébrale » (points dans le plan de profil)
    * et dont la hauteur et la largeur varient selon les valeurs clés.
-   * Couleurs : dos foncé, ventre clair et rayures facultatives sur le dos.
+   * Couleurs : dos foncé, ventre clair et rayures facultatives sur le dos
+   * (pour une patte, option membre : la couleur passe de « dos » en haut à « ventre » au pied).
    */
-  const creerCorps = (points, cles, teintes, { segments = 80, tours = 22, rayures = 0, frequence = 8, z = 0 } = {}) => {
+  const creerCorps = (points, cles, teintes, { segments = 80, tours = 22, rayures = 0, frequence = 8, z = 0, membre = false } = {}) => {
     const courbe = new T.CatmullRomCurve3(points.map(([x, y]) => new T.Vector3(x, y, z)));
     const rayon = profil(cles);
     const dos = couleur(teintes.dos);
@@ -489,7 +494,8 @@ window.demarrerDesert3D = function ({ canvas, hero, toggle, root, reducedMotion 
         positions.push(p.x + haut.x * ca * ry, p.y + haut.y * ca * ry, z + Math.sin(a) * rz);
         parametres.push(t);
         uvs.push(t * 4, j / tours);
-        c.copy(ventre).lerp(dos, lisse(ca, -0.35, 0.55));
+        if (membre) c.copy(dos).lerp(ventre, lisse(t, 0.15, 1)); // patte : de plus en plus foncée vers le pied
+        else c.copy(ventre).lerp(dos, lisse(ca, -0.35, 0.55));
         if (rayures && ca > 0) c.lerp(rayure, Math.pow(Math.max(0, Math.sin(t * frequence * Math.PI * 2)), 4) * ca * rayures);
         if (pointe) c.lerp(pointe, lisse(t, 0.9, 0.96));
         c.multiplyScalar(0.92 + bruitFin(t * 3 % 1, j / tours) * 0.16); // petites taches irrégulières
@@ -583,20 +589,72 @@ window.demarrerDesert3D = function ({ canvas, hero, toggle, root, reducedMotion 
   };
 
   /**
+   * Muscle (cuisse, épaule) : un ovoïde qui dépasse un peu du flanc. Il a le même dégradé que le corps
+   * (dos foncé, ventre clair) : la patte ne semble plus « collée » sous le ventre, elle sort du corps.
+   */
+  const creerMuscle = ([rx, ry, rz], teintes) => {
+    const geo = new T.SphereGeometry(1, 28, 18);
+    const normales = geo.attributes.normal;
+    const dos = couleur(teintes.dos);
+    const ventre = couleur(teintes.ventre);
+    const c = new T.Color();
+    const couleurs = [];
+    for (let k = 0; k < normales.count; k++) {
+      c.copy(ventre).lerp(dos, lisse(normales.getY(k), -0.35, 0.55));
+      couleurs.push(c.r, c.g, c.b);
+    }
+    geo.setAttribute('color', new T.Float32BufferAttribute(couleurs, 3));
+    geo.scale(rx, ry, rz);
+    geo.computeVertexNormals();
+    const muscle = new T.Mesh(geo, materiauPeau);
+    muscle.castShadow = true;
+    muscle.receiveShadow = true;
+    return muscle;
+  };
+
+  /**
    * Patte articulée : hanche → cuisse → genou → bas de la patte + pied.
    * On fait pivoter la hanche et le genou pour marcher.
+   * La cuisse est large de profil et commence dans le corps : elle s'y fond comme un vrai muscle.
+   * teintes : { haut, bas, pied } (la patte fonce de la cuisse jusqu'au pied).
+   * muscle : { rayons: [x, y, z], y, teintes } gros muscle de la cuisse ou de l'épaule, aux couleurs du corps.
    */
-  const creerPatte = (dino, x, y, z, haut, basPatte, teintes) => {
+  const creerPatte = (dino, x, y, z, cuisse, jambe, teintes, muscle) => {
     const hanche = new T.Group();
     hanche.position.set(x, y, z);
-    hanche.add(creerCorps(haut.points, haut.cles, teintes, { segments: 18, tours: 14 }));
+    if (muscle) {
+      const ovoide = creerMuscle(muscle.rayons, muscle.teintes);
+      ovoide.position.y = muscle.y;
+      hanche.add(ovoide);
+    }
+    hanche.add(creerCorps(cuisse.points, cuisse.cles, { dos: teintes.haut, ventre: teintes.bas }, { segments: 24, tours: 20, membre: true }));
     const genou = new T.Group();
-    const [gx, gy] = haut.points[haut.points.length - 1];
+    const [gx, gy] = cuisse.points[cuisse.points.length - 1];
     genou.position.set(gx, gy, 0);
-    genou.add(creerCorps(basPatte.points, basPatte.cles, teintes, { segments: 24, tours: 14 }));
+    genou.add(creerCorps(jambe.points, jambe.cles, { dos: teintes.bas, ventre: teintes.pied }, { segments: 32, tours: 20, membre: true }));
     hanche.add(genou);
     dino.add(hanche);
-    return { hanche, genou };
+    // Point du pied (dans le repère du genou) : sert à poser les traces de pas dans le sable
+    const [px, py] = jambe.points[jambe.points.length - 1];
+    return { hanche, genou, pied: new T.Vector3(px, py, 0), cosPrecedent: 0 };
+  };
+
+  /** Pied de théropode (T-Rex) : trois doigts écartés en éventail, chacun avec sa griffe. */
+  const ajouterDoigts = (genou, x, y, longueur, epaisseur, teinte, angles) => {
+    angles.forEach((angle) => {
+      const doigt = new T.Group();
+      doigt.position.set(x, y, 0);
+      doigt.rotation.y = angle;
+      const l = longueur * (angle === 0 ? 1 : 0.78); // le doigt du milieu est le plus long
+      doigt.add(creerCorps([[0, 0], [l * 0.5, -0.03], [l, -0.06]], [[0, epaisseur, epaisseur * 1.15], [0.7, epaisseur * 0.75], [1, epaisseur * 0.4]],
+        { dos: teinte, ventre: teinte }, { segments: 10, tours: 10, membre: true }));
+      const griffe = new T.Mesh(new T.ConeGeometry(epaisseur * 0.45, epaisseur * 2.2, 6), materiauGriffe);
+      griffe.rotation.z = -Math.PI / 2 - 0.35; // pointe vers l'avant et vers le sol
+      griffe.position.set(l + epaisseur * 0.7, -0.09, 0);
+      griffe.castShadow = true;
+      doigt.add(griffe);
+      genou.add(doigt);
+    });
   };
 
   const creerRex = () => {
@@ -639,12 +697,14 @@ window.demarrerDesert3D = function ({ canvas, hero, toggle, root, reducedMotion 
       rex.add(creerCorps([[1.7, 3.35], [1.95, 3.05], [2.15, 2.95]], [[0, 0.13], [1, 0.06]], teintes, { segments: 10, tours: 10, z: cote * 0.62 })); // petit bras
     });
 
-    const teintesPattes = { dos: '#47512a', ventre: '#a99c74' };
-    const pattes = [-1, 1].map((cote) => creerPatte(rex, 0.25, 2.62, cote * 0.62,
-      { points: [[0, 0.35], [0.12, -0.45], [0.28, -1.15]], cles: [[0, 0.55], [0.5, 0.48], [1, 0.3]] },
-      { points: [[0, 0], [-0.25, -0.6], [-0.32, -1.05], [-0.05, -1.32], [0.45, -1.38]], cles: [[0, 0.28], [0.6, 0.17], [0.78, 0.15], [1, 0.07]] },
-      teintesPattes));
-    pattes.forEach(({ genou }) => ajouterGriffes(genou, 0.52, -1.4, 0.09, 3, 0.2));
+    const teintesPattes = { haut: '#a39d70', bas: '#5c6334', pied: '#3a3d22' };
+    const pattes = [-1, 1].map((cote) => creerPatte(rex, 0.25, 2.62, cote * 0.56,
+      // cuisse en « pilon » : très musclée en haut, fine au genou
+      { points: [[0, 0.55], [0.1, -0.35], [0.28, -1.15]], cles: [[0, 0.82, 0.52], [0.45, 0.62, 0.45], [1, 0.3, 0.28]] },
+      // jambe, puis métatarse et plante du pied, large et plate
+      { points: [[0, 0], [-0.25, -0.6], [-0.32, -1.05], [-0.12, -1.3], [0.08, -1.36]], cles: [[0, 0.3, 0.28], [0.4, 0.19, 0.18], [0.75, 0.15], [1, 0.12, 0.16]] },
+      teintesPattes, { rayons: [1.0, 0.95, 0.42], y: 0.45, teintes }));
+    pattes.forEach(({ genou }) => ajouterDoigts(genou, 0.05, -1.36, 0.5, 0.09, teintesPattes.pied, [-0.42, 0, 0.42]));
     ajouterOmbreContact(rex, -0.2, 7, 2.2);
     return {
       groupe: rex, pattes, phases: [0, Math.PI], amplitudeHanche: 0.48, amplitudeGenou: 0.7, foulee: 3.4,
@@ -670,11 +730,13 @@ window.demarrerDesert3D = function ({ canvas, hero, toggle, root, reducedMotion 
       narine.position.set(6.62, 9.22, cote * 0.1);
       tete.add(narine);
     });
-    const pattes = [[-1.3, 1], [-1.3, -1], [2.3, 1], [2.3, -1]].map(([x, cote]) => creerPatte(bronto, x, 3.78, cote * 0.95,
-      { points: [[0, 0.4], [0.05, -0.9], [0.1, -1.7]], cles: [[0, 0.62], [1, 0.5]] },
-      { points: [[0, 0], [0.05, -1.0], [0.12, -1.66]], cles: [[0, 0.48], [0.85, 0.42], [1, 0.4]] },
-      { dos: '#565c49', ventre: '#8f8c78' }));
-    pattes.forEach(({ genou }) => ajouterGriffes(genou, 0.5, -1.92, 0.2, 3, 0.18));
+    // Pattes en colonnes, comme un éléphant : le pied s'élargit puis s'arrondit sur le sable
+    const pattes = [[-1.3, 1], [-1.3, -1], [2.3, 1], [2.3, -1]].map(([x, cote]) => creerPatte(bronto, x, 3.78, cote * (x < 0 ? 0.92 : 0.72),
+      { points: [[0, 0.7], [0.05, -0.9], [0.1, -1.7]], cles: [[0, 0.95, 0.62], [0.5, 0.68, 0.54], [1, 0.5, 0.47]] },
+      { points: [[0, 0], [0.05, -1.0], [0.1, -1.7], [0.13, -2.06]], cles: [[0, 0.5, 0.48], [0.6, 0.42], [0.86, 0.5], [1, 0.1]] },
+      { haut: '#a29e86', bas: '#6e7160', pied: '#4a4b3c' },
+      x < 0 ? { rayons: [1.2, 1.35, 0.7], y: 0.5, teintes } : { rayons: [0.95, 1.1, 0.5], y: 0.4, teintes })); // cuisse / épaule
+    pattes.forEach(({ genou }) => ajouterGriffes(genou, 0.55, -1.92, 0.2, 3, 0.16));
     ajouterOmbreContact(bronto, -1, 15, 4);
     bronto.scale.setScalar(taille);
     return {
@@ -761,11 +823,12 @@ window.demarrerDesert3D = function ({ canvas, hero, toggle, root, reducedMotion 
       corps.add(creerOeil(3.0, 2.15, cote * 0.46, 0.08));
     });
     corps.add(creerCorne([[3.55, 1.95], [3.68, 2.22], [3.85, 2.33]], 0.09, 0));
-    const pattes = [[-0.6, 1], [-0.6, -1], [1.5, 1], [1.5, -1]].map(([x, cote]) => creerPatte(tricera, x, 1.52, cote * 0.85,
-      { points: [[0, 0.3], [0.08, -0.55]], cles: [[0, 0.56], [1, 0.44]] },
-      { points: [[0, 0], [0.05, -0.5], [0.2, -0.68]], cles: [[0, 0.42], [0.75, 0.34], [1, 0.32]] },
-      { dos: '#6e472e', ventre: '#a88a68' }));
-    pattes.forEach(({ genou }) => ajouterGriffes(genou, 0.42, -0.86, 0.14, 3, 0.14));
+    const pattes = [[-0.6, 1], [-0.6, -1], [1.5, 1], [1.5, -1]].map(([x, cote]) => creerPatte(tricera, x, 1.52, cote * 0.8,
+      { points: [[0, 0.5], [0.08, -0.55]], cles: [[0, 0.75, 0.52], [0.5, 0.55, 0.46], [1, 0.42, 0.4]] },
+      { points: [[0, 0], [0.04, -0.45], [0.1, -0.75], [0.12, -0.93]], cles: [[0, 0.4, 0.38], [0.6, 0.33], [0.85, 0.38], [1, 0.08]] },
+      { haut: '#b8966f', bas: '#7a5a3e', pied: '#4a3626' },
+      x < 0 ? { rayons: [0.95, 1.0, 0.5], y: 0.5, teintes } : { rayons: [0.8, 0.9, 0.45], y: 0.4, teintes })); // cuisse / épaule
+    pattes.forEach(({ genou }) => ajouterGriffes(genou, 0.36, -0.82, 0.14, 3, 0.14));
     ajouterOmbreContact(tricera, -0.3, 8.5, 3);
     tricera.scale.setScalar(taille);
     return {
@@ -774,27 +837,58 @@ window.demarrerDesert3D = function ({ canvas, hero, toggle, root, reducedMotion 
     };
   };
 
+  /** Ptérosaure (type ptéranodon) : long bec, crête vers l'arrière, ailes étroites qui se plient en battant. */
   const creerPtero = () => {
     const ptero = new T.Group();
-    const teintes = { dos: '#6e3b2a', ventre: '#c79a78' };
-    ptero.add(creerCorps([[-0.9, 0], [-0.2, 0.05], [0.4, 0.1], [0.8, 0.2], [1.1, 0.25], [2.0, 0.1]],
-      [[0, 0.05], [0.25, 0.22], [0.45, 0.24], [0.6, 0.12], [0.7, 0.15], [1, 0.01]], teintes, { segments: 30, tours: 12 }));
-    ptero.add(creerCorps([[1.0, 0.3], [0.5, 0.55], [0.1, 0.7]], [[0, 0.1], [1, 0.02]], teintes, { segments: 10, tours: 8 })); // crête
-    const membrane = new T.MeshStandardMaterial({ color: couleur('#7a4532'), roughness: 0.8, side: T.DoubleSide, emissive: couleur('#3a1a10'), emissiveIntensity: 0.4 });
-    const ailes = [-1, 1].map((cote) => {
+    const teintes = { dos: '#5a2e22', ventre: '#c79a78' };
+    // Corps, cou et tête
+    ptero.add(creerCorps([[-0.7, 0], [-0.1, 0.05], [0.45, 0.08], [0.85, 0.2], [1.15, 0.3], [1.45, 0.33]],
+      [[0, 0.04], [0.25, 0.2], [0.5, 0.18], [0.68, 0.08], [0.85, 0.13], [1, 0.1]], teintes, { segments: 36, tours: 12 }));
+    // Long bec pointu, plus clair, et crête tournée vers l'arrière
+    ptero.add(creerCorps([[1.4, 0.33], [1.9, 0.27], [2.45, 0.17]], [[0, 0.1, 0.08], [1, 0.01]], { dos: '#c9a25e', ventre: '#e2c48a' }, { segments: 14, tours: 10 }));
+    ptero.add(creerCorps([[1.35, 0.4], [1.0, 0.58], [0.6, 0.7]], [[0, 0.09, 0.03], [1, 0.012]], { dos: '#9c3b25', ventre: '#b8553a' }, { segments: 12, tours: 8 }));
+    [-1, 1].forEach((cote) => {
+      ptero.add(creerOeil(1.4, 0.4, cote * 0.09, 0.035));
+      // pattes repliées vers l'arrière pendant le vol
+      ptero.add(creerCorps([[-0.45, -0.05], [-0.8, -0.1], [-1.05, -0.12]], [[0, 0.05], [1, 0.025]], teintes, { segments: 8, tours: 6, z: cote * 0.1 }));
+    });
+
+    // Membrane : le soleil passe à travers (lueur chaude), os sombres le long du bord d'attaque
+    const membrane = new T.MeshStandardMaterial({
+      vertexColors: true, roughness: 0.75, side: T.DoubleSide, emissive: couleur('#7a3a1c'), emissiveIntensity: 0.45,
+    });
+    const os = couleur('#3e1f16');
+    const peau = couleur('#a8603e');
+    /** Morceau d'aile plat : points du bord d'attaque (devant) et du bord de fuite (derrière), le long de l'envergure. */
+    const morceauAile = (devant, derriere, cote) => {
       const forme = new T.Shape();
-      forme.moveTo(0.5, 0);
-      forme.quadraticCurveTo(0.9, 1.2, 0.4, 2.2);
-      forme.lineTo(-0.3, 3.8);
-      forme.quadraticCurveTo(-0.6, 2.0, -0.9, 0.2);
-      forme.lineTo(0.5, 0);
-      const geo = new T.ShapeGeometry(forme, 12);
+      forme.moveTo(...devant[0]);
+      devant.slice(1).forEach((point) => forme.lineTo(...point));
+      [...derriere].reverse().forEach((point) => forme.lineTo(...point));
+      const geo = new T.ShapeGeometry(forme);
+      const p = geo.attributes.position;
+      const couleurs = [];
+      for (let k = 0; k < p.count; k++) {
+        const surLeBord = devant.some(([x, y]) => Math.abs(x - p.getX(k)) < 1e-4 && Math.abs(y - p.getY(k)) < 1e-4);
+        const c = surLeBord ? os : peau;
+        couleurs.push(c.r, c.g, c.b);
+      }
+      geo.setAttribute('color', new T.Float32BufferAttribute(couleurs, 3));
       if (cote < 0) geo.scale(1, -1, 1);
       geo.rotateX(Math.PI / 2); // l'aile s'étend sur les côtés (axe z)
-      const aile = new T.Mesh(geo, membrane);
-      aile.castShadow = true;
+      const maille = new T.Mesh(geo, membrane);
+      maille.castShadow = true;
+      return maille;
+    };
+    const ailes = [-1, 1].map((cote) => {
+      const aile = new T.Group(); // partie intérieure, du corps au « poignet »
+      aile.add(morceauAile([[0.4, 0], [0.42, 0.8], [0.3, 1.6]], [[-0.8, 0], [-0.7, 0.5], [-0.5, 1.1], [-0.3, 1.6]], cote));
+      const bout = new T.Group(); // partie extérieure, portée par le très long 4e doigt
+      bout.position.z = cote * 1.6;
+      bout.add(morceauAile([[0.3, 0], [0.18, 0.9], [0, 1.8], [-0.25, 2.5]], [[-0.3, 0], [-0.32, 0.6], [-0.36, 1.3], [-0.32, 1.9], [-0.28, 2.25]], cote));
+      aile.add(bout);
       ptero.add(aile);
-      return { aile, cote };
+      return { aile, bout, cote };
     });
     ptero.rotation.y = Math.PI + 0.55; // vole vers la gauche, tête tournée vers nous (trois quarts)
     const conteneur = new T.Group();
@@ -803,12 +897,13 @@ window.demarrerDesert3D = function ({ canvas, hero, toggle, root, reducedMotion 
   };
 
   // Les dinosaures marchent vers la droite, chacun dans sa « voie » (profondeur z)
-  const bronto = { ...creerBronto(0.62), z: -10, vitesse: 1.3 };
+  // trace : forme et taille des empreintes laissées dans le sable
+  const bronto = { ...creerBronto(0.62), z: -10, vitesse: 1.3, trace: { forme: 'rond', taille: 0.9 } };
   const dinos = [
     bronto,
-    { ...creerBronto(0.28), z: -7.8, vitesse: 1.3, suit: bronto, ecart: 7.5 }, // le bébé suit sa mère
-    { ...creerTricera(1.15), z: -4, vitesse: 1.9 },
-    { ...creerRex(), z: 1, vitesse: 2.7 },
+    { ...creerBronto(0.28), z: -7.8, vitesse: 1.3, suit: bronto, ecart: 7.5, trace: { forme: 'rond', taille: 0.42 } }, // le bébé suit sa mère
+    { ...creerTricera(1.15), z: -4, vitesse: 1.9, trace: { forme: 'rond', taille: 0.65 } },
+    { ...creerRex(), z: 1, vitesse: 2.7, trace: { forme: 'tridactyle', taille: 1.0 } },
   ];
   dinos.forEach((dino) => {
     dino.groupe.position.z = dino.z;
@@ -819,6 +914,105 @@ window.demarrerDesert3D = function ({ canvas, hero, toggle, root, reducedMotion 
     scene.add(ptero.groupe);
     return ptero;
   });
+
+  /* ---------- Traces de pas et nuages de poussière ---------- */
+  /**
+   * Empreinte vue de dessus, en niveaux de gris : plus c'est sombre, plus le creux assombrit le sable.
+   * La paroi tournée vers le soleil (côté doigts et bord du fond) est dans l'ombre, le talon est plus clair.
+   */
+  const dessinerEmpreinte = (forme) => {
+    const toile = document.createElement('canvas');
+    toile.width = toile.height = 128;
+    const c = toile.getContext('2d');
+    const ombrage = c.createLinearGradient(0, 0, 128, 128);
+    ombrage.addColorStop(0, '#2e2e2e');
+    ombrage.addColorStop(1, '#8c8c8c');
+    c.fillStyle = ombrage;
+    c.filter = 'blur(3px)'; // bords adoucis, comme du sable qui s'éboule
+    const ovale = (x, y, rx, ry, angle = 0) => {
+      c.beginPath();
+      c.ellipse(x * 2, y * 2, rx * 2, ry * 2, angle, 0, Math.PI * 2);
+      c.fill();
+    };
+    if (forme === 'tridactyle') { // trois doigts en éventail + talon (T-Rex)
+      ovale(32, 44, 9, 10);
+      ovale(32, 20, 5, 15);
+      ovale(17, 25, 4.5, 13, -0.55);
+      ovale(47, 25, 4.5, 13, 0.55);
+    } else { // pied rond avec petits orteils (sauropodes, tricératops)
+      ovale(32, 38, 17, 19);
+      [18, 32, 46].forEach((x) => ovale(x, 14, 5, 6));
+    }
+    const texture = new T.CanvasTexture(toile);
+    texture.encoding = T.sRGBEncoding;
+    return texture;
+  };
+  const empreintes = { tridactyle: dessinerEmpreinte('tridactyle'), rond: dessinerEmpreinte('rond') };
+  // Plan couché sur le sol, orienté pour que les doigts pointent dans le sens de la marche (+x)
+  const geoEmpreinte = new T.PlaneGeometry(1, 1).rotateX(-Math.PI / 2).rotateY(-Math.PI / 2);
+
+  const traces = Array.from({ length: 160 }, () => {
+    const maille = new T.Mesh(geoEmpreinte, new T.MeshBasicMaterial({
+      map: empreintes.rond, transparent: true, opacity: 0, depthWrite: false, toneMapped: false, fog: false,
+      // L'empreinte « multiplie » le sable : il garde son grain, sa lumière (jour ou nuit) et l'ombre des dinosaures
+      blending: T.CustomBlending, blendEquation: T.AddEquation, blendSrc: T.DstColorFactor, blendDst: T.OneMinusSrcAlphaFactor,
+      premultipliedAlpha: true, polygonOffset: true, polygonOffsetFactor: -3, polygonOffsetUnits: -3,
+    }));
+    maille.visible = false;
+    scene.add(maille);
+    return { maille, age: 0 };
+  });
+  let prochaineTrace = 0;
+
+  const bouffees = Array.from({ length: 40 }, () => {
+    const sprite = new T.Sprite(new T.SpriteMaterial({ map: textureGrain, color: couleur('#e9cfa2'), transparent: true, opacity: 0, depthWrite: false }));
+    sprite.visible = false;
+    scene.add(sprite);
+    return { sprite, age: 1, taille: 1 };
+  });
+  let prochaineBouffee = 0;
+  const point = new T.Vector3();
+
+  /** Un pied touche le sol : on laisse une empreinte et on soulève un peu de poussière. */
+  const poserPied = (dino, patte) => {
+    patte.genou.updateWorldMatrix(true, false);
+    patte.genou.localToWorld(point.copy(patte.pied));
+    const sol = hauteurSol(point.x, point.z);
+    const t = traces[prochaineTrace];
+    prochaineTrace = (prochaineTrace + 1) % traces.length;
+    const tridactyle = dino.trace.forme === 'tridactyle';
+    t.maille.material.map = empreintes[dino.trace.forme];
+    t.maille.scale.set(dino.trace.taille * (tridactyle ? 1.2 : 0.9), 1, dino.trace.taille * 0.9);
+    t.maille.position.set(point.x + 0.15 * dino.trace.taille, sol + 0.03, point.z);
+    t.maille.visible = true;
+    t.age = 0;
+
+    const b = bouffees[prochaineBouffee];
+    prochaineBouffee = (prochaineBouffee + 1) % bouffees.length;
+    b.sprite.position.set(point.x, sol + 0.25 * dino.trace.taille, point.z + 0.2);
+    b.sprite.material.color.copy(couleur(amb.nuit ? '#5a4b78' : '#e9cfa2'));
+    b.sprite.visible = true;
+    b.age = 0;
+    b.taille = dino.trace.taille;
+  };
+
+  const vieillirTraces = (dt) => {
+    traces.forEach((t) => {
+      if (!t.maille.visible) return;
+      t.age += dt;
+      t.maille.material.opacity = 0.95 * Math.max(0, 1 - t.age / 22); // le vent efface l'empreinte en 22 s
+      if (t.age > 22) t.maille.visible = false;
+    });
+    bouffees.forEach((b) => {
+      if (!b.sprite.visible) return;
+      b.age += dt;
+      const p = b.age / 1.3; // la poussière retombe en 1,3 s
+      b.sprite.scale.setScalar((0.4 + p * 1.6) * b.taille);
+      b.sprite.position.y += dt * 0.35;
+      b.sprite.material.opacity = 0.32 * Math.max(0, 1 - p);
+      if (p >= 1) b.sprite.visible = false;
+    });
+  };
 
   /* ---------- Cadrage : l'horizon et les dinosaures restent en bas de l'accueil ---------- */
   let W = 0;
@@ -916,12 +1110,15 @@ window.demarrerDesert3D = function ({ canvas, hero, toggle, root, reducedMotion 
     if (!W || !H) return false;
     renderer.setSize(W, H, false);
 
-    // Taille voulue du T-Rex à l'écran, puis position de l'horizon pour que ses pieds touchent le bas
+    // Taille du T-Rex à l'écran : il occupe la place libre sous le texte de l'accueil
     const petit = W < 600;
-    const tailleRex = Math.min(165, Math.max(80, W * 0.105));
+    const texte = hero.querySelector('.hero__content');
+    const espaceLibre = texte ? hero.getBoundingClientRect().bottom - texte.getBoundingClientRect().bottom : H * 0.3;
+    const tailleRex = Math.min(300, W * (petit ? 0.4 : 0.32), Math.max(95, espaceLibre * 0.8));
+    // Puis position de l'horizon pour que ses pieds touchent le bas de l'écran
     const distanceRex = CAMERA_Z - dinos[3].z;
     pixelsParRadian = tailleRex / (4.9 / distanceRex);
-    yHorizon = Math.max(H * 0.45, H - (petit ? 26 : 44) - pixelsParRadian * (CAMERA_HAUTEUR / distanceRex));
+    yHorizon = Math.max(H * 0.4, H - (petit ? 22 : 34) - pixelsParRadian * (CAMERA_HAUTEUR / distanceRex));
 
     // « Décentrement » de l'objectif : l'horizon est placé bas sans incliner la caméra
     const pleineHauteur = 2 * yHorizon;
@@ -938,24 +1135,34 @@ window.demarrerDesert3D = function ({ canvas, hero, toggle, root, reducedMotion 
   const souris = { x: 0, y: 0 };
   let temps = 0;
 
+  /** Fait avancer un dinosaure : position, cycle de marche et traces de pas. Renvoie la phase du pas. */
+  const avancer = (dino, dt) => {
+    if (dino.suit) {
+      dino.groupe.position.x = dino.suit.groupe.position.x - dino.ecart;
+    } else {
+      dino.groupe.position.x += dino.vitesse * dt;
+      const limite = demiLargeur(dino.z);
+      if (dino.groupe.position.x > limite + 10) dino.groupe.position.x = -limite - rand(0, 15);
+    }
+    // Cycle de marche calé sur la distance parcourue : la hanche balance, le genou plie quand la patte avance
+    const pas = (dino.groupe.position.x / dino.foulee) * Math.PI * 2;
+    dino.pattes.forEach((patte, i) => {
+      const phase = pas + dino.phases[i];
+      const c = Math.cos(phase);
+      patte.hanche.rotation.z = Math.sin(phase) * dino.amplitudeHanche;
+      patte.genou.rotation.z = -Math.max(0, c) * dino.amplitudeGenou;
+      // Le pied se pose quand la patte a fini d'avancer (le cosinus devient négatif) : empreinte et poussière
+      if (dt > 0 && patte.cosPrecedent > 0 && c <= 0) poserPied(dino, patte);
+      patte.cosPrecedent = c;
+    });
+    return pas;
+  };
+
   const animer = (dt) => {
     temps += dt;
 
     dinos.forEach((dino) => {
-      if (dino.suit) {
-        dino.groupe.position.x = dino.suit.groupe.position.x - dino.ecart;
-      } else {
-        dino.groupe.position.x += dino.vitesse * dt;
-        const limite = demiLargeur(dino.z);
-        if (dino.groupe.position.x > limite + 10) dino.groupe.position.x = -limite - rand(0, 15);
-      }
-      // Cycle de marche calé sur la distance parcourue : la hanche balance, le genou plie quand la patte avance
-      const pas = (dino.groupe.position.x / dino.foulee) * Math.PI * 2;
-      dino.pattes.forEach(({ hanche, genou }, i) => {
-        const phase = pas + dino.phases[i];
-        hanche.rotation.z = Math.sin(phase) * dino.amplitudeHanche;
-        genou.rotation.z = -Math.max(0, Math.cos(phase)) * dino.amplitudeGenou;
-      });
+      const pas = avancer(dino, dt);
       dino.groupe.position.y = Math.abs(Math.cos(pas)) * 0.06;
       dino.groupe.rotation.z = Math.sin(pas * 2) * 0.012; // léger balancement du corps
       // Queue et cou qui ondulent, tête qui balance (décalés d'un dinosaure à l'autre)
@@ -965,6 +1172,8 @@ window.demarrerDesert3D = function ({ canvas, hero, toggle, root, reducedMotion 
         if (dino.tete) dino.tete.position.set(0, bobTete, balancementCou);
       }
     });
+
+    vieillirTraces(dt);
 
     // Virevoltant : roule, rebondit, puis réapparaît plus tard de l'autre côté
     roulade.x += roulade.vitesse * dt;
@@ -986,8 +1195,13 @@ window.demarrerDesert3D = function ({ canvas, hero, toggle, root, reducedMotion 
     pteros.forEach((ptero) => {
       ptero.groupe.position.x -= ptero.vitesse * dt;
       if (ptero.groupe.position.x < -demiLargeur(ptero.groupe.position.z)) placerPtero(ptero, true);
+      // Battement d'ailes : le bout de l'aile suit avec un léger retard (l'aile se plie comme une vraie)
       const angle = 0.1 + Math.sin(temps * 5 + ptero.battement) * 0.45;
-      ptero.ailes.forEach(({ aile, cote }) => { aile.rotation.x = -cote * angle; });
+      const retard = Math.sin(temps * 5 + ptero.battement - 0.7) * 0.3;
+      ptero.ailes.forEach(({ aile, bout, cote }) => {
+        aile.rotation.x = -cote * angle;
+        bout.rotation.x = -cote * retard;
+      });
       ptero.groupe.position.y += Math.sin(temps * 5 + ptero.battement) * 0.01;
     });
 
@@ -1013,8 +1227,13 @@ window.demarrerDesert3D = function ({ canvas, hero, toggle, root, reducedMotion 
   const preparer = () => {
     if (pret || !cadrer()) return pret;
     dinos.forEach((dino) => {
-      if (!dino.suit) { const limite = demiLargeur(dino.z) - 12; dino.groupe.position.x = rand(-limite * 0.7, limite * 0.7); }
+      if (!dino.suit) { const limite = demiLargeur(dino.z) - 12; dino.groupe.position.x = rand(-limite * 0.7, limite * 0.7) - dino.vitesse * 8; }
     });
+    // Les dinosaures marchent 8 s « en coulisse » : même l'image fixe montre leurs traces dans le sable
+    for (let k = 0; k < 160; k++) {
+      dinos.forEach((dino) => avancer(dino, 0.05));
+      vieillirTraces(0.05);
+    }
     pteros.forEach((ptero) => placerPtero(ptero, false));
     nuages.forEach((nuage) => placerNuage(nuage, false));
     appliquerAmbiance();

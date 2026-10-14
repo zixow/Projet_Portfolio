@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projets — Nathan THIBAULT · Portfolio BTS SIO SLAM</title>
+    <meta name="description" content="Projets de Nathan THIBAULT : PixelStar (site web PHP / MySQL) et Caillou Tour (application mobile Flutter).">
+
+    <!-- Polices et icônes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css">
+
+    <!-- Styles communs à toutes les pages, puis styles propres à cette page -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/mise-en-page.css">
+    <link rel="stylesheet" href="css/projets.css">
+
+    <!-- Applique le thème enregistré avant l'affichage (évite le flash) -->
+    <script>
+        (function () {
+          try {
+            var theme = localStorage.getItem('theme');
+            if (theme) document.documentElement.setAttribute('data-theme', theme);
+          } catch (e) { /* stockage indisponible : thème « désert » (clair) par défaut */ }
+        })();
+    </script>
+</head>
+<body data-page="projets">
+
+<!-- En-tête : ajouté par js/composants.js (écrit une seule fois pour toutes les pages) -->
+<div id="entete-site"></div>
+
+<main>
+
+    <!-- ============ PROJETS ============ -->
+    <section class="section section--alt" id="projets">
+        <div class="container">
+            <header class="section__header reveal">
+                <span class="section__label">Projets</span>
+                <h2 class="section__title">Mes <span class="gradient-text">projets</span></h2>
+                <p class="section__subtitle">Projets réalisés en formation, en stage et sur mon temps personnel. Cliquez sur « Détails » pour en savoir plus.</p>
+            </header>
+
+            <div class="filters" id="projects-filters" role="group" aria-label="Filtrer les projets">
+                <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">Tous</button>
+                <button class="filter-btn" type="button" data-filter="web" aria-pressed="false">Web</button>
+                <button class="filter-btn" type="button" data-filter="mobile" aria-pressed="false">Mobile</button>
+            </div>
+
+            <!-- Mes projets : ajoutez ici vos prochains projets -->
+            <div class="projects__grid">
+
+                <!-- PixelStar (projet web) -->
+                <article class="card card--hover project-card tilt reveal" data-category="web">
+                    <div class="project-card__media project-card__media--photo">
+                        <img src="assets/projets/pixelstar-accueil.jpg" alt="" loading="lazy">
+                        <span class="project-card__type">Projet BTS · En cours</span>
+                    </div>
+                    <div class="project-card__body">
+                        <h3>PixelStar</h3>
+                        <p>Site web dynamique de vente de jeux vidéo (PC, PS5, Xbox, Switch) : catalogue lu dans une base MySQL, filtre par genre, notes des joueurs et page de contact.</p>
+                        <ul class="tech-list"><li>PHP</li><li>PDO</li><li>MySQL</li><li>HTML / CSS</li></ul>
+                        <div class="project-card__actions">
+                            <button class="btn btn--small btn--primary" type="button" data-open-project>Détails</button>
+                        </div>
+                    </div>
+                    <template>
+                        <span class="modal__tag">Projet BTS · Web · En cours</span>
+                        <h3>PixelStar — boutique de jeux vidéo</h3>
+                        <p>Site web dynamique en PHP pour une boutique de jeux vidéo multiplateforme. Les jeux, les genres et les avis sont enregistrés dans une base de données MySQL.</p>
+                        <div class="modal__gallery modal__gallery--single">
+                            <figure>
+                                <a href="assets/projets/pixelstar-accueil.jpg" target="_blank" rel="noopener"><img src="assets/projets/pixelstar-accueil.jpg" alt="Page d'accueil de PixelStar" loading="lazy"></a>
+                                <figcaption>Page d'accueil</figcaption>
+                            </figure>
+                        </div>
+                        <h4>Fonctionnalités réalisées</h4>
+                        <ul>
+                            <li>Navigation entre les pages (Accueil, À propos, Contact) avec un routeur PHP et une page 404</li>
+                            <li>En-tête et pied de page réutilisables</li>
+                            <li>Catalogue des jeux mis en avant, filtre par genre, note moyenne et nombre d'avis</li>
+                            <li>Statistiques : nombre de jeux, note moyenne, clients</li>
+                            <li>Formulaire de contact avec vérification des champs et de l'adresse e-mail</li>
+                        </ul>
+                        <h4>Base de données</h4>
+                        <ul>
+                            <li>Tables jeux, genres, utilisateurs, avis, commandes et panier</li>
+                            <li>Relation plusieurs-à-plusieurs entre jeux et genres (table game_genres)</li>
+                            <li>Requêtes avec jointures et calculs (AVG, COUNT) et vues SQL</li>
+                        </ul>
+                        <h4>Prochaines étapes</h4>
+                        <ul>
+                            <li>Inscription et connexion des utilisateurs</li>
+                            <li>Panier et passage de commande</li>
+                        </ul>
+                        <div class="tags"><span>PHP</span><span>PDO</span><span>MySQL</span><span>HTML</span><span>CSS</span><span>Git</span></div>
+                    </template>
+                </article>
+
+                <!-- Caillou Tour (projet réel) -->
+                <article class="card card--hover project-card tilt reveal" data-category="mobile">
+                    <div class="project-card__media project-card__media--2">
+                        <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>
+                        <span class="project-card__type">Projet en binôme · En cours</span>
+                    </div>
+                    <div class="project-card__body">
+                        <h3>Caillou Tour</h3>
+                        <p>Application mobile de découverte touristique de la Nouvelle-Calédonie : lieux, activités, événements, restaurants et hébergements.</p>
+                        <ul class="tech-list"><li>Flutter</li><li>Dart</li><li>Material 3</li><li>UML</li></ul>
+                        <div class="project-card__actions">
+                            <button class="btn btn--small btn--primary" type="button" data-open-project>Détails</button>
+                            <a href="https://github.com/zixow/POO_nathan_weinim" class="btn btn--small btn--ghost" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                    <template>
+                        <span class="modal__tag">Projet scolaire en binôme · Mobile · En cours</span>
+                        <h3>Caillou Tour</h3>
+                        <p>Application mobile pour un office du tourisme : elle aide les visiteurs à découvrir la Nouvelle-Calédonie (lieux touristiques, activités, événements, restaurants et hébergements).</p>
+                        <h4>Conception (UML)</h4>
+                        <ul>
+                            <li>Diagramme de cas d'utilisation avec trois acteurs : visiteur, membre et administrateur</li>
+                            <li>Diagramme de classes : utilisateurs, lieux, catégories, activités, événements, restaurants, hébergements et favoris</li>
+                        </ul>
+                        <div class="modal__gallery">
+                            <figure>
+                                <a href="assets/projets/caillou-tour-cas-utilisation.jpg" target="_blank" rel="noopener"><img src="assets/projets/caillou-tour-cas-utilisation.jpg" alt="Diagramme de cas d'utilisation de Caillou Tour" loading="lazy"></a>
+                                <figcaption>Cas d'utilisation</figcaption>
+                            </figure>
+                            <figure>
+                                <a href="assets/projets/caillou-tour-classes.jpg" target="_blank" rel="noopener"><img src="assets/projets/caillou-tour-classes.jpg" alt="Diagramme de classes de Caillou Tour" loading="lazy"></a>
+                                <figcaption>Diagramme de classes</figcaption>
+                            </figure>
+                        </div>
+                        <h4>Fonctionnalités réalisées</h4>
+                        <ul>
+                            <li>Navigation par onglets (Accueil, Hôtels, Commentaires) avec la barre de navigation Material 3</li>
+                            <li>Page d'accueil avec barre de recherche</li>
+                            <li>Écran de connexion avec validation des champs</li>
+                            <li>Création de compte : pseudo, e-mail vérifié par expression régulière, mot de passe et confirmation</li>
+                        </ul>
+                        <h4>Prochaines étapes</h4>
+                        <ul>
+                            <li>Fiches des lieux, activités et événements</li>
+                            <li>Favoris et affichage sur une carte</li>
+                            <li>Comptes enregistrés dans une base de données via une API</li>
+                            <li>Espace administrateur pour gérer le contenu</li>
+                        </ul>
+                        <div class="tags"><span>Flutter</span><span>Dart</span><span>Material 3</span><span>UML</span><span>Git</span></div>
+                    </template>
+                </article>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- Pied de page : ajouté par js/composants.js -->
+<div id="pied-site"></div>
+
+<!-- Fenêtre modale des projets -->
+<div class="modal" id="project-modal" role="dialog" aria-modal="true" aria-label="Détails du projet" aria-hidden="true">
+    <div class="modal__box">
+        <button class="icon-btn modal__close" type="button" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal__content" id="modal-content"></div>
+    </div>
+</div>
+
+<script src="js/composants.js"></script>
+<script src="js/commun.js"></script>
+<script src="js/projets.js"></script>
+</body>
+</html>

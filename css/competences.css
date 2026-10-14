@@ -1,0 +1,112 @@
+/* =========================================================
+   Portfolio — Nathan THIBAULT · BTS SIO option SLAM
+   Page Compétences : compétences techniques et certifications
+   ========================================================= */
+
+/* ---------- 10. Compétences ---------- */
+.skills__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 1.25rem;
+}
+.skill-card__head {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+.skill-card__icon {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  font-size: 2rem;
+}
+.skill-card__head h3 { font-size: 1.12rem; }
+.skill-card__cat { font-size: 0.78rem; color: var(--text-muted); }
+.skill-card__percent {
+  margin-left: auto;
+  font-family: var(--font-title);
+  font-weight: 700;
+  color: var(--primary);
+}
+.progress {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--surface-2);
+}
+.progress__bar {
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--gradient);
+  transition: width 1.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.skill-card p { margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted); }
+
+.skills__extra {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+.extra-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+  font-size: 1.05rem;
+}
+.extra-card h3 i { color: var(--primary); }
+
+/* ---------- 13. Certifications ---------- */
+.certif-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
+  gap: 1.25rem;
+}
+.certif-card { display: flex; flex-direction: column; gap: 0.6rem; }
+.certif-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+.certif-card__icon {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  color: #fff;
+  font-size: 1.4rem;
+}
+.certif-card__icon--pix   { background: linear-gradient(135deg, #6366f1, #a855f7); }
+.certif-card__icon--anssi { background: linear-gradient(135deg, #0ea5e9, #1e40af); }
+.certif-card__icon--cnil  { background: linear-gradient(135deg, #ef4444, #db2777); }
+.certif-card__icon--fcc   { background: linear-gradient(135deg, #10b981, #0f766e); }
+.certif-card h3 { font-size: 1.12rem; }
+.certif-card__org { font-size: 0.85rem; font-weight: 600; color: var(--primary); }
+.certif-card p:not(.certif-card__org) { font-size: 0.9rem; color: var(--text-muted); }
+.certif-card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.certif-card__footer a { font-weight: 600; color: var(--primary); }
+.certif-card__footer a:hover { text-decoration: underline; }
+
+@media (max-width: 960px) {
+  .skills__extra { grid-template-columns: 1fr; }
+}

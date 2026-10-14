@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcours — Nathan THIBAULT · Portfolio BTS SIO SLAM</title>
+    <meta name="description" content="Parcours scolaire et stages en entreprise de Nathan THIBAULT, étudiant en BTS SIO SLAM à Nouméa.">
+
+    <!-- Polices et icônes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css">
+
+    <!-- Styles communs à toutes les pages, puis styles propres à cette page -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/mise-en-page.css">
+    <link rel="stylesheet" href="css/parcours.css">
+
+    <!-- Applique le thème enregistré avant l'affichage (évite le flash) -->
+    <script>
+        (function () {
+          try {
+            var theme = localStorage.getItem('theme');
+            if (theme) document.documentElement.setAttribute('data-theme', theme);
+          } catch (e) { /* stockage indisponible : thème « désert » (clair) par défaut */ }
+        })();
+    </script>
+</head>
+<body data-page="parcours">
+
+<!-- En-tête : ajouté par js/composants.js (écrit une seule fois pour toutes les pages) -->
+<div id="entete-site"></div>
+
+<main>
+
+    <!-- ============ PARCOURS SCOLAIRE ============ -->
+    <section class="section section--alt" id="parcours">
+        <div class="container">
+            <header class="section__header reveal">
+                <span class="section__label">Parcours scolaire</span>
+                <h2 class="section__title">Mon <span class="gradient-text">parcours</span></h2>
+                <p class="section__subtitle">Les étapes de ma formation, du baccalauréat au BTS SIO.</p>
+            </header>
+
+            <div class="timeline">
+                <!-- Étape 1 -->
+                <article class="timeline__item reveal">
+                    <div class="timeline__dot"><i class="fa-solid fa-flag-checkered"></i></div>
+                    <div class="card timeline__card">
+                        <span class="timeline__date">2027 · Objectif</span>
+                        <h3>Poursuite d'études en développement</h3>
+                        <p class="timeline__place"><i class="fa-solid fa-route"></i> Bachelor / Licence professionnelle, en alternance</p>
+                        <p>Approfondir le développement full-stack et mobile, et me spécialiser vers les applications immersives (XR).</p>
+                    </div>
+                </article>
+
+                <!-- Étape 2 -->
+                <article class="timeline__item reveal">
+                    <div class="timeline__dot"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <div class="card timeline__card">
+                        <span class="timeline__date">2025 — 2026 · En cours</span>
+                        <h3>BTS SIO — option SLAM</h3>
+                        <p class="timeline__place"><i class="fa-solid fa-school"></i> Lycée Dick Ukeiwé, Nouméa (Yahoué)</p>
+                        <p>Brevet de Technicien Supérieur Services Informatiques aux Organisations, option Solutions Logicielles et Applications Métiers.</p>
+                        <ul class="timeline__list">
+                            <li><strong>Bloc 1</strong> — Support et mise à disposition de services informatiques</li>
+                            <li><strong>Bloc 2</strong> — Conception et développement d'applications (SLAM)</li>
+                            <li><strong>Bloc 3</strong> — Cybersécurité des services informatiques</li>
+                        </ul>
+                        <div class="tags">
+                            <span>Développement</span><span>Bases de données</span><span>POO</span><span>Cybersécurité</span><span>Gestion de projet</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Étape 3 -->
+                <article class="timeline__item reveal">
+                    <div class="timeline__dot"><i class="fa-solid fa-award"></i></div>
+                    <div class="card timeline__card">
+                        <span class="timeline__date">2024 · Obtenu</span>
+                        <h3>Baccalauréat professionnel</h3>
+                        <p class="timeline__place"><i class="fa-solid fa-school"></i> [Nom du lycée], [Ville]</p>
+                        <p>Bac pro [spécialité] — Mention [à compléter].</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ EXPÉRIENCES ============ -->
+    <section class="section" id="experiences">
+        <div class="container">
+            <header class="section__header reveal">
+                <span class="section__label">Expériences</span>
+                <h2 class="section__title">Expériences <span class="gradient-text">en entreprise</span></h2>
+                <p class="section__subtitle">Mes stages réalisés dans le cadre du BTS SIO.</p>
+            </header>
+
+            <!-- À MODIFIER : nom de l'entreprise du 1er stage, durées, missions et technologies exactes -->
+            <div class="xp-list">
+                <article class="card xp-card reveal">
+                    <div class="xp-card__side">
+                        <div class="xp-card__logo xp-card__logo--alt"><i class="fa-solid fa-headset"></i></div>
+                        <span class="xp-card__date">2026</span>
+                        <span class="xp-card__duration"><i class="fa-regular fa-clock"></i> 2<sup>e</sup> année de BTS</span>
+                        <span class="status status--done">Terminé</span>
+                    </div>
+                    <div class="xp-card__main">
+                        <h3>Technicien hotline — Stage de 2<sup>e</sup> année</h3>
+                        <p class="xp-card__company"><i class="fa-solid fa-building"></i> SF2I</p>
+                        <p>Stage au sein du service d'assistance (hotline) : accompagnement des clients et résolution de leurs problèmes informatiques.</p>
+                        <h4>Missions réalisées</h4>
+                        <ul class="check-list">
+                            <li>Prise en charge des appels et des demandes des clients</li>
+                            <li>Diagnostic et résolution des incidents à distance</li>
+                            <li>Suivi des demandes dans l'outil de tickets</li>
+                            <li>Transmission des problèmes complexes aux techniciens confirmés</li>
+                        </ul>
+                        <div class="tags"><span>Hotline</span><span>Support utilisateurs</span><span>Tickets</span><span>Relation client</span></div>
+                    </div>
+                </article>
+
+                <article class="card xp-card reveal">
+                    <div class="xp-card__side">
+                        <div class="xp-card__logo"><i class="fa-solid fa-laptop-code"></i></div>
+                        <span class="xp-card__date">2025</span>
+                        <span class="xp-card__duration"><i class="fa-regular fa-clock"></i> 1<sup>re</sup> année de BTS</span>
+                        <span class="status status--done">Terminé</span>
+                    </div>
+                    <div class="xp-card__main">
+                        <h3>Développeur web — Stage de 1<sup>re</sup> année</h3>
+                        <p class="xp-card__company"><i class="fa-solid fa-building"></i> [Nom de l'entreprise] · Entreprise individuelle</p>
+                        <p>Stage dans une entreprise d'une seule personne : j'ai réalisé son site web, en étant l'unique développeur du projet.</p>
+                        <h4>Missions réalisées</h4>
+                        <ul class="check-list">
+                            <li>Recueil des besoins auprès du gérant</li>
+                            <li>Conception de la maquette et de l'arborescence du site</li>
+                            <li>Développement d'un site web responsive</li>
+                            <li>Mise en ligne et présentation du site au gérant</li>
+                        </ul>
+                        <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Autonomie</span></div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- Pied de page : ajouté par js/composants.js -->
+<div id="pied-site"></div>
+
+<script src="js/composants.js"></script>
+<script src="js/commun.js"></script>
+
+</body>
+</html>

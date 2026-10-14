@@ -1,0 +1,177 @@
+/* =========================================================
+   Portfolio — Nathan THIBAULT · BTS SIO option SLAM
+   Page Projets : cartes des projets et fenêtre de détails
+   ========================================================= */
+
+/* ---------- 11. Projets ---------- */
+.projects__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); /* deux grandes cartes côte à côte */
+  gap: 1.75rem;
+}
+.project-card {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+}
+.project-card__media {
+  position: relative;
+  height: clamp(190px, 22vw, 260px);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: #fff;
+  font-size: 3.4rem;
+}
+.project-card__media::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(circle at center, #000 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(circle at center, #000 30%, transparent 75%);
+}
+.project-card__media i {
+  position: relative;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+  transition: transform 0.5s var(--ease);
+}
+.project-card:hover .project-card__media i { transform: scale(1.15) rotate(-6deg); }
+.project-card__media--1 { background: linear-gradient(135deg, #0ea5e9, #6366f1); }
+.project-card__media--2 { background: linear-gradient(135deg, #10b981, #0ea5e9); }
+.project-card__media--3 { background: linear-gradient(135deg, #ef4444, #a855f7); }
+.project-card__media--4 { background: linear-gradient(135deg, #f59e0b, #ef4444); }
+.project-card__media--5 { background: linear-gradient(135deg, #6366f1, #ec4899); }
+.project-card__media--6 { background: linear-gradient(135deg, #22d3ee, #a855f7 60%, #f472b6); }
+/* Carte avec une vraie capture d'écran du projet */
+.project-card__media--photo { background: #1b2838; }
+.project-card__media--photo::before { display: none; }
+.project-card__media--photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.5s var(--ease);
+}
+.project-card:hover .project-card__media--photo img { transform: scale(1.05); }
+.project-card__type {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.3);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.project-card__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+}
+.project-card__body h3 { margin-bottom: 0.6rem; font-size: 1.2rem; }
+.project-card__body p { font-size: 0.92rem; color: var(--text-muted); }
+.project-card .tech-list { margin: 1.1rem 0 1.4rem; }
+.project-card__actions { display: flex; gap: 0.7rem; margin-top: auto; }
+
+/* Fenêtre modale */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  background: rgba(3, 4, 12, 0.72);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s var(--ease), visibility 0.3s var(--ease);
+}
+.modal.open { opacity: 1; visibility: visible; }
+.modal__box {
+  position: relative;
+  width: min(680px, 100%);
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 2.2rem;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  translate: 0 20px;
+  scale: 0.97;
+  transition: translate 0.3s var(--ease), scale 0.3s var(--ease);
+}
+.modal.open .modal__box { translate: 0 0; scale: 1; }
+.modal__close { position: absolute; top: 1rem; right: 1rem; }
+.modal__tag {
+  display: inline-block;
+  margin-bottom: 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+.modal__content h3 { padding-right: 3rem; margin-bottom: 0.6rem; font-size: 1.6rem; }
+.modal__content h4 { margin: 1.4rem 0 0.6rem; font-size: 1rem; color: var(--secondary); }
+.modal__content p,
+.modal__content li { font-size: 0.95rem; color: var(--text-muted); }
+.modal__content ul:not(.tags) { display: grid; gap: 0.45rem; }
+.modal__content ul:not(.tags) li { position: relative; padding-left: 1.3rem; }
+.modal__content ul:not(.tags) li::before {
+  content: "";
+  position: absolute;
+  top: 0.6em;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gradient);
+}
+.modal__content .tags { margin-top: 1.5rem; }
+
+/* Images (diagrammes, captures) dans le détail d'un projet */
+.modal__gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+.modal__gallery--single { grid-template-columns: 1fr; }
+.modal__gallery figure { margin: 0; }
+.modal__gallery img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+  transition: transform 0.3s var(--ease);
+}
+.modal__gallery--single img { aspect-ratio: auto; }
+.modal__gallery a:hover img { transform: scale(1.02); }
+.modal__gallery figcaption {
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+@media (max-width: 520px) {
+  .modal__gallery { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 520px) {
+  .project-card { padding: 0; }
+  .modal__box { padding: 1.6rem 1.3rem; }
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — Nathan THIBAULT · Portfolio BTS SIO SLAM</title>
+    <meta name="description" content="Contacter Nathan THIBAULT, étudiant en BTS SIO SLAM à Nouméa.">
+
+    <!-- Polices et icônes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css">
+
+    <!-- Styles communs à toutes les pages, puis styles propres à cette page -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/mise-en-page.css">
+    <link rel="stylesheet" href="css/contact.css">
+
+    <!-- Applique le thème enregistré avant l'affichage (évite le flash) -->
+    <script>
+        (function () {
+          try {
+            var theme = localStorage.getItem('theme');
+            if (theme) document.documentElement.setAttribute('data-theme', theme);
+          } catch (e) { /* stockage indisponible : thème « désert » (clair) par défaut */ }
+        })();
+    </script>
+</head>
+<body data-page="contact">
+
+<!-- En-tête : ajouté par js/composants.js (écrit une seule fois pour toutes les pages) -->
+<div id="entete-site"></div>
+
+<main>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section section--alt" id="contact">
+        <div class="container">
+            <header class="section__header reveal">
+                <span class="section__label">Contact</span>
+                <h2 class="section__title">Me <span class="gradient-text">contacter</span></h2>
+                <p class="section__subtitle">Une question, une proposition de stage ou d'alternance ? Écrivez-moi.</p>
+            </header>
+
+            <div class="contact">
+                <!-- À MODIFIER : vos coordonnées -->
+                <div class="contact__info reveal">
+                    <a class="card contact__item" href="mailto:nathan.thibault@exemple.fr">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span><small>E-mail</small><strong>nathan.thibault@exemple.fr</strong></span>
+                    </a>
+                    <a class="card contact__item" href="https://www.linkedin.com/" target="_blank" rel="noopener">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                        <span><small>LinkedIn</small><strong>linkedin.com/in/nathan-thibault</strong></span>
+                    </a>
+                    <a class="card contact__item" href="https://github.com/zixow" target="_blank" rel="noopener">
+                        <i class="fa-brands fa-github"></i>
+                        <span><small>GitHub</small><strong>github.com/zixow</strong></span>
+                    </a>
+                    <div class="card contact__item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span><small>Localisation</small><strong>Nouméa, Nouvelle-Calédonie</strong></span>
+                    </div>
+                </div>
+
+                <!-- Le formulaire ouvre la messagerie du visiteur (pas de serveur nécessaire) -->
+                <form class="card contact__form reveal" id="contact-form" data-to="nathan.thibault@exemple.fr" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Nom</label>
+                            <input type="text" id="name" name="name" autocomplete="name" placeholder="Votre nom" required>
+                            <small class="error" id="name-error"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" name="email" autocomplete="email" placeholder="vous@exemple.fr" required>
+                            <small class="error" id="email-error"></small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Objet</label>
+                        <input type="text" id="subject" name="subject" placeholder="Proposition de stage, question…" required>
+                        <small class="error" id="subject-error"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Votre message…" required></textarea>
+                        <small class="error" id="message-error"></small>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full"><i class="fa-solid fa-paper-plane"></i> Envoyer le message</button>
+                    <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- Pied de page : ajouté par js/composants.js -->
+<div id="pied-site"></div>
+
+<script src="js/composants.js"></script>
+<script src="js/commun.js"></script>
+<script src="js/contact.js"></script>
+</body>
+</html>

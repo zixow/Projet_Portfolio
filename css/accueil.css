@@ -1,0 +1,360 @@
+/* =========================================================
+   Portfolio — Nathan THIBAULT · BTS SIO option SLAM
+   Page d'accueil : scène du désert, présentation, portrait et raccourcis
+   ========================================================= */
+
+/* ---------- Accueil (scène du désert) ---------- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-start;
+  padding: calc(var(--header-h) + 3rem) 0 clamp(11rem, 30vh, 18rem); /* le bas est réservé aux dinosaures */
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Effet « photo » par-dessus la scène de l'accueil : léger vignetage et grain de pellicule */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 120% 95% at 50% 42%, transparent 62%, rgba(40, 22, 8, 0.26) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0.4 -0.16'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.hero__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+/* Le texte est en haut à gauche : le bas de l'écran est laissé aux dinosaures */
+.hero__container { position: relative; }
+.hero__content { max-width: 640px; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+.badge__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+  animation: pulse 2s infinite;
+}
+
+.hero__hello {
+  font-family: var(--font-title);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--primary);
+}
+.hero__title {
+  font-size: clamp(2.6rem, 6.5vw, 4.7rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  margin: 0.3rem 0 0.6rem;
+}
+.hero__role {
+  font-family: var(--font-title);
+  font-size: clamp(1.15rem, 2.4vw, 1.6rem);
+  font-weight: 600;
+  min-height: 1.6em;
+}
+.cursor {
+  margin-left: 2px;
+  color: var(--primary);
+  animation: blink 1s steps(1) infinite;
+}
+.hero__text {
+  max-width: 560px;
+  margin: 1rem 0 2rem;
+  font-size: 1.05rem;
+  color: var(--text-muted);
+}
+.hero__text strong { color: var(--text); }
+.hero__buttons { display: flex; flex-wrap: wrap; gap: 1rem; }
+
+/* Bouton pause / lecture de l'animation des dinosaures */
+.dino-toggle {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--header-bg);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: var(--text);
+  font-size: 0.78rem;
+  font-weight: 600;
+  transition: border-color 0.3s var(--ease);
+}
+.dino-toggle:hover { border-color: var(--primary); }
+.dino-toggle i { color: var(--primary); }
+
+.scroll-down {
+  position: absolute;
+  bottom: 1.6rem;
+  left: 50%;
+  translate: -50% 0;
+  width: 26px;
+  height: 42px;
+  border: 2px solid var(--text-muted);
+  border-radius: 14px;
+  opacity: 0.7;
+}
+.scroll-down span {
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  width: 4px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--primary);
+  animation: wheel 1.6s infinite;
+}
+
+/* ---------- 8. À propos ---------- */
+.about {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  align-items: center;
+  gap: 3rem;
+}
+.about__text p {
+  margin-bottom: 1.1rem;
+  font-size: 1.03rem;
+  color: var(--text-muted);
+}
+.about__text strong { color: var(--text); }
+
+.about__infos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+  margin-top: 1.8rem;
+}
+.about__infos li {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-size: 0.92rem;
+}
+.about__infos i { width: 18px; text-align: center; color: var(--primary); }
+
+.about__stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+.stat {
+  padding: 1.8rem 1.2rem;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  text-align: center;
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+.stat:hover { transform: translateY(-5px); box-shadow: var(--glow); }
+.stat__number {
+  display: block;
+  font-family: var(--font-title);
+  font-size: 2.9rem;
+  font-weight: 700;
+  line-height: 1.1;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.stat__label { font-size: 0.9rem; color: var(--text-muted); }
+
+/* ---------- Portrait (photo) ---------- */
+.portrait {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 440px;
+}
+
+.avatar {
+  position: relative;
+  width: min(330px, 70vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transition: transform 0.2s ease-out;
+}
+.avatar__ring {
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--primary), var(--accent), var(--secondary), var(--primary));
+  animation: spin 9s linear infinite;
+}
+.avatar__ring::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: var(--bg);
+}
+.avatar__inner {
+  position: absolute;
+  inset: 14px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: radial-gradient(circle at 30% 25%, var(--surface-2), var(--surface) 70%);
+}
+.avatar__inner span {
+  font-family: var(--font-title);
+  font-size: clamp(4rem, 13vw, 6.5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.avatar__inner img { width: 100%; height: 100%; object-fit: cover; }
+
+.float-icon {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  font-size: 1.9rem;
+  animation: float 6s ease-in-out infinite;
+}
+.float-icon--1 { top: 4%; left: 8%; }
+.float-icon--2 { top: 8%; right: 6%; animation-delay: -1.5s; }
+.float-icon--3 { top: 52%; left: -1%; animation-delay: -3s; }
+.float-icon--4 { top: 56%; right: -1%; animation-delay: -4.5s; }
+
+.portrait__carte {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  translate: -50% 0;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 1.2rem;
+  border-radius: 16px;
+  background: var(--header-bg);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  white-space: nowrap;
+  transition: border-color 0.3s var(--ease);
+}
+.portrait__carte:hover { border-color: var(--primary); }
+.portrait__carte > i {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--gradient);
+  color: #fff;
+  font-size: 1.1rem;
+}
+.portrait__carte strong { display: block; font-size: 0.92rem; }
+.portrait__carte small { color: var(--text-muted); font-size: 0.8rem; }
+
+@media (max-width: 960px) {
+  .about { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  /* Accueil plus compact sur téléphone : les dinosaures restent visibles sans faire défiler */
+  .hero { padding: calc(var(--header-h) + 1.25rem) 0 clamp(9rem, 26vh, 13rem); }
+  .badge { margin-bottom: 1rem; }
+  .hero__text { margin: 0.6rem 0 1.25rem; font-size: 0.97rem; }
+  .hero__long { display: none; } /* textes raccourcis : « CV », sans le détail de SLAM */
+  .hero__buttons { gap: 0.6rem; }
+  .hero__buttons .btn { flex: 1 1 auto; padding: 0.8rem 1.1rem; }
+  .hero .socials { margin-top: 1.25rem; }
+  .about__infos { grid-template-columns: 1fr; }
+  .stat { padding: 1.4rem 0.8rem; }
+  .stat__number { font-size: 2.3rem; }
+  .float-icon { width: 46px; height: 46px; border-radius: 12px; font-size: 1.4rem; }
+  .float-icon--3 { left: 2%; }
+  .float-icon--4 { right: 2%; }
+  .portrait { min-height: 330px; }
+  .portrait__carte { padding: 0.65rem 0.9rem; }
+  .portrait__carte > i { width: 36px; height: 36px; font-size: 0.95rem; }
+}
+
+/* ---------- Présentation : portrait à gauche, texte à droite, chiffres en dessous ---------- */
+.about { grid-template-columns: 1fr 1.3fr; }
+.about__stats { grid-template-columns: repeat(4, 1fr); margin-top: 3rem; }
+
+/* ---------- Raccourcis vers les autres pages ---------- */
+.raccourcis {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 1.25rem;
+}
+.raccourci { display: flex; flex-direction: column; gap: 0.6rem; color: var(--text); }
+.raccourci__icone {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--gradient);
+  color: #fff;
+  font-size: 1.3rem;
+}
+.raccourci h3 { margin-top: 0.4rem; font-size: 1.2rem; }
+.raccourci p { flex: 1; font-size: 0.93rem; color: var(--text-muted); }
+.raccourci__lien {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+.raccourci__lien i { transition: translate 0.3s var(--ease); }
+.raccourci:hover .raccourci__lien i { translate: 4px 0; }
+
+@media (max-width: 960px) {
+  .about { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .about__stats { grid-template-columns: repeat(2, 1fr); }
+}

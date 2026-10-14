@@ -1,0 +1,131 @@
+/* =========================================================
+   Portfolio — Nathan THIBAULT · BTS SIO option SLAM
+   Page Synthèse BTS : tableau des compétences
+   ========================================================= */
+
+.visuellement-cache {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Tableau de synthèse ---------- */
+.table-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.synthese-tableau {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  background: var(--surface);
+  font-size: 0.93rem;
+}
+.synthese-tableau th,
+.synthese-tableau td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.synthese-tableau thead th {
+  background: var(--surface-2);
+  font-family: var(--font-title);
+  font-size: 1rem;
+  text-align: center;
+}
+.synthese-tableau thead th:first-child { text-align: left; }
+.synthese-tableau abbr { text-decoration: none; cursor: help; }
+.synthese-tableau tbody th {
+  text-align: left;
+  font-weight: 500;
+  color: var(--text);
+}
+.synthese-tableau td {
+  text-align: center;
+  color: var(--success);
+  font-size: 1.1rem;
+}
+.synthese-tableau tbody tr:last-child th,
+.synthese-tableau tbody tr:last-child td { border-bottom: none; }
+.synthese-tableau tbody tr:hover { background: var(--surface-2); }
+
+.type {
+  display: inline-block;
+  margin-right: 0.5rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  vertical-align: middle;
+}
+.type--stage { color: var(--primary); background: color-mix(in srgb, var(--primary) 14%, transparent); }
+.type--projet { color: var(--secondary); background: color-mix(in srgb, var(--secondary) 14%, transparent); }
+.type--perso { color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, transparent); }
+
+/* ---------- Légende ---------- */
+.legende {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr));
+  gap: 0.6rem 1.5rem;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.legende strong {
+  display: inline-block;
+  min-width: 2.2rem;
+  color: var(--primary);
+}
+
+/* ---------- Bloc 2 (SLAM) ---------- */
+.blocs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: 1.25rem;
+}
+.bloc { display: flex; flex-direction: column; gap: 0.9rem; }
+.bloc__icone {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--gradient);
+  color: #fff;
+  font-size: 1.3rem;
+}
+.bloc h3 { font-size: 1.15rem; }
+.bloc .tags { margin-top: auto; padding-top: 0.5rem; }
+
+.check-list { display: grid; gap: 0.55rem; }
+.check-list li {
+  position: relative;
+  padding-left: 1.7rem;
+  font-size: 0.93rem;
+  color: var(--text-muted);
+}
+.check-list li::before {
+  content: "\f00c";
+  position: absolute;
+  top: 0.15em;
+  left: 0;
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 0.85rem;
+  color: var(--success);
+}
+
+/* ---------- Téléphone : le tableau tient dans l'écran (étiquette au-dessus du titre) ---------- */
+@media (max-width: 600px) {
+  .synthese-tableau { min-width: 0; font-size: 0.85rem; }
+  .synthese-tableau th,
+  .synthese-tableau td { padding: 0.7rem 0.3rem; }
+  .synthese-tableau thead th:first-child,
+  .synthese-tableau tbody th { padding-left: 0.8rem; }
+  .synthese-tableau .type { display: block; width: fit-content; margin: 0 0 0.3rem; }
+  .synthese-tableau td { font-size: 0.95rem; }
+}
