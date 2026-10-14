@@ -355,9 +355,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ---------- Fond animé de l'accueil : désert et dinosaures en pixel art ---------- */
+  /* ---------- Fond animé de l'accueil : désert et dinosaures ---------- */
+  // Version 3D (js/desert3d.js) si Three.js et WebGL sont disponibles,
+  // sinon version 2D en pixel art (fonction demarrerDesert2D ci-dessous).
   const canvas = $('#dinos');
-  if (canvas) {
+
+  const demarrerDesert2D = () => {
     const ctx = canvas.getContext('2d');
     const hero = $('#accueil');
     const toggle = $('#dino-toggle');
@@ -702,6 +705,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     resize();
     draw();
+  };
+
+  if (canvas) {
+    const choisirDesert = () => {
+      const desert3D = typeof window.demarrerDesert3D === 'function'
+        && window.demarrerDesert3D({ canvas, hero: $('#accueil'), toggle: $('#dino-toggle'), root, reducedMotion });
+      if (!desert3D) demarrerDesert2D();
+    };
+    // Si la page n'est pas encore affichée (fenêtre de taille nulle), on attend qu'elle le soit
+    if (window.innerWidth > 0) choisirDesert();
+    else window.addEventListener('resize', choisirDesert, { once: true });
   }
 
   /* ---------- Année du pied de page ---------- */
