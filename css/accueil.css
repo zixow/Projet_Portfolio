@@ -13,6 +13,8 @@
   padding: calc(var(--header-h) + 3rem) 0 clamp(11rem, 30vh, 18rem); /* sur téléphone, le bas est réservé au bureau */
   overflow: hidden;
   isolation: isolate;
+  --vignette: radial-gradient(ellipse 120% 95% at 50% 42%, transparent 62%, rgba(40, 22, 8, 0.22) 100%);
+  --grain-photo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0.4 -0.16'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
 }
 
 /* Effet « photo » par-dessus la scène de l'accueil : voile clair derrière le texte, léger vignetage et grain */
@@ -23,8 +25,8 @@
   z-index: -1;
   background:
     linear-gradient(90deg, color-mix(in srgb, var(--bg) 55%, transparent) 0%, transparent 50%),
-    radial-gradient(ellipse 120% 95% at 50% 42%, transparent 62%, rgba(40, 22, 8, 0.22) 100%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0.4 -0.16'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+    var(--vignette),
+    var(--grain-photo);
   pointer-events: none;
 }
 
@@ -39,7 +41,6 @@
 /* Le texte est en haut à gauche ; le bureau est à droite (ou en bas sur téléphone) */
 .hero__container { position: relative; }
 .hero__content { max-width: 640px; }
-
 .badge {
   display: inline-flex;
   align-items: center;
@@ -358,4 +359,36 @@
 }
 @media (max-width: 700px) {
   .about__stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+/*
+ * Grand écran : le texte est posé dans une carte en verre dépoli, en bas à gauche,
+ * pour laisser voir le mur décoré au-dessus (fenêtre, cadres, horloge, guirlande).
+ */
+@media (min-width: 900px) and (min-aspect-ratio: 21/20) {
+  .hero { align-items: flex-end; padding: calc(var(--header-h) + 1.5rem) 0 3.5rem; }
+  .hero::after { background: var(--vignette), var(--grain-photo); }
+  .hero__content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    max-width: 580px;
+    padding: 1.4rem 1.8rem 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    background: color-mix(in srgb, var(--surface) 80%, transparent);
+    -webkit-backdrop-filter: blur(12px) saturate(1.2);
+    backdrop-filter: blur(12px) saturate(1.2);
+    box-shadow: 0 30px 60px -28px rgba(40, 20, 5, 0.5);
+  }
+  .hero__content > * { flex: 1 1 100%; }
+  .hero__content > .badge { flex: 0 0 auto; margin-bottom: 0.8rem; }
+  .hero__title { font-size: clamp(2.2rem, 3.3vw, 2.9rem); margin: 0.1rem 0 0.25rem; white-space: nowrap; }
+  .hero__role { font-size: clamp(1.1rem, 1.8vw, 1.35rem); }
+  .hero__text { margin: 0.45rem 0 1rem; font-size: 0.96rem; line-height: 1.6; }
+  .hero__long { display: none; }
+  /* Boutons et réseaux sociaux sur la même ligne */
+  .hero__content > .hero__buttons { flex: 0 1 auto; gap: 0.7rem; }
+  .hero .socials { flex: 0 0 auto; margin: 0 0 0 auto; gap: 0.5rem; }
+  .hero .socials a { width: 40px; height: 40px; }
 }

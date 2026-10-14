@@ -82,8 +82,52 @@ window.demarrerSetup2D = function ({ canvas, hero, toggle, root, reducedMotion }
     c.fillRect(0, 0, W, Math.max(0, Y(2.5)));
     c.fillStyle = teintes.sol;
     c.fillRect(0, Y(0), W, H - Y(0));
-    // Rideau à gauche
-    for (let i = 0; i < 9; i++) rect(-3.8 + i * 0.11, 0.05, -3.8 + i * 0.11 + 0.1, 2.33, i % 2 ? teintes.rideau : 'rgba(0,0,0,0.12)');
+    // Fenêtre sur le lagon (ciel, mer, soleil ou lune) et ses deux rideaux
+    const nuit = teintes === COULEURS.dark;
+    const ciel = c.createLinearGradient(0, Y(2.12), 0, Y(1.5));
+    ciel.addColorStop(0, nuit ? '#0b1030' : '#5aa7e0');
+    ciel.addColorStop(1, nuit ? '#41356e' : '#ffb27f');
+    c.fillStyle = ciel;
+    c.fillRect(X(-3.25), Y(2.12), 1.1 * echelle, 0.62 * echelle);
+    rect(-3.25, 0.95, -2.15, 1.5, nuit ? '#141a45' : '#2f9fb3');
+    c.fillStyle = nuit ? '#f4f1e2' : '#fff2cc';
+    c.beginPath();
+    c.arc(X(nuit ? -2.45 : -2.62), Y(nuit ? 1.95 : 1.55), 0.05 * echelle, 0, Math.PI * 2);
+    c.fill();
+    [[-3.3, -3.25, 0.9, 2.17], [-2.15, -2.1, 0.9, 2.17], [-3.3, -2.1, 2.12, 2.17], [-3.3, -2.1, 0.9, 0.95], [-2.718, -2.682, 0.95, 2.12]]
+      .forEach(([x0, x1, y0, y1]) => rect(x0, y0, x1, y1, '#f5f3ef'));
+    [[-3.71, -3.27], [-2.13, -1.69]].forEach(([x0, x1]) => {
+      for (let x = x0; x < x1; x += 0.055) rect(x, 0.08, x + 0.05, 2.3, teintes.rideau);
+    });
+    // Cadres : CV, Caillou Tour, PixelStar et affiche VR, puis l'horloge
+    [[-1.42, 1.76, 0.3, 0.424, '#e9efe9'], [-0.86, 1.92, 0.46, 0.2, '#1a8a96'], [-0.9, 1.56, 0.4, 0.152, '#14141a'], [-0.4, 1.52, 0.2, 0.28, '#7b2cbf']]
+      .forEach(([x, y, l, h, teinte]) => {
+        rect(x - l / 2 - 0.057, y - h / 2 - 0.057, x + l / 2 + 0.057, y + h / 2 + 0.057, '#1d1b1f');
+        rect(x - l / 2 - 0.035, y - h / 2 - 0.035, x + l / 2 + 0.035, y + h / 2 + 0.035, '#f7f4ee');
+        rect(x - l / 2, y - h / 2, x + l / 2, y + h / 2, teinte);
+      });
+    c.fillStyle = '#fbfaf7';
+    c.strokeStyle = '#1f1f22';
+    c.lineWidth = Math.max(1.5, 0.012 * echelle);
+    c.beginPath();
+    c.arc(X(-0.36), Y(2.05), 0.13 * echelle, 0, Math.PI * 2);
+    c.fill();
+    c.stroke();
+    const maintenant = new Date();
+    [[(maintenant.getHours() % 12) / 12 + maintenant.getMinutes() / 720, 0.07], [maintenant.getMinutes() / 60, 0.1]].forEach(([tour, longueur]) => {
+      c.beginPath();
+      c.moveTo(X(-0.36), Y(2.05));
+      c.lineTo(X(-0.36 + Math.sin(tour * Math.PI * 2) * longueur), Y(2.05 + Math.cos(tour * Math.PI * 2) * longueur));
+      c.stroke();
+    });
+    // Guirlande lumineuse
+    for (let x = -3.75; x <= -0.25; x += 0.1) {
+      const k = ((x + 3.75) % 1.15) / 1.15;
+      c.fillStyle = nuit ? 'rgba(255, 210, 122, 0.95)' : 'rgba(255, 196, 110, 0.75)';
+      c.beginPath();
+      c.arc(X(x), Y(2.38 - Math.sin(k * Math.PI) * 0.13), Math.max(1.5, 0.014 * echelle), 0, Math.PI * 2);
+      c.fill();
+    }
     // Tasseaux de chêne sur feutre noir
     rect(0.05, 0, 3.5, 2.28, teintes.joint);
     for (let x = 0.063; x < 3.49; x += 0.04) rect(x, 0, x + 0.027, 2.28, teintes.latte);

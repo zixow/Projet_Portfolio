@@ -6,6 +6,8 @@
    et métal gris, étagère avec ma collection de figurines, écran
    qui affiche le code de mon application Caillou Tour, console,
    manettes, PC aux ventilateurs RGB et ventilateur sur pied.
+   Sur le mur crème : fenêtre sur le lagon, cadres cliquables (mon CV,
+   mes projets, ma veille), horloge à l'heure, meuble bas et guirlande.
    - Textures (bois, feutre, plâtre, parquet, écran) dessinées par le code
    - Thème clair : lumière du jour ; thème sombre : la chambre la nuit,
      éclairée par l'écran et les rubans LED
@@ -49,6 +51,7 @@ window.demarrerSetup3D = function ({ canvas, hero, toggle, root, reducedMotion }
       fenetre: '#ffc68a', forceFenetre: 5.2,                   // soleil doré de fin d'après-midi par la fenêtre
       plafonnier: '#ffe2bd', forcePlafonnier: 0.2,
       forceLed: 0.35, forceEcran: 0.25, lueur: 0.22, poussiere: 0.85, neon: 0.6, forceNeon: 0,
+      guirlande: 0.3, forceGuirlande: 0, forceSpot: 1.3, vue: '#ffd9b0', forceVue: 0.55,
     },
     dark: {
       nuit: true, exposition: 1.15,
@@ -56,6 +59,7 @@ window.demarrerSetup3D = function ({ canvas, hero, toggle, root, reducedMotion }
       fenetre: '#8fa2ff', forceFenetre: 0.55,                  // clair de lune par la même fenêtre
       plafonnier: '#ffb27a', forcePlafonnier: 0,
       forceLed: 1.6, forceEcran: 0.9, lueur: 0.85, poussiere: 0, neon: 1, forceNeon: 0.9,
+      guirlande: 0.95, forceGuirlande: 0.5, forceSpot: 0.55, vue: '#8fa2ff', forceVue: 0.2,
     },
   };
   let amb = root.getAttribute('data-theme') === 'dark' ? AMBIANCES.dark : AMBIANCES.light;
@@ -334,27 +338,6 @@ window.demarrerSetup3D = function ({ canvas, hero, toggle, root, reducedMotion }
     plinthe.position.set((x0 + x1) / 2, 0.04, 0.006);
     scene.add(plinthe);
   });
-
-  // Rideau gris (plis ondulés) et sa tringle aux embouts en bois, à gauche
-  (() => {
-    const geo = new T.PlaneGeometry(1.0, 2.25, 60, 1);
-    const p = geo.attributes.position;
-    for (let i = 0; i < p.count; i++) p.setZ(i, Math.sin(p.getX(i) * 24) * 0.035 + Math.sin(p.getX(i) * 9) * 0.02);
-    geo.computeVertexNormals();
-    const rideau = new T.Mesh(geo, new T.MeshStandardMaterial({ color: couleur('#77738a'), roughness: 0.95, side: T.DoubleSide }));
-    rideau.position.set(-4.5, 1.2, 0.14);
-    const tringle = new T.Mesh(new T.CylinderGeometry(0.011, 0.011, 1.5, 12), materiauMetal);
-    tringle.rotation.z = Math.PI / 2;
-    tringle.position.set(-4.5, 2.36, 0.12);
-    const bois = new T.MeshStandardMaterial({ color: couleur('#d8c3a2'), roughness: 0.6 });
-    [-1, 1].forEach((cote) => {
-      const embout = new T.Mesh(new T.SphereGeometry(0.03, 16, 12), bois);
-      embout.position.set(-4.5 + cote * 0.78, 2.36, 0.12);
-      scene.add(embout);
-    });
-    scene.add(rideau, tringle);
-    ombre(rideau);
-  })();
 
   /* ---------- Mur en tasseaux de chêne sur feutre noir (panneau acoustique) ---------- */
   const PANNEAU = { x0: 0.05, x1: 3.5, haut: 2.28 };
@@ -1189,6 +1172,429 @@ window.demarrerSetup3D = function ({ canvas, hero, toggle, root, reducedMotion }
   };
   bougerPoussieres(0);
 
+  /* ---------- Le mur crème : fenêtre sur le lagon, cadres, horloge, meuble bas et guirlande ---------- */
+
+  // Vue par la fenêtre : coucher de soleil sur le lagon, îlot et phare, palmiers (la nuit : lune et étoiles)
+  const FENETRE = { x0: -3.25, x1: -2.15, y0: 0.95, y1: 2.12 };
+  const [toileVue, cv] = creerToile(512, 544);
+  const textureVue = versTexture(toileVue, { repetition: false });
+  const dessinerVue = () => {
+    const L = 512;
+    const H = 544;
+    const horizon = 330;
+    const nuit = amb.nuit;
+    let graineVue = 7; // même dessin à chaque fois
+    const alea = (min, max) => {
+      graineVue = (graineVue * 16807) % 2147483647;
+      return min + ((graineVue - 1) / 2147483646) * (max - min);
+    };
+    const ciel = cv.createLinearGradient(0, 0, 0, horizon);
+    (nuit ? [[0, '#070b24'], [0.6, '#1d2457'], [1, '#463a73']] : [[0, '#4f9fdc'], [0.48, '#a8c9e8'], [0.8, '#f7c79a'], [1, '#ff9d6c']])
+      .forEach(([t, teinte]) => ciel.addColorStop(t, teinte));
+    cv.fillStyle = ciel;
+    cv.fillRect(0, 0, L, horizon);
+    if (nuit) {
+      for (let i = 0; i < 110; i++) {
+        cv.globalAlpha = alea(0.3, 1);
+        cv.fillStyle = '#ffffff';
+        const taille = alea(1, 2.4);
+        cv.fillRect(alea(0, L), alea(0, horizon * 0.85), taille, taille);
+      }
+      cv.globalAlpha = 1;
+    } else {
+      cv.fillStyle = 'rgba(255, 214, 196, 0.55)'; // nuages roses
+      [[110, 120, 70, 9], [190, 108, 50, 7], [400, 160, 80, 10], [450, 150, 40, 6]].forEach(([x, y, rx, ry]) => {
+        cv.beginPath();
+        cv.ellipse(x, y, rx, ry, 0, 0, Math.PI * 2);
+        cv.fill();
+      });
+    }
+    const [sx, sy, sr] = nuit ? [380, 92, 22] : [300, horizon - 26, 34];
+    const halo = cv.createRadialGradient(sx, sy, sr * 0.5, sx, sy, sr * 5);
+    halo.addColorStop(0, nuit ? 'rgba(230, 235, 255, 0.35)' : 'rgba(255, 236, 190, 0.85)');
+    halo.addColorStop(1, 'rgba(255, 255, 255, 0)');
+    cv.fillStyle = halo;
+    cv.fillRect(0, 0, L, horizon);
+    cv.fillStyle = nuit ? '#f4f1e2' : '#fff2cc';
+    cv.beginPath();
+    cv.arc(sx, sy, sr, 0, Math.PI * 2);
+    cv.fill();
+    // Montagnes de la Grande Terre au loin
+    cv.fillStyle = nuit ? '#1b1a3c' : '#8c7aa6';
+    cv.beginPath();
+    cv.moveTo(0, horizon);
+    for (let x = 0; x <= L; x += 8) cv.lineTo(x, horizon - 26 - Math.sin(x * 0.012 + 0.4) * 16 - Math.sin(x * 0.041 + 1) * 6);
+    cv.lineTo(L, horizon);
+    cv.fill();
+    // Le lagon et le reflet du soleil (ou de la lune)
+    const mer = cv.createLinearGradient(0, horizon, 0, H);
+    (nuit ? [[0, '#262b62'], [1, '#0a0f2e']] : [[0, '#f2a07a'], [0.1, '#47bcc6'], [1, '#0b7d95']]).forEach(([t, teinte]) => mer.addColorStop(t, teinte));
+    cv.fillStyle = mer;
+    cv.fillRect(0, horizon, L, H - horizon);
+    cv.fillStyle = nuit ? 'rgba(230, 235, 255, 0.45)' : 'rgba(255, 232, 180, 0.75)';
+    for (let y = horizon + 3; y < H; y += 6) {
+      const longueur = (1 - (y - horizon) / (H - horizon)) * 70 + 6;
+      cv.fillRect(sx - longueur / 2 + alea(-8, 8), y, longueur, 2);
+    }
+    // Îlot et son phare (comme le phare Amédée)
+    cv.fillStyle = nuit ? '#0e1130' : '#33503f';
+    cv.beginPath();
+    cv.ellipse(118, horizon + 3, 72, 10, 0, Math.PI, 0);
+    cv.fill();
+    cv.fillStyle = nuit ? '#1a1d40' : '#f3efe6';
+    cv.fillRect(114, horizon - 54, 9, 52);
+    cv.beginPath();
+    cv.moveTo(110, horizon - 54);
+    cv.lineTo(127, horizon - 54);
+    cv.lineTo(118.5, horizon - 66);
+    cv.fill();
+    if (nuit) { // le phare éclaire la nuit
+      const faisceau = cv.createRadialGradient(118, horizon - 58, 1, 118, horizon - 58, 26);
+      faisceau.addColorStop(0, 'rgba(255, 230, 150, 0.95)');
+      faisceau.addColorStop(1, 'rgba(255, 230, 150, 0)');
+      cv.fillStyle = faisceau;
+      cv.fillRect(80, horizon - 90, 80, 60);
+    }
+    // Palmiers en silhouette au premier plan
+    const palmier = (x, hauteur, penche) => {
+      cv.strokeStyle = nuit ? '#05061a' : '#2a2a33';
+      cv.fillStyle = cv.strokeStyle;
+      cv.lineWidth = 9;
+      cv.lineCap = 'round';
+      const hx = x + penche * hauteur;
+      const hy = H - hauteur;
+      cv.beginPath();
+      cv.moveTo(x, H);
+      cv.quadraticCurveTo(x + penche * hauteur * 0.2, H - hauteur * 0.6, hx, hy);
+      cv.stroke();
+      for (let k = 0; k < 8; k++) {
+        const angle = (k / 8) * Math.PI * 2 + 0.3;
+        const longueur = alea(70, 105);
+        const bx = hx + Math.cos(angle) * longueur;
+        const by = hy + Math.sin(angle) * longueur * 0.55 + longueur * 0.25;
+        cv.lineWidth = 6;
+        cv.beginPath();
+        cv.moveTo(hx, hy);
+        cv.quadraticCurveTo((hx + bx) / 2, hy - 30, bx, by);
+        cv.stroke();
+        for (let f = 0.25; f < 1; f += 0.12) { // folioles
+          const px = hx + (bx - hx) * f;
+          const py = hy + (by - hy) * f - Math.sin(f * Math.PI) * 28;
+          cv.lineWidth = 2;
+          cv.beginPath();
+          cv.moveTo(px, py);
+          cv.lineTo(px + Math.cos(angle + 1.2) * 16, py + 14);
+          cv.moveTo(px, py);
+          cv.lineTo(px + Math.cos(angle - 1.2) * 16, py + 14);
+          cv.stroke();
+        }
+      }
+    };
+    palmier(40, 330, 0.18);
+    palmier(478, 250, -0.22);
+    textureVue.needsUpdate = true;
+  };
+  dessinerVue();
+
+  (() => {
+    const largeur = FENETRE.x1 - FENETRE.x0;
+    const hauteur = FENETRE.y1 - FENETRE.y0;
+    const cx = (FENETRE.x0 + FENETRE.x1) / 2;
+    const cy = (FENETRE.y0 + FENETRE.y1) / 2;
+    const vue = new T.Mesh(new T.PlaneGeometry(largeur, hauteur), new T.MeshBasicMaterial({ map: textureVue, toneMapped: false }));
+    vue.position.set(cx, cy, 0.003);
+    scene.add(vue);
+    // Reflet léger sur la vitre
+    const vitre = new T.Mesh(new T.PlaneGeometry(largeur, hauteur), new T.MeshStandardMaterial({
+      color: 0xffffff, transparent: true, opacity: 0.1, roughness: 0.05, metalness: 0.9, depthWrite: false,
+    }));
+    vitre.position.set(cx, cy, 0.03);
+    scene.add(vitre);
+    // Cadre blanc, montant central et tablette
+    const blanc = plastique('#f5f3ef', 0.5);
+    const e = 0.055;
+    [[largeur + 2 * e, e, cx, FENETRE.y1 + e / 2], [largeur + 2 * e, e, cx, FENETRE.y0 - e / 2], [e, hauteur, FENETRE.x0 - e / 2, cy], [e, hauteur, FENETRE.x1 + e / 2, cy], [0.035, hauteur, cx, cy]]
+      .forEach(([l, h, x, y]) => {
+        const montant = boite(l, h, 0.06, blanc);
+        montant.position.set(x, y, 0.03);
+        scene.add(montant);
+      });
+    const tablette = boite(largeur + 0.24, 0.035, 0.16, blanc);
+    tablette.position.set(cx, FENETRE.y0 - e - 0.0175, 0.08);
+    scene.add(tablette);
+    // Deux rideaux gris (comme dans ma chambre) et leur tringle aux embouts en bois
+    const geoRideau = new T.PlaneGeometry(0.44, 2.22, 44, 1);
+    const p = geoRideau.attributes.position;
+    for (let i = 0; i < p.count; i++) p.setZ(i, Math.sin(p.getX(i) * 52) * 0.028 + Math.sin(p.getX(i) * 17) * 0.012);
+    geoRideau.computeVertexNormals();
+    const tissu = new T.MeshStandardMaterial({ color: couleur('#77738a'), roughness: 0.95, side: T.DoubleSide });
+    [FENETRE.x0 - 0.24, FENETRE.x1 + 0.24].forEach((x) => {
+      const rideau = new T.Mesh(geoRideau, tissu);
+      rideau.position.set(x, 1.19, 0.15);
+      rideau.castShadow = true;
+      rideau.receiveShadow = true;
+      scene.add(rideau);
+    });
+    const tringle = new T.Mesh(new T.CylinderGeometry(0.011, 0.011, largeur + 0.95, 12), materiauMetal);
+    tringle.rotation.z = Math.PI / 2;
+    tringle.position.set(cx, 2.32, 0.13);
+    scene.add(tringle);
+    const bois = new T.MeshStandardMaterial({ color: couleur('#d8c3a2'), roughness: 0.6 });
+    [-1, 1].forEach((cote) => {
+      const embout = new T.Mesh(new T.SphereGeometry(0.03, 16, 12), bois);
+      embout.position.set(cx + cote * (largeur / 2 + 0.49), 2.32, 0.13);
+      scene.add(embout);
+    });
+  })();
+  // La fenêtre éclaire un peu le mur autour d'elle
+  const lumiereVue = new T.PointLight(couleur(amb.vue), amb.forceVue, 3.2, 2);
+  lumiereVue.position.set((FENETRE.x0 + FENETRE.x1) / 2, 1.5, 0.7);
+  scene.add(lumiereVue);
+
+  /* Cadres : mon CV, mes deux projets et une affiche sur la VR (on peut cliquer dessus) */
+  const chargeur = new T.TextureLoader();
+  const cliquables = [];
+  const creerCadre = ({ largeur, hauteur, image, texture, x, y, lien, nouvelOnglet = false, marge = 0.035, teinte = '#1d1b1f' }) => {
+    const cadre = new T.Group();
+    const L = largeur + 2 * marge;
+    const Ht = hauteur + 2 * marge;
+    const ep = 0.022; // largeur de la baguette
+    const materiauBaguette = new T.MeshStandardMaterial({ color: couleur(teinte), roughness: 0.45 });
+    [[L + 2 * ep, ep, 0, Ht / 2 + ep / 2], [L + 2 * ep, ep, 0, -Ht / 2 - ep / 2], [ep, Ht, -L / 2 - ep / 2, 0], [ep, Ht, L / 2 + ep / 2, 0]]
+      .forEach(([l, h, px, py]) => {
+        const baguette = boite(l, h, 0.03, materiauBaguette);
+        baguette.position.set(px, py, 0.015);
+        cadre.add(baguette);
+      });
+    const passePartout = new T.Mesh(new T.PlaneGeometry(L, Ht), plastique('#f7f4ee', 0.9));
+    passePartout.position.z = 0.008;
+    passePartout.receiveShadow = true;
+    const materiauImage = new T.MeshStandardMaterial({ roughness: 0.6, map: texture || null });
+    if (image) {
+      chargeur.load(image, (t) => {
+        t.encoding = T.sRGBEncoding;
+        t.anisotropy = 4;
+        materiauImage.map = t;
+        materiauImage.needsUpdate = true;
+        if (pret && !idAnimation) rendre();
+      });
+    }
+    const photo = new T.Mesh(new T.PlaneGeometry(largeur, hauteur), materiauImage);
+    photo.position.z = 0.01;
+    photo.receiveShadow = true;
+    cadre.add(passePartout, photo);
+    cadre.position.set(x, y, 0.002);
+    scene.add(cadre);
+    if (lien) cliquables.push({ objet: cadre, lien, nouvelOnglet });
+    return cadre;
+  };
+
+  // Affiche « VR · AR » dessinée par le code (casque de réalité virtuelle)
+  const afficheVR = (() => {
+    const [toile, c] = creerToile(256, 358);
+    const fond = c.createLinearGradient(0, 0, 256, 358);
+    fond.addColorStop(0, '#2b1055');
+    fond.addColorStop(0.55, '#7b2cbf');
+    fond.addColorStop(1, '#ff4f9e');
+    c.fillStyle = fond;
+    c.fillRect(0, 0, 256, 358);
+    c.strokeStyle = 'rgba(255, 255, 255, 0.12)'; // grille « numérique »
+    c.lineWidth = 1;
+    for (let y = 230; y < 358; y += 14) { c.beginPath(); c.moveTo(0, y); c.lineTo(256, y); c.stroke(); }
+    for (let x = -256; x < 512; x += 32) { c.beginPath(); c.moveTo(128, 200); c.lineTo(x, 358); c.stroke(); }
+    c.fillStyle = '#f5f0ff'; // casque
+    c.beginPath();
+    c.roundRect ? c.roundRect(48, 118, 160, 84, 30) : c.rect(48, 118, 160, 84);
+    c.fill();
+    c.fillStyle = '#22d3ee';
+    [92, 164].forEach((x) => { c.beginPath(); c.ellipse(x, 160, 26, 22, 0, 0, Math.PI * 2); c.fill(); });
+    c.fillStyle = '#2b1055';
+    c.beginPath();
+    c.moveTo(118, 202);
+    c.quadraticCurveTo(128, 180, 138, 202);
+    c.fill();
+    c.fillStyle = '#ffffff';
+    c.font = '700 44px "Space Grotesk", Arial, sans-serif';
+    c.textAlign = 'center';
+    c.fillText('VR · AR', 128, 74);
+    c.font = '600 15px Inter, Arial, sans-serif';
+    c.fillText('VEILLE TECHNOLOGIQUE', 128, 304);
+    return versTexture(toile, { repetition: false });
+  })();
+
+  creerCadre({ largeur: 0.3, hauteur: 0.424, image: 'assets/cv-apercu.jpg', x: -1.42, y: 1.76, lien: 'assets/CV_Nathan_THIBAULT.pdf', nouvelOnglet: true, teinte: '#3b2a1c' });
+  creerCadre({ largeur: 0.46, hauteur: 0.2, image: 'assets/projets/caillou-tour-apercu.jpg', x: -0.86, y: 1.92, lien: 'projets.html' });
+  creerCadre({ largeur: 0.4, hauteur: 0.152, image: 'assets/projets/pixelstar-accueil.jpg', x: -0.9, y: 1.56, lien: 'projets.html' });
+  creerCadre({ largeur: 0.2, hauteur: 0.28, texture: afficheVR, x: -0.4, y: 1.52, lien: 'veille.html', marge: 0.022 });
+
+  // Petit spot au plafond qui éclaire les cadres
+  const spot = new T.SpotLight(couleur('#ffe1b8'), amb.forceSpot, 4.5, 0.6, 0.75, 2);
+  spot.position.set(-0.95, 2.45, 1.4);
+  spot.target.position.set(-0.95, 1.67, 0);
+  scene.add(spot, spot.target);
+
+  // Horloge murale : elle donne la vraie heure
+  const horloge = (() => {
+    const groupe = new T.Group();
+    const rayon = 0.13;
+    const [toile, c] = creerToile(256, 256);
+    c.fillStyle = '#fbfaf7';
+    c.beginPath();
+    c.arc(128, 128, 128, 0, Math.PI * 2);
+    c.fill();
+    c.strokeStyle = '#2a2a2e';
+    for (let i = 0; i < 60; i++) {
+      const angle = (i / 60) * Math.PI * 2;
+      const long = i % 5 === 0 ? 18 : 8;
+      c.lineWidth = i % 5 === 0 ? 5 : 2;
+      c.beginPath();
+      c.moveTo(128 + Math.sin(angle) * 118, 128 - Math.cos(angle) * 118);
+      c.lineTo(128 + Math.sin(angle) * (118 - long), 128 - Math.cos(angle) * (118 - long));
+      c.stroke();
+    }
+    c.fillStyle = '#2a2a2e';
+    c.font = '700 26px "Space Grotesk", Arial, sans-serif';
+    c.textAlign = 'center';
+    c.textBaseline = 'middle';
+    [[12, 0], [3, 1], [6, 2], [9, 3]].forEach(([n, k]) => c.fillText(String(n), 128 + Math.sin(k * Math.PI / 2) * 80, 128 - Math.cos(k * Math.PI / 2) * 80));
+    c.font = '700 16px "Space Grotesk", Arial, sans-serif';
+    c.fillStyle = '#e11d48';
+    c.fillText('NT.', 128, 170);
+    const cadran = new T.Mesh(new T.CircleGeometry(rayon * 0.96, 48), new T.MeshStandardMaterial({ map: versTexture(toile, { repetition: false }), roughness: 0.4 }));
+    cadran.position.z = 0.033;
+    const boitier = new T.Mesh(new T.CylinderGeometry(rayon, rayon, 0.026, 48), plastiqueNoir);
+    boitier.rotation.x = Math.PI / 2;
+    boitier.position.z = 0.013; // le fond du boîtier reste derrière le cadran
+    const bord = new T.Mesh(new T.TorusGeometry(rayon, 0.01, 10, 48), plastiqueNoir);
+    bord.position.z = 0.03;
+    groupe.add(boitier, cadran, bord);
+    const aiguille = (longueur, epaisseur, teinte, z) => {
+      const geo = new T.BoxGeometry(epaisseur, longueur, 0.003);
+      geo.translate(0, longueur / 2 - 0.012, 0); // tourne autour du centre
+      const m = new T.Mesh(geo, plastique(teinte, 0.4));
+      m.position.z = z;
+      groupe.add(m);
+      return m;
+    };
+    const heures = aiguille(0.07, 0.009, '#1f1f22', 0.034);
+    const minutes = aiguille(0.1, 0.006, '#1f1f22', 0.036);
+    const secondes = aiguille(0.11, 0.0025, '#e11d48', 0.038);
+    groupe.position.set(-0.36, 2.05, 0.002);
+    groupe.traverse((o) => { if (o.isMesh) o.castShadow = true; });
+    scene.add(groupe);
+    return { heures, minutes, secondes };
+  })();
+  const mettreAHeure = () => {
+    const d = new Date();
+    const sec = d.getSeconds() + d.getMilliseconds() / 1000;
+    const min = d.getMinutes() + sec / 60;
+    const h = (d.getHours() % 12) + min / 60;
+    horloge.secondes.rotation.z = -(sec / 60) * Math.PI * 2;
+    horloge.minutes.rotation.z = -(min / 60) * Math.PI * 2;
+    horloge.heures.rotation.z = -(h / 12) * Math.PI * 2;
+  };
+  mettreAHeure();
+
+  // Meuble bas blanc à casiers : livres, panier, enceinte et petit cactus
+  (() => {
+    const meuble = new T.Group();
+    const blanc = plastique('#f3f1ec', 0.55);
+    const L = 1.14;
+    const Hm = 0.58;
+    const P = 0.34;
+    const ep = 0.025;
+    [[L, ep, P, 0, Hm - ep / 2], [L, ep, P, 0, ep / 2 + 0.05], [ep, Hm - 0.05, P, -L / 2 + ep / 2, (Hm + 0.05) / 2], [ep, Hm - 0.05, P, L / 2 - ep / 2, (Hm + 0.05) / 2],
+      [ep, Hm - 0.1, P - 0.02, -L / 6, (Hm + 0.05) / 2], [ep, Hm - 0.1, P - 0.02, L / 6, (Hm + 0.05) / 2]]
+      .forEach(([l, h, p, x, y]) => {
+        const planche = boite(l, h, p, blanc);
+        planche.position.set(x, y, 0);
+        meuble.add(planche);
+      });
+    const fond = boite(L, Hm, 0.01, plastique('#e7e3db', 0.8));
+    fond.position.set(0, Hm / 2, -P / 2 + 0.005);
+    meuble.add(fond);
+    // Livres dans les deux premiers casiers
+    const teintesLivres = ['#1f4e79', '#b5452d', '#2f6b4f', '#d9a441', '#5b3a76', '#e9e2d0', '#20222a', '#8a2f3c', '#3c7a8c'];
+    [[-L / 2 + ep, -L / 6 - ep / 2], [-L / 6 + ep / 2, L / 6 - ep / 2]].forEach(([x0, x1]) => {
+      let x = x0 + 0.01;
+      while (x < x1 - 0.03) {
+        const epaisseur = rand(0.025, 0.05);
+        const hauteurLivre = rand(0.2, 0.3);
+        const livre = boite(epaisseur, hauteurLivre, rand(0.17, 0.22), plastique(teintesLivres[Math.floor(hasard() * teintesLivres.length)], 0.7));
+        livre.position.set(x + epaisseur / 2, 0.065 + hauteurLivre / 2, 0.02);
+        if (hasard() < 0.12 && x < x1 - 0.12) livre.rotation.z = -0.25; // un livre penché
+        meuble.add(livre);
+        x += epaisseur + 0.004;
+      }
+    });
+    // Panier en osier dans le dernier casier
+    const panier = new T.Mesh(new T.CylinderGeometry(0.15, 0.13, 0.24, 24, 1, true), new T.MeshStandardMaterial({ color: couleur('#b48a5a'), roughness: 0.9, side: T.DoubleSide }));
+    panier.position.set(L / 3, 0.065 + 0.12, 0.01);
+    meuble.add(panier);
+    // Sur le dessus : enceinte, pile de livres et cactus
+    const enceinte = boite(0.13, 0.22, 0.12, plastiqueNoir);
+    enceinte.position.set(-0.4, Hm + 0.11, 0.0);
+    const membrane = new T.Mesh(new T.CircleGeometry(0.045, 24), plastique('#2c2c31', 0.8));
+    membrane.position.set(-0.4, Hm + 0.08, 0.061);
+    meuble.add(enceinte, membrane);
+    [[0.3, 0.05, '#c2412d'], [0.27, 0.04, '#1f4e79'], [0.24, 0.035, '#e9e2d0']].reduce((y, [l, h, teinte]) => {
+      const livre = boite(l * 0.75, h, l, plastique(teinte, 0.7));
+      livre.position.set(0.05, y + h / 2, 0.0);
+      livre.rotation.y = rand(-0.15, 0.15);
+      meuble.add(livre);
+      return y + h;
+    }, Hm);
+    const pot = new T.Mesh(new T.CylinderGeometry(0.05, 0.04, 0.08, 20), plastique('#d9775a', 0.7));
+    pot.position.set(0.38, Hm + 0.04, 0.02);
+    const cactus = new T.Mesh(new T.SphereGeometry(0.045, 16, 12), plastique('#4e8a4a', 0.7));
+    cactus.scale.set(1, 1.6, 1);
+    cactus.position.set(0.38, Hm + 0.13, 0.02);
+    meuble.add(pot, cactus);
+    meuble.position.set(-1.05, 0, P / 2 + 0.01);
+    ombre(meuble);
+    scene.add(meuble);
+  })();
+
+  // Guirlande lumineuse en festons en haut du mur
+  const ampoules = [];
+  (() => {
+    const crochets = [-3.75, -2.6, -1.45, -0.25];
+    const points = [];
+    for (let i = 0; i < crochets.length - 1; i++) {
+      for (let k = 0; k <= 12; k++) {
+        if (i > 0 && k === 0) continue;
+        const t = k / 12;
+        const x = crochets[i] + (crochets[i + 1] - crochets[i]) * t;
+        points.push(new T.Vector3(x, 2.4 - Math.sin(t * Math.PI) * 0.13, 0.03 + Math.sin(t * Math.PI) * 0.03));
+      }
+    }
+    const fil = new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(points), 160, 0.0025, 5, false), plastique('#2c3a2c', 0.6));
+    scene.add(fil);
+    const materiauAmpoule = new T.MeshBasicMaterial({ color: couleur('#ffd27a'), toneMapped: false });
+    points.forEach((point, i) => {
+      if (i % 2) return;
+      const ampoule = new T.Mesh(new T.SphereGeometry(0.012, 10, 8), materiauAmpoule);
+      ampoule.position.copy(point).add(new T.Vector3(0, -0.018, 0));
+      scene.add(ampoule);
+      const halo = new T.Sprite(new T.SpriteMaterial({ map: textureLueur, color: 0xffc56b, transparent: true, opacity: amb.guirlande, blending: T.AdditiveBlending, depthWrite: false, toneMapped: false }));
+      halo.scale.setScalar(0.13);
+      halo.position.copy(ampoule.position);
+      scene.add(halo);
+      ampoules.push({ halo, phase: rand(0, Math.PI * 2) });
+    });
+  })();
+  const lumieresGuirlande = [-2.0].map((x) => {
+    const l = new T.PointLight(couleur('#ffc56b'), amb.forceGuirlande, 3.2, 2);
+    l.position.set(x, 2.2, 0.35);
+    scene.add(l);
+    return l;
+  });
+  const scintiller = (t) => {
+    ampoules.forEach(({ halo, phase }) => {
+      halo.material.opacity = amb.guirlande * (amb.nuit ? 0.8 + Math.sin(t * 2.2 + phase) * 0.2 : 1);
+    });
+  };
+
   /* ---------- Cadrage : le bureau occupe la place laissée libre par le texte ---------- */
   // Caméra assez loin, à hauteur d'yeux : peu de déformation, comme une photo prise avec un zoom
   const DIRECTION_CAMERA = new T.Vector3(0.12, 0.1, 1).normalize();
@@ -1262,6 +1668,12 @@ window.demarrerSetup3D = function ({ canvas, hero, toggle, root, reducedMotion }
     materiauNeon.opacity = amb.neon;
     lumiereNeon.intensity = amb.forceNeon;
     materiauPoussieres.opacity = amb.poussiere;
+    lumiereVue.color.copy(couleur(amb.vue));
+    lumiereVue.intensity = amb.forceVue;
+    spot.intensity = amb.forceSpot;
+    lumieresGuirlande.forEach((l) => { l.intensity = amb.forceGuirlande; });
+    scintiller(temps);
+    dessinerVue();
     scene.traverse((o) => {
       if (o.material && o.material.isMeshStandardMaterial) o.material.envMapIntensity = amb.nuit ? 0.6 : 0.55;
     });
@@ -1322,6 +1734,8 @@ window.demarrerSetup3D = function ({ canvas, hero, toggle, root, reducedMotion }
     mettreAJourLumieres(temps);
     helicesPC.forEach((helice, i) => { helice.rotation.z += dt * (14 + i); });
     if (amb.poussiere) bougerPoussieres(temps);
+    mettreAHeure();
+    scintiller(temps);
     ventilateur.helice.rotation.z -= dt * 22;
     ventilateur.tete.rotation.y = Math.sin(temps * 0.35) * 0.45; // le ventilateur oscille
     souris.lisseX += (souris.x - souris.lisseX) * 0.05;
@@ -1381,6 +1795,36 @@ window.demarrerSetup3D = function ({ canvas, hero, toggle, root, reducedMotion }
     souris.x = e.clientX / window.innerWidth - 0.5;
     souris.y = 0.5 - e.clientY / window.innerHeight;
   }, { passive: true });
+
+  // Cadres du mur : un clic ouvre le CV, la page Projets ou la page Veille
+  const lancer = new T.Raycaster();
+  const pointeur = new T.Vector2();
+  let survole = null;
+  const cadreSousLaSouris = (e) => {
+    if (!pret || e.target.closest('a, button, input, .hero__content')) return null;
+    const r = canvas.getBoundingClientRect();
+    pointeur.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+    lancer.setFromCamera(pointeur, camera);
+    const touche = lancer.intersectObjects(cliquables.map((c) => c.objet), true)[0];
+    let objet = touche ? touche.object : null;
+    while (objet && !cliquables.some((c) => c.objet === objet)) objet = objet.parent;
+    return objet ? cliquables.find((c) => c.objet === objet) : null;
+  };
+  hero.addEventListener('mousemove', (e) => {
+    const cible = cadreSousLaSouris(e);
+    if (cible === survole) return;
+    if (survole) survole.objet.scale.setScalar(1);
+    survole = cible;
+    if (survole) survole.objet.scale.setScalar(1.04); // le cadre « ressort » un peu
+    hero.style.cursor = survole ? 'pointer' : '';
+    if (!idAnimation) rendre();
+  });
+  hero.addEventListener('click', (e) => {
+    const cible = cadreSousLaSouris(e);
+    if (!cible) return;
+    if (cible.nouvelOnglet) window.open(cible.lien, '_blank', 'noopener');
+    else window.location.href = cible.lien;
+  });
 
   let delai;
   window.addEventListener('resize', () => {

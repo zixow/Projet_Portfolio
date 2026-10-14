@@ -99,6 +99,7 @@
   font-size: 1.6rem;
 }
 .xp-card__logo--alt { background: linear-gradient(135deg, #f59e0b, #ef4444); }
+.xp-card__logo--reseau { background: linear-gradient(135deg, #0f9b8e, #0e7490); }
 .xp-card__date { font-family: var(--font-title); font-weight: 600; }
 .xp-card__duration { font-size: 0.85rem; color: var(--text-muted); }
 .xp-card__main h3 { margin-bottom: 0.35rem; font-size: 1.3rem; }

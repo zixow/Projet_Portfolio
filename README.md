@@ -10,7 +10,7 @@ Portfolio de **Nathan THIBAULT**, étudiant en 2<sup>e</sup> année de **BTS SIO
 
 | Page | Contenu |
 | --- | --- |
-| `index.html` | **Accueil** : mon bureau en 3D (inspiré de ma chambre), présentation et accès rapide aux autres pages |
+| `index.html` | **Accueil** : mon bureau en 3D (inspiré de ma chambre) avec un mur décoré de cadres cliquables (mon CV, mes projets, ma veille), présentation, téléchargement du CV et accès rapide aux autres pages |
 | `parcours.html` | **Parcours scolaire** (du baccalauréat au BTS SIO SLAM) et **expériences en entreprise** (stages) |
 | `competences.html` | **Compétences** (HTML, CSS, JavaScript, Angular, PHP, Java, Flutter, MySQL, PostgreSQL) et **certifications** |
 | `projets.html` | **Projets** : PixelStar (site web PHP / MySQL) et Caillou Tour (application mobile Flutter) |
@@ -25,7 +25,7 @@ Site statique réalisé sans framework :
 - **HTML5** sémantique et accessible
 - **CSS3** : Grid, Flexbox, variables, thème « chambre » de jour / de nuit (mur crème, tasseaux de chêne, plateau de bureau), responsive
 - **JavaScript** : en-tête et pied de page communs, animations au défilement, filtres, fenêtre modale, onglets, validation du formulaire
-- **Three.js (3D)** : sur la page d'accueil, mon bureau reconstitué en 3D d'après ma chambre : mur en tasseaux de chêne, bureaux en bois et métal, étagère de figurines avec une plante, écran qui affiche le code de Caillou Tour en train de s'écrire, console, manettes, PC aux ventilateurs RGB, néon « NT. » et tapis. Le soleil de fin d'après-midi entre par une fenêtre et dessine sa forme sur le mur et le sol (avec de la poussière qui brille dans la lumière) ; la nuit, clair de lune, néon et rubans LED. Textures dessinées par le code ; version 2D en Canvas si la 3D n'est pas disponible
+- **Three.js (3D)** : sur la page d'accueil, mon bureau reconstitué en 3D d'après ma chambre : mur en tasseaux de chêne, bureaux en bois et métal, étagère de figurines avec une plante, écran qui affiche le code de Caillou Tour en train de s'écrire, console, manettes, PC aux ventilateurs RGB, néon « NT. » et tapis. Sur le mur crème : une fenêtre avec vue sur le lagon, des cadres sur lesquels on peut cliquer (mon CV, Caillou Tour, PixelStar, ma veille), une horloge qui donne l'heure, un meuble bas et une guirlande lumineuse. Le soleil de fin d'après-midi dessine la forme d'une fenêtre sur le mur et le sol (avec de la poussière qui brille dans la lumière) ; la nuit, clair de lune, néon et rubans LED. Textures dessinées par le code ; version 2D en Canvas si la 3D n'est pas disponible
 
 ## Structure
 
@@ -45,7 +45,7 @@ Projet_Portfolio/
 │   ├── setup3d.js          # mon bureau en 3D (Three.js)
 │   ├── setup2d.js          # version 2D de secours (Canvas)
 │   └── competences.js, projets.js, veille.js, contact.js    # scripts propres à chaque page
-└── assets/                 # images, captures des projets, CV
+└── assets/                 # CV (PDF + aperçu), captures des projets, icône du site
 ```
 
 Pour ajouter une page : copier une page existante, changer `data-page` sur la balise `<body>`, puis l'ajouter dans la liste `PAGES` de `js/composants.js` (le menu se met à jour sur toutes les pages).
