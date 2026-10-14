@@ -4,7 +4,7 @@ Portfolio de **Nathan THIBAULT**, étudiant en 2<sup>e</sup> année de **BTS SIO
 
 🌐 **Voir le site en ligne :** https://zixow.github.io/Projet_Portfolio/
 
-![Aperçu du portfolio](assets/visuel-portfolio.png)
+![Aperçu du portfolio](assets/visuel-portfolio.jpg)
 
 ## Contenu
 
