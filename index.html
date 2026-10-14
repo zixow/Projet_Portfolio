@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nathan THIBAULT — Portfolio BTS SIO SLAM</title>
     <meta name="description" content="Portfolio de Nathan THIBAULT, étudiant en 2e année de BTS SIO option SLAM à Nouméa : parcours, compétences, projets, veille technologique sur la réalité virtuelle et augmentée, tableau de synthèse.">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#f3d7a7">
 
     <!-- Polices et icônes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,9 +37,9 @@
 
 <main>
 
-    <!-- ============ ACCUEIL : scène du désert en 3D ============ -->
+    <!-- ============ ACCUEIL : mon bureau en 3D ============ -->
     <section class="hero" id="accueil">
-        <canvas id="dinos" class="hero__canvas" aria-hidden="true"></canvas>
+        <canvas id="decor" class="hero__canvas" aria-hidden="true"></canvas>
 
         <div class="container hero__container">
             <div class="hero__content">
@@ -65,7 +67,7 @@
         </div>
 
         <a href="#apropos" class="scroll-down" aria-label="Défiler vers la présentation"><span></span></a>
-        <button class="dino-toggle" id="dino-toggle" type="button"><i class="fa-solid fa-pause"></i> <span>Pause</span></button>
+        <button class="anim-toggle" id="anim-toggle" type="button"><i class="fa-solid fa-pause"></i> <span>Pause</span></button>
     </section>
 
     <!-- ============ À PROPOS ============ -->
@@ -186,11 +188,10 @@
 
 <!-- Three.js pour le désert en 3D (si le site ne peut pas le charger, la version 2D s'affiche) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/objects/Sky.js"></script>
 <script src="js/composants.js"></script>
 <script src="js/commun.js"></script>
-<script src="js/desert3d.js"></script>
-<script src="js/desert2d.js"></script>
+<script src="js/setup3d.js"></script>
+<script src="js/setup2d.js"></script>
 <script src="js/accueil.js"></script>
 </body>
 </html>

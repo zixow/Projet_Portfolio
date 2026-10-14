@@ -148,6 +148,9 @@
   margin-top: 1rem;
 }
 .modal__gallery--single { grid-template-columns: 1fr; }
+/* Captures d'écran de téléphone : trois par ligne, au format portrait */
+.modal__gallery--telephones { grid-template-columns: repeat(3, 1fr); }
+.modal__gallery.modal__gallery--telephones img { aspect-ratio: 390 / 844; object-position: top; border-radius: 14px; }
 .modal__gallery figure { margin: 0; }
 .modal__gallery img {
   width: 100%;
@@ -169,6 +172,7 @@
 }
 @media (max-width: 520px) {
   .modal__gallery { grid-template-columns: 1fr; }
+  .modal__gallery--telephones { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
 }
 
 @media (max-width: 520px) {

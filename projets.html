@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projets — Nathan THIBAULT · Portfolio BTS SIO SLAM</title>
     <meta name="description" content="Projets de Nathan THIBAULT : PixelStar (site web PHP / MySQL) et Caillou Tour (application mobile Flutter).">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#f3d7a7">
 
     <!-- Polices et icônes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -102,14 +104,14 @@
 
                 <!-- Caillou Tour (projet réel) -->
                 <article class="card card--hover project-card tilt reveal" data-category="mobile">
-                    <div class="project-card__media project-card__media--2">
-                        <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>
+                    <div class="project-card__media project-card__media--photo">
+                        <img src="assets/projets/caillou-tour-apercu.jpg" alt="" loading="lazy">
                         <span class="project-card__type">Projet en binôme · En cours</span>
                     </div>
                     <div class="project-card__body">
                         <h3>Caillou Tour</h3>
-                        <p>Application mobile de découverte touristique de la Nouvelle-Calédonie : lieux, activités, événements, restaurants et hébergements.</p>
-                        <ul class="tech-list"><li>Flutter</li><li>Dart</li><li>Material 3</li><li>UML</li></ul>
+                        <p>Application mobile Flutter pour découvrir la Nouvelle-Calédonie : recherche, fiches des lieux avec carte, agenda des activités et événements, hôtels et restaurants, favoris et avis des membres.</p>
+                        <ul class="tech-list"><li>Flutter</li><li>Dart</li><li>Material 3</li><li>UML</li><li>Tests</li></ul>
                         <div class="project-card__actions">
                             <button class="btn btn--small btn--primary" type="button" data-open-project>Détails</button>
                             <a href="https://github.com/zixow/POO_nathan_weinim" class="btn btn--small btn--ghost" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
@@ -118,11 +120,37 @@
                     <template>
                         <span class="modal__tag">Projet scolaire en binôme · Mobile · En cours</span>
                         <h3>Caillou Tour</h3>
-                        <p>Application mobile pour un office du tourisme : elle aide les visiteurs à découvrir la Nouvelle-Calédonie (lieux touristiques, activités, événements, restaurants et hébergements).</p>
-                        <h4>Conception (UML)</h4>
+                        <p>Application mobile en Flutter pour un office du tourisme : elle aide les visiteurs à découvrir la Nouvelle-Calédonie (lieux touristiques, activités, événements, restaurants et hébergements).</p>
+                        <div class="modal__gallery modal__gallery--telephones">
+                            <figure>
+                                <a href="assets/projets/caillou-tour-detail.jpg" target="_blank" rel="noopener"><img src="assets/projets/caillou-tour-detail.jpg" alt="Fiche du Centre culturel Tjibaou dans Caillou Tour" loading="lazy"></a>
+                                <figcaption>Fiche d'un lieu</figcaption>
+                            </figure>
+                            <figure>
+                                <a href="assets/projets/caillou-tour-agenda.jpg" target="_blank" rel="noopener"><img src="assets/projets/caillou-tour-agenda.jpg" alt="Agenda des activités dans Caillou Tour" loading="lazy"></a>
+                                <figcaption>Agenda des activités</figcaption>
+                            </figure>
+                            <figure>
+                                <a href="assets/projets/caillou-tour-sejour.jpg" target="_blank" rel="noopener"><img src="assets/projets/caillou-tour-sejour.jpg" alt="Hôtels et restaurants dans Caillou Tour" loading="lazy"></a>
+                                <figcaption>Hôtels et restaurants</figcaption>
+                            </figure>
+                        </div>
+                        <h4>Fonctionnalités réalisées</h4>
                         <ul>
-                            <li>Diagramme de cas d'utilisation avec trois acteurs : visiteur, membre et administrateur</li>
-                            <li>Diagramme de classes : utilisateurs, lieux, catégories, activités, événements, restaurants, hébergements et favoris</li>
+                            <li>Navigation à 5 onglets (Material 3) : Accueil, Explorer, Agenda, Séjour et Favoris</li>
+                            <li>Recherche instantanée des lieux, activités et événements, sans tenir compte des accents</li>
+                            <li>Fiche de chaque lieu : description, note moyenne, coordonnées GPS et carte de la Nouvelle-Calédonie dessinée avec CustomPainter</li>
+                            <li>Agenda : activités filtrées par difficulté et prochains événements</li>
+                            <li>Hôtels et restaurants : prix en F CFP, notes et réservation de démonstration</li>
+                            <li>Comptes membres : connexion, création de compte, profil, favoris et avis (note de 1 à 5)</li>
+                            <li>Rôle administrateur qui peut modérer les avis</li>
+                            <li>Infos pratiques : horaires de l'office, numéros d'urgence et formulaire de contact</li>
+                        </ul>
+                        <h4>Conception et qualité</h4>
+                        <ul>
+                            <li>Classes issues du diagramme UML, avec de l'héritage : Utilisateur → UtilisateurConnecte → Administrateur, Etablissement → Restaurant / Hebergement</li>
+                            <li>Services (connexion, favoris, avis, recherche) séparés des écrans</li>
+                            <li>29 tests automatisés (tests unitaires et tests de widgets) lancés avec <code>flutter test</code></li>
                         </ul>
                         <div class="modal__gallery">
                             <figure>
@@ -134,21 +162,13 @@
                                 <figcaption>Diagramme de classes</figcaption>
                             </figure>
                         </div>
-                        <h4>Fonctionnalités réalisées</h4>
-                        <ul>
-                            <li>Navigation par onglets (Accueil, Hôtels, Commentaires) avec la barre de navigation Material 3</li>
-                            <li>Page d'accueil avec barre de recherche</li>
-                            <li>Écran de connexion avec validation des champs</li>
-                            <li>Création de compte : pseudo, e-mail vérifié par expression régulière, mot de passe et confirmation</li>
-                        </ul>
                         <h4>Prochaines étapes</h4>
                         <ul>
-                            <li>Fiches des lieux, activités et événements</li>
-                            <li>Favoris et affichage sur une carte</li>
-                            <li>Comptes enregistrés dans une base de données via une API</li>
-                            <li>Espace administrateur pour gérer le contenu</li>
+                            <li>Enregistrer les comptes, les favoris et les avis dans une base de données via une API</li>
+                            <li>Vraie carte interactive et appel téléphonique depuis l'application</li>
+                            <li>Espace administrateur pour ajouter des lieux et des événements</li>
                         </ul>
-                        <div class="tags"><span>Flutter</span><span>Dart</span><span>Material 3</span><span>UML</span><span>Git</span></div>
+                        <div class="tags"><span>Flutter</span><span>Dart</span><span>Material 3</span><span>UML</span><span>Tests</span><span>Git</span></div>
                     </template>
                 </article>
             </div>

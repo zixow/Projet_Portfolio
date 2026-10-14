@@ -1,28 +1,29 @@
 /* =========================================================
    Portfolio — Nathan THIBAULT · BTS SIO option SLAM
-   Page d'accueil : scène du désert, présentation, portrait et raccourcis
+   Page d'accueil : mon bureau en 3D, présentation, portrait et raccourcis
    ========================================================= */
 
-/* ---------- Accueil (scène du désert) ---------- */
+/* ---------- Accueil (mon bureau en 3D) ---------- */
 .hero {
   position: relative;
   min-height: 100vh;
   min-height: 100svh;
   display: flex;
   align-items: flex-start;
-  padding: calc(var(--header-h) + 3rem) 0 clamp(11rem, 30vh, 18rem); /* le bas est réservé aux dinosaures */
+  padding: calc(var(--header-h) + 3rem) 0 clamp(11rem, 30vh, 18rem); /* sur téléphone, le bas est réservé au bureau */
   overflow: hidden;
   isolation: isolate;
 }
 
-/* Effet « photo » par-dessus la scène de l'accueil : léger vignetage et grain de pellicule */
+/* Effet « photo » par-dessus la scène de l'accueil : voile clair derrière le texte, léger vignetage et grain */
 .hero::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
   background:
-    radial-gradient(ellipse 120% 95% at 50% 42%, transparent 62%, rgba(40, 22, 8, 0.26) 100%),
+    linear-gradient(90deg, color-mix(in srgb, var(--bg) 55%, transparent) 0%, transparent 50%),
+    radial-gradient(ellipse 120% 95% at 50% 42%, transparent 62%, rgba(40, 22, 8, 0.22) 100%),
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0.4 -0.16'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
   pointer-events: none;
 }
@@ -35,7 +36,7 @@
   z-index: -1;
 }
 
-/* Le texte est en haut à gauche : le bas de l'écran est laissé aux dinosaures */
+/* Le texte est en haut à gauche ; le bureau est à droite (ou en bas sur téléphone) */
 .hero__container { position: relative; }
 .hero__content { max-width: 640px; }
 
@@ -91,8 +92,8 @@
 .hero__text strong { color: var(--text); }
 .hero__buttons { display: flex; flex-wrap: wrap; gap: 1rem; }
 
-/* Bouton pause / lecture de l'animation des dinosaures */
-.dino-toggle {
+/* Bouton pause / lecture de l'animation du bureau */
+.anim-toggle {
   position: absolute;
   right: 1.25rem;
   bottom: 1rem;
@@ -110,8 +111,8 @@
   font-weight: 600;
   transition: border-color 0.3s var(--ease);
 }
-.dino-toggle:hover { border-color: var(--primary); }
-.dino-toggle i { color: var(--primary); }
+.anim-toggle:hover { border-color: var(--primary); }
+.anim-toggle i { color: var(--primary); }
 
 .scroll-down {
   position: absolute;
@@ -299,7 +300,7 @@
   .about { grid-template-columns: 1fr; }
 }
 @media (max-width: 520px) {
-  /* Accueil plus compact sur téléphone : les dinosaures restent visibles sans faire défiler */
+  /* Accueil plus compact sur téléphone : le bureau reste visible sans faire défiler */
   .hero { padding: calc(var(--header-h) + 1.25rem) 0 clamp(9rem, 26vh, 13rem); }
   .badge { margin-bottom: 1rem; }
   .hero__text { margin: 0.6rem 0 1.25rem; font-size: 0.97rem; }

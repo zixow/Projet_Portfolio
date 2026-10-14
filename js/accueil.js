@@ -1,6 +1,6 @@
 /* =========================================================
    Page d'accueil : texte qui s'écrit, compteurs animés
-   et choix du fond animé (désert en 3D, ou en 2D en secours)
+   et choix du fond animé (mon bureau en 3D, ou en 2D en secours)
    ========================================================= */
 
 (function () {
@@ -60,17 +60,17 @@
   }, { threshold: 0.6 });
   $$('[data-count]').forEach((el) => observateur.observe(el));
 
-  /* ---------- Fond animé : désert et dinosaures ---------- */
-  const canvas = $('#dinos');
+  /* ---------- Fond animé : mon bureau ---------- */
+  const canvas = $('#decor');
   if (canvas) {
-    const options = { canvas, hero: $('#accueil'), toggle: $('#dino-toggle'), root, reducedMotion };
-    const choisirDesert = () => {
-      // 3D si Three.js et WebGL sont disponibles, sinon pixel art 2D
-      const desert3D = typeof window.demarrerDesert3D === 'function' && window.demarrerDesert3D(options);
-      if (!desert3D) window.demarrerDesert2D(options);
+    const options = { canvas, hero: $('#accueil'), toggle: $('#anim-toggle'), root, reducedMotion };
+    const choisirDecor = () => {
+      // 3D si Three.js et WebGL sont disponibles, sinon dessin 2D
+      const decor3D = typeof window.demarrerSetup3D === 'function' && window.demarrerSetup3D(options);
+      if (!decor3D) window.demarrerSetup2D(options);
     };
     // Si la page n'est pas encore affichée (fenêtre de taille nulle), on attend qu'elle le soit
-    if (window.innerWidth > 0) choisirDesert();
-    else window.addEventListener('resize', choisirDesert, { once: true });
+    if (window.innerWidth > 0) choisirDecor();
+    else window.addEventListener('resize', choisirDecor, { once: true });
   }
 })();

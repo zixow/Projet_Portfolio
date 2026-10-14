@@ -4,12 +4,12 @@
    ========================================================= */
 
 /* ---------- 1. Variables & thèmes ---------- */
-/* Thème sombre : le désert la nuit (sable violet, ciel étoilé) */
+/* Thème sombre : ma chambre la nuit, éclairée par l'écran et les rubans LED */
 :root {
-  --bg: #241730;
-  --bg-alt: #2d1d3b;
-  --surface: #352347;
-  --surface-2: #3f2b53;
+  --bg: #221a2b;
+  --bg-alt: #2c2236;
+  --surface: #31263d;
+  --surface-2: #3b2f49;
   --border: rgba(244, 200, 255, 0.13);
   --text: #f6eefc;
   --text-muted: #c3b0d6;
@@ -22,13 +22,22 @@
   --gradient: linear-gradient(135deg, #22d3ee, #a855f7 55%, #f472b6);
   --shadow: 0 20px 45px -20px rgba(0, 0, 0, 0.6);
   --glow: 0 0 0 1px rgba(34, 211, 238, 0.3), 0 20px 45px -18px rgba(168, 85, 247, 0.55);
-  --header-bg: rgba(36, 23, 48, 0.82);
-  /* Grain de sable + ondulations laissées par le vent */
-  --grain:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 0.88 0 0 0 0 0.96 0 0 0 0.45 -0.16'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"),
-    repeating-linear-gradient(172deg, transparent 0 22px, rgba(255, 220, 255, 0.035) 22px 24px);
-  /* Forme d'une dune, utilisée entre les sections */
-  --dune: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 48' preserveAspectRatio='none'%3E%3Cpath d='M0 48 C 180 20 360 6 600 22 S 1020 46 1240 18 S 1400 10 1440 16 V48 Z'/%3E%3C/svg%3E");
+  --header-bg: rgba(34, 26, 43, 0.84);
+  /* Grain léger du plâtre */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 0.9 0 0 0 0 1 0 0 0 0.3 -0.12'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  /* Mur en tasseaux : relief de chaque tasseau, veines du bois, éclairage */
+  --lattes:
+    radial-gradient(ellipse 60% 55% at 50% -6%, rgba(168, 85, 247, 0.36), transparent 72%),
+    radial-gradient(ellipse 40% 50% at 92% 106%, rgba(34, 211, 238, 0.18), transparent 70%),
+    radial-gradient(ellipse 40% 50% at 8% 106%, rgba(244, 114, 182, 0.16), transparent 70%),
+    linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.3)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='420'%3E %3Cfilter id='v'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9 0.012' numOctaves='3' stitchTiles='stitch'/%3E %3CfeColorMatrix values='0 0 0 0 0.04 0 0 0 0 0.02 0 0 0 0 0.01 0 0 0 0.9 -0.4'/%3E%3C/filter%3E %3Crect width='100%' height='100%' filter='url(%23v)'/%3E %3C/svg%3E"),
+    repeating-linear-gradient(90deg, #100c13 0 9px, #2a1c14 9px 10px, #5a3b29 11.5px, #76523b 17px, #67452f 23px, #3e2a1c 28.5px, #100c13 30px);
+  /* Lumière d'une fenêtre (et ombre d'une plante) sur le mur crème */
+  --lumiere: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1000' height='700' viewBox='0 0 1000 700'%3E %3Cdefs%3E %3Cfilter id='f' x='-20%' y='-20%' width='140%' height='140%'%3E%3CfeGaussianBlur stdDeviation='13'/%3E%3C/filter%3E %3Cfilter id='g' x='-20%' y='-20%' width='140%' height='140%'%3E%3CfeGaussianBlur stdDeviation='5'/%3E%3C/filter%3E %3C/defs%3E %3Cg filter='url(%23f)' fill='%23aab6ff' fill-opacity='0.12'%3E %3Cpolygon points='430,40 640,10 600,250 390,280'/%3E%3Cpolygon points='662,6 872,-24 832,216 622,246'/%3E%3Cpolygon points='386,300 596,270 556,510 346,540'/%3E%3Cpolygon points='618,266 828,236 788,476 578,506'/%3E %3C/g%3E %3Cg filter='url(%23g)' fill='%2305030a' fill-opacity='0.07'%3E %3Cellipse cx='470' cy='440' rx='62' ry='20' transform='rotate(-38 470 440)'/%3E%3Cellipse cx='520' cy='395' rx='55' ry='18' transform='rotate(-12 520 395)'/%3E%3Cellipse cx='440' cy='380' rx='48' ry='16' transform='rotate(-70 440 380)'/%3E%3Cellipse cx='560' cy='470' rx='58' ry='19' transform='rotate(22 560 470)'/%3E%3Cellipse cx='500' cy='500' rx='44' ry='15' transform='rotate(-55 500 500)'/%3E%3Cellipse cx='610' cy='420' rx='40' ry='14' transform='rotate(40 610 420)'/%3E%3Cellipse cx='420' cy='470' rx='38' ry='13' transform='rotate(10 420 470)'/%3E%3Cellipse cx='540' cy='345' rx='36' ry='12' transform='rotate(-40 540 345)'/%3E %3Cpath d='M 300 640 C 380 560 430 520 470 440 M 470 440 C 500 410 520 400 540 345 M 470 440 C 520 450 545 460 560 470' fill='none' stroke='%2305030a' stroke-opacity='0.07' stroke-width='5'/%3E %3C/g%3E %3C/svg%3E");
+  /* Plateau du bureau (pied de page) : chant en métal gris, bois veiné */
+  --bureau: linear-gradient(180deg, #2a2830 0 7px, transparent 7px), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='160'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.006 0.6' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.05 0 0 0 0 0.03 0 0 0 0 0.02 0 0 0 0.7 -0.3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E"), linear-gradient(180deg, #45352d, #3a2c25);
+  --bureau-texte: #dccbbd;
   --radius: 18px;
   --radius-sm: 12px;
   --font-title: "Space Grotesk", system-ui, sans-serif;
@@ -38,27 +47,37 @@
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Thème « désert » (clair, par défaut) : sable doré, terracotta, turquoise et coucher de soleil */
+/* Thème « chambre » (clair, par défaut) : mur crème, tasseaux de chêne, bureau en chêne clair */
 [data-theme="light"] {
-  --bg: #f3d7a7;
-  --bg-alt: #ebc890;
-  --surface: #fff6e6;
-  --surface-2: #fbecd2;
-  --border: rgba(120, 72, 30, 0.18);
-  --text: #3a2216;
-  --text-muted: #6b4633;
+  --bg: #f1e9dc;
+  --bg-alt: #e8dcc8;
+  --surface: #fffaf2;
+  --surface-2: #f7efe2;
+  --border: rgba(92, 64, 38, 0.16);
+  --text: #2f2219;
+  --text-muted: #6a5646;
   --primary: #9a3412;
   --secondary: #0f6b63;
   --accent: #db2777;
   --success: #15803d;
   --warning: #b45309;
   --gradient: linear-gradient(135deg, #ea580c, #e11d48 55%, #be185d);
-  --shadow: 0 20px 45px -25px rgba(124, 45, 18, 0.45);
+  --shadow: 0 20px 45px -25px rgba(80, 45, 18, 0.45);
   --glow: 0 0 0 1px rgba(234, 88, 12, 0.35), 0 20px 45px -22px rgba(225, 29, 72, 0.45);
-  --header-bg: rgba(250, 228, 190, 0.88);
-  --grain:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.28 0 0 0 0 0.12 0 0 0 0.6 -0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"),
-    repeating-linear-gradient(172deg, transparent 0 22px, rgba(150, 95, 40, 0.06) 22px 24px);
+  --header-bg: rgba(247, 241, 232, 0.88);
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.35 0 0 0 0 0.25 0 0 0 0.35 -0.14'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  /* Mur en tasseaux : relief de chaque tasseau, veines du bois, éclairage */
+  --lattes:
+    radial-gradient(ellipse 26% 80% at 14% -14%, rgba(255, 226, 168, 0.5), transparent 72%),
+    radial-gradient(ellipse 26% 80% at 50% -14%, rgba(255, 226, 168, 0.5), transparent 72%),
+    radial-gradient(ellipse 26% 80% at 86% -14%, rgba(255, 226, 168, 0.5), transparent 72%),
+    linear-gradient(180deg, rgba(255, 240, 215, 0.05), rgba(55, 30, 12, 0.34)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='420'%3E %3Cfilter id='v'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9 0.012' numOctaves='3' stitchTiles='stitch'/%3E %3CfeColorMatrix values='0 0 0 0 0.32 0 0 0 0 0.18 0 0 0 0 0.07 0 0 0 0.9 -0.4'/%3E%3C/filter%3E %3Crect width='100%' height='100%' filter='url(%23v)'/%3E %3C/svg%3E"),
+    repeating-linear-gradient(90deg, #2a2522 0 9px, #5e3f22 9px 10px, #b07a42 11.5px, #d6a46a 17px, #c99459 23px, #94642f 28.5px, #2a2522 30px);
+  /* Lumière d'une fenêtre (et ombre d'une plante) sur le mur crème */
+  --lumiere: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1000' height='700' viewBox='0 0 1000 700'%3E %3Cdefs%3E %3Cfilter id='f' x='-20%' y='-20%' width='140%' height='140%'%3E%3CfeGaussianBlur stdDeviation='13'/%3E%3C/filter%3E %3Cfilter id='g' x='-20%' y='-20%' width='140%' height='140%'%3E%3CfeGaussianBlur stdDeviation='5'/%3E%3C/filter%3E %3C/defs%3E %3Cg filter='url(%23f)' fill='%23fff6e4' fill-opacity='0.8'%3E %3Cpolygon points='430,40 640,10 600,250 390,280'/%3E%3Cpolygon points='662,6 872,-24 832,216 622,246'/%3E%3Cpolygon points='386,300 596,270 556,510 346,540'/%3E%3Cpolygon points='618,266 828,236 788,476 578,506'/%3E %3C/g%3E %3Cg filter='url(%23g)' fill='%236b4f36' fill-opacity='0.12'%3E %3Cellipse cx='470' cy='440' rx='62' ry='20' transform='rotate(-38 470 440)'/%3E%3Cellipse cx='520' cy='395' rx='55' ry='18' transform='rotate(-12 520 395)'/%3E%3Cellipse cx='440' cy='380' rx='48' ry='16' transform='rotate(-70 440 380)'/%3E%3Cellipse cx='560' cy='470' rx='58' ry='19' transform='rotate(22 560 470)'/%3E%3Cellipse cx='500' cy='500' rx='44' ry='15' transform='rotate(-55 500 500)'/%3E%3Cellipse cx='610' cy='420' rx='40' ry='14' transform='rotate(40 610 420)'/%3E%3Cellipse cx='420' cy='470' rx='38' ry='13' transform='rotate(10 420 470)'/%3E%3Cellipse cx='540' cy='345' rx='36' ry='12' transform='rotate(-40 540 345)'/%3E %3Cpath d='M 300 640 C 380 560 430 520 470 440 M 470 440 C 500 410 520 400 540 345 M 470 440 C 520 450 545 460 560 470' fill='none' stroke='%236b4f36' stroke-opacity='0.12' stroke-width='5'/%3E %3C/g%3E %3C/svg%3E");
+  --bureau: linear-gradient(180deg, #3c3c40 0 7px, transparent 7px), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='160'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.006 0.6' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.3 0 0 0 0 0.15 0 0 0 0.7 -0.3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E"), linear-gradient(180deg, #ddc8a6, #d0b892);
+  --bureau-texte: #4a382b;
 }
 
 /* ---------- 2. Base ---------- */

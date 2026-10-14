@@ -10,7 +10,7 @@ Portfolio de **Nathan THIBAULT**, étudiant en 2<sup>e</sup> année de **BTS SIO
 
 | Page | Contenu |
 | --- | --- |
-| `index.html` | **Accueil** : désert en 3D avec des dinosaures qui marchent, présentation et accès rapide aux autres pages |
+| `index.html` | **Accueil** : mon bureau en 3D (inspiré de ma chambre), présentation et accès rapide aux autres pages |
 | `parcours.html` | **Parcours scolaire** (du baccalauréat au BTS SIO SLAM) et **expériences en entreprise** (stages) |
 | `competences.html` | **Compétences** (HTML, CSS, JavaScript, Angular, PHP, Java, Flutter, MySQL, PostgreSQL) et **certifications** |
 | `projets.html` | **Projets** : PixelStar (site web PHP / MySQL) et Caillou Tour (application mobile Flutter) |
@@ -23,9 +23,9 @@ Portfolio de **Nathan THIBAULT**, étudiant en 2<sup>e</sup> année de **BTS SIO
 Site statique réalisé sans framework :
 
 - **HTML5** sémantique et accessible
-- **CSS3** : Grid, Flexbox, variables, thème « désert » de jour / de nuit, responsive
+- **CSS3** : Grid, Flexbox, variables, thème « chambre » de jour / de nuit (mur crème, tasseaux de chêne, plateau de bureau), responsive
 - **JavaScript** : en-tête et pied de page communs, animations au défilement, filtres, fenêtre modale, onglets, validation du formulaire
-- **Three.js (3D)** : désert réaliste sur la page d'accueil (ciel physique, dunes et rides du sable, falaises, dinosaures aux formes organiques avec muscles et pattes articulées, traces de pas et poussière dans le sable, ptérosaures, textures générées par le code), avec une version 2D en Canvas si la 3D n'est pas disponible
+- **Three.js (3D)** : sur la page d'accueil, mon bureau reconstitué en 3D d'après ma chambre : mur en tasseaux de chêne, bureaux en bois et métal, étagère de figurines avec une plante, écran qui affiche le code de Caillou Tour en train de s'écrire, console, manettes, PC aux ventilateurs RGB, néon « NT. » et tapis. Le soleil de fin d'après-midi entre par une fenêtre et dessine sa forme sur le mur et le sol (avec de la poussière qui brille dans la lumière) ; la nuit, clair de lune, néon et rubans LED. Textures dessinées par le code ; version 2D en Canvas si la 3D n'est pas disponible
 
 ## Structure
 
@@ -35,15 +35,15 @@ Projet_Portfolio/
 │   veille.html, synthese.html, contact.html      # une page par partie
 ├── css/
 │   ├── base.css            # variables, thèmes jour / nuit, typographie, boutons, cartes (toutes les pages)
-│   ├── mise-en-page.css    # en-tête, sections, dunes de sable, pied de page (toutes les pages)
+│   ├── mise-en-page.css    # en-tête, sections (mur crème / tasseaux), pied de page (toutes les pages)
 │   └── accueil.css, parcours.css, competences.css,
 │       projets.css, veille.css, synthese.css, contact.css   # styles propres à chaque page
 ├── js/
 │   ├── composants.js       # en-tête et pied de page, écrits une seule fois pour toutes les pages
 │   ├── commun.js           # thème, menu mobile, apparition au défilement… (toutes les pages)
 │   ├── accueil.js          # effet machine à écrire, compteurs, choix 3D / 2D
-│   ├── desert3d.js         # désert et dinosaures en 3D (Three.js)
-│   ├── desert2d.js         # version 2D de secours (pixel art en Canvas)
+│   ├── setup3d.js          # mon bureau en 3D (Three.js)
+│   ├── setup2d.js          # version 2D de secours (Canvas)
 │   └── competences.js, projets.js, veille.js, contact.js    # scripts propres à chaque page
 └── assets/                 # images, captures des projets, CV
 ```
