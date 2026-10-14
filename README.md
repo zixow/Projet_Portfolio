@@ -24,7 +24,7 @@ Site statique réalisé sans framework :
 - **HTML5** sémantique et accessible
 - **CSS3** : Grid, Flexbox, variables, thème « désert » de jour / de nuit, responsive
 - **JavaScript** : animations au défilement, filtres, fenêtre modale, onglets, validation du formulaire
-- **Three.js (3D)** : désert et dinosaures low-poly animés sur la page d'accueil, avec une version 2D en Canvas si la 3D n'est pas disponible
+- **Three.js (3D)** : désert réaliste sur la page d'accueil (ciel physique, dunes, falaises, dinosaures aux formes organiques avec pattes articulées, textures générées par le code), avec une version 2D en Canvas si la 3D n'est pas disponible
 
 ## Structure
 
