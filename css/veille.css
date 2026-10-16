@@ -171,12 +171,13 @@
 }
 .continuum__points {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr)); /* les colonnes peuvent rétrécir sur petit écran */
   gap: 0.5rem;
   text-align: center;
 }
 .continuum__points strong { display: block; font-size: 0.9rem; }
 .continuum__points small { font-size: 0.8rem; color: var(--text-muted); }
+.continuum__court { display: none; } /* libellé court, seulement sur petit écran */
 
 /* Tableau comparatif */
 .table-wrap {
@@ -527,7 +528,9 @@
   .steps { grid-template-columns: 1fr 1fr; }
   .continuum { padding: 1.5rem 1.25rem; }
   .continuum__points small { display: none; }
-  .continuum__points strong { font-size: 0.78rem; }
+  .continuum__points strong { font-size: 0.74rem; hyphens: auto; }
+  .continuum__long { display: none; }  /* « Réel » et « Virtuel » au lieu de « Environnement … » */
+  .continuum__court { display: inline; }
 }
 @media (max-width: 520px) {
   .steps { grid-template-columns: 1fr; }

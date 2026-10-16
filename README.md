@@ -13,7 +13,7 @@ Portfolio de **Nathan THIBAULT**, étudiant en 2<sup>e</sup> année de **BTS SIO
 | `index.html` | **Accueil** : mon bureau en 3D (inspiré de ma chambre) avec un mur décoré de cadres cliquables (mon CV, mes projets, ma veille), présentation, téléchargement du CV et accès rapide aux autres pages |
 | `parcours.html` | **Parcours scolaire** (du baccalauréat au BTS SIO SLAM) et **expériences en entreprise** (stages) |
 | `competences.html` | **Compétences** (HTML, CSS, JavaScript, Angular, PHP, Java, Flutter, MySQL, PostgreSQL) et **certifications** |
-| `projets.html` | **Projets** : PixelStar (site web PHP / MySQL) et Caillou Tour (application mobile Flutter) |
+| `projets.html` | **Projets** : PixelStar (site web PHP / MySQL) et Caillou Tour (application mobile Flutter, projet de POO en binôme : [code](https://github.com/zixow/POO_nathan_weinim) et [conception UML](https://github.com/zixow/PO-Nathan-Weimin)) |
 | `veille.html` | **Veille technologique** : la réalité virtuelle et la réalité augmentée |
 | `synthese.html` | **Tableau de synthèse BTS** : compétences du bloc 1 (E5) et du bloc 2 (E6) mobilisées dans chaque réalisation |
 | `contact.html` | **Contact** : coordonnées et formulaire |

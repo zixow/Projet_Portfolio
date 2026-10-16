@@ -81,7 +81,7 @@
 .project-card__body h3 { margin-bottom: 0.6rem; font-size: 1.2rem; }
 .project-card__body p { font-size: 0.92rem; color: var(--text-muted); }
 .project-card .tech-list { margin: 1.1rem 0 1.4rem; }
-.project-card__actions { display: flex; gap: 0.7rem; margin-top: auto; }
+.project-card__actions { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: auto; }
 
 /* Fenêtre modale */
 .modal {
@@ -139,6 +139,16 @@
   background: var(--gradient);
 }
 .modal__content .tags { margin-top: 1.5rem; }
+/* Liens dans le texte (dépôts GitHub) : bien visibles */
+.modal__content li a,
+.modal__content p a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.modal__content li a:hover,
+.modal__content p a:hover { text-decoration-thickness: 2px; }
 
 /* Images (diagrammes, captures) dans le détail d'un projet */
 .modal__gallery {
