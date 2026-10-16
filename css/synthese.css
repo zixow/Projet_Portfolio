@@ -52,6 +52,12 @@
 .synthese-tableau tbody tr:last-child th,
 .synthese-tableau tbody tr:last-child td { border-bottom: none; }
 .synthese-tableau tbody tr:hover { background: var(--surface-2); }
+.synthese-tableau tbody th a {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--primary) 40%, transparent);
+  text-underline-offset: 3px;
+}
+.synthese-tableau tbody th a:hover { color: var(--primary); text-decoration-color: currentColor; }
 
 .type {
   display: inline-block;
@@ -62,9 +68,10 @@
   font-weight: 700;
   vertical-align: middle;
 }
-.type--stage { color: var(--primary); background: color-mix(in srgb, var(--primary) 14%, transparent); }
-.type--projet { color: var(--secondary); background: color-mix(in srgb, var(--secondary) 14%, transparent); }
-.type--perso { color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, transparent); }
+/* Texte mélangé à la couleur du texte du thème : contraste suffisant de jour comme de nuit */
+.type--stage { color: color-mix(in srgb, var(--primary) 75%, var(--text)); background: color-mix(in srgb, var(--primary) 14%, transparent); }
+.type--projet { color: color-mix(in srgb, var(--secondary) 75%, var(--text)); background: color-mix(in srgb, var(--secondary) 14%, transparent); }
+.type--perso { color: color-mix(in srgb, var(--accent) 75%, var(--text)); background: color-mix(in srgb, var(--accent) 14%, transparent); }
 
 /* ---------- Légende ---------- */
 .legende {

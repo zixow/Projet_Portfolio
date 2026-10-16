@@ -286,8 +286,9 @@ sup { font-size: 0.72em; line-height: 0; }
   border-radius: 50%;
   background: currentColor;
 }
-.status--done { color: var(--success); background: color-mix(in srgb, var(--success) 14%, transparent); }
-.status--soon { color: var(--warning); background: color-mix(in srgb, var(--warning) 14%, transparent); }
+/* Le texte est mélangé à la couleur du texte du thème : contraste suffisant (au moins 4,5:1) de jour comme de nuit */
+.status--done { color: color-mix(in srgb, var(--success) 80%, var(--text)); background: color-mix(in srgb, var(--success) 14%, transparent); }
+.status--soon { color: color-mix(in srgb, var(--warning) 80%, var(--text)); background: color-mix(in srgb, var(--warning) 14%, transparent); }
 
 .filters {
   display: flex;

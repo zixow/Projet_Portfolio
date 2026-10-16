@@ -139,6 +139,36 @@
   background: var(--gradient);
 }
 .modal__content .tags { margin-top: 1.5rem; }
+/* Fiche du projet : contexte, période, équipe, liens vers le code */
+.fiche {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+  gap: 0.6rem;
+  margin: 1.2rem 0 0.4rem;
+}
+.fiche > div {
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+}
+.fiche dt {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.fiche dt i { margin-right: 0.3rem; color: var(--primary); }
+.fiche dd { margin: 0.25rem 0 0; font-size: 0.92rem; font-weight: 500; color: var(--text); }
+.fiche a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+
 /* Liens dans le texte (dépôts GitHub) : bien visibles */
 .modal__content li a,
 .modal__content p a {

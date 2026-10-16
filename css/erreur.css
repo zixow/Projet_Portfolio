@@ -1,0 +1,25 @@
+/* =========================================================
+   Portfolio — Nathan THIBAULT · BTS SIO option SLAM
+   Page 404 : page introuvable
+   ========================================================= */
+
+.erreur {
+  min-height: calc(100vh - 160px);
+  display: grid;
+  place-items: center;
+  padding-top: calc(var(--header-h) + 3rem);
+  text-align: center;
+}
+.erreur__code {
+  font-family: var(--font-title);
+  font-size: clamp(6rem, 22vw, 11rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.erreur .section__subtitle { margin: 1rem auto 2rem; }
+.erreur__boutons { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }

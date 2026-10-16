@@ -43,7 +43,7 @@
     <footer class="footer">
       <div class="container footer__inner">
         <a href="index.html" class="logo">NT<span>.</span></a>
-        <p>© ${new Date().getFullYear()} Nathan THIBAULT · BTS SIO option SLAM · Réalisé en HTML, CSS et JavaScript</p>
+        <p>© ${new Date().getFullYear()} Nathan THIBAULT · BTS SIO option SLAM · Réalisé en HTML, CSS et JavaScript · <a href="https://github.com/zixow/Projet_Portfolio" target="_blank" rel="noopener">voir le code</a></p>
         <ul class="socials socials--small">
           <li><a href="https://github.com/zixow" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a></li>
           <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a></li>

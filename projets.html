@@ -6,7 +6,18 @@
     <title>Projets — Nathan THIBAULT · Portfolio BTS SIO SLAM</title>
     <meta name="description" content="Projets de Nathan THIBAULT : PixelStar (site web PHP / MySQL) et Caillou Tour (application mobile Flutter).">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-    <meta name="theme-color" content="#f3d7a7">
+    <meta name="theme-color" content="#f1e9dc">
+    <!-- Aperçu quand le lien du portfolio est partagé (LinkedIn, Discord, Messenger…) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Portfolio de Nathan THIBAULT">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:title" content="Projets — Nathan THIBAULT · Portfolio BTS SIO SLAM">
+    <meta property="og:description" content="Projets de Nathan THIBAULT : PixelStar (site web PHP / MySQL) et Caillou Tour (application mobile Flutter).">
+    <meta property="og:url" content="https://zixow.github.io/Projet_Portfolio/projets.html">
+    <meta property="og:image" content="https://zixow.github.io/Projet_Portfolio/assets/apercu-partage.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
 
     <!-- Polices et icônes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,7 +37,7 @@
           try {
             var theme = localStorage.getItem('theme');
             if (theme) document.documentElement.setAttribute('data-theme', theme);
-          } catch (e) { /* stockage indisponible : thème « désert » (clair) par défaut */ }
+          } catch (e) { /* stockage indisponible : thème clair par défaut */ }
         })();
     </script>
 </head>
@@ -43,7 +54,7 @@
             <header class="section__header reveal">
                 <span class="section__label">Projets</span>
                 <h2 class="section__title">Mes <span class="gradient-text">projets</span></h2>
-                <p class="section__subtitle">Projets réalisés en formation, en stage et sur mon temps personnel. Cliquez sur « Détails » pour en savoir plus.</p>
+                <p class="section__subtitle">Projets réalisés pendant mon BTS SIO. Cliquez sur « Détails » pour en savoir plus, ou sur « Code » pour voir le code sur GitHub.</p>
             </header>
 
             <div class="filters" id="projects-filters" role="group" aria-label="Filtrer les projets">
@@ -55,11 +66,11 @@
             <!-- Mes projets : ajoutez ici vos prochains projets -->
             <div class="projects__grid">
 
-                <!-- PixelStar (projet web) -->
-                <article class="card card--hover project-card tilt reveal" data-category="web">
+                <!-- PixelStar (projet web, individuel) : projets.html#pixelstar ouvre directement ses détails -->
+                <article class="card card--hover project-card tilt reveal" id="pixelstar" data-category="web">
                     <div class="project-card__media project-card__media--photo">
                         <img src="assets/projets/pixelstar-accueil.jpg" alt="" loading="lazy">
-                        <span class="project-card__type">Projet BTS · En cours</span>
+                        <span class="project-card__type">Projet BTS individuel · En cours</span>
                     </div>
                     <div class="project-card__body">
                         <h3>PixelStar</h3>
@@ -67,12 +78,20 @@
                         <ul class="tech-list"><li>PHP</li><li>PDO</li><li>MySQL</li><li>HTML / CSS</li></ul>
                         <div class="project-card__actions">
                             <button class="btn btn--small btn--primary" type="button" data-open-project>Détails</button>
+                            <a href="https://github.com/zixow/projet-steam-php-html-css" class="btn btn--small btn--ghost" target="_blank" rel="noopener" aria-label="Code de PixelStar sur GitHub"><i class="fa-brands fa-github"></i> Code</a>
                         </div>
                     </div>
                     <template>
-                        <span class="modal__tag">Projet BTS · Web · En cours</span>
+                        <span class="modal__tag">Projet BTS individuel · Web · En cours</span>
                         <h3>PixelStar — boutique de jeux vidéo</h3>
                         <p>Site web dynamique en PHP pour une boutique de jeux vidéo multiplateforme. Les jeux, les genres et les avis sont enregistrés dans une base de données MySQL.</p>
+                        <dl class="fiche">
+                            <div><dt><i class="fa-solid fa-school"></i> Contexte</dt><dd>Projet de BTS SIO en développement web</dd></div>
+                            <div><dt><i class="fa-regular fa-calendar"></i> Période</dt><dd>Depuis mai 2026</dd></div>
+                            <div><dt><i class="fa-solid fa-user"></i> Équipe</dt><dd>Projet individuel</dd></div>
+                            <div><dt><i class="fa-brands fa-github"></i> Code</dt><dd><a href="https://github.com/zixow/projet-steam-php-html-css" target="_blank" rel="noopener">projet-steam-php-html-css</a></dd></div>
+                            <div><dt><i class="fa-solid fa-table-cells"></i> Compétences BTS</dt><dd><a href="synthese.html">Tableau de synthèse</a></dd></div>
+                        </dl>
                         <div class="modal__gallery modal__gallery--single">
                             <figure>
                                 <a href="assets/projets/pixelstar-accueil.jpg" target="_blank" rel="noopener"><img src="assets/projets/pixelstar-accueil.jpg" alt="Page d'accueil de PixelStar" loading="lazy"></a>
@@ -103,7 +122,7 @@
                 </article>
 
                 <!-- Caillou Tour : projet de POO en binôme avec Weimin (dépôts POO_nathan_weinim et PO-Nathan-Weimin) -->
-                <article class="card card--hover project-card tilt reveal" data-category="mobile">
+                <article class="card card--hover project-card tilt reveal" id="caillou-tour" data-category="mobile">
                     <div class="project-card__media project-card__media--photo">
                         <img src="assets/projets/caillou-tour-apercu.jpg" alt="" loading="lazy">
                         <span class="project-card__type">Projet POO en binôme · En cours</span>
@@ -122,6 +141,14 @@
                         <span class="modal__tag">Projet de POO en binôme avec Weimin · Mobile · En cours</span>
                         <h3>Caillou Tour</h3>
                         <p>Application mobile en Flutter pour un office du tourisme : elle aide les visiteurs à découvrir la Nouvelle-Calédonie (lieux touristiques, activités, événements, restaurants et hébergements). Projet client de programmation orientée objet (POO), réalisé en binôme avec Weimin.</p>
+                        <dl class="fiche">
+                            <div><dt><i class="fa-solid fa-school"></i> Contexte</dt><dd>Projet de POO du BTS SIO pour un office du tourisme</dd></div>
+                            <div><dt><i class="fa-regular fa-calendar"></i> Période</dt><dd>Depuis août 2026</dd></div>
+                            <div><dt><i class="fa-solid fa-user-group"></i> Équipe</dt><dd>En binôme avec Weimin</dd></div>
+                            <div><dt><i class="fa-brands fa-github"></i> Code</dt><dd><a href="https://github.com/zixow/POO_nathan_weinim" target="_blank" rel="noopener">POO_nathan_weinim</a></dd></div>
+                            <div><dt><i class="fa-solid fa-diagram-project"></i> Conception UML</dt><dd><a href="https://github.com/zixow/PO-Nathan-Weimin" target="_blank" rel="noopener">PO-Nathan-Weimin</a></dd></div>
+                            <div><dt><i class="fa-solid fa-table-cells"></i> Compétences BTS</dt><dd><a href="synthese.html">Tableau de synthèse</a></dd></div>
+                        </dl>
                         <div class="modal__gallery modal__gallery--telephones">
                             <figure>
                                 <a href="assets/projets/caillou-tour-detail.jpg" target="_blank" rel="noopener"><img src="assets/projets/caillou-tour-detail.jpg" alt="Fiche du Centre culturel Tjibaou dans Caillou Tour" loading="lazy"></a>
@@ -168,11 +195,6 @@
                             <li>Enregistrer les comptes, les favoris et les avis dans une base de données via une API</li>
                             <li>Vraie carte interactive et appel téléphonique depuis l'application</li>
                             <li>Espace administrateur pour ajouter des lieux et des événements</li>
-                        </ul>
-                        <h4>Dépôts GitHub</h4>
-                        <ul>
-                            <li><a href="https://github.com/zixow/PO-Nathan-Weimin" target="_blank" rel="noopener">PO-Nathan-Weimin</a> : la conception, avec le diagramme de cas d'utilisation et le diagramme de classes</li>
-                            <li><a href="https://github.com/zixow/POO_nathan_weinim" target="_blank" rel="noopener">POO_nathan_weinim</a> : le code de l'application Flutter, ses tests et sa documentation</li>
                         </ul>
                         <div class="tags"><span>Flutter</span><span>Dart</span><span>Material 3</span><span>UML</span><span>Tests</span><span>Git</span></div>
                     </template>

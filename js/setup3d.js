@@ -1423,8 +1423,8 @@ window.demarrerSetup3D = function ({ canvas, hero, toggle, root, reducedMotion }
   })();
 
   creerCadre({ largeur: 0.3, hauteur: 0.424, image: 'assets/cv-apercu.jpg', x: -1.42, y: 1.76, lien: 'assets/CV_Nathan_THIBAULT.pdf', nouvelOnglet: true, teinte: '#3b2a1c' });
-  creerCadre({ largeur: 0.46, hauteur: 0.2, image: 'assets/projets/caillou-tour-apercu.jpg', x: -0.86, y: 1.92, lien: 'projets.html' });
-  creerCadre({ largeur: 0.4, hauteur: 0.152, image: 'assets/projets/pixelstar-accueil.jpg', x: -0.9, y: 1.56, lien: 'projets.html' });
+  creerCadre({ largeur: 0.46, hauteur: 0.2, image: 'assets/projets/caillou-tour-apercu.jpg', x: -0.86, y: 1.92, lien: 'projets.html#caillou-tour' });
+  creerCadre({ largeur: 0.4, hauteur: 0.152, image: 'assets/projets/pixelstar-accueil.jpg', x: -0.9, y: 1.56, lien: 'projets.html#pixelstar' });
   creerCadre({ largeur: 0.2, hauteur: 0.28, texture: afficheVR, x: -0.4, y: 1.52, lien: 'veille.html', marge: 0.022 });
 
   // Petit spot au plafond qui éclaire les cadres

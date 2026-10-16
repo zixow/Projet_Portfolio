@@ -143,6 +143,8 @@ body:not([data-page="accueil"]) .header {
 /* ---------- 16. Pied de page & retour en haut ---------- */
 /* Le pied de page ressemble au plateau de mon bureau */
 .footer { padding: 3.2rem 0 2.6rem; background: var(--bureau); }
+.footer__inner p a { text-decoration: underline; text-underline-offset: 3px; }
+.footer__inner p a:hover { color: var(--primary); }
 .footer__inner {
   display: flex;
   flex-wrap: wrap;

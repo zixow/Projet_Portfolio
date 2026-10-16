@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page introuvable — Nathan THIBAULT · Portfolio BTS SIO SLAM</title>
+    <meta name="description" content="Cette page n'existe pas sur le portfolio de Nathan THIBAULT.">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#f1e9dc">
+    <!-- Aperçu quand le lien du portfolio est partagé (LinkedIn, Discord, Messenger…) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Portfolio de Nathan THIBAULT">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:title" content="Page introuvable — Nathan THIBAULT · Portfolio BTS SIO SLAM">
+    <meta property="og:description" content="Cette page n'existe pas sur le portfolio de Nathan THIBAULT.">
+    <meta property="og:url" content="https://zixow.github.io/Projet_Portfolio/404.html">
+    <meta property="og:image" content="https://zixow.github.io/Projet_Portfolio/assets/apercu-partage.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Polices et icônes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css">
+
+    <!-- Styles communs à toutes les pages, puis styles propres à cette page -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/mise-en-page.css">
+    <link rel="stylesheet" href="css/erreur.css">
+
+    <!-- Applique le thème enregistré avant l'affichage (évite le flash) -->
+    <script>
+        (function () {
+          try {
+            var theme = localStorage.getItem('theme');
+            if (theme) document.documentElement.setAttribute('data-theme', theme);
+          } catch (e) { /* stockage indisponible : thème clair par défaut */ }
+        })();
+    </script>
+</head>
+<body data-page="erreur">
+
+<!-- En-tête : ajouté par js/composants.js -->
+<div id="entete-site"></div>
+
+<main>
+    <!-- ============ PAGE INTROUVABLE ============ -->
+    <section class="section erreur">
+        <div class="container">
+            <p class="erreur__code" aria-hidden="true">404</p>
+            <h1 class="section__title">Page <span class="gradient-text">introuvable</span></h1>
+            <p class="section__subtitle">Cette page n'existe pas, ou elle a changé d'adresse.</p>
+            <div class="erreur__boutons">
+                <a href="index.html" class="btn btn--primary"><i class="fa-solid fa-house"></i> Retour à l'accueil</a>
+                <a href="projets.html" class="btn btn--ghost"><i class="fa-solid fa-code"></i> Voir mes projets</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Pied de page : ajouté par js/composants.js -->
+<div id="pied-site"></div>
+
+<script src="js/composants.js"></script>
+<script src="js/commun.js"></script>
+</body>
+</html>

@@ -27,6 +27,8 @@
     modale.classList.remove('open');
     modale.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('no-scroll');
+    // On retire l'ancre de l'adresse : recharger la page ne rouvre pas la fenêtre
+    if (location.hash) history.replaceState(null, '', location.pathname + location.search);
     if (dernierFocus) dernierFocus.focus();
   };
 
@@ -52,4 +54,19 @@
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modale.classList.contains('open')) refermer();
   });
+
+  /* ---------- Lien direct vers un projet : projets.html#pixelstar ouvre ses détails ---------- */
+  // Utilisé par les cadres du mur de l'accueil et par le tableau de synthèse
+  const ouvrirDepuisAdresse = () => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    const carte = id && document.getElementById(id);
+    if (!carte || !carte.classList.contains('project-card')) return;
+    const modele = $('template', carte);
+    if (!modele) return;
+    carte.scrollIntoView({ block: 'center' });
+    ouvrir(modele);
+    dernierFocus = $('[data-open-project]', carte); // à la fermeture, le focus revient sur « Détails »
+  };
+  window.addEventListener('hashchange', ouvrirDepuisAdresse);
+  ouvrirDepuisAdresse();
 })();
