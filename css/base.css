@@ -136,6 +136,8 @@ sup { font-size: 0.72em; line-height: 0; }
 
 .muted { color: var(--text-muted); }
 .is-hidden { display: none !important; }
+/* L'attribut hidden l'emporte toujours, même sur un élément en display: grid ou flex */
+[hidden] { display: none !important; }
 
 /* ---------- 3. Animations d'apparition ---------- */
 .reveal { opacity: 0; }
@@ -266,9 +268,10 @@ sup { font-size: 0.72em; line-height: 0; }
   padding: 0.22rem 0.65rem;
   border-radius: 6px;
 }
-.pill--vr { color: var(--secondary); background: color-mix(in srgb, var(--secondary) 15%, transparent); }
-.pill--ar { color: var(--primary); background: color-mix(in srgb, var(--primary) 15%, transparent); }
-.pill--mr { color: var(--accent); background: color-mix(in srgb, var(--accent) 15%, transparent); }
+/* Texte mélangé à la couleur du texte du thème : contraste suffisant de jour comme de nuit */
+.pill--vr { color: color-mix(in srgb, var(--secondary) 75%, var(--text)); background: color-mix(in srgb, var(--secondary) 15%, transparent); }
+.pill--ar { color: color-mix(in srgb, var(--primary) 75%, var(--text)); background: color-mix(in srgb, var(--primary) 15%, transparent); }
+.pill--mr { color: color-mix(in srgb, var(--accent) 75%, var(--text)); background: color-mix(in srgb, var(--accent) 15%, transparent); }
 
 .status {
   display: inline-flex;

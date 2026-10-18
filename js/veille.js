@@ -1,56 +1,52 @@
 /* =========================================================
-   Page Veille technologique : onglets, filtre des actualités
-   et bouton « Copier » du bloc de code
+   Page Veille technologique : actualités lues dans la base de
+   données (table actualite), filtre VR / AR / réalité mixte et
+   bouton « Voir les actualités plus anciennes »
    ========================================================= */
 
 (function () {
-  const { $, $$, reducedMotion, activerFiltres } = window.Portfolio;
+  const { $, $$, activerFiltres, reveler, echapper } = window.Portfolio;
+  const liste = $('#liste-actualites');
+  const boutonPlus = $('#news-plus');
+  const NB_VISIBLES = 5; // les plus récentes ; les autres s'affichent avec le bouton
+  const MOIS = ['Janv.', 'Févr.', 'Mars', 'Avr.', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'];
+  const CATEGORIES = { vr: 'VR', ar: 'AR', mr: 'MR' };
+  /** Seuls les liens http(s) sont acceptés (jamais de lien « javascript: » venant de la base). */
+  const lienSur = (url) => (/^https?:\/\//i.test(url || '') ? url : '');
 
-  /* ---------- Onglets (accessibles au clavier : flèches, Début, Fin) ---------- */
-  const onglets = $$('.tab-btn');
-  const panneaux = $$('.tab-panel');
-
-  const activer = (onglet, focus = false) => {
-    onglets.forEach((o) => {
-      const choisi = o === onglet;
-      o.setAttribute('aria-selected', String(choisi));
-      o.tabIndex = choisi ? 0 : -1;
-    });
-    panneaux.forEach((panneau) => {
-      panneau.classList.toggle('active', panneau.id === onglet.getAttribute('aria-controls'));
-    });
-    if (focus) onglet.focus();
-    onglet.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: reducedMotion ? 'auto' : 'smooth' });
+  const actualite = (a, rang) => {
+    const [annee, mois] = String(a.date).split('-').map(Number);
+    const categorie = CATEGORIES[a.categorie] ? a.categorie : 'vr';
+    const ancienne = rang >= NB_VISIBLES;
+    const source = lienSur(a.source_url)
+      ? `<a href="${echapper(a.source_url)}" target="_blank" rel="noopener">${echapper(a.source_nom)}</a>`
+      : echapper(a.source_nom);
+    return `
+      <article class="card news-item reveal${ancienne ? ' news-item--ancienne' : ''}" data-category="${categorie}"${ancienne ? ' hidden' : ''}>
+        <div class="news-item__date">${MOIS[mois - 1] || ''} <small>${annee || ''}</small></div>
+        <div>
+          <span class="pill pill--${categorie}">${CATEGORIES[categorie]}</span>
+          <h4>${echapper(a.titre)}</h4>
+          <p>${echapper(a.resume)}</p>
+          <p class="news-item__avis"><strong>Mon avis :</strong> ${echapper(a.avis)}</p>
+          <p class="news-item__source">Source : ${source}</p>
+        </div>
+      </article>`;
   };
 
-  onglets.forEach((onglet, i) => {
-    onglet.addEventListener('click', () => activer(onglet));
-    onglet.addEventListener('keydown', (e) => {
-      const touches = {
-        ArrowRight: (i + 1) % onglets.length,
-        ArrowLeft: (i - 1 + onglets.length) % onglets.length,
-        Home: 0,
-        End: onglets.length - 1,
-      };
-      if (e.key in touches) {
-        e.preventDefault();
-        activer(onglets[touches[e.key]], true);
-      }
+  window.Portfolio.donnees.then((donnees) => {
+    liste.innerHTML = donnees.actualites.map(actualite).join('');
+    reveler(liste);
+    activerFiltres('#news-filters', '.news-item');
+
+    const anciennes = $$('.news-item--ancienne', liste);
+    boutonPlus.hidden = anciennes.length === 0;
+    boutonPlus.addEventListener('click', () => {
+      anciennes.forEach((article) => { article.hidden = false; });
+      boutonPlus.hidden = true;
+      // Le clavier et les lecteurs d'écran arrivent sur la première actualité affichée
+      anciennes[0].tabIndex = -1;
+      anciennes[0].focus();
     });
   });
-
-  /* ---------- Filtre des actualités (VR, AR, réalité mixte) ---------- */
-  activerFiltres('#news-filters', '.news-item');
-
-  /* ---------- Bouton « Copier » du bloc de code ---------- */
-  $$('[data-copy]').forEach((bouton) => bouton.addEventListener('click', async () => {
-    const code = $('code', bouton.closest('.code')).innerText;
-    try {
-      await navigator.clipboard.writeText(code);
-      bouton.innerHTML = '<i class="fa-solid fa-check"></i> Copié !';
-    } catch (e) {
-      bouton.textContent = 'Copie impossible';
-    }
-    setTimeout(() => { bouton.innerHTML = '<i class="fa-regular fa-copy"></i> Copier'; }, 1800);
-  }));
 })();

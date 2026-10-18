@@ -58,15 +58,14 @@
             </header>
 
             <div class="contact">
-                <!-- À MODIFIER : lien LinkedIn -->
                 <div class="contact__info reveal">
                     <a class="card contact__item" href="mailto:thibaultwalimnathan@gmail.com">
                         <i class="fa-solid fa-envelope"></i>
                         <span><small>E-mail</small><strong>thibaultwalimnathan@gmail.com</strong></span>
                     </a>
-                    <a class="card contact__item" href="https://www.linkedin.com/" target="_blank" rel="noopener">
+                    <a class="card contact__item" href="https://www.linkedin.com/in/nathan-thibault-416ba0407" target="_blank" rel="noopener">
                         <i class="fa-brands fa-linkedin-in"></i>
-                        <span><small>LinkedIn</small><strong>linkedin.com/in/nathan-thibault</strong></span>
+                        <span><small>LinkedIn</small><strong>linkedin.com/in/nathan-thibault-416ba0407</strong></span>
                     </a>
                     <a class="card contact__item" href="https://github.com/zixow" target="_blank" rel="noopener">
                         <i class="fa-brands fa-github"></i>
@@ -102,8 +101,14 @@
                         <textarea id="message" name="message" rows="5" placeholder="Votre message…" required></textarea>
                         <small class="error" id="message-error"></small>
                     </div>
+                    <!-- Champ piège invisible : un robot le remplit, un visiteur ne le voit pas -->
+                    <div class="piege" aria-hidden="true">
+                        <label for="site_web">Site web</label>
+                        <input type="text" id="site_web" name="site_web" tabindex="-1" autocomplete="off">
+                    </div>
                     <button type="submit" class="btn btn--primary btn--full"><i class="fa-solid fa-paper-plane"></i> Envoyer le message</button>
                     <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+                    <p class="form-note"><i class="fa-solid fa-lock"></i> Vos coordonnées servent uniquement à vous répondre. Elles ne sont jamais transmises à quelqu'un d'autre.</p>
                 </form>
             </div>
         </div>

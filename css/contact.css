@@ -81,3 +81,18 @@ a.contact__item:hover { border-color: var(--primary); transform: translateX(6px)
 @media (max-width: 520px) {
   .contact__form { padding: 1.4rem; }
 }
+
+/* Champ piège anti-robots : hors de l'écran, invisible pour les visiteurs */
+.piege {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.form-note {
+  margin-top: 0.9rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+.form-note i { margin-right: 0.3rem; color: var(--primary); }

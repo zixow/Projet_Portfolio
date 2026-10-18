@@ -63,143 +63,9 @@
                 <button class="filter-btn" type="button" data-filter="mobile" aria-pressed="false">Mobile</button>
             </div>
 
-            <!-- Mes projets : ajoutez ici vos prochains projets -->
-            <div class="projects__grid">
-
-                <!-- PixelStar (projet web, individuel) : projets.html#pixelstar ouvre directement ses détails -->
-                <article class="card card--hover project-card tilt reveal" id="pixelstar" data-category="web">
-                    <div class="project-card__media project-card__media--photo">
-                        <img src="assets/projets/pixelstar-accueil.jpg" alt="" loading="lazy">
-                        <span class="project-card__type">Projet BTS individuel · En cours</span>
-                    </div>
-                    <div class="project-card__body">
-                        <h3>PixelStar</h3>
-                        <p>Site web dynamique de vente de jeux vidéo (PC, PS5, Xbox, Switch) : catalogue lu dans une base MySQL, filtre par genre, notes des joueurs et page de contact.</p>
-                        <ul class="tech-list"><li>PHP</li><li>PDO</li><li>MySQL</li><li>HTML / CSS</li></ul>
-                        <div class="project-card__actions">
-                            <button class="btn btn--small btn--primary" type="button" data-open-project>Détails</button>
-                            <a href="https://github.com/zixow/projet-steam-php-html-css" class="btn btn--small btn--ghost" target="_blank" rel="noopener" aria-label="Code de PixelStar sur GitHub"><i class="fa-brands fa-github"></i> Code</a>
-                        </div>
-                    </div>
-                    <template>
-                        <span class="modal__tag">Projet BTS individuel · Web · En cours</span>
-                        <h3>PixelStar — boutique de jeux vidéo</h3>
-                        <p>Site web dynamique en PHP pour une boutique de jeux vidéo multiplateforme. Les jeux, les genres et les avis sont enregistrés dans une base de données MySQL.</p>
-                        <dl class="fiche">
-                            <div><dt><i class="fa-solid fa-school"></i> Contexte</dt><dd>Projet de BTS SIO en développement web</dd></div>
-                            <div><dt><i class="fa-regular fa-calendar"></i> Période</dt><dd>Depuis mai 2026</dd></div>
-                            <div><dt><i class="fa-solid fa-user"></i> Équipe</dt><dd>Projet individuel</dd></div>
-                            <div><dt><i class="fa-brands fa-github"></i> Code</dt><dd><a href="https://github.com/zixow/projet-steam-php-html-css" target="_blank" rel="noopener">projet-steam-php-html-css</a></dd></div>
-                            <div><dt><i class="fa-solid fa-table-cells"></i> Compétences BTS</dt><dd><a href="synthese.html">Tableau de synthèse</a></dd></div>
-                        </dl>
-                        <div class="modal__gallery modal__gallery--single">
-                            <figure>
-                                <a href="assets/projets/pixelstar-accueil.jpg" target="_blank" rel="noopener"><img src="assets/projets/pixelstar-accueil.jpg" alt="Page d'accueil de PixelStar" loading="lazy"></a>
-                                <figcaption>Page d'accueil</figcaption>
-                            </figure>
-                        </div>
-                        <h4>Fonctionnalités réalisées</h4>
-                        <ul>
-                            <li>Navigation entre les pages (Accueil, À propos, Contact) avec un routeur PHP et une page 404</li>
-                            <li>En-tête et pied de page réutilisables</li>
-                            <li>Catalogue des jeux mis en avant, filtre par genre, note moyenne et nombre d'avis</li>
-                            <li>Statistiques : nombre de jeux, note moyenne, clients</li>
-                            <li>Formulaire de contact avec vérification des champs et de l'adresse e-mail</li>
-                        </ul>
-                        <h4>Base de données</h4>
-                        <ul>
-                            <li>Tables jeux, genres, utilisateurs, avis, commandes et panier</li>
-                            <li>Relation plusieurs-à-plusieurs entre jeux et genres (table game_genres)</li>
-                            <li>Requêtes avec jointures et calculs (AVG, COUNT) et vues SQL</li>
-                        </ul>
-                        <h4>Prochaines étapes</h4>
-                        <ul>
-                            <li>Inscription et connexion des utilisateurs</li>
-                            <li>Panier et passage de commande</li>
-                        </ul>
-                        <div class="tags"><span>PHP</span><span>PDO</span><span>MySQL</span><span>HTML</span><span>CSS</span><span>Git</span></div>
-                    </template>
-                </article>
-
-                <!-- Caillou Tour : projet de POO en binôme avec Weimin (dépôts POO_nathan_weinim et PO-Nathan-Weimin) -->
-                <article class="card card--hover project-card tilt reveal" id="caillou-tour" data-category="mobile">
-                    <div class="project-card__media project-card__media--photo">
-                        <img src="assets/projets/caillou-tour-apercu.jpg" alt="" loading="lazy">
-                        <span class="project-card__type">Projet POO en binôme · En cours</span>
-                    </div>
-                    <div class="project-card__body">
-                        <h3>Caillou Tour</h3>
-                        <p>Application mobile Flutter pour découvrir la Nouvelle-Calédonie : recherche, fiches des lieux avec carte, agenda des activités et événements, hôtels et restaurants, favoris et avis des membres.</p>
-                        <ul class="tech-list"><li>Flutter</li><li>Dart</li><li>Material 3</li><li>UML</li><li>Tests</li></ul>
-                        <div class="project-card__actions">
-                            <button class="btn btn--small btn--primary" type="button" data-open-project>Détails</button>
-                            <a href="https://github.com/zixow/POO_nathan_weinim" class="btn btn--small btn--ghost" target="_blank" rel="noopener" aria-label="Code de Caillou Tour sur GitHub"><i class="fa-brands fa-github"></i> Code</a>
-                            <a href="https://github.com/zixow/PO-Nathan-Weimin" class="btn btn--small btn--ghost" target="_blank" rel="noopener" aria-label="Conception UML de Caillou Tour sur GitHub"><i class="fa-solid fa-diagram-project"></i> UML</a>
-                        </div>
-                    </div>
-                    <template>
-                        <span class="modal__tag">Projet de POO en binôme avec Weimin · Mobile · En cours</span>
-                        <h3>Caillou Tour</h3>
-                        <p>Application mobile en Flutter pour un office du tourisme : elle aide les visiteurs à découvrir la Nouvelle-Calédonie (lieux touristiques, activités, événements, restaurants et hébergements). Projet client de programmation orientée objet (POO), réalisé en binôme avec Weimin.</p>
-                        <dl class="fiche">
-                            <div><dt><i class="fa-solid fa-school"></i> Contexte</dt><dd>Projet de POO du BTS SIO pour un office du tourisme</dd></div>
-                            <div><dt><i class="fa-regular fa-calendar"></i> Période</dt><dd>Depuis août 2026</dd></div>
-                            <div><dt><i class="fa-solid fa-user-group"></i> Équipe</dt><dd>En binôme avec Weimin</dd></div>
-                            <div><dt><i class="fa-brands fa-github"></i> Code</dt><dd><a href="https://github.com/zixow/POO_nathan_weinim" target="_blank" rel="noopener">POO_nathan_weinim</a></dd></div>
-                            <div><dt><i class="fa-solid fa-diagram-project"></i> Conception UML</dt><dd><a href="https://github.com/zixow/PO-Nathan-Weimin" target="_blank" rel="noopener">PO-Nathan-Weimin</a></dd></div>
-                            <div><dt><i class="fa-solid fa-table-cells"></i> Compétences BTS</dt><dd><a href="synthese.html">Tableau de synthèse</a></dd></div>
-                        </dl>
-                        <div class="modal__gallery modal__gallery--telephones">
-                            <figure>
-                                <a href="assets/projets/caillou-tour-detail.jpg" target="_blank" rel="noopener"><img src="assets/projets/caillou-tour-detail.jpg" alt="Fiche du Centre culturel Tjibaou dans Caillou Tour" loading="lazy"></a>
-                                <figcaption>Fiche d'un lieu</figcaption>
-                            </figure>
-                            <figure>
-                                <a href="assets/projets/caillou-tour-agenda.jpg" target="_blank" rel="noopener"><img src="assets/projets/caillou-tour-agenda.jpg" alt="Agenda des activités dans Caillou Tour" loading="lazy"></a>
-                                <figcaption>Agenda des activités</figcaption>
-                            </figure>
-                            <figure>
-                                <a href="assets/projets/caillou-tour-sejour.jpg" target="_blank" rel="noopener"><img src="assets/projets/caillou-tour-sejour.jpg" alt="Hôtels et restaurants dans Caillou Tour" loading="lazy"></a>
-                                <figcaption>Hôtels et restaurants</figcaption>
-                            </figure>
-                        </div>
-                        <h4>Fonctionnalités réalisées</h4>
-                        <ul>
-                            <li>Navigation à 5 onglets (Material 3) : Accueil, Explorer, Agenda, Séjour et Favoris</li>
-                            <li>Recherche instantanée des lieux, activités et événements, sans tenir compte des accents</li>
-                            <li>Fiche de chaque lieu : description, note moyenne, coordonnées GPS et carte de la Nouvelle-Calédonie dessinée avec CustomPainter</li>
-                            <li>Agenda : activités filtrées par difficulté et prochains événements</li>
-                            <li>Hôtels et restaurants : prix en F CFP, notes et réservation de démonstration</li>
-                            <li>Comptes membres : connexion, création de compte, profil, favoris et avis (note de 1 à 5)</li>
-                            <li>Rôle administrateur qui peut modérer les avis</li>
-                            <li>Infos pratiques : horaires de l'office, numéros d'urgence et formulaire de contact</li>
-                        </ul>
-                        <h4>Conception et qualité</h4>
-                        <ul>
-                            <li>Classes issues du diagramme UML, avec de l'héritage : Utilisateur → UtilisateurConnecte → Administrateur, Etablissement → Restaurant / Hebergement</li>
-                            <li>Services (connexion, favoris, avis, recherche) séparés des écrans</li>
-                            <li>29 tests automatisés (tests unitaires et tests de widgets) lancés avec <code>flutter test</code></li>
-                        </ul>
-                        <div class="modal__gallery">
-                            <figure>
-                                <a href="assets/projets/caillou-tour-cas-utilisation.jpg" target="_blank" rel="noopener"><img src="assets/projets/caillou-tour-cas-utilisation.jpg" alt="Diagramme de cas d'utilisation de Caillou Tour" loading="lazy"></a>
-                                <figcaption>Cas d'utilisation</figcaption>
-                            </figure>
-                            <figure>
-                                <a href="assets/projets/caillou-tour-classes.jpg" target="_blank" rel="noopener"><img src="assets/projets/caillou-tour-classes.jpg" alt="Diagramme de classes de Caillou Tour" loading="lazy"></a>
-                                <figcaption>Diagramme de classes</figcaption>
-                            </figure>
-                        </div>
-                        <h4>Prochaines étapes</h4>
-                        <ul>
-                            <li>Enregistrer les comptes, les favoris et les avis dans une base de données via une API</li>
-                            <li>Vraie carte interactive et appel téléphonique depuis l'application</li>
-                            <li>Espace administrateur pour ajouter des lieux et des événements</li>
-                        </ul>
-                        <div class="tags"><span>Flutter</span><span>Dart</span><span>Material 3</span><span>UML</span><span>Tests</span><span>Git</span></div>
-                    </template>
-                </article>
-            </div>
+            <!-- Projets lus dans la base de données (tables projet, technologie, projet_rubrique…) :
+                 cartes et fenêtres de détails créées par js/projets.js -->
+            <div class="projects__grid" id="liste-projets"></div>
         </div>
     </section>
 
@@ -218,6 +84,8 @@
 
 <script src="js/composants.js"></script>
 <script src="js/commun.js"></script>
+<script src="data/contenu.js"></script>
+<script src="js/donnees.js"></script>
 <script src="js/projets.js"></script>
 </body>
 </html>

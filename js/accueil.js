@@ -42,6 +42,14 @@
     ecrire();
   }
 
+  /* ---------- Chiffres clés : comptés dans la base de données ---------- */
+  window.Portfolio.donnees.then((donnees) => {
+    $$('[data-stat]').forEach((el) => {
+      const liste = donnees[el.dataset.stat];
+      if (Array.isArray(liste) && liste.length) el.textContent = liste.length;
+    });
+  });
+
   /* ---------- Compteurs animés (0 → valeur) ---------- */
   const observateur = new IntersectionObserver((entrees, obs) => {
     entrees.forEach((entree) => {

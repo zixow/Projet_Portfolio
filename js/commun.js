@@ -2,7 +2,8 @@
    Fonctions communes à toutes les pages
    ---------------------------------------------------------
    Thème clair / sombre, menu mobile, en-tête, retour en haut,
-   apparition au défilement, effet 3D au survol et filtres.
+   apparition au défilement, effet 3D au survol, filtres et
+   outils pour afficher le contenu venant de la base de données.
    Les autres scripts utilisent window.Portfolio ($, $$, …).
    ========================================================= */
 
@@ -68,29 +69,40 @@ window.Portfolio = (function () {
   });
 
   /* ---------- Apparition des éléments au défilement ---------- */
-  const aReveler = $$('.reveal');
-  if (reducedMotion) {
-    aReveler.forEach((el) => el.classList.add('visible'));
-  } else {
-    const observateur = new IntersectionObserver((entrees, obs) => {
-      entrees.forEach((entree) => {
-        if (!entree.isIntersecting) return;
-        entree.target.classList.add('visible');
-        obs.unobserve(entree.target);
-      });
-    }, { threshold: 0.12 });
+  // reveler() est aussi appelée pour le contenu ajouté plus tard (données de la base)
+  const dejaObserves = new WeakSet();
+  const observateurApparition = reducedMotion ? null : new IntersectionObserver((entrees, obs) => {
+    entrees.forEach((entree) => {
+      if (!entree.isIntersecting) return;
+      entree.target.classList.add('visible');
+      obs.unobserve(entree.target);
+    });
+  }, { threshold: 0.12 });
 
-    aReveler.forEach((el) => {
+  const reveler = (racine = document) => {
+    $$('.reveal', racine).forEach((el) => {
+      if (dejaObserves.has(el)) return;
+      dejaObserves.add(el);
+      if (reducedMotion) {
+        el.classList.add('visible');
+        return;
+      }
       // Décalage progressif entre éléments frères (effet cascade)
       const freres = [...el.parentElement.children].filter((enfant) => enfant.classList.contains('reveal'));
       el.style.animationDelay = `${Math.min(freres.indexOf(el), 5) * 90}ms`;
-      observateur.observe(el);
+      observateurApparition.observe(el);
     });
-  }
+  };
+  reveler();
 
   /* ---------- Effet 3D (inclinaison) au survol ---------- */
-  if (!reducedMotion && window.matchMedia('(hover: hover)').matches) {
-    $$('.tilt').forEach((el) => {
+  const peutIncliner = !reducedMotion && window.matchMedia('(hover: hover)').matches;
+  const dejaInclines = new WeakSet();
+  const activerTilt = (racine = document) => {
+    if (!peutIncliner) return;
+    $$('.tilt', racine).forEach((el) => {
+      if (dejaInclines.has(el)) return;
+      dejaInclines.add(el);
       const soulevement = el.classList.contains('project-card') ? ' translateY(-6px)' : '';
       el.addEventListener('mousemove', (e) => {
         const r = el.getBoundingClientRect();
@@ -100,7 +112,15 @@ window.Portfolio = (function () {
       });
       el.addEventListener('mouseleave', () => { el.style.transform = ''; });
     });
-  }
+  };
+  activerTilt();
+
+  /* ---------- Texte venant de la base de données ---------- */
+  /** Échappe un texte avant de l'insérer dans du HTML (protection contre l'injection de code). */
+  const echapper = (texte) => String(texte ?? '').replace(/[&<>"']/g, (c) => (
+    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  /** Comme echapper(), et `texte entre accents graves` devient du code. */
+  const texteRiche = (texte) => echapper(texte).replace(/`([^`]+)`/g, '<code>$1</code>');
 
   /* ---------- Filtres (compétences, projets, actualités) ---------- */
   /** Boutons de filtre (data-filter) qui masquent les éléments dont data-category ne correspond pas. */
@@ -126,5 +146,5 @@ window.Portfolio = (function () {
     }));
   };
 
-  return { $, $$, root, reducedMotion, activerFiltres };
+  return { $, $$, root, reducedMotion, activerFiltres, reveler, activerTilt, echapper, texteRiche };
 })();

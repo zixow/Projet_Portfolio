@@ -38,7 +38,7 @@
       </nav>
     </header>`;
 
-  // À MODIFIER : vos liens personnels
+  // Liens personnels : GitHub, LinkedIn, contact
   const pied = `
     <footer class="footer">
       <div class="container footer__inner">
@@ -46,7 +46,7 @@
         <p>© ${new Date().getFullYear()} Nathan THIBAULT · BTS SIO option SLAM · Réalisé en HTML, CSS et JavaScript · <a href="https://github.com/zixow/Projet_Portfolio" target="_blank" rel="noopener">voir le code</a></p>
         <ul class="socials socials--small">
           <li><a href="https://github.com/zixow" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a></li>
-          <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a></li>
+          <li><a href="https://www.linkedin.com/in/nathan-thibault-416ba0407" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a></li>
           <li><a href="contact.html" aria-label="Me contacter"><i class="fa-solid fa-envelope"></i></a></li>
         </ul>
       </div>

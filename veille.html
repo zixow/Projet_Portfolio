@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Veille technologique — Nathan THIBAULT · Portfolio BTS SIO SLAM</title>
-    <meta name="description" content="Veille technologique sur la réalité virtuelle et la réalité augmentée : définitions, acteurs, usages, enjeux et actualités.">
+    <meta name="description" content="Ma veille technologique sur la réalité virtuelle et la réalité augmentée : l'essentiel, mes actualités et mon avis.">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <meta name="theme-color" content="#f1e9dc">
     <!-- Aperçu quand le lien du portfolio est partagé (LinkedIn, Discord, Messenger…) -->
@@ -12,7 +12,7 @@
     <meta property="og:site_name" content="Portfolio de Nathan THIBAULT">
     <meta property="og:locale" content="fr_FR">
     <meta property="og:title" content="Veille technologique — Nathan THIBAULT · Portfolio BTS SIO SLAM">
-    <meta property="og:description" content="Veille technologique sur la réalité virtuelle et la réalité augmentée : définitions, acteurs, usages, enjeux et actualités.">
+    <meta property="og:description" content="Ma veille technologique sur la réalité virtuelle et la réalité augmentée : l'essentiel, mes actualités et mon avis.">
     <meta property="og:url" content="https://zixow.github.io/Projet_Portfolio/veille.html">
     <meta property="og:image" content="https://zixow.github.io/Projet_Portfolio/assets/apercu-partage.jpg">
     <meta property="og:image:width" content="1200">
@@ -48,494 +48,94 @@
 
 <main>
 
-    <!-- ============ VEILLE TECHNOLOGIQUE ============ -->
+    <!-- ============ VEILLE TECHNOLOGIQUE (version courte) ============ -->
     <section class="section" id="veille">
         <div class="container">
             <header class="section__header reveal">
                 <span class="section__label">Veille technologique</span>
                 <h2 class="section__title">Réalité virtuelle <span class="gradient-text">&amp; réalité augmentée</span></h2>
-                <p class="section__subtitle">Où en sont les technologies immersives, qui sont les acteurs, et qu'est-ce que cela change pour un développeur ?</p>
+                <p class="section__subtitle">Ce que je suis depuis septembre 2025, en bref.</p>
             </header>
 
-            <div class="veille__intro reveal">
-                <div class="problematique">
-                    <span class="problematique__label"><i class="fa-solid fa-magnifying-glass"></i> Problématique</span>
-                    <blockquote>
-                        En quoi la réalité virtuelle et la réalité augmentée transforment-elles nos usages,
-                        et quelles opportunités offrent-elles aux développeurs d'applications ?
-                    </blockquote>
-                    <p>
-                        Longtemps réservées au jeu vidéo et aux laboratoires, la VR et l'AR arrivent dans la santé, l'industrie,
-                        l'éducation ou le commerce. Les géants de la tech (Meta, Apple, Google, Samsung, Valve) y investissent massivement,
-                        entre casques immersifs et lunettes connectées dopées à l'intelligence artificielle.
-                    </p>
-                </div>
+            <div class="problematique reveal">
+                <span class="problematique__label"><i class="fa-solid fa-magnifying-glass"></i> Ma question</span>
+                <blockquote>Comment la réalité virtuelle et la réalité augmentée changent-elles nos usages, et qu'est-ce que cela change pour un développeur ?</blockquote>
                 <ul class="veille__meta">
-                    <li><i class="fa-solid fa-vr-cardboard"></i><span><small>Sujet</small>VR, AR et réalité mixte (XR)</span></li>
-                    <li><i class="fa-solid fa-calendar-days"></i><span><small>Période suivie</small>Depuis septembre 2025</span></li>
-                    <li><i class="fa-solid fa-rotate"></i><span><small>Dernière mise à jour</small>Octobre 2026</span></li>
-                    <li><i class="fa-solid fa-rss"></i><span><small>Outils</small>Feedly, Google Alertes, YouTube</span></li>
+                    <li><i class="fa-solid fa-calendar-days"></i> Depuis septembre 2025</li>
+                    <li><i class="fa-solid fa-rss"></i> Feedly, Google Alertes, YouTube</li>
                 </ul>
             </div>
 
-            <!-- Onglets -->
-            <div class="tabs reveal" role="tablist" aria-label="Parties de la veille technologique">
-                <button class="tab-btn" type="button" role="tab" id="tab-btn-def" aria-controls="tab-def" aria-selected="true"><i class="fa-solid fa-book-open"></i> Définitions</button>
-                <button class="tab-btn" type="button" role="tab" id="tab-btn-acteurs" aria-controls="tab-acteurs" aria-selected="false" tabindex="-1"><i class="fa-solid fa-microchip"></i> Acteurs &amp; matériel</button>
-                <button class="tab-btn" type="button" role="tab" id="tab-btn-usages" aria-controls="tab-usages" aria-selected="false" tabindex="-1"><i class="fa-solid fa-lightbulb"></i> Usages</button>
-                <button class="tab-btn" type="button" role="tab" id="tab-btn-dev" aria-controls="tab-dev" aria-selected="false" tabindex="-1"><i class="fa-solid fa-code"></i> Développer en XR</button>
-                <button class="tab-btn" type="button" role="tab" id="tab-btn-enjeux" aria-controls="tab-enjeux" aria-selected="false" tabindex="-1"><i class="fa-solid fa-scale-balanced"></i> Enjeux &amp; limites</button>
-                <button class="tab-btn" type="button" role="tab" id="tab-btn-news" aria-controls="tab-news" aria-selected="false" tabindex="-1"><i class="fa-solid fa-newspaper"></i> Actualités</button>
-                <button class="tab-btn" type="button" role="tab" id="tab-btn-methode" aria-controls="tab-methode" aria-selected="false" tabindex="-1"><i class="fa-solid fa-filter"></i> Méthodologie</button>
+            <!-- L'essentiel -->
+            <h3 class="sub-title"><i class="fa-solid fa-book-open"></i> En bref</h3>
+            <div class="grid-3">
+                <article class="card def-card reveal">
+                    <span class="def-card__icon def-card__icon--vr"><i class="fa-solid fa-vr-cardboard"></i></span>
+                    <span class="def-card__acronym">VR</span>
+                    <h3>Réalité virtuelle</h3>
+                    <p>Un casque plonge l'utilisateur dans un monde entièrement virtuel.</p>
+                    <p class="def-card__ex"><strong>Exemples :</strong> Meta Quest 3, Steam Frame</p>
+                </article>
+                <article class="card def-card reveal">
+                    <span class="def-card__icon def-card__icon--ar"><i class="fa-solid fa-mobile-screen"></i></span>
+                    <span class="def-card__acronym">AR</span>
+                    <h3>Réalité augmentée</h3>
+                    <p>Des éléments virtuels s'ajoutent au monde réel, sur un téléphone ou des lunettes.</p>
+                    <p class="def-card__ex"><strong>Exemples :</strong> Pokémon GO, Meta Ray-Ban Display</p>
+                </article>
+                <article class="card def-card reveal">
+                    <span class="def-card__icon def-card__icon--mr"><i class="fa-solid fa-cube"></i></span>
+                    <span class="def-card__acronym">MR</span>
+                    <h3>Réalité mixte</h3>
+                    <p>Le réel et le virtuel se mélangent. On regroupe tout cela sous le nom de XR.</p>
+                    <p class="def-card__ex"><strong>Exemples :</strong> Apple Vision Pro, Samsung Galaxy XR</p>
+                </article>
             </div>
 
-            <!-- Onglet : Définitions -->
-            <div class="tab-panel active" role="tabpanel" id="tab-def" aria-labelledby="tab-btn-def" tabindex="0">
-                <div class="grid-3">
-                    <article class="card def-card">
-                        <span class="def-card__icon def-card__icon--vr"><i class="fa-solid fa-vr-cardboard"></i></span>
-                        <span class="def-card__acronym">VR · Virtual Reality</span>
-                        <h3>Réalité virtuelle</h3>
-                        <p>L'utilisateur est plongé dans un environnement entièrement généré par ordinateur. Un casque masque le monde réel et des capteurs suivent les mouvements de la tête et des mains pour interagir avec cet univers.</p>
-                        <p class="def-card__ex"><strong>Exemples :</strong> Meta Quest 3, Steam Frame, PlayStation VR2</p>
-                    </article>
-                    <article class="card def-card">
-                        <span class="def-card__icon def-card__icon--ar"><i class="fa-solid fa-mobile-screen"></i></span>
-                        <span class="def-card__acronym">AR · Augmented Reality</span>
-                        <h3>Réalité augmentée</h3>
-                        <p>Des éléments virtuels (textes, objets 3D, indications) sont superposés au monde réel, en temps réel, à travers l'écran d'un smartphone ou des lunettes transparentes.</p>
-                        <p class="def-card__ex"><strong>Exemples :</strong> Pokémon GO, filtres Snapchat, IKEA Place, Meta Ray-Ban Display</p>
-                    </article>
-                    <article class="card def-card">
-                        <span class="def-card__icon def-card__icon--mr"><i class="fa-solid fa-cube"></i></span>
-                        <span class="def-card__acronym">MR · Mixed Reality</span>
-                        <h3>Réalité mixte</h3>
-                        <p>Objets virtuels et réels cohabitent et interagissent : un objet 3D peut être posé sur une vraie table ou caché derrière un vrai mur. On regroupe toutes ces technologies sous le terme <strong>XR</strong> (eXtended Reality).</p>
-                        <p class="def-card__ex"><strong>Exemples :</strong> Apple Vision Pro, Samsung Galaxy XR, Meta Quest 3</p>
-                    </article>
+            <div class="grid-2 veille__duo">
+                <div class="card reveal">
+                    <h3 class="card-title"><i class="fa-solid fa-lightbulb"></i> À quoi ça sert</h3>
+                    <ul class="chips">
+                        <li>Jeu vidéo</li><li>Formation</li><li>Santé</li><li>Industrie</li><li>Commerce</li><li>Architecture</li>
+                    </ul>
                 </div>
-
-                <div class="card continuum">
-                    <h3>Le continuum réalité – virtualité</h3>
-                    <p class="muted">Modèle proposé par Paul Milgram et Fumio Kishino (1994) : il n'y a pas de frontière nette entre réel et virtuel, mais un continuum.</p>
-                    <div class="continuum__bar" aria-hidden="true">
-                        <span class="continuum__mr">Réalité mixte</span>
-                        <span class="continuum__dot" style="left:12.5%"></span>
-                        <span class="continuum__dot" style="left:37.5%"></span>
-                        <span class="continuum__dot" style="left:62.5%"></span>
-                        <span class="continuum__dot" style="left:87.5%"></span>
-                    </div>
-                    <ol class="continuum__points">
-                        <li><strong><span class="continuum__long">Environnement réel</span><span class="continuum__court">Réel</span></strong><small>Le monde tel qu'on le voit</small></li>
-                        <li><strong>Réalité augmentée</strong><small>Le réel enrichi de virtuel</small></li>
-                        <li><strong>Virtualité augmentée</strong><small>Le virtuel enrichi de réel</small></li>
-                        <li><strong><span class="continuum__long">Environnement virtuel</span><span class="continuum__court">Virtuel</span></strong><small>Un monde 100 % numérique</small></li>
-                    </ol>
-                </div>
-
-                <h3 class="sub-title"><i class="fa-solid fa-table-columns"></i> VR ou AR : comparatif</h3>
-                <div class="table-wrap">
-                    <table class="compare">
-                        <thead>
-                        <tr><th scope="col">Critère</th><th scope="col">Réalité virtuelle</th><th scope="col">Réalité augmentée</th></tr>
-                        </thead>
-                        <tbody>
-                        <tr><td>Immersion</td><td>Totale</td><td>Partielle</td></tr>
-                        <tr><td>Rapport au réel</td><td>L'utilisateur est coupé du monde réel</td><td>Le monde réel reste visible et est enrichi</td></tr>
-                        <tr><td>Matériel</td><td>Casque autonome ou relié à un PC</td><td>Smartphone, tablette, lunettes connectées</td></tr>
-                        <tr><td>Interactions</td><td>Manettes, suivi des mains et du regard</td><td>Écran tactile, gestes, voix</td></tr>
-                        <tr><td>Usages types</td><td>Jeu, simulation, formation</td><td>Aide à la tâche, commerce, navigation</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <h3 class="sub-title"><i class="fa-solid fa-clock-rotate-left"></i> Repères historiques</h3>
-                <ol class="history">
-                    <li><span class="history__year">1968</span>Ivan Sutherland crée « l'Épée de Damoclès », premier visiocasque.</li>
-                    <li><span class="history__year">1990</span>Tom Caudell, chercheur chez Boeing, invente le terme « réalité augmentée ».</li>
-                    <li><span class="history__year">2012</span>Le casque Oculus Rift est financé sur Kickstarter et relance la VR.</li>
-                    <li><span class="history__year">2016</span>Pokémon GO popularise l'AR, HTC Vive arrive chez le grand public.</li>
-                    <li><span class="history__year">2019</span>Oculus Quest : le premier casque VR autonome à grand succès.</li>
-                    <li><span class="history__year">2024</span>Apple Vision Pro : Apple entre sur le marché avec « l'informatique spatiale ».</li>
-                </ol>
-
-                <h3 class="sub-title"><i class="fa-solid fa-spell-check"></i> Glossaire</h3>
-                <dl class="glossary">
-                    <div class="card glossary__item"><dt>6DoF / 3DoF</dt><dd>Six degrés de liberté : le casque suit la rotation <em>et</em> le déplacement de la tête. En 3DoF, seule la rotation est détectée.</dd></div>
-                    <div class="card glossary__item"><dt>Passthrough</dt><dd>Les caméras du casque filment le monde réel et l'affichent à l'intérieur : c'est ce qui permet la réalité mixte.</dd></div>
-                    <div class="card glossary__item"><dt>FOV</dt><dd><em>Field of View</em> : le champ de vision, en degrés. Plus il est large, plus l'immersion est forte.</dd></div>
-                    <div class="card glossary__item"><dt>SLAM</dt><dd><em>Simultaneous Localization And Mapping</em> : l'appareil cartographie la pièce et s'y repère en même temps. Rien à voir avec mon option… quoique !</dd></div>
-                    <div class="card glossary__item"><dt>Eye tracking</dt><dd>Suivi du regard, utilisé pour interagir et pour le <em>rendu fovéal</em> : seule la zone regardée est affichée en pleine qualité.</dd></div>
-                    <div class="card glossary__item"><dt>Latence</dt><dd>Délai entre un mouvement et son affichage. Au-delà d'environ 20 ms, le risque de cybercinétose (nausée) augmente.</dd></div>
-                </dl>
-            </div>
-
-            <!-- Onglet : Acteurs & matériel -->
-            <div class="tab-panel" role="tabpanel" id="tab-acteurs" aria-labelledby="tab-btn-acteurs" tabindex="0">
-                <p class="panel-intro">Le marché se partage entre <strong>casques immersifs</strong> (jeu, travail, formation) et <strong>lunettes légères</strong> pensées pour un usage quotidien. Prix indiqués : prix de lancement aux États-Unis.</p>
-                <div class="grid-auto">
-                    <article class="card card--hover device-card">
-                        <div class="device-card__head">
-                            <span class="device-card__logo"><i class="fa-brands fa-meta"></i></span>
-                            <div><h3>Meta Quest 3 / 3S</h3><span>Meta · 2023 / 2024</span></div>
-                        </div>
-                        <span class="pill pill--vr">Casque autonome VR / MR</span>
-                        <p>La gamme la plus répandue du marché. Le passthrough couleur permet de mélanger réel et virtuel. Système : Horizon OS.</p>
-                        <div class="device-card__price"><i class="fa-solid fa-tag"></i> 499 $ / 299 $</div>
-                    </article>
-                    <article class="card card--hover device-card">
-                        <div class="device-card__head">
-                            <span class="device-card__logo"><i class="fa-brands fa-apple"></i></span>
-                            <div><h3>Apple Vision Pro</h3><span>Apple · 2024 (puce M5 en 2025)</span></div>
-                        </div>
-                        <span class="pill pill--mr">Ordinateur spatial MR</span>
-                        <p>Écrans micro-OLED très haute définition, contrôle par le regard et les gestes, système visionOS. Positionné haut de gamme : productivité et vidéo immersive.</p>
-                        <div class="device-card__price"><i class="fa-solid fa-tag"></i> 3 499 $</div>
-                    </article>
-                    <article class="card card--hover device-card">
-                        <div class="device-card__head">
-                            <span class="device-card__logo"><i class="fa-brands fa-android"></i></span>
-                            <div><h3>Samsung Galaxy XR</h3><span>Samsung × Google · octobre 2025</span></div>
-                        </div>
-                        <span class="pill pill--mr">Casque MR Android XR</span>
-                        <p>Premier casque sous Android XR, avec l'IA Gemini intégrée et le suivi des yeux et des mains. L'alternative Android au Vision Pro.</p>
-                        <div class="device-card__price"><i class="fa-solid fa-tag"></i> 1 799 $</div>
-                    </article>
-                    <article class="card card--hover device-card">
-                        <div class="device-card__head">
-                            <span class="device-card__logo"><i class="fa-brands fa-steam"></i></span>
-                            <div><h3>Valve Steam Frame</h3><span>Valve · 2026</span></div>
-                        </div>
-                        <span class="pill pill--vr">Casque autonome VR</span>
-                        <p>Pensé pour le jeu PC : il lance des jeux Steam en autonome ou les diffuse sans fil depuis un PC, avec un streaming optimisé grâce au suivi du regard.</p>
-                        <div class="device-card__price"><i class="fa-solid fa-tag"></i> à partir de 1 059 $</div>
-                    </article>
-                    <article class="card card--hover device-card">
-                        <div class="device-card__head">
-                            <span class="device-card__logo"><i class="fa-solid fa-glasses"></i></span>
-                            <div><h3>Meta Ray-Ban Display</h3><span>Meta × EssilorLuxottica · 2025</span></div>
-                        </div>
-                        <span class="pill pill--ar">Lunettes à écran</span>
-                        <p>Un petit écran intégré au verre affiche messages, itinéraires ou traductions. Elles se pilotent avec le Neural Band, un bracelet qui détecte les gestes de la main.</p>
-                        <div class="device-card__price"><i class="fa-solid fa-tag"></i> 799 $</div>
-                    </article>
-                    <article class="card card--hover device-card">
-                        <div class="device-card__head">
-                            <span class="device-card__logo"><i class="fa-solid fa-display"></i></span>
-                            <div><h3>Lunettes d'affichage</h3><span>XREAL, VITURE, RayNeo…</span></div>
-                        </div>
-                        <span class="pill pill--ar">Écran virtuel portable</span>
-                        <p>Branchées à un smartphone, un PC ou une console, elles affichent un écran géant devant les yeux. Au CES 2026, Asus et XREAL ont présenté des lunettes gaming à 240 Hz.</p>
-                        <div class="device-card__price"><i class="fa-solid fa-tag"></i> à partir d'environ 300 $</div>
-                    </article>
-                </div>
-
-                <h3 class="sub-title"><i class="fa-solid fa-layer-group"></i> Les plateformes logicielles</h3>
-                <ul class="chips chips--lg">
-                    <li><i class="fa-brands fa-meta"></i> Horizon OS — Meta</li>
-                    <li><i class="fa-brands fa-apple"></i> visionOS — Apple</li>
-                    <li><i class="fa-brands fa-google"></i> Android XR — Google</li>
-                    <li><i class="fa-brands fa-steam"></i> SteamOS / SteamVR — Valve</li>
-                    <li><i class="fa-solid fa-unlock"></i> OpenXR — standard ouvert</li>
-                </ul>
-            </div>
-
-            <!-- Onglet : Usages -->
-            <div class="tab-panel" role="tabpanel" id="tab-usages" aria-labelledby="tab-btn-usages" tabindex="0">
-                <p class="panel-intro">La VR et l'AR ne servent pas qu'à jouer : de nombreux secteurs les utilisent déjà pour former, vendre ou assister leurs équipes.</p>
-                <div class="grid-auto">
-                    <article class="card card--hover usage-card">
-                        <span class="usage-card__icon"><i class="fa-solid fa-heart-pulse"></i></span>
-                        <h3>Santé</h3>
-                        <p>Formation des chirurgiens en simulation, rééducation, thérapie des phobies par exposition progressive, visualisation 3D d'organes.</p>
-                    </article>
-                    <article class="card card--hover usage-card">
-                        <span class="usage-card__icon"><i class="fa-solid fa-industry"></i></span>
-                        <h3>Industrie</h3>
-                        <p>Maintenance assistée en AR (instructions affichées sur la machine), jumeaux numériques, formation aux gestes à risque sans danger.</p>
-                    </article>
-                    <article class="card card--hover usage-card">
-                        <span class="usage-card__icon"><i class="fa-solid fa-chalkboard-user"></i></span>
-                        <h3>Éducation</h3>
-                        <p>Visites virtuelles de musées ou de sites historiques, expériences scientifiques impossibles en classe, apprentissage par la pratique.</p>
-                    </article>
-                    <article class="card card--hover usage-card">
-                        <span class="usage-card__icon"><i class="fa-solid fa-cart-shopping"></i></span>
-                        <h3>Commerce</h3>
-                        <p>Essayage virtuel de lunettes, vêtements ou maquillage, visualisation de meubles chez soi (IKEA Place), showrooms virtuels.</p>
-                    </article>
-                    <article class="card card--hover usage-card">
-                        <span class="usage-card__icon"><i class="fa-solid fa-gamepad"></i></span>
-                        <h3>Jeu &amp; divertissement</h3>
-                        <p>Jeux comme Beat Saber ou Half-Life: Alyx, Pokémon GO en AR, concerts et matchs retransmis en immersion.</p>
-                    </article>
-                    <article class="card card--hover usage-card">
-                        <span class="usage-card__icon"><i class="fa-solid fa-house"></i></span>
-                        <h3>Architecture &amp; immobilier</h3>
-                        <p>Visites de biens à distance, revue de maquettes 3D à l'échelle 1 avant la construction, aménagement intérieur.</p>
-                    </article>
+                <div class="card reveal">
+                    <h3 class="card-title"><i class="fa-solid fa-code"></i> Pour un développeur</h3>
+                    <ul class="chips">
+                        <li>WebXR (JavaScript)</li><li>Three.js</li><li>Unity (C#)</li><li>ARCore / ARKit</li><li>OpenXR</li>
+                    </ul>
+                    <p class="veille__note">L'accueil de ce portfolio utilise déjà Three.js : la 3D dans le navigateur est à ma portée.</p>
                 </div>
             </div>
 
-            <!-- Onglet : Développer en XR -->
-            <div class="tab-panel" role="tabpanel" id="tab-dev" aria-labelledby="tab-btn-dev" tabindex="0">
-                <p class="panel-intro">Ce qui m'intéresse en tant que futur développeur SLAM : la XR devient accessible avec des outils proches de ceux que j'utilise déjà, à commencer par <strong>JavaScript</strong>.</p>
-                <div class="grid-auto">
-                    <article class="card card--hover dev-card dev-card--highlight">
-                        <div class="dev-card__head"><i class="fa-solid fa-globe"></i><h3>WebXR</h3></div>
-                        <span class="pill pill--ar">JavaScript</span>
-                        <p>API du W3C pour créer des expériences VR / AR directement dans le navigateur, sans installation. Bibliothèques : Three.js, A-Frame, Babylon.js.</p>
-                        <p class="dev-card__link"><i class="fa-solid fa-link"></i> Lien direct avec mes compétences HTML / JS</p>
-                    </article>
-                    <article class="card card--hover dev-card">
-                        <div class="dev-card__head"><i class="fa-brands fa-unity"></i><h3>Unity</h3></div>
-                        <span class="pill pill--vr">C#</span>
-                        <p>Le moteur le plus utilisé pour les applications XR, avec le XR Interaction Toolkit. Il cible Quest, Android XR, visionOS et le PC.</p>
-                    </article>
-                    <article class="card card--hover dev-card">
-                        <div class="dev-card__head"><i class="fa-solid fa-mountain-sun"></i><h3>Unreal Engine</h3></div>
-                        <span class="pill pill--vr">C++ / Blueprints</span>
-                        <p>Rendu photoréaliste, utilisé pour la simulation, l'architecture et les jeux haut de gamme.</p>
-                    </article>
-                    <article class="card card--hover dev-card">
-                        <div class="dev-card__head"><i class="fa-solid fa-unlock"></i><h3>OpenXR</h3></div>
-                        <span class="pill pill--mr">Standard Khronos</span>
-                        <p>API ouverte et multiplateforme : on développe une fois pour plusieurs casques (Meta, Valve, Samsung, Pico…).</p>
-                    </article>
-                    <article class="card card--hover dev-card">
-                        <div class="dev-card__head"><i class="fa-solid fa-mobile-screen"></i><h3>ARCore &amp; ARKit</h3></div>
-                        <span class="pill pill--ar">Kotlin / Swift</span>
-                        <p>Kits de Google et d'Apple pour l'AR mobile : détection des surfaces, ancrage d'objets 3D, estimation de la lumière.</p>
-                    </article>
-                    <article class="card card--hover dev-card">
-                        <div class="dev-card__head"><i class="devicon-flutter-plain"></i><h3>Flutter</h3></div>
-                        <span class="pill pill--ar">Dart</span>
-                        <p>Des packages communautaires s'appuient sur ARCore / ARKit pour ajouter de l'AR à une application Flutter : une piste pour mes projets mobiles.</p>
-                    </article>
-                </div>
-
-                <div class="code">
-                    <div class="code__bar">
-                        <span class="code__dots" aria-hidden="true"><i></i><i></i><i></i></span>
-                        <span>scene-vr.html — une scène VR en 10 lignes avec A-Frame</span>
-                        <button class="code__copy" type="button" data-copy><i class="fa-regular fa-copy"></i> Copier</button>
-                    </div>
-                    <pre><code><span class="tok-com">&lt;!-- Une scène 3D visitable dans le navigateur et dans un casque VR --&gt;</span>
-<span class="tok-tag">&lt;script</span> <span class="tok-attr">src</span>=<span class="tok-val">"https://aframe.io/releases/1.6.0/aframe.min.js"</span><span class="tok-tag">&gt;&lt;/script&gt;</span>
-
-<span class="tok-tag">&lt;a-scene&gt;</span>
-  <span class="tok-tag">&lt;a-box</span> <span class="tok-attr">position</span>=<span class="tok-val">"-1 0.5 -3"</span> <span class="tok-attr">rotation</span>=<span class="tok-val">"0 45 0"</span> <span class="tok-attr">color</span>=<span class="tok-val">"#22d3ee"</span><span class="tok-tag">&gt;&lt;/a-box&gt;</span>
-  <span class="tok-tag">&lt;a-sphere</span> <span class="tok-attr">position</span>=<span class="tok-val">"0 1.25 -5"</span> <span class="tok-attr">radius</span>=<span class="tok-val">"1.25"</span> <span class="tok-attr">color</span>=<span class="tok-val">"#a855f7"</span><span class="tok-tag">&gt;&lt;/a-sphere&gt;</span>
-  <span class="tok-tag">&lt;a-plane</span> <span class="tok-attr">rotation</span>=<span class="tok-val">"-90 0 0"</span> <span class="tok-attr">width</span>=<span class="tok-val">"8"</span> <span class="tok-attr">height</span>=<span class="tok-val">"8"</span> <span class="tok-attr">color</span>=<span class="tok-val">"#1e1b4b"</span><span class="tok-tag">&gt;&lt;/a-plane&gt;</span>
-  <span class="tok-tag">&lt;a-sky</span> <span class="tok-attr">color</span>=<span class="tok-val">"#0b0d1a"</span><span class="tok-tag">&gt;&lt;/a-sky&gt;</span>
-<span class="tok-tag">&lt;/a-scene&gt;</span></code></pre>
-                </div>
+            <!-- Actualités : lues dans la base de données (table actualite), ajoutées depuis l'administration -->
+            <h3 class="sub-title"><i class="fa-solid fa-newspaper"></i> Actualités</h3>
+            <div class="filters filters--left" id="news-filters" role="group" aria-label="Filtrer les actualités">
+                <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">Toutes</button>
+                <button class="filter-btn" type="button" data-filter="vr" aria-pressed="false">VR</button>
+                <button class="filter-btn" type="button" data-filter="ar" aria-pressed="false">AR</button>
+                <button class="filter-btn" type="button" data-filter="mr" aria-pressed="false">Réalité mixte</button>
+            </div>
+            <div class="news" id="liste-actualites"></div>
+            <div class="news__plus">
+                <button class="btn btn--ghost btn--small" type="button" id="news-plus" hidden><i class="fa-solid fa-chevron-down"></i> Voir les actualités plus anciennes</button>
             </div>
 
-            <!-- Onglet : Enjeux & limites -->
-            <div class="tab-panel" role="tabpanel" id="tab-enjeux" aria-labelledby="tab-btn-enjeux" tabindex="0">
-                <div class="grid-2">
-                    <div class="card pros">
-                        <h3><i class="fa-solid fa-circle-check"></i> Opportunités</h3>
-                        <ul>
-                            <li><strong>Former sans risque :</strong> gestes techniques, chirurgie, sécurité incendie, répétables à volonté.</li>
-                            <li><strong>Visualiser en 3D :</strong> produits, bâtiments ou données, avant même qu'ils existent.</li>
-                            <li><strong>Collaborer à distance</strong> dans un espace virtuel partagé.</li>
-                            <li><strong>Rendre accessibles</strong> des lieux lointains ou fragiles (musées, sites historiques).</li>
-                            <li><strong>Nouveaux métiers :</strong> développeur XR, designer 3D, UX designer « spatial ».</li>
-                        </ul>
-                    </div>
-                    <div class="card cons">
-                        <h3><i class="fa-solid fa-triangle-exclamation"></i> Limites &amp; risques</h3>
-                        <ul>
-                            <li><strong>Cybercinétose :</strong> nausées et vertiges quand le mouvement vu ne correspond pas au mouvement ressenti.</li>
-                            <li><strong>Coût :</strong> les casques haut de gamme dépassent 1 000 $ et produire du contenu 3D coûte cher.</li>
-                            <li><strong>Confort :</strong> poids sur le visage, autonomie souvent limitée à 2 ou 3 heures, fatigue visuelle.</li>
-                            <li><strong>Vie privée :</strong> caméras en permanence, cartographie du domicile, données du regard très sensibles.</li>
-                            <li><strong>Santé et société :</strong> usage déconseillé aux jeunes enfants, risque d'isolement.</li>
-                            <li><strong>Fragmentation :</strong> plusieurs écosystèmes concurrents (Horizon OS, visionOS, Android XR…).</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="card perspective">
-                    <h3><i class="fa-solid fa-rocket"></i> Perspectives</h3>
-                    <p>
-                        La tendance 2025-2026 est nette : les grands acteurs misent sur des <strong>lunettes légères associées à l'IA</strong>
-                        (assistant vocal, traduction, reconnaissance de ce que l'on regarde), tandis que les <strong>casques</strong> restent la référence
-                        pour l'immersion totale (jeu, formation, simulation). Les standards ouverts comme <strong>OpenXR</strong> et <strong>WebXR</strong>
-                        facilitent le développement multiplateforme et rendent ce domaine accessible aux développeurs web et mobile.
-                    </p>
-                </div>
-            </div>
+            <!-- Méthode -->
+            <h3 class="sub-title"><i class="fa-solid fa-arrows-spin"></i> Ma méthode</h3>
+            <ol class="steps">
+                <li class="card step"><span class="step__num">1</span><h4>Collecter</h4><p>Alertes et flux RSS sur la VR et l'AR.</p></li>
+                <li class="card step"><span class="step__num">2</span><h4>Trier</h4><p>Je garde les informations récentes et fiables.</p></li>
+                <li class="card step"><span class="step__num">3</span><h4>Vérifier</h4><p>Je compare au moins deux sources.</p></li>
+                <li class="card step"><span class="step__num">4</span><h4>Résumer</h4><p>Une phrase pour l'info, une pour mon avis.</p></li>
+            </ol>
 
-            <!-- Onglet : Actualités -->
-            <div class="tab-panel" role="tabpanel" id="tab-news" aria-labelledby="tab-btn-news" tabindex="0">
-                <div class="filters filters--left" id="news-filters" role="group" aria-label="Filtrer les actualités">
-                    <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">Toutes</button>
-                    <button class="filter-btn" type="button" data-filter="vr" aria-pressed="false">VR</button>
-                    <button class="filter-btn" type="button" data-filter="ar" aria-pressed="false">AR</button>
-                    <button class="filter-btn" type="button" data-filter="mr" aria-pressed="false">Réalité mixte</button>
-                </div>
-
-                <!-- À COMPLÉTER : ajoutez vos nouvelles actualités en haut de la liste -->
-                <div class="news">
-                    <article class="card news-item reveal" data-category="vr">
-                        <div class="news-item__date">Sept. <small>2026</small></div>
-                        <div>
-                            <span class="pill pill--vr">VR</span>
-                            <h4>Valve ouvre les réservations du Steam Frame</h4>
-                            <p>Le casque VR autonome de Valve devient réservable via Steam, à partir de 1 059 $ pour la version 256 Go. L'alimentation est vendue séparément.</p>
-                            <p class="news-item__analysis"><strong>Mon analyse :</strong> un prix plus élevé que prévu, expliqué par la hausse du coût des composants. Valve vise les joueurs PC exigeants plutôt que le grand public.</p>
-                            <p class="news-item__source">Source : <a href="https://www.uploadvr.com/steam-frame-price-revealed-reservations-opened-alyx-included/" target="_blank" rel="noopener">UploadVR</a></p>
-                        </div>
-                    </article>
-
-                    <article class="card news-item reveal" data-category="ar">
-                        <div class="news-item__date">Janv. <small>2026</small></div>
-                        <div>
-                            <span class="pill pill--ar">AR</span>
-                            <h4>CES 2026 : Asus et XREAL dévoilent les ROG XREAL R1</h4>
-                            <p>Des lunettes d'affichage orientées jeu vidéo : écrans micro-OLED, 240 Hz, champ de vision de 57° pour 91 grammes.</p>
-                            <p class="news-item__analysis"><strong>Mon analyse :</strong> les lunettes « écran » deviennent un vrai accessoire de jeu, une alternative plus légère aux casques.</p>
-                            <p class="news-item__source">Source : <a href="https://www.xreal.com/blog/rog-xreal-r1-ar-gaming-glasses-announce-en" target="_blank" rel="noopener">XREAL (communiqué)</a></p>
-                        </div>
-                    </article>
-
-                    <article class="card news-item reveal" data-category="ar">
-                        <div class="news-item__date">Déc. <small>2025</small></div>
-                        <div>
-                            <span class="pill pill--ar">AR</span>
-                            <h4>Google détaille ses lunettes Android XR pour 2026</h4>
-                            <p>Deux familles de lunettes : des lunettes IA sans écran (audio, caméra) et des lunettes avec un affichage dans le verre, conçues avec Samsung et des marques de lunetterie comme Warby Parker et Gentle Monster.</p>
-                            <p class="news-item__analysis"><strong>Mon analyse :</strong> Google mise sur le design et l'IA Gemini pour rendre les lunettes connectées acceptables au quotidien.</p>
-                            <p class="news-item__source">Source : <a href="https://blog.google/" target="_blank" rel="noopener">Blog Google</a></p>
-                        </div>
-                    </article>
-
-                    <article class="card news-item reveal" data-category="vr">
-                        <div class="news-item__date">Nov. <small>2025</small></div>
-                        <div>
-                            <span class="pill pill--vr">VR</span>
-                            <h4>Valve annonce le Steam Frame</h4>
-                            <p>Un casque VR autonome sous SteamOS, capable de lancer des jeux Steam ou de les diffuser sans fil depuis un PC, avec un streaming optimisé par le suivi du regard.</p>
-                            <p class="news-item__analysis"><strong>Mon analyse :</strong> le retour de Valve relance la concurrence face à Meta sur le marché de la VR pour les joueurs.</p>
-                            <p class="news-item__source">Source : <a href="https://store.steampowered.com/" target="_blank" rel="noopener">Steam / Valve</a></p>
-                        </div>
-                    </article>
-
-                    <article class="card news-item reveal" data-category="mr">
-                        <div class="news-item__date">Oct. <small>2025</small></div>
-                        <div>
-                            <span class="pill pill--mr">MR</span>
-                            <h4>Samsung lance le Galaxy XR, premier casque Android XR</h4>
-                            <p>Vendu 1 799 $, il intègre l'IA Gemini, le suivi des yeux et des mains, et donne accès aux applications Android.</p>
-                            <p class="news-item__analysis"><strong>Mon analyse :</strong> l'arrivée de l'écosystème Android pourrait faire pour la XR ce qu'il a fait pour le smartphone : multiplier les appareils et les applications.</p>
-                            <p class="news-item__source">Source : <a href="https://news.samsung.com/fr/" target="_blank" rel="noopener">Samsung Newsroom</a></p>
-                        </div>
-                    </article>
-
-                    <article class="card news-item reveal" data-category="ar">
-                        <div class="news-item__date">Sept. <small>2025</small></div>
-                        <div>
-                            <span class="pill pill--ar">AR</span>
-                            <h4>Meta présente les Ray-Ban Display et le Neural Band</h4>
-                            <p>Des lunettes avec un écran intégré dans le verre droit, pilotées par un bracelet qui lit l'activité musculaire du poignet. Prix : 799 $.</p>
-                            <p class="news-item__analysis"><strong>Mon analyse :</strong> le bracelet résout un vrai problème (comment interagir avec des lunettes ?) et pourrait devenir un standard.</p>
-                            <p class="news-item__source">Source : <a href="https://about.fb.com/news/" target="_blank" rel="noopener">Meta Newsroom</a></p>
-                        </div>
-                    </article>
-
-                    <article class="card news-item reveal" data-category="ar">
-                        <div class="news-item__date">Juin <small>2025</small></div>
-                        <div>
-                            <span class="pill pill--ar">AR</span>
-                            <h4>Snap annonce ses lunettes AR grand public « Specs » pour 2026</h4>
-                            <p>Après plusieurs générations de Spectacles réservées aux développeurs, Snap prépare une version grand public de ses lunettes de réalité augmentée.</p>
-                            <p class="news-item__analysis"><strong>Mon analyse :</strong> la course aux vraies lunettes AR ne se limite pas aux géants comme Apple ou Meta.</p>
-                            <p class="news-item__source">Source : <a href="https://newsroom.snap.com/" target="_blank" rel="noopener">Snap Newsroom</a></p>
-                        </div>
-                    </article>
-
-                    <article class="card news-item reveal" data-category="mr">
-                        <div class="news-item__date">Déc. <small>2024</small></div>
-                        <div>
-                            <span class="pill pill--mr">MR</span>
-                            <h4>Google annonce Android XR</h4>
-                            <p>Un système d'exploitation pour casques et lunettes, développé avec Samsung et Qualcomm, compatible avec Unity, OpenXR et WebXR.</p>
-                            <p class="news-item__analysis"><strong>Mon analyse :</strong> le support de WebXR et d'OpenXR est une bonne nouvelle pour les développeurs : pas besoin d'apprendre une technologie propriétaire.</p>
-                            <p class="news-item__source">Source : <a href="https://blog.google/" target="_blank" rel="noopener">Blog Google</a></p>
-                        </div>
-                    </article>
-
-                    <article class="card news-item reveal" data-category="ar">
-                        <div class="news-item__date">Sept. <small>2024</small></div>
-                        <div>
-                            <span class="pill pill--ar">AR</span>
-                            <h4>Meta dévoile Orion, son prototype de lunettes AR</h4>
-                            <p>Des lunettes holographiques avec un champ de vision d'environ 70°, présentées comme un aperçu du futur des lunettes AR grand public.</p>
-                            <p class="news-item__analysis"><strong>Mon analyse :</strong> la technologie existe, mais son coût de fabrication la réserve encore aux prototypes.</p>
-                            <p class="news-item__source">Source : <a href="https://about.fb.com/news/" target="_blank" rel="noopener">Meta Newsroom</a></p>
-                        </div>
-                    </article>
-
-                    <article class="card news-item reveal" data-category="mr">
-                        <div class="news-item__date">Fév. <small>2024</small></div>
-                        <div>
-                            <span class="pill pill--mr">MR</span>
-                            <h4>Sortie de l'Apple Vision Pro aux États-Unis</h4>
-                            <p>Apple lance son premier casque à 3 499 $ et parle « d'informatique spatiale » plutôt que de VR ou d'AR.</p>
-                            <p class="news-item__analysis"><strong>Mon analyse :</strong> un prix trop élevé pour le grand public, mais Apple a imposé un nouveau niveau de qualité d'affichage et d'interaction (yeux + mains).</p>
-                            <p class="news-item__source">Source : <a href="https://www.apple.com/fr/newsroom/" target="_blank" rel="noopener">Apple Newsroom</a></p>
-                        </div>
-                    </article>
-                </div>
-            </div>
-
-            <!-- Onglet : Méthodologie -->
-            <div class="tab-panel" role="tabpanel" id="tab-methode" aria-labelledby="tab-btn-methode" tabindex="0">
-                <h3 class="sub-title sub-title--first"><i class="fa-solid fa-arrows-spin"></i> Ma démarche de veille</h3>
-                <ol class="steps">
-                    <li class="card step"><span class="step__num">1</span><h4>Collecter</h4><p>Flux RSS et alertes sur des mots-clés : réalité virtuelle, réalité augmentée, WebXR, Android XR…</p></li>
-                    <li class="card step"><span class="step__num">2</span><h4>Trier</h4><p>Je garde les informations pertinentes, récentes et issues de sources fiables.</p></li>
-                    <li class="card step"><span class="step__num">3</span><h4>Vérifier</h4><p>Je recoupe chaque information avec au moins deux sources différentes.</p></li>
-                    <li class="card step"><span class="step__num">4</span><h4>Synthétiser</h4><p>Je résume l'information et j'ajoute mon analyse personnelle.</p></li>
-                    <li class="card step"><span class="step__num">5</span><h4>Partager</h4><p>Je publie ma synthèse sur ce portfolio et je la mets à jour régulièrement.</p></li>
-                </ol>
-
-                <div class="grid-2">
-                    <div class="card">
-                        <h3 class="card-title"><i class="fa-solid fa-toolbox"></i> Outils</h3>
-                        <ul class="tool-list">
-                            <li><i class="fa-solid fa-rss"></i><span><strong>Feedly</strong> — agrégateur de flux RSS</span></li>
-                            <li><i class="fa-solid fa-bell"></i><span><strong>Google Alertes</strong> — alertes e-mail par mot-clé</span></li>
-                            <li><i class="fa-brands fa-youtube"></i><span><strong>YouTube</strong> — tests et conférences (Meta Connect, WWDC, Google I/O)</span></li>
-                            <li><i class="fa-brands fa-reddit-alien"></i><span><strong>Reddit</strong> — r/virtualreality, r/augmentedreality</span></li>
-                            <li><i class="fa-brands fa-linkedin-in"></i><span><strong>LinkedIn</strong> — retours d'expérience d'entreprises</span></li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <h3 class="card-title"><i class="fa-solid fa-newspaper"></i> Sources</h3>
-                        <ul class="source-list">
-                            <li><a href="https://www.realite-virtuelle.com/" target="_blank" rel="noopener">Réalité-Virtuelle.com <span>FR</span></a></li>
-                            <li><a href="https://www.lesnumeriques.com/" target="_blank" rel="noopener">Les Numériques <span>FR</span></a></li>
-                            <li><a href="https://www.frandroid.com/" target="_blank" rel="noopener">Frandroid <span>FR</span></a></li>
-                            <li><a href="https://www.uploadvr.com/" target="_blank" rel="noopener">UploadVR <span>EN</span></a></li>
-                            <li><a href="https://www.roadtovr.com/" target="_blank" rel="noopener">Road to VR <span>EN</span></a></li>
-                            <li><a href="https://immersiveweb.dev/" target="_blank" rel="noopener">Immersive Web (WebXR) <span>EN</span></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Synthèse -->
             <div class="synthese reveal">
-                <h3><i class="fa-solid fa-feather-pointed"></i> Ma synthèse</h3>
+                <h3><i class="fa-solid fa-feather-pointed"></i> Ma conclusion</h3>
                 <p>
-                    La réalité virtuelle et la réalité augmentée ne relèvent plus de la science-fiction : elles sont déjà utilisées pour former,
-                    soigner, vendre ou divertir. Le marché se structure autour de deux familles d'appareils : des <strong>casques immersifs</strong>
-                    (Quest, Vision Pro, Galaxy XR, Steam Frame) et des <strong>lunettes légères</strong> associées à l'intelligence artificielle.
-                    Des freins demeurent (prix, confort, vie privée), mais l'arrivée de standards ouverts comme OpenXR et WebXR rend ce domaine
-                    accessible aux développeurs web et mobile. C'est une piste que je souhaite explorer dans la suite de mes études.
+                    La VR et l'AR sortent du jeu vidéo : on s'en sert déjà pour former, soigner ou vendre.
+                    Les casques restent chers, mais des <strong>lunettes légères avec de l'IA</strong> arrivent.
+                    Pour un développeur web comme moi, <strong>WebXR</strong> et <strong>Three.js</strong> sont une bonne porte d'entrée.
                 </p>
             </div>
         </div>
@@ -548,6 +148,8 @@
 
 <script src="js/composants.js"></script>
 <script src="js/commun.js"></script>
+<script src="data/contenu.js"></script>
+<script src="js/donnees.js"></script>
 <script src="js/veille.js"></script>
 </body>
 </html>

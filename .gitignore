@@ -30,3 +30,6 @@ bin/
 ### IntelliJ (fichiers du projet) ###
 .idea/
 *.iml
+
+### Portfolio : identifiants de la base sur un hébergeur (privés) ###
+api/config.local.php

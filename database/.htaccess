@@ -1,0 +1,2 @@
+# Ce dossier ne doit pas être accessible depuis le navigateur (serveur Apache)
+Require all denied
