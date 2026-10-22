@@ -88,7 +88,7 @@ function lireContenu(PDO $bdd): array
     return [
         'categories'     => array_map(fn ($c) => ['code' => $c['code'], 'libelle' => $c['libelle']], $categories),
         'competences'    => array_map(fn ($c) => ['niveau' => (int) $c['niveau']] + $c, $competences),
-        'certifications' => array_map(fn ($c) => ['annee' => (int) $c['annee']] + $c, $certifications),
+        'certifications' => array_map(fn ($c) => ['annee' => $c['annee'] === null ? null : (int) $c['annee']] + $c, $certifications),
         'projets'        => $projets,
         'actualites'     => $actualites,
     ];

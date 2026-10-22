@@ -33,7 +33,8 @@
   const STATUTS = { obtenue: ['done', 'Obtenue'], en_cours: ['soon', 'En cours'] };
   const carteCertification = (c) => {
     const [classe, libelle] = STATUTS[c.statut] || STATUTS.obtenue;
-    const date = [c.annee, c.detail].filter(Boolean).map(echapper).join(' · ');
+    const infos = [c.annee, c.detail].filter(Boolean).map(echapper).join(' · ');
+    const icone = c.annee ? 'fa-regular fa-calendar' : 'fa-solid fa-award';
     const lien = lienSur(c.lien)
       ? `<a href="${echapper(c.lien)}" target="_blank" rel="noopener">Voir <i class="fa-solid fa-arrow-up-right-from-square"></i></a>`
       : '';
@@ -47,7 +48,7 @@
         <p class="certif-card__org">${echapper(c.organisme)}</p>
         <p>${echapper(c.description)}</p>
         <div class="certif-card__footer">
-          <span><i class="fa-regular fa-calendar"></i> ${date}</span>
+          <span>${infos ? `<i class="${icone}"></i> ${infos}` : ''}</span>
           ${lien}
         </div>
       </article>`;

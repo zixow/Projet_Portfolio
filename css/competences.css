@@ -87,6 +87,7 @@
   font-size: 1.4rem;
 }
 .certif-card__icon--pix   { background: linear-gradient(135deg, #6366f1, #a855f7); }
+.certif-card__icon--oc    { background: linear-gradient(135deg, #7451eb, #4c2fb5); }
 .certif-card__icon--anssi { background: linear-gradient(135deg, #0ea5e9, #1e40af); }
 .certif-card__icon--cnil  { background: linear-gradient(135deg, #ef4444, #db2777); }
 .certif-card__icon--fcc   { background: linear-gradient(135deg, #10b981, #0f766e); }

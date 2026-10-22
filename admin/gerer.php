@@ -42,7 +42,7 @@ function lireFormulaire(array $champs, callable $options): array
             $min = $champ['min'] ?? ($champ['type'] === 'annee' ? 2000 : 0);
             $max = $champ['max'] ?? ($champ['type'] === 'annee' ? 2100 : 65535);
             if ($texte === '' && empty($champ['requis'])) {
-                $valeurs[$nom] = $champ['defaut'] ?? 0;
+                $valeurs[$nom] = $champ['defaut'] ?? null; // champ facultatif laissé vide : NULL dans la base
                 continue;
             }
             if (filter_var($texte, FILTER_VALIDATE_INT, ['options' => ['min_range' => $min, 'max_range' => $max]]) === false) {

@@ -105,7 +105,7 @@ window.CONTENU_PORTFOLIO = {
     ],
     "certifications": [
         {
-            "annee": 2026,
+            "annee": null,
             "nom": "Certification Pix",
             "organisme": "Pix — service public",
             "description": "Certification des compétences numériques : information, communication, création de contenu, protection et sécurité, environnement numérique.",
@@ -116,37 +116,70 @@ window.CONTENU_PORTFOLIO = {
             "style": "pix"
         },
         {
-            "annee": 2025,
-            "nom": "SecNumacadémie",
-            "organisme": "ANSSI",
-            "description": "MOOC de sensibilisation à la sécurité du numérique : panorama de la SSI, authentification, sécurité sur Internet et du poste de travail.",
+            "annee": null,
+            "nom": "HTML et CSS",
+            "organisme": "OpenClassrooms",
+            "description": "Créer des pages web avec HTML et les mettre en forme avec CSS.",
             "statut": "obtenue",
-            "detail": null,
-            "lien": "https://secnumacademie.gouv.fr/",
-            "icone": "fa-solid fa-shield-halved",
-            "style": "anssi"
+            "detail": "Certificat de réussite",
+            "lien": null,
+            "icone": "fa-brands fa-html5",
+            "style": "oc"
         },
         {
-            "annee": 2025,
-            "nom": "Atelier RGPD",
-            "organisme": "CNIL",
-            "description": "MOOC sur le Règlement Général sur la Protection des Données : principes, droits des personnes et obligations des organisations.",
+            "annee": null,
+            "nom": "JavaScript",
+            "organisme": "OpenClassrooms",
+            "description": "Les bases de JavaScript pour rendre une page web interactive.",
             "statut": "obtenue",
-            "detail": null,
-            "lien": "https://atelier-rgpd.cnil.fr/",
-            "icone": "fa-solid fa-scale-balanced",
-            "style": "cnil"
+            "detail": "Certificat de réussite",
+            "lien": null,
+            "icone": "fa-brands fa-js",
+            "style": "oc"
         },
         {
-            "annee": 2026,
-            "nom": "Responsive Web Design",
-            "organisme": "freeCodeCamp",
-            "description": "Certification en ligne sur la conception de pages web adaptatives en HTML et CSS, validée par plusieurs projets pratiques.",
-            "statut": "en_cours",
-            "detail": null,
-            "lien": "https://www.freecodecamp.org/learn/2022/responsive-web-design/",
-            "icone": "fa-solid fa-code",
-            "style": "fcc"
+            "annee": null,
+            "nom": "Java",
+            "organisme": "OpenClassrooms",
+            "description": "Les bases de la programmation en Java, un langage orienté objet.",
+            "statut": "obtenue",
+            "detail": "Certificat de réussite",
+            "lien": null,
+            "icone": "fa-brands fa-java",
+            "style": "oc"
+        },
+        {
+            "annee": null,
+            "nom": "Python",
+            "organisme": "OpenClassrooms",
+            "description": "Les bases de la programmation en Python.",
+            "statut": "obtenue",
+            "detail": "Certificat de réussite",
+            "lien": null,
+            "icone": "fa-brands fa-python",
+            "style": "oc"
+        },
+        {
+            "annee": null,
+            "nom": "Angular",
+            "organisme": "OpenClassrooms",
+            "description": "Créer une application web avec le framework Angular et TypeScript.",
+            "statut": "obtenue",
+            "detail": "Certificat de réussite",
+            "lien": null,
+            "icone": "fa-brands fa-angular",
+            "style": "oc"
+        },
+        {
+            "annee": null,
+            "nom": "ChatGPT",
+            "organisme": "OpenClassrooms",
+            "description": "Utiliser ChatGPT et l'intelligence artificielle générative de façon efficace.",
+            "statut": "obtenue",
+            "detail": "Certificat de réussite",
+            "lien": null,
+            "icone": "fa-solid fa-robot",
+            "style": "oc"
         }
     ],
     "projets": [

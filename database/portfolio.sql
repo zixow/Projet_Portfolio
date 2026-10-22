@@ -50,12 +50,12 @@ CREATE TABLE certification (
     nom         VARCHAR(80)  NOT NULL,
     organisme   VARCHAR(80)  NOT NULL,
     description VARCHAR(300) NOT NULL,
-    annee       YEAR         NOT NULL,
+    annee       YEAR         NULL,              -- facultative
     statut      ENUM('obtenue', 'en_cours') NOT NULL DEFAULT 'obtenue',
     detail      VARCHAR(50)  NULL,                  -- ex. score Pix
     lien        VARCHAR(255) NULL,
     icone       VARCHAR(60)  NOT NULL,              -- classe Font Awesome
-    style       VARCHAR(20)  NOT NULL DEFAULT 'pix', -- couleur de l'icône : pix, anssi, cnil, fcc
+    style       VARCHAR(20)  NOT NULL DEFAULT 'pix', -- couleur de l'icône : pix, oc (OpenClassrooms), anssi, cnil, fcc
     ordre       SMALLINT UNSIGNED NOT NULL DEFAULT 0
 ) ENGINE = InnoDB;
 
@@ -187,10 +187,13 @@ INSERT INTO competence (nom, categorie_id, complement, niveau, description, icon
     ('PostgreSQL', 4, NULL, 65, 'Contraintes d''intégrité, vues, fonctions, gestion des rôles et des droits.', 'devicon-postgresql-plain colored', 2);
 
 INSERT INTO certification (nom, organisme, description, annee, statut, detail, lien, icone, style, ordre) VALUES
-    ('Certification Pix', 'Pix — service public', 'Certification des compétences numériques : information, communication, création de contenu, protection et sécurité, environnement numérique.', 2026, 'obtenue', NULL, 'https://pix.fr/', 'fa-solid fa-medal', 'pix', 1),
-    ('SecNumacadémie', 'ANSSI', 'MOOC de sensibilisation à la sécurité du numérique : panorama de la SSI, authentification, sécurité sur Internet et du poste de travail.', 2025, 'obtenue', NULL, 'https://secnumacademie.gouv.fr/', 'fa-solid fa-shield-halved', 'anssi', 2),
-    ('Atelier RGPD', 'CNIL', 'MOOC sur le Règlement Général sur la Protection des Données : principes, droits des personnes et obligations des organisations.', 2025, 'obtenue', NULL, 'https://atelier-rgpd.cnil.fr/', 'fa-solid fa-scale-balanced', 'cnil', 3),
-    ('Responsive Web Design', 'freeCodeCamp', 'Certification en ligne sur la conception de pages web adaptatives en HTML et CSS, validée par plusieurs projets pratiques.', 2026, 'en_cours', NULL, 'https://www.freecodecamp.org/learn/2022/responsive-web-design/', 'fa-solid fa-code', 'fcc', 4);
+    ('Certification Pix', 'Pix — service public', 'Certification des compétences numériques : information, communication, création de contenu, protection et sécurité, environnement numérique.', NULL, 'obtenue', NULL, 'https://pix.fr/', 'fa-solid fa-medal', 'pix', 1),
+    ('HTML et CSS', 'OpenClassrooms', 'Créer des pages web avec HTML et les mettre en forme avec CSS.', NULL, 'obtenue', 'Certificat de réussite', NULL, 'fa-brands fa-html5', 'oc', 2),
+    ('JavaScript', 'OpenClassrooms', 'Les bases de JavaScript pour rendre une page web interactive.', NULL, 'obtenue', 'Certificat de réussite', NULL, 'fa-brands fa-js', 'oc', 3),
+    ('Java', 'OpenClassrooms', 'Les bases de la programmation en Java, un langage orienté objet.', NULL, 'obtenue', 'Certificat de réussite', NULL, 'fa-brands fa-java', 'oc', 4),
+    ('Python', 'OpenClassrooms', 'Les bases de la programmation en Python.', NULL, 'obtenue', 'Certificat de réussite', NULL, 'fa-brands fa-python', 'oc', 5),
+    ('Angular', 'OpenClassrooms', 'Créer une application web avec le framework Angular et TypeScript.', NULL, 'obtenue', 'Certificat de réussite', NULL, 'fa-brands fa-angular', 'oc', 6),
+    ('ChatGPT', 'OpenClassrooms', 'Utiliser ChatGPT et l''intelligence artificielle générative de façon efficace.', NULL, 'obtenue', 'Certificat de réussite', NULL, 'fa-solid fa-robot', 'oc', 7);
 
 -- Projets ------------------------------------------------
 INSERT INTO projet (id, slug, titre, titre_complet, type, domaine, statut, resume, description, contexte, periode, equipe, image, lien_code, lien_conception, ordre) VALUES
