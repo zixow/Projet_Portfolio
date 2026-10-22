@@ -34,11 +34,14 @@ CREATE TABLE competence (
     nom          VARCHAR(50)  NOT NULL,
     categorie_id TINYINT UNSIGNED NOT NULL,
     complement   VARCHAR(50)  NULL,                 -- affiché après la catégorie : « Front-end · TypeScript »
-    niveau       TINYINT UNSIGNED NOT NULL,
     description  VARCHAR(255) NOT NULL,
     icone        VARCHAR(60)  NOT NULL,             -- classe Devicon, ex. « devicon-php-plain colored »
+    langage      VARCHAR(20)  NOT NULL,             -- langage de l'extrait de code (pour la coloration)
+    source       VARCHAR(80)  NOT NULL,             -- d'où vient l'extrait : « PixelStar · pages/home.php »
+    code         TEXT         NOT NULL,             -- extrait de code affiché sur la carte
+    explication  VARCHAR(500) NOT NULL,             -- ce que fait ce code, en quelques phrases
     ordre        SMALLINT UNSIGNED NOT NULL DEFAULT 0,
-    CONSTRAINT ck_competence_niveau CHECK (niveau BETWEEN 0 AND 100),
+    CONSTRAINT ck_competence_langage CHECK (langage IN ('html', 'css', 'javascript', 'typescript', 'php', 'java', 'dart', 'sql')),
     CONSTRAINT fk_competence_categorie FOREIGN KEY (categorie_id) REFERENCES categorie (id)
 ) ENGINE = InnoDB;
 
@@ -175,16 +178,122 @@ INSERT INTO categorie (id, code, libelle, ordre) VALUES
     (3, 'mobile', 'Mobile', 3),
     (4, 'bdd', 'Base de données', 4);
 
-INSERT INTO competence (nom, categorie_id, complement, niveau, description, icone, ordre) VALUES
-    ('HTML5', 1, NULL, 90, 'Structure sémantique, formulaires, accessibilité et bonnes pratiques SEO.', 'devicon-html5-plain colored', 1),
-    ('CSS3', 1, NULL, 85, 'Flexbox, Grid, responsive design, variables CSS et animations.', 'devicon-css3-plain colored', 2),
-    ('JavaScript', 1, NULL, 75, 'Manipulation du DOM, événements, ES6+, appels d''API REST avec fetch.', 'devicon-javascript-plain colored', 3),
-    ('Angular', 1, 'TypeScript', 60, 'Composants, services, routing, formulaires réactifs et HttpClient.', 'devicon-angularjs-plain colored', 4),
-    ('PHP', 2, NULL, 80, 'POO, architecture MVC, PDO et requêtes préparées, sessions, API REST.', 'devicon-php-plain colored', 1),
-    ('Java', 2, 'Desktop', 70, 'POO, collections, JavaFX, accès aux données avec JDBC, tests JUnit.', 'devicon-java-plain colored', 2),
-    ('Flutter', 3, 'Dart', 60, 'Widgets, navigation, gestion d''état et consommation d''API REST.', 'devicon-flutter-plain colored', 1),
-    ('MySQL', 4, NULL, 80, 'Modélisation Merise (MCD / MLD), requêtes SQL, jointures, procédures et triggers.', 'devicon-mysql-plain colored', 1),
-    ('PostgreSQL', 4, NULL, 65, 'Contraintes d''intégrité, vues, fonctions, gestion des rôles et des droits.', 'devicon-postgresql-plain colored', 2);
+INSERT INTO competence (nom, categorie_id, complement, description, icone, langage, source, code, explication, ordre) VALUES
+    ('HTML5', 1, NULL, 'Structure sémantique, formulaires, accessibilité et bonnes pratiques SEO.', 'devicon-html5-plain colored', 'html', 'Portfolio · contact.html', '<form id="contact-form">
+  <label for="email">E-mail</label>
+  <input type="email" id="email" name="email"
+         autocomplete="email" required>
+
+  <button type="submit">Envoyer le message</button>
+  <p id="form-status" role="status" aria-live="polite"></p>
+</form>', 'Un extrait du formulaire de contact de ce portfolio. Le `label` est relié au champ (`for` = `id`) : un clic sur « E-mail » place le curseur dans le champ, et les lecteurs d''écran annoncent ce qu''il faut saisir. `type="email"` affiche le clavier e-mail sur téléphone et `required` rend le champ obligatoire. La zone `role="status"` fait lire le résultat de l''envoi par les lecteurs d''écran.', 1),
+    ('CSS3', 1, NULL, 'Flexbox, Grid, responsive design, variables CSS et animations.', 'devicon-css3-plain colored', 'css', 'Portfolio · base.css et projets.css', ':root {                  /* thème sombre */
+  --surface: #31263d;
+  --text: #f6eefc;
+}
+[data-theme="light"] {   /* thème clair */
+  --surface: #fffaf2;
+  --text: #2f2219;
+}
+
+.projects__grid {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: 1.75rem;
+}', 'Deux techniques de ce portfolio. Les couleurs sont rangées dans des variables (`--surface`, `--text`) : le bouton de thème change seulement l''attribut `data-theme`, et toute la page passe du sombre au clair. La grille des projets crée autant de colonnes de 420 px minimum que l''écran le permet (`auto-fit` + `minmax`) : deux cartes sur ordinateur, une seule sur téléphone, sans media query.', 2),
+    ('JavaScript', 1, NULL, 'Manipulation du DOM, événements, ES6+, appels d''API REST avec fetch.', 'devicon-javascript-plain colored', 'javascript', 'Portfolio · js/donnees.js', 'try {
+  const reponse = await fetch(''api/contenu.php'', {
+    headers: { Accept: ''application/json'' },
+    signal: AbortSignal.timeout(3000),
+  });
+  if (reponse.ok) {
+    return await reponse.json();
+  }
+} catch (erreur) {
+  // serveur sans PHP ou base arrêtée
+}
+return window.CONTENU_PORTFOLIO; // copie de secours', 'Le chargement du contenu de ce portfolio. `fetch()` demande les données à l''API PHP, et `await` attend la réponse sans bloquer la page. Si le serveur ne répond pas en 3 secondes ou ne fait pas tourner PHP (comme GitHub Pages), on passe dans le `catch` et le site utilise sa copie de secours : il s''affiche dans tous les cas.', 3),
+    ('Angular', 1, 'TypeScript', 'Composants, services, routing, formulaires réactifs et HttpClient.', 'devicon-angularjs-plain colored', 'typescript', 'Exemple · composant Angular', '@Component({
+  selector: ''app-carte-jeu'',
+  template: `
+    <h3>{{ jeu.titre }}</h3>
+    <p>{{ jeu.prix | currency:''EUR'' }}</p>
+    <button (click)="ajouter()">Ajouter au panier</button>
+  `,
+})
+export class CarteJeuComponent {
+  @Input() jeu!: Jeu;
+  @Output() ajout = new EventEmitter<Jeu>();
+
+  ajouter() {
+    this.ajout.emit(this.jeu);
+  }
+}', 'Un composant Angular, une brique réutilisable de l''interface : une carte qui affiche un jeu et son prix (le pipe `currency` le met en forme en euros). `@Input()` reçoit le jeu depuis le composant parent ; au clic sur le bouton, `@Output()` envoie un événement au parent, qui ajoute le jeu au panier.', 4),
+    ('PHP', 2, NULL, 'POO, architecture MVC, PDO et requêtes préparées, sessions, API REST.', 'devicon-php-plain colored', 'php', 'PixelStar · pages/home.php', '<?php
+$genreFilter = isset($_GET[''genre'']) ? (int)$_GET[''genre''] : 0;
+
+$stmt = $pdo->prepare(''SELECT g.* FROM games g
+    INNER JOIN game_genres gg ON gg.game_id = g.id
+    WHERE gg.genre_id = :genre AND g.stock > 0'');
+$stmt->execute(['':genre'' => $genreFilter]);
+$games = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+<?php foreach ($games as $game): ?>
+    <h3><?php echo htmlspecialchars($game[''title'']); ?></h3>
+<?php endforeach; ?>', 'La page d''accueil de PixelStar affiche les jeux d''un genre. Le numéro du genre vient de l''adresse (`?genre=3`) : il est converti en nombre avec `(int)`, puis passé à une requête préparée (`:genre`), ce qui empêche les injections SQL. À l''affichage, `htmlspecialchars()` neutralise les caractères spéciaux du titre pour bloquer les attaques XSS.', 1),
+    ('Java', 2, 'Desktop', 'POO, collections, JavaFX, accès aux données avec JDBC, tests JUnit.', 'devicon-java-plain colored', 'java', 'Cours de POO · Eleves.java', 'public class Eleves extends Personne {
+    private String classe;
+
+    public Eleves(String nom, String prenom,
+                  int age, String classe) {
+        super(nom, prenom, age);
+        this.classe = classe;
+    }
+
+    @Override
+    public void afficher() {
+        super.afficher();
+        System.out.println("Classe : " + classe);
+    }
+}', 'La classe `Eleves` hérite de `Personne` (`extends`) : elle récupère le nom, le prénom et l''âge sans les réécrire. `super(...)` appelle le constructeur de la classe mère. `@Override` redéfinit la méthode `afficher()` : elle affiche d''abord la personne (`super.afficher()`), puis la classe de l''élève. C''est l''héritage et le polymorphisme de la programmation objet.', 2),
+    ('Flutter', 3, 'Dart', 'Widgets, navigation, gestion d''état et consommation d''API REST.', 'devicon-flutter-plain colored', 'dart', 'Caillou Tour · widgets/etoiles.dart', 'class Etoiles extends StatelessWidget {
+  const Etoiles({super.key, required this.note});
+  final double note; // ex. 4.5
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(children: [
+      for (var position = 1; position <= 5; position++)
+        Icon(
+          _iconePour(position),
+          color: CouleursCaillou.soleil,
+        ),
+    ]);
+  }
+
+  IconData _iconePour(int position) {
+    if (note >= position) return Icons.star;
+    if (note >= position - 0.5) return Icons.star_half;
+    return Icons.star_border;
+  }
+}', 'Le widget qui affiche la note d''un lieu dans l''application Caillou Tour. La boucle `for` crée 5 icônes : pour chaque position, `_iconePour()` choisit une étoile pleine, une demi-étoile ou une étoile vide. Une note de 3,5 donne donc 3 étoiles pleines, une demie et une vide. Pour l''utiliser, il suffit d''écrire `Etoiles(note: 4.5)`.', 1),
+    ('MySQL', 4, NULL, 'Modélisation Merise (MCD / MLD), requêtes SQL, jointures, procédures et triggers.', 'devicon-mysql-plain colored', 'sql', 'PixelStar · meilleures ventes', 'SELECT jeu, plateforme,
+       SUM(quantite) AS total_vendus,
+       COUNT(DISTINCT commande_id) AS nb_commandes
+FROM vue_jeux_achetes
+GROUP BY jeu_id, jeu, plateforme
+ORDER BY total_vendus DESC
+LIMIT 6;', 'Le classement des meilleures ventes de PixelStar. La requête lit la vue `vue_jeux_achetes` (les jeux de chaque commande) et regroupe les lignes par jeu avec `GROUP BY`. Pour chaque jeu, `SUM` additionne les quantités vendues et `COUNT(DISTINCT …)` compte les commandes. `ORDER BY … DESC` puis `LIMIT 6` gardent les 6 jeux les plus vendus.', 1),
+    ('PostgreSQL', 4, NULL, 'Contraintes d''intégrité, vues, fonctions, gestion des rôles et des droits.', 'devicon-postgresql-plain colored', 'sql', 'Exemple · vue et droits', '-- Une vue : seulement les projets publiés
+CREATE VIEW projets_publies AS
+  SELECT titre, resume, periode
+  FROM projet
+  WHERE publie = TRUE;
+
+-- Un rôle qui peut lire la vue, et rien d''autre
+CREATE ROLE visiteur LOGIN;
+GRANT SELECT ON projets_publies TO visiteur;', 'Une vue est une requête enregistrée qu''on interroge comme une table : ici, seulement les projets publiés. Le rôle `visiteur` reçoit uniquement le droit de lire cette vue (`GRANT SELECT`) : il ne peut rien modifier et ne voit pas les projets non publiés. C''est le principe du moindre privilège.', 2);
 
 INSERT INTO certification (nom, organisme, description, annee, statut, detail, lien, icone, style, ordre) VALUES
     ('Certification Pix', 'Pix — service public', 'Certification des compétences numériques : information, communication, création de contenu, protection et sécurité, environnement numérique.', NULL, 'obtenue', NULL, 'https://pix.fr/', 'fa-solid fa-medal', 'pix', 1),

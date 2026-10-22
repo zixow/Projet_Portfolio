@@ -12,7 +12,7 @@ Portfolio de **Nathan THIBAULT**, étudiant en 2<sup>e</sup> année de **BTS SIO
 | --- | --- |
 | `index.html` | **Accueil** : mon bureau en 3D (inspiré de ma chambre) avec un mur décoré de cadres cliquables (mon CV, mes projets, ma veille), présentation, téléchargement du CV et accès rapide aux autres pages |
 | `parcours.html` | **Parcours scolaire** (du baccalauréat au BTS SIO SLAM) et **expériences en entreprise** (stages) |
-| `competences.html` | **Compétences** (HTML, CSS, JavaScript, Angular, PHP, Java, Flutter, MySQL, PostgreSQL) et **certifications** |
+| `competences.html` | **Compétences** (HTML, CSS, JavaScript, Angular, PHP, Java, Flutter, MySQL, PostgreSQL), chacune avec un extrait de mon code et ce qu'il fait, et **certifications** |
 | `projets.html` | **Projets** : PixelStar (site web PHP / MySQL, [code](https://github.com/zixow/projet-steam-php-html-css)), Caillou Tour (application mobile Flutter, projet de POO en binôme : [code](https://github.com/zixow/POO_nathan_weinim) et [conception UML](https://github.com/zixow/PO-Nathan-Weimin)) et ce portfolio |
 | `veille.html` | **Veille technologique** : la réalité virtuelle et la réalité augmentée, en version courte (l'essentiel, mes actualités et mon avis) |
 | `synthese.html` | **Tableau de synthèse BTS** : compétences du bloc 1 (E5) et du bloc 2 (E6) mobilisées dans chaque réalisation |
@@ -24,7 +24,7 @@ Site réalisé sans framework, avec une base de données :
 
 - **HTML5** sémantique et accessible
 - **CSS3** : Grid, Flexbox, variables, thème « chambre » de jour / de nuit (mur crème, tasseaux de chêne, plateau de bureau), responsive
-- **JavaScript** : en-tête et pied de page communs, contenu affiché d'après la base de données, animations au défilement, filtres, fenêtre modale, validation du formulaire
+- **JavaScript** : en-tête et pied de page communs, contenu affiché d'après la base de données, animations au défilement, filtres, fenêtre modale, validation du formulaire ; coloration des extraits de code avec la bibliothèque **Prism**
 - **PHP 8 et MySQL** : base de données de 12 tables, API qui renvoie le contenu en JSON, formulaire de contact enregistré, espace d'administration sécurisé
 - **Three.js (3D)** : sur la page d'accueil, mon bureau reconstitué en 3D d'après ma chambre : mur en tasseaux de chêne, bureaux en bois et métal, étagère de figurines avec une plante, écran qui affiche le code de Caillou Tour en train de s'écrire, console, manettes, PC aux ventilateurs RGB, néon « NT. » et tapis. Sur le mur crème : une fenêtre avec vue sur le lagon, des cadres sur lesquels on peut cliquer (mon CV, Caillou Tour, PixelStar, ma veille), une horloge qui donne l'heure, un meuble bas et une guirlande lumineuse. Le soleil de fin d'après-midi dessine la forme d'une fenêtre sur le mur et le sol (avec de la poussière qui brille dans la lumière) ; la nuit, clair de lune, néon et rubans LED. Textures dessinées par le code ; version 2D en Canvas si la 3D n'est pas disponible
 
@@ -88,8 +88,10 @@ erDiagram
         smallint id PK
         varchar nom
         tinyint categorie_id FK
-        tinyint niveau
         varchar description
+        varchar langage
+        text code
+        varchar explication
     }
     PROJET {
         smallint id PK

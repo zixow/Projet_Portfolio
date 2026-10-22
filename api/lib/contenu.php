@@ -26,7 +26,7 @@ function lireContenu(PDO $bdd): array
 
     $competences = $bdd->query(
         'SELECT c.nom, cat.code AS categorie, cat.libelle AS categorie_libelle, c.complement,
-                c.niveau, c.description, c.icone
+                c.description, c.icone, c.langage, c.source, c.code, c.explication
            FROM competence c JOIN categorie cat ON cat.id = c.categorie_id
           ORDER BY cat.ordre, c.ordre, c.id'
     )->fetchAll();
@@ -87,7 +87,7 @@ function lireContenu(PDO $bdd): array
 
     return [
         'categories'     => array_map(fn ($c) => ['code' => $c['code'], 'libelle' => $c['libelle']], $categories),
-        'competences'    => array_map(fn ($c) => ['niveau' => (int) $c['niveau']] + $c, $competences),
+        'competences'    => $competences,
         'certifications' => array_map(fn ($c) => ['annee' => $c['annee'] === null ? null : (int) $c['annee']] + $c, $certifications),
         'projets'        => $projets,
         'actualites'     => $actualites,

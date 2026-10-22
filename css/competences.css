@@ -6,14 +6,19 @@
 /* ---------- 10. Compétences ---------- */
 .skills__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 460px), 1fr)); /* deux colonnes : de la place pour le code */
   gap: 1.25rem;
+}
+.skill-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0; /* une ligne de code trop longue défile dans son bloc au lieu d'élargir la carte */
 }
 .skill-card__head {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem;
 }
 .skill-card__icon {
   flex-shrink: 0;
@@ -28,26 +33,113 @@
 }
 .skill-card__head h3 { font-size: 1.12rem; }
 .skill-card__cat { font-size: 0.78rem; color: var(--text-muted); }
-.skill-card__percent {
-  margin-left: auto;
-  font-family: var(--font-title);
-  font-weight: 700;
-  color: var(--primary);
-}
-.progress {
-  height: 8px;
+.skill-card__desc { font-size: 0.9rem; color: var(--text-muted); }
+
+/* Extrait de code présenté comme une fenêtre d'éditeur (fond sombre dans les deux thèmes) */
+.code {
+  flex-grow: 1; /* les cartes d'une même ligne gardent la même hauteur */
+  margin: 1.1rem 0 0;
   overflow: hidden;
+  border: 1px solid #3a3047;
+  border-radius: var(--radius-sm);
+  background: #1c1624;
+}
+.code__barre {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.55rem 0.9rem;
+  background: #261e31;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #c9bdd9;
+}
+.code__barre::before { /* les trois pastilles d'une fenêtre */
+  content: "";
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  margin-right: 32px;
+  border-radius: 50%;
+  background: #ff5f57;
+  box-shadow: 16px 0 #febc2e, 32px 0 #28c840;
+}
+.code__source {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.code__langage {
+  flex-shrink: 0;
+  padding: 0.1rem 0.55rem;
   border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  font-weight: 600;
+  color: #efe8f7;
+}
+.code__bloc {
+  margin: 0;
+  padding: 1rem;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-variant-ligatures: none; /* « <= » reste « <= » (pas de « ≤ ») : le code s'affiche tel qu'on l'écrit */
+  line-height: 1.65;
+  color: #ece6f5;
+  tab-size: 4;
+}
+.code__bloc code { font: inherit; white-space: pre; }
+.code__bloc:focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; }
+
+/* Couleurs du code (classes ajoutées par Prism), toutes bien contrastées sur le fond sombre */
+.code .token.comment,
+.code .token.prolog,
+.code .token.doctype { font-style: italic; color: #a99fba; }
+.code .token.punctuation,
+.code .token.operator { color: #cfc6dc; }
+.code .token.keyword,
+.code .token.tag,
+.code .token.selector,
+.code .token.important { color: #ff8fa3; }
+.code .token.string,
+.code .token.char,
+.code .token.attr-value,
+.code .token.template-string { color: #a8e6a1; }
+.code .token.function,
+.code .token.decorator,
+.code .token.annotation { color: #82cfff; }
+.code .token.number,
+.code .token.boolean,
+.code .token.constant { color: #ffb86c; }
+.code .token.class-name,
+.code .token.builtin,
+.code .token.variable { color: #f1d38a; }
+.code .token.attr-name,
+.code .token.property { color: #c4a7ff; }
+
+/* Ce que fait ce code */
+.skill-card__explication {
+  display: flex;
+  gap: 0.65rem;
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  border-left: 3px solid var(--primary);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   background: var(--surface-2);
+  font-size: 0.88rem;
+  line-height: 1.6;
 }
-.progress__bar {
-  width: 0;
-  height: 100%;
-  border-radius: inherit;
-  background: var(--gradient);
-  transition: width 1.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+.skill-card__explication i { margin-top: 0.3rem; color: var(--primary); }
+.skill-card__explication code {
+  padding: 0.05rem 0.35rem;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  font-variant-ligatures: none;
 }
-.skill-card p { margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted); }
 
 .skills__extra {
   display: grid;
@@ -110,4 +202,13 @@
 
 @media (max-width: 960px) {
   .skills__extra { grid-template-columns: 1fr; }
+}
+
+/* Impression : code en noir sur blanc (les fonds sombres ne sont pas imprimés) */
+@media print {
+  .code,
+  .code__barre { background: #fff; }
+  .code__bloc,
+  .code__barre,
+  .code .token { color: #000 !important; }
 }

@@ -32,7 +32,10 @@ function lireFormulaire(array $champs, callable $options): array
     $erreurs = [];
     foreach ($champs as $nom => $champ) {
         $libelle = $champ['libelle'];
-        $texte = trim((string) ($_POST[$nom] ?? ''));
+        $texte = (string) ($_POST[$nom] ?? '');
+        $texte = $champ['type'] === 'code'
+            ? preg_replace('/^(?:[ \t]*\n)+/', '', rtrim(str_replace("\r\n", "\n", $texte))) // garde l'indentation du code
+            : trim($texte);
 
         if ($champ['type'] === 'case') {
             $valeurs[$nom] = isset($_POST[$nom]) ? 1 : 0;
@@ -179,7 +182,7 @@ if ($formulaire !== null):
                     . (!empty($champ['requis']) ? ' required' : '')
                     . ($descriptions ? ' aria-describedby="' . e($descriptions) . '"' : '')
                     . (isset($erreurs[$nom]) ? ' aria-invalid="true"' : '');
-                $large = in_array($champ['type'], ['zone'], true) ? ' champ--large' : '';
+                $large = in_array($champ['type'], ['zone', 'code'], true) ? ' champ--large' : '';
                 ?>
                 <div class="champ<?= $large ?><?= isset($erreurs[$nom]) ? ' champ--erreur' : '' ?>">
                     <?php if ($champ['type'] === 'case'): ?>
@@ -188,6 +191,8 @@ if ($formulaire !== null):
                         <label for="<?= $idChamp ?>"><?= e($champ['libelle']) ?><?= !empty($champ['requis']) ? ' <abbr title="obligatoire">*</abbr>' : '' ?></label>
                         <?php if ($champ['type'] === 'zone'): ?>
                             <textarea <?= $attributs ?> rows="<?= ($champ['max'] ?? 0) > 500 ? 6 : 3 ?>" maxlength="<?= (int) $champ['max'] ?>"><?= e($valeur) ?></textarea>
+                        <?php elseif ($champ['type'] === 'code'): ?>
+                            <textarea <?= $attributs ?> class="champ-code" rows="14" maxlength="<?= (int) $champ['max'] ?>" spellcheck="false" autocapitalize="off" autocomplete="off"><?= e($valeur) ?></textarea>
                         <?php elseif ($champ['type'] === 'choix' || $champ['type'] === 'liste'): ?>
                             <select <?= $attributs ?>>
                                 <?php foreach (($champ['type'] === 'choix' ? $champ['choix'] : $options($champ)) as $code => $libelle): ?>

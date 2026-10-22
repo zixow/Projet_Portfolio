@@ -1,11 +1,11 @@
 /* =========================================================
    Page Compétences : cartes créées d'après la base de données
-   (compétences, catégories, certifications), barres de niveau
-   animées et filtres
+   (compétences, catégories, certifications), extraits de code
+   colorés avec Prism et filtres
    ========================================================= */
 
 (function () {
-  const { $, $$, activerFiltres, reveler, echapper } = window.Portfolio;
+  const { $, $$, activerFiltres, reveler, echapper, texteRiche } = window.Portfolio;
   const filtres = $('#skills-filters');
   const grille = $('#liste-competences');
   const listeCertifications = $('#liste-certifications');
@@ -13,20 +13,33 @@
   /** Seuls les liens http(s) sont acceptés (jamais de lien « javascript: » venant de la base). */
   const lienSur = (url) => (/^https?:\/\//i.test(url || '') ? url : '');
 
+  /** Langages colorés par Prism (chargé dans competences.html) et nom affiché au-dessus du code. */
+  const LANGAGES = {
+    html: 'HTML', css: 'CSS', javascript: 'JavaScript', typescript: 'TypeScript',
+    php: 'PHP', java: 'Java', dart: 'Dart', sql: 'SQL',
+  };
+
   const carteCompetence = (c) => {
-    const niveau = Math.min(100, Math.max(0, Number(c.niveau) || 0));
     const categorie = echapper(c.categorie_libelle) + (c.complement ? ` · ${echapper(c.complement)}` : '');
-    // Accessibilité : la barre est annoncée comme une jauge par les lecteurs d'écran
+    const langage = Object.hasOwn(LANGAGES, c.langage) ? c.langage : 'none'; // « none » : code sans couleurs
     return `
       <article class="card card--hover skill-card reveal" data-category="${echapper(c.categorie)}">
         <div class="skill-card__head">
           <span class="skill-card__icon"><i class="${echapper(c.icone)}" aria-hidden="true"></i></span>
           <div><h3>${echapper(c.nom)}</h3><span class="skill-card__cat">${categorie}</span></div>
-          <span class="skill-card__percent">${niveau}%</span>
         </div>
-        <div class="progress" role="progressbar" aria-label="Niveau en ${echapper(c.nom)}"
-             aria-valuemin="0" aria-valuemax="100" aria-valuenow="${niveau}"><div class="progress__bar" data-level="${niveau}"></div></div>
-        <p>${echapper(c.description)}</p>
+        <p class="skill-card__desc">${echapper(c.description)}</p>
+        <figure class="code">
+          <figcaption class="code__barre">
+            <span class="code__source">${echapper(c.source)}</span>
+            <span class="code__langage">${LANGAGES[langage] || 'Code'}</span>
+          </figcaption>
+          <pre class="code__bloc"><code class="language-${langage}">${echapper(c.code)}</code></pre>
+        </figure>
+        <p class="skill-card__explication">
+          <i class="fa-regular fa-lightbulb" aria-hidden="true"></i>
+          <span><strong>Ce que fait ce code :</strong> ${texteRiche(c.explication)}</span>
+        </p>
       </article>`;
   };
 
@@ -54,15 +67,12 @@
       </article>`;
   };
 
-  // Les barres se remplissent quand elles apparaissent à l'écran
-  const observateur = new IntersectionObserver((entrees, obs) => {
-    entrees.forEach((entree) => {
-      if (!entree.isIntersecting) return;
-      const barre = $('.progress__bar', entree.target);
-      barre.style.width = `${barre.dataset.level}%`;
-      obs.unobserve(entree.target);
-    });
-  }, { threshold: 0.5 });
+  // Accessibilité : un bloc de code plus large que la carte défile, il doit alors pouvoir
+  // recevoir le focus pour être parcouru au clavier (flèches gauche / droite)
+  const ajusterDefilement = () => $$('.code__bloc', grille).forEach((bloc) => {
+    if (bloc.scrollWidth > bloc.clientWidth) bloc.tabIndex = 0;
+    else bloc.removeAttribute('tabindex');
+  });
 
   window.Portfolio.donnees.then((donnees) => {
     filtres.innerHTML = '<button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">Toutes</button>'
@@ -72,9 +82,14 @@
     grille.innerHTML = donnees.competences.map(carteCompetence).join('');
     listeCertifications.innerHTML = donnees.certifications.map(carteCertification).join('');
 
+    // Coloration du code : sans Prism (CDN injoignable), le code reste affiché en clair
+    if (window.Prism) window.Prism.highlightAllUnder(grille);
+    ajusterDefilement();
+    window.addEventListener('resize', ajusterDefilement);
+    filtres.addEventListener('click', () => requestAnimationFrame(ajusterDefilement));
+
     reveler(grille);
     reveler(listeCertifications);
-    $$('.progress', grille).forEach((piste) => observateur.observe(piste));
     activerFiltres('#skills-filters', '.skill-card');
   });
 })();

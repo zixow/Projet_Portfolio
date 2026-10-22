@@ -54,7 +54,7 @@
             <header class="section__header reveal">
                 <span class="section__label">Compétences</span>
                 <h2 class="section__title">Mes <span class="gradient-text">compétences</span></h2>
-                <p class="section__subtitle">Les langages et technologies que j'utilise en cours, en stage et sur mes projets personnels.</p>
+                <p class="section__subtitle">Les langages que j'utilise en cours, en stage et sur mes projets, avec pour chacun un extrait de mon code et ce qu'il fait.</p>
             </header>
 
             <!-- Contenu lu dans la base de données (tables categorie et competence) : modifiable dans l'administration -->
@@ -120,6 +120,14 @@
 <script src="js/commun.js"></script>
 <script src="data/contenu.js"></script>
 <script src="js/donnees.js"></script>
+<!-- Coloration des extraits de code (Prism). « integrity » : le navigateur refuse un fichier modifié sur le CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/prism.min.js" data-manual integrity="sha512-HiD3V4nv8fcjtouznjT9TqDNDm1EXngV331YGbfVGeKUoH+OLkRTCMzA34ecjlgSQZpdHZupdSrqHY+Hz3l6uQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/components/prism-markup-templating.min.js" integrity="sha512-+8BiRfWso6waiFDv6tEmWF8yfPGgxAtOYLDUB0rRISLwtpxkJ9lpPNUhxwWlikn3qSO+4RQyzDppi62o3ON/AA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/components/prism-php.min.js" integrity="sha512-plzrTi61ltEMFf84gTVO9IkvIMfBu07bnDuahvdlIclmFWzXJ9VcRsny9d45sxFZRv3jJg/MHNyuxnUYEMxMEg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/components/prism-java.min.js" integrity="sha512-xKcnbsdT0KMoA4yrozkqZM1XJVTrPsjdQwvigxlAlxEDu8YDvC/jl+LfVqn0fY3Vs6m2y4a89JCHEIA/Z9zpmQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/components/prism-dart.min.js" integrity="sha512-r/W8eHXvGAyqo0Pa1hwUx9znj2RKBDKgTZ7iL5R4FIJpLpF1HPXKHiGorzKE5gwj906GlNqAskHKSNpyVziozw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/components/prism-sql.min.js" integrity="sha512-sijCOJblSCXYYmXdwvqV0tak8QJW5iy2yLB1wAbbLc3OOIueqymizRFWUS/mwKctnzPKpNdPJV3aK1zlDMJmXQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/components/prism-typescript.min.js" integrity="sha512-uOw7XYETzS/DPmmirpP5UCMihSDNMeyTS965J0/456OSPfxn9xEtHHjj5Q/5WefVdqyMfN/afmQnNpZd/tpkcA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="js/competences.js"></script>
 </body>
 </html>

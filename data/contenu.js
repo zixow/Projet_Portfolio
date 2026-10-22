@@ -22,85 +22,112 @@ window.CONTENU_PORTFOLIO = {
     ],
     "competences": [
         {
-            "niveau": 90,
             "nom": "HTML5",
             "categorie": "front",
             "categorie_libelle": "Front-end",
             "complement": null,
             "description": "Structure sémantique, formulaires, accessibilité et bonnes pratiques SEO.",
-            "icone": "devicon-html5-plain colored"
+            "icone": "devicon-html5-plain colored",
+            "langage": "html",
+            "source": "Portfolio · contact.html",
+            "code": "\u003Cform id=\"contact-form\"\u003E\n  \u003Clabel for=\"email\"\u003EE-mail\u003C/label\u003E\n  \u003Cinput type=\"email\" id=\"email\" name=\"email\"\n         autocomplete=\"email\" required\u003E\n\n  \u003Cbutton type=\"submit\"\u003EEnvoyer le message\u003C/button\u003E\n  \u003Cp id=\"form-status\" role=\"status\" aria-live=\"polite\"\u003E\u003C/p\u003E\n\u003C/form\u003E",
+            "explication": "Un extrait du formulaire de contact de ce portfolio. Le `label` est relié au champ (`for` = `id`) : un clic sur « E-mail » place le curseur dans le champ, et les lecteurs d'écran annoncent ce qu'il faut saisir. `type=\"email\"` affiche le clavier e-mail sur téléphone et `required` rend le champ obligatoire. La zone `role=\"status\"` fait lire le résultat de l'envoi par les lecteurs d'écran."
         },
         {
-            "niveau": 85,
             "nom": "CSS3",
             "categorie": "front",
             "categorie_libelle": "Front-end",
             "complement": null,
             "description": "Flexbox, Grid, responsive design, variables CSS et animations.",
-            "icone": "devicon-css3-plain colored"
+            "icone": "devicon-css3-plain colored",
+            "langage": "css",
+            "source": "Portfolio · base.css et projets.css",
+            "code": ":root {                  /* thème sombre */\n  --surface: #31263d;\n  --text: #f6eefc;\n}\n[data-theme=\"light\"] {   /* thème clair */\n  --surface: #fffaf2;\n  --text: #2f2219;\n}\n\n.projects__grid {\n  display: grid;\n  grid-template-columns:\n    repeat(auto-fit, minmax(min(100%, 420px), 1fr));\n  gap: 1.75rem;\n}",
+            "explication": "Deux techniques de ce portfolio. Les couleurs sont rangées dans des variables (`--surface`, `--text`) : le bouton de thème change seulement l'attribut `data-theme`, et toute la page passe du sombre au clair. La grille des projets crée autant de colonnes de 420 px minimum que l'écran le permet (`auto-fit` + `minmax`) : deux cartes sur ordinateur, une seule sur téléphone, sans media query."
         },
         {
-            "niveau": 75,
             "nom": "JavaScript",
             "categorie": "front",
             "categorie_libelle": "Front-end",
             "complement": null,
             "description": "Manipulation du DOM, événements, ES6+, appels d'API REST avec fetch.",
-            "icone": "devicon-javascript-plain colored"
+            "icone": "devicon-javascript-plain colored",
+            "langage": "javascript",
+            "source": "Portfolio · js/donnees.js",
+            "code": "try {\n  const reponse = await fetch('api/contenu.php', {\n    headers: { Accept: 'application/json' },\n    signal: AbortSignal.timeout(3000),\n  });\n  if (reponse.ok) {\n    return await reponse.json();\n  }\n} catch (erreur) {\n  // serveur sans PHP ou base arrêtée\n}\nreturn window.CONTENU_PORTFOLIO; // copie de secours",
+            "explication": "Le chargement du contenu de ce portfolio. `fetch()` demande les données à l'API PHP, et `await` attend la réponse sans bloquer la page. Si le serveur ne répond pas en 3 secondes ou ne fait pas tourner PHP (comme GitHub Pages), on passe dans le `catch` et le site utilise sa copie de secours : il s'affiche dans tous les cas."
         },
         {
-            "niveau": 60,
             "nom": "Angular",
             "categorie": "front",
             "categorie_libelle": "Front-end",
             "complement": "TypeScript",
             "description": "Composants, services, routing, formulaires réactifs et HttpClient.",
-            "icone": "devicon-angularjs-plain colored"
+            "icone": "devicon-angularjs-plain colored",
+            "langage": "typescript",
+            "source": "Exemple · composant Angular",
+            "code": "@Component({\n  selector: 'app-carte-jeu',\n  template: `\n    \u003Ch3\u003E{{ jeu.titre }}\u003C/h3\u003E\n    \u003Cp\u003E{{ jeu.prix | currency:'EUR' }}\u003C/p\u003E\n    \u003Cbutton (click)=\"ajouter()\"\u003EAjouter au panier\u003C/button\u003E\n  `,\n})\nexport class CarteJeuComponent {\n  @Input() jeu!: Jeu;\n  @Output() ajout = new EventEmitter\u003CJeu\u003E();\n\n  ajouter() {\n    this.ajout.emit(this.jeu);\n  }\n}",
+            "explication": "Un composant Angular, une brique réutilisable de l'interface : une carte qui affiche un jeu et son prix (le pipe `currency` le met en forme en euros). `@Input()` reçoit le jeu depuis le composant parent ; au clic sur le bouton, `@Output()` envoie un événement au parent, qui ajoute le jeu au panier."
         },
         {
-            "niveau": 80,
             "nom": "PHP",
             "categorie": "back",
             "categorie_libelle": "Back-end",
             "complement": null,
             "description": "POO, architecture MVC, PDO et requêtes préparées, sessions, API REST.",
-            "icone": "devicon-php-plain colored"
+            "icone": "devicon-php-plain colored",
+            "langage": "php",
+            "source": "PixelStar · pages/home.php",
+            "code": "\u003C?php\n$genreFilter = isset($_GET['genre']) ? (int)$_GET['genre'] : 0;\n\n$stmt = $pdo-\u003Eprepare('SELECT g.* FROM games g\n    INNER JOIN game_genres gg ON gg.game_id = g.id\n    WHERE gg.genre_id = :genre AND g.stock \u003E 0');\n$stmt-\u003Eexecute([':genre' =\u003E $genreFilter]);\n$games = $stmt-\u003EfetchAll(PDO::FETCH_ASSOC);\n?\u003E\n\u003C?php foreach ($games as $game): ?\u003E\n    \u003Ch3\u003E\u003C?php echo htmlspecialchars($game['title']); ?\u003E\u003C/h3\u003E\n\u003C?php endforeach; ?\u003E",
+            "explication": "La page d'accueil de PixelStar affiche les jeux d'un genre. Le numéro du genre vient de l'adresse (`?genre=3`) : il est converti en nombre avec `(int)`, puis passé à une requête préparée (`:genre`), ce qui empêche les injections SQL. À l'affichage, `htmlspecialchars()` neutralise les caractères spéciaux du titre pour bloquer les attaques XSS."
         },
         {
-            "niveau": 70,
             "nom": "Java",
             "categorie": "back",
             "categorie_libelle": "Back-end",
             "complement": "Desktop",
             "description": "POO, collections, JavaFX, accès aux données avec JDBC, tests JUnit.",
-            "icone": "devicon-java-plain colored"
+            "icone": "devicon-java-plain colored",
+            "langage": "java",
+            "source": "Cours de POO · Eleves.java",
+            "code": "public class Eleves extends Personne {\n    private String classe;\n\n    public Eleves(String nom, String prenom,\n                  int age, String classe) {\n        super(nom, prenom, age);\n        this.classe = classe;\n    }\n\n    @Override\n    public void afficher() {\n        super.afficher();\n        System.out.println(\"Classe : \" + classe);\n    }\n}",
+            "explication": "La classe `Eleves` hérite de `Personne` (`extends`) : elle récupère le nom, le prénom et l'âge sans les réécrire. `super(...)` appelle le constructeur de la classe mère. `@Override` redéfinit la méthode `afficher()` : elle affiche d'abord la personne (`super.afficher()`), puis la classe de l'élève. C'est l'héritage et le polymorphisme de la programmation objet."
         },
         {
-            "niveau": 60,
             "nom": "Flutter",
             "categorie": "mobile",
             "categorie_libelle": "Mobile",
             "complement": "Dart",
             "description": "Widgets, navigation, gestion d'état et consommation d'API REST.",
-            "icone": "devicon-flutter-plain colored"
+            "icone": "devicon-flutter-plain colored",
+            "langage": "dart",
+            "source": "Caillou Tour · widgets/etoiles.dart",
+            "code": "class Etoiles extends StatelessWidget {\n  const Etoiles({super.key, required this.note});\n  final double note; // ex. 4.5\n\n  @override\n  Widget build(BuildContext context) {\n    return Row(children: [\n      for (var position = 1; position \u003C= 5; position++)\n        Icon(\n          _iconePour(position),\n          color: CouleursCaillou.soleil,\n        ),\n    ]);\n  }\n\n  IconData _iconePour(int position) {\n    if (note \u003E= position) return Icons.star;\n    if (note \u003E= position - 0.5) return Icons.star_half;\n    return Icons.star_border;\n  }\n}",
+            "explication": "Le widget qui affiche la note d'un lieu dans l'application Caillou Tour. La boucle `for` crée 5 icônes : pour chaque position, `_iconePour()` choisit une étoile pleine, une demi-étoile ou une étoile vide. Une note de 3,5 donne donc 3 étoiles pleines, une demie et une vide. Pour l'utiliser, il suffit d'écrire `Etoiles(note: 4.5)`."
         },
         {
-            "niveau": 80,
             "nom": "MySQL",
             "categorie": "bdd",
             "categorie_libelle": "Base de données",
             "complement": null,
             "description": "Modélisation Merise (MCD / MLD), requêtes SQL, jointures, procédures et triggers.",
-            "icone": "devicon-mysql-plain colored"
+            "icone": "devicon-mysql-plain colored",
+            "langage": "sql",
+            "source": "PixelStar · meilleures ventes",
+            "code": "SELECT jeu, plateforme,\n       SUM(quantite) AS total_vendus,\n       COUNT(DISTINCT commande_id) AS nb_commandes\nFROM vue_jeux_achetes\nGROUP BY jeu_id, jeu, plateforme\nORDER BY total_vendus DESC\nLIMIT 6;",
+            "explication": "Le classement des meilleures ventes de PixelStar. La requête lit la vue `vue_jeux_achetes` (les jeux de chaque commande) et regroupe les lignes par jeu avec `GROUP BY`. Pour chaque jeu, `SUM` additionne les quantités vendues et `COUNT(DISTINCT …)` compte les commandes. `ORDER BY … DESC` puis `LIMIT 6` gardent les 6 jeux les plus vendus."
         },
         {
-            "niveau": 65,
             "nom": "PostgreSQL",
             "categorie": "bdd",
             "categorie_libelle": "Base de données",
             "complement": null,
             "description": "Contraintes d'intégrité, vues, fonctions, gestion des rôles et des droits.",
-            "icone": "devicon-postgresql-plain colored"
+            "icone": "devicon-postgresql-plain colored",
+            "langage": "sql",
+            "source": "Exemple · vue et droits",
+            "code": "-- Une vue : seulement les projets publiés\nCREATE VIEW projets_publies AS\n  SELECT titre, resume, periode\n  FROM projet\n  WHERE publie = TRUE;\n\n-- Un rôle qui peut lire la vue, et rien d'autre\nCREATE ROLE visiteur LOGIN;\nGRANT SELECT ON projets_publies TO visiteur;",
+            "explication": "Une vue est une requête enregistrée qu'on interroge comme une table : ici, seulement les projets publiés. Le rôle `visiteur` reçoit uniquement le droit de lire cette vue (`GRANT SELECT`) : il ne peut rien modifier et ne voit pas les projets non publiés. C'est le principe du moindre privilège."
         }
     ],
     "certifications": [
