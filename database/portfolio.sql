@@ -257,27 +257,28 @@ $games = $stmt->fetchAll(PDO::FETCH_ASSOC);
         System.out.println("Classe : " + classe);
     }
 }', 'La classe `Eleves` hérite de `Personne` (`extends`) : elle récupère le nom, le prénom et l''âge sans les réécrire. `super(...)` appelle le constructeur de la classe mère. `@Override` redéfinit la méthode `afficher()` : elle affiche d''abord la personne (`super.afficher()`), puis la classe de l''élève. C''est l''héritage et le polymorphisme de la programmation objet.', 2),
-    ('Flutter', 3, 'Dart', 'Widgets, navigation, gestion d''état et consommation d''API REST.', 'devicon-flutter-plain colored', 'dart', 'Caillou Tour · widgets/etoiles.dart', 'class Etoiles extends StatelessWidget {
-  const Etoiles({super.key, required this.note});
-  final double note; // ex. 4.5
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(children: [
-      for (var position = 1; position <= 5; position++)
-        Icon(
-          _iconePour(position),
-          color: CouleursCaillou.soleil,
-        ),
-    ]);
-  }
-
-  IconData _iconePour(int position) {
-    if (note >= position) return Icons.star;
-    if (note >= position - 0.5) return Icons.star_half;
-    return Icons.star_border;
-  }
-}', 'Le widget qui affiche la note d''un lieu dans l''application Caillou Tour. La boucle `for` crée 5 icônes : pour chaque position, `_iconePour()` choisit une étoile pleine, une demi-étoile ou une étoile vide. Une note de 3,5 donne donc 3 étoiles pleines, une demie et une vide. Pour l''utiliser, il suffit d''écrire `Etoiles(note: 4.5)`.', 1),
+    ('Flutter', 3, 'Dart', 'Widgets, navigation, gestion d''état et consommation d''API REST.', 'devicon-flutter-plain colored', 'dart', 'Caillou Tour · pages/navigation.dart', 'NavigationBar(
+  selectedIndex: _index,
+  onDestinationSelected: (index) {
+    setState(() => _index = index); // change d''onglet
+  },
+  destinations: [
+    const NavigationDestination(
+      icon: Icon(Icons.explore_outlined),
+      selectedIcon: Icon(Icons.explore),
+      label: ''Explorer'',
+    ),
+    // … Agenda et Séjour, sur le même modèle
+    NavigationDestination(
+      icon: Badge(
+        isLabelVisible: nombreFavoris > 0,
+        label: Text(''$nombreFavoris''),
+        child: const Icon(Icons.favorite_border),
+      ),
+      label: ''Favoris'',
+    ),
+  ],
+)', 'La barre de navigation en bas de l''application Caillou Tour (Explorer, Agenda, Séjour, Favoris). Quand on touche un onglet, `onDestinationSelected` reçoit son numéro et `setState()` l''enregistre dans `_index` : Flutter redessine l''écran, l''onglet choisi s''allume (`selectedIcon`, l''icône pleine) et sa page s''affiche. Sur « Favoris », un `Badge` montre le nombre de lieux en favoris, seulement s''il y en a au moins un.', 1),
     ('MySQL', 4, NULL, 'Modélisation Merise (MCD / MLD), requêtes SQL, jointures, procédures et triggers.', 'devicon-mysql-plain colored', 'sql', 'PixelStar · meilleures ventes', 'SELECT jeu, plateforme,
        SUM(quantite) AS total_vendus,
        COUNT(DISTINCT commande_id) AS nb_commandes

@@ -101,9 +101,9 @@ window.CONTENU_PORTFOLIO = {
             "description": "Widgets, navigation, gestion d'état et consommation d'API REST.",
             "icone": "devicon-flutter-plain colored",
             "langage": "dart",
-            "source": "Caillou Tour · widgets/etoiles.dart",
-            "code": "class Etoiles extends StatelessWidget {\n  const Etoiles({super.key, required this.note});\n  final double note; // ex. 4.5\n\n  @override\n  Widget build(BuildContext context) {\n    return Row(children: [\n      for (var position = 1; position \u003C= 5; position++)\n        Icon(\n          _iconePour(position),\n          color: CouleursCaillou.soleil,\n        ),\n    ]);\n  }\n\n  IconData _iconePour(int position) {\n    if (note \u003E= position) return Icons.star;\n    if (note \u003E= position - 0.5) return Icons.star_half;\n    return Icons.star_border;\n  }\n}",
-            "explication": "Le widget qui affiche la note d'un lieu dans l'application Caillou Tour. La boucle `for` crée 5 icônes : pour chaque position, `_iconePour()` choisit une étoile pleine, une demi-étoile ou une étoile vide. Une note de 3,5 donne donc 3 étoiles pleines, une demie et une vide. Pour l'utiliser, il suffit d'écrire `Etoiles(note: 4.5)`."
+            "source": "Caillou Tour · pages/navigation.dart",
+            "code": "NavigationBar(\n  selectedIndex: _index,\n  onDestinationSelected: (index) {\n    setState(() =\u003E _index = index); // change d'onglet\n  },\n  destinations: [\n    const NavigationDestination(\n      icon: Icon(Icons.explore_outlined),\n      selectedIcon: Icon(Icons.explore),\n      label: 'Explorer',\n    ),\n    // … Agenda et Séjour, sur le même modèle\n    NavigationDestination(\n      icon: Badge(\n        isLabelVisible: nombreFavoris \u003E 0,\n        label: Text('$nombreFavoris'),\n        child: const Icon(Icons.favorite_border),\n      ),\n      label: 'Favoris',\n    ),\n  ],\n)",
+            "explication": "La barre de navigation en bas de l'application Caillou Tour (Explorer, Agenda, Séjour, Favoris). Quand on touche un onglet, `onDestinationSelected` reçoit son numéro et `setState()` l'enregistre dans `_index` : Flutter redessine l'écran, l'onglet choisi s'allume (`selectedIcon`, l'icône pleine) et sa page s'affiche. Sur « Favoris », un `Badge` montre le nombre de lieux en favoris, seulement s'il y en a au moins un."
         },
         {
             "nom": "MySQL",
