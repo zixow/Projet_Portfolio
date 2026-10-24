@@ -49,6 +49,20 @@ window.Portfolio = (function () {
     if (e.key === 'Escape' && menu.classList.contains('open')) basculerMenu(false);
   });
 
+  /* ---------- Bouton « Administration » ---------- */
+  // Affiché seulement quand le site tourne avec PHP (XAMPP, hébergeur) : jamais sur
+  // GitHub Pages, où l'administration ne peut pas fonctionner
+  const lienAdmin = $('#lien-admin');
+  const apiPossible = location.protocol.startsWith('http') && !location.hostname.endsWith('github.io');
+  if (apiPossible) {
+    document.addEventListener('DOMContentLoaded', () => {
+      // Pages qui lisent la base : bouton affiché seulement si l'API PHP a répondu
+      const donnees = window.Portfolio.donnees;
+      if (donnees) donnees.then((d) => { lienAdmin.hidden = d.source !== 'base'; });
+      else lienAdmin.hidden = false;
+    });
+  }
+
   /* ---------- En-tête, barre de progression, retour en haut ---------- */
   const entete = $('#header');
   const progression = $('#scroll-progress');

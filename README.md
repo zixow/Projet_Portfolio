@@ -176,6 +176,6 @@ erDiagram
 2. Importer `database/portfolio.sql` dans phpMyAdmin (onglet *Importer*).
 3. Créer votre compte administrateur, dans le dossier du portfolio : `php outils/creer-admin.php votre-identifiant`
 4. Lancer le site : `php -S localhost:8000`, puis ouvrir http://localhost:8000
-5. Administration : http://localhost:8000/admin/
+5. Administration : bouton cadenas en haut à droite du site (affiché seulement quand le site tourne avec PHP, donc jamais sur GitHub Pages), ou http://localhost:8000/admin/
 
 Si la commande `php` n'est pas reconnue, utilisez celle de XAMPP : `C:\xampp\php\php.exe`.

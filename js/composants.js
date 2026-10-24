@@ -32,6 +32,7 @@
         <a href="index.html" class="logo" aria-label="Retour à l'accueil">NT<span>.</span></a>
         <ul class="nav__menu" id="nav-menu">${liens}</ul>
         <div class="nav__actions">
+          <a class="icon-btn" id="lien-admin" href="admin/" aria-label="Administration du portfolio (connexion)" title="Administration" hidden><i class="fa-solid fa-user-lock"></i></a>
           <button class="icon-btn" id="theme-toggle" type="button" aria-label="Changer de thème"><i class="fa-solid fa-sun"></i></button>
           <button class="icon-btn nav__burger" id="nav-burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-menu"><i class="fa-solid fa-bars"></i></button>
         </div>

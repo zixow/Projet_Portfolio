@@ -16,9 +16,16 @@ window.Portfolio.donnees = (async () => {
 
   if (apiPossible) {
     try {
+      // Pas de réponse 3 s après le chargement de la page : on prend la copie.
+      // Le délai part du chargement, car la 3D de l'accueil occupe la page plusieurs secondes.
+      const controleur = new AbortController();
+      const lancerDelai = () => setTimeout(() => controleur.abort(), 3000);
+      if (document.readyState === 'complete') lancerDelai();
+      else window.addEventListener('load', lancerDelai, { once: true });
+
       const reponse = await fetch('api/contenu.php', {
         headers: { Accept: 'application/json' },
-        signal: AbortSignal.timeout(3000), // pas de réponse en 3 s : on prend la copie
+        signal: controleur.signal,
       });
       const json = (reponse.headers.get('content-type') || '').includes('application/json');
       if (reponse.ok && json) {
